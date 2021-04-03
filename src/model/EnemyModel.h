@@ -1,3 +1,5 @@
+#ifndef ENEMY_MODEL_HEADER
+#define ENEMY_MODEL_HEADER
 
 //Class for storing all the information relating to enemies in the game.
 class EnemyModel
@@ -22,3 +24,5 @@ private:
     int magicDefence;
     int speed;
 };
+
+#endif
