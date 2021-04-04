@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
         std::cout << "Test Failed: " << testmain.getFailedTestId() << " Aborting\n";
         return -1;
     }
+    std::cout << "All Tests Passed\n";
 
     OpenGLWindow window;
     window.resize(450, 600);
@@ -24,6 +25,8 @@ int main(int argc, char *argv[])
     fmt.setStencilBufferSize(8);
     window.setFormat(fmt);
     window.show();
+
+    std::cout << "Application Running...\n";
 
     return app.exec();
 }

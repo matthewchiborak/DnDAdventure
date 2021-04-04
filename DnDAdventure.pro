@@ -10,9 +10,15 @@ CONFIG += c++11
 
 SOURCES += \
     src/display/openglwindow.cpp \
+    src/factory/boardobjectfactory.cpp \
+    src/factory/worldobjectfactoryabstract.cpp \
     src/filemanagment/fileReader.cpp \
     src/main.cpp \
     src/model/EnemyModel.cpp \
+    src/model/boardmodel.cpp \
+    src/model/boardobjectabstract.cpp \
+    src/model/boardobjectobstacle.cpp \
+    src/model/gamemodelabstract.cpp \
     src/test/FileReaderTester.cpp \
     src/test/tester.cpp \
     src/testmain.cpp
@@ -24,8 +30,14 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     src/display/openglwindow.h \
+    src/factory/boardobjectfactory.h \
+    src/factory/worldobjectfactoryabstract.h \
     src/filemanagment/fileReader.h \
     src/model/EnemyModel.h \
+    src/model/boardmodel.h \
+    src/model/boardobjectabstract.h \
+    src/model/boardobjectobstacle.h \
+    src/model/gamemodelabstract.h \
     src/test/FileReaderTester.h \
     src/test/tester.h \
     src/testmain.h

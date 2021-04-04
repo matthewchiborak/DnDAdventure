@@ -2,23 +2,63 @@
 
 #include <fstream>
 #include <string>
+#include <sstream>
 
 FileReader::FileReader(std::string fileName)
 {
     this->fileName = fileName;
+
+    read();
 }
 
-std::string FileReader::readFileContents()
+void FileReader::read()
 {
     std::ifstream file(fileName);
 
-    std::string contents = "";
     std::string singleLine = "";
 
     while (std::getline(file, singleLine)) {
       // Output the text from the file
-        contents += singleLine;
+        fileLines.push(singleLine);
+    }
+}
+
+bool FileReader::hasNext()
+{
+    return (fileLines.size() > 0);
+}
+
+std::string FileReader::next()
+{
+    if(hasNext())
+    {
+        std::string temp = fileLines.front();
+        fileLines.pop();
+        return temp;
     }
 
-    return contents;
+    return "";
+}
+
+std::vector<std::string> FileReader::splitString(std::string line, char delimeter)
+{
+    std::vector<std::string> vect;
+
+    std::stringstream ss(line);
+    std::string currentLine = "";
+
+    for (char i; ss >> i;) {
+        currentLine.push_back(i);
+        if (ss.peek() == delimeter)
+        {
+            ss.ignore();
+            vect.push_back(currentLine);
+            currentLine = "";
+        }
+    }
+
+    //Forgot to add the end of the string
+    vect.push_back(currentLine);
+
+    return vect;
 }

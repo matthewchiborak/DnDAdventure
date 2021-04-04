@@ -12,6 +12,7 @@ public:
     bool execute();
 private :
     bool readFileContentsTest();
+    bool boardObjectFactoryPopulateVectorBasedOnTextFileTest();
 };
 
 #endif
