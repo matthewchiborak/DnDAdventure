@@ -9,7 +9,6 @@ class FileReader
 public:
     FileReader(std::string fileName);
 
-    void read();
     bool hasNext();
     std::string next();
 
@@ -18,6 +17,8 @@ public:
 private:
     std::string fileName;
     std::queue<std::string> fileLines;
+
+    void read();
 };
 
 #endif

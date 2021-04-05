@@ -1,0 +1,2 @@
+Delphox,sprite/DelphoxSprite.png
+Prim,sprite/PrimSprite.png

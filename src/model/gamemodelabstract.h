@@ -5,6 +5,7 @@
 
 class QPainter;
 
+//This feels redundant. TODO review
 class GameModelAbstract
 {
 public:

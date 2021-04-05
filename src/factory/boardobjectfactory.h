@@ -16,6 +16,7 @@ public:
 
 private:
     BoardObjectAbstract * createObstacle(std::vector<std::string> info);
+    //Create other
 };
 
 #endif // BOARDOBJECTFACTORY_H

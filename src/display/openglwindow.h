@@ -1,24 +1,14 @@
 #ifndef OPENGLWINDOW_H
 #define OPENGLWINDOW_H
 
-#include <QOpenGLWindow>
-#include <QScreen>
-#include <QPainter>
-#include <QGuiApplication>
-#include <QMatrix4x4>
-#include <QStaticText>
-#include <QKeyEvent>
-#include <QPainterPath>
-#include <QQueue>
-#include <QDebug>
+#include "abstractview.h"
 
-
-class OpenGLWindow : public QOpenGLWindow
+class OpenGLWindow : public AbstractView
 {
     Q_OBJECT
 
 public:
-    OpenGLWindow();
+    OpenGLWindow(ModelAbstract * model);
 
 protected:
     void paintGL() Q_DECL_OVERRIDE;

@@ -2,8 +2,8 @@
 
 
 
-OpenGLWindow::OpenGLWindow()
-    : QOpenGLWindow(QOpenGLWindow::NoPartialUpdate)
+OpenGLWindow::OpenGLWindow(ModelAbstract *model)
+    : AbstractView(model)
 {
     m_view.lookAt(QVector3D(0,0,0),
                   QVector3D(0,0,0),
@@ -20,14 +20,19 @@ OpenGLWindow::OpenGLWindow()
 
 void OpenGLWindow::paintGL()
 {
+    //TODO send to a rendering stratgy that the controller sets
+
     QPainter p(this);
     p.setWorldTransform(m_window_normalised_matrix.toTransform());
 
     QMatrix4x4 mvp = m_projection * m_view;
     p.setTransform(mvp.toTransform(), true);
 
+    //based on the current stregy, draw the objects
+    renderStrat->draw(&p);
+
     //Clear the screen
-    p.fillRect(0, 0, 150, 200, m_brush);
+    //p.fillRect(0, 0, 150, 200, m_brush);
 }
 
 void OpenGLWindow::resizeGL(int w, int h)

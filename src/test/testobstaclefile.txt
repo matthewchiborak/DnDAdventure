@@ -1,1 +1,2 @@
-obs,0,1,2,3,testsprite.png
+obs,0,1,2,3,Delphox
+obs,3,4,3,2,Prim
