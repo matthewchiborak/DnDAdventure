@@ -58,7 +58,7 @@ bool FileReaderTester::boardObjectFactoryPopulateVectorBasedOnTextFileTest()
 
     factory.populate(&madeObjects, "D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefile.txt");
 
-    if(madeObjects.size() != 1)
+    if(madeObjects.size() != 2)
         return false;
 
     if(madeObjects.at(0)->getXpos() != 0)
@@ -69,7 +69,7 @@ bool FileReaderTester::boardObjectFactoryPopulateVectorBasedOnTextFileTest()
         return false;
     if(madeObjects.at(0)->getHeight() != 3)
         return false;
-    if(madeObjects.at(0)->getSpriteName() != "testsprite.png")
+    if(madeObjects.at(0)->getSpriteName() != "Delphox")
         return false;
 
     return true;

@@ -11,7 +11,7 @@ class WorldObjectFactoryAbstract
 public:
     WorldObjectFactoryAbstract();
 
-    void populate(std::vector<BoardObjectAbstract*> * boardObjects, std::string boardFileName);
+    virtual void populate(std::vector<BoardObjectAbstract*> * boardObjects, std::string boardFileName);
 };
 
 #endif // WORLDOBJECTFACTORYABSTRACT_H

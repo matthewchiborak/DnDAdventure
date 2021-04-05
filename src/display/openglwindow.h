@@ -8,7 +8,7 @@ class OpenGLWindow : public AbstractView
     Q_OBJECT
 
 public:
-    OpenGLWindow(ModelAbstract * model);
+    OpenGLWindow(ModelAbstract * model, SpriteFlyweightFactoryAbstract * factory);
 
 protected:
     void paintGL() Q_DECL_OVERRIDE;
@@ -23,6 +23,9 @@ private:
     QMatrix4x4 m_model_triangle;
     QMatrix4x4 m_model_text;
     QBrush m_brush;
+
+    float xOffset;
+    float yOffset;
 };
 
 #endif // OPENGLWINDOW_H

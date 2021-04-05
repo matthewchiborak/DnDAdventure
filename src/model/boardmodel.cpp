@@ -7,12 +7,13 @@ BoardModel::BoardModel()
 
 }
 
-void BoardModel::draw(QPainter *p)
-{
-    qDebug() << "Board Model Draw";
-}
-
 void BoardModel::load(std::string loadInfo)
 {
     factory.populate(&boardObjects, loadInfo);
 }
+
+std::vector<BoardObjectAbstract *> *BoardModel::getObjects()
+{
+    return &boardObjects;
+}
+

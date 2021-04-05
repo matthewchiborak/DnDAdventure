@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -8,8 +8,12 @@ CONFIG += c++11
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+LIBS+ = -lGL -lGLU
+
 SOURCES += \
     src/display/abstractview.cpp \
+    src/display/drawinformation.cpp \
+    src/display/fglut.cpp \
     src/display/openglwindow.cpp \
     src/display/renderingstrategy.cpp \
     src/display/renderingstrategyboard.cpp \
@@ -39,6 +43,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     src/display/abstractview.h \
+    src/display/drawinformation.h \
+    src/display/fglut.h \
+    src/display/matrixes.h \
     src/display/openglwindow.h \
     src/display/renderingstrategy.h \
     src/display/renderingstrategyboard.h \
@@ -59,5 +66,10 @@ HEADERS += \
     src/test/FileReaderTester.h \
     src/test/tester.h \
     src/testmain.h
+
+LIBS += -lOpenGL32
+
+LIBS += -lGlU32
+
 
 FORMS +=

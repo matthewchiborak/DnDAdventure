@@ -1,9 +1,10 @@
 #include "abstractview.h"
 
-AbstractView::AbstractView(ModelAbstract * model)
+AbstractView::AbstractView(ModelAbstract * model, SpriteFlyweightFactoryAbstract *factory)
     : QOpenGLWindow(QOpenGLWindow::NoPartialUpdate)
 {
     this->model = model;
+    this->spriteFactory = factory;
 }
 
 void AbstractView::setStrategy(RenderingStrategy *renderStrat)

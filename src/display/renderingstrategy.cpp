@@ -5,7 +5,7 @@ RenderingStrategy::RenderingStrategy(ModelAbstract *model)
     this->model = model;
 }
 
-void RenderingStrategy::draw(QPainter *p)
+void RenderingStrategy::draw(std::vector<DrawInformation> * items)
 {
 
 }

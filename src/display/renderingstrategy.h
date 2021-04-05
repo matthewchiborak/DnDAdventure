@@ -3,12 +3,14 @@
 
 #include "../model/modelabstract.h"
 
+class DrawInformation;
+
 class RenderingStrategy
 {
 public:
     RenderingStrategy(ModelAbstract * model);
 
-    void draw(QPainter * p);
+    virtual void draw(std::vector<DrawInformation> * items);
 
 protected:
     ModelAbstract * model;

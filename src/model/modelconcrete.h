@@ -6,8 +6,8 @@
 class ModelConcrete : public ModelAbstract
 {
 public:
-    ModelConcrete(SpriteFlyweightFactoryAbstract * factory);
-    void drawBoardModel(QPainter *p);
+    ModelConcrete();
+    void drawBoardModel(std::vector<DrawInformation> * items);
     void loadBoardModel(std::string loadInfo);
 };
 

@@ -1,2 +1,2 @@
-Delphox,sprite/DelphoxSprite.png
-Prim,sprite/PrimSprite.png
+Delphox,D:\Qt Projects\DnDAdventure\src\test\sprites\DelphoxSprite.png
+Prim,D:\Qt Projects\DnDAdventure\src\test\sprites\PrimSprite.PNG

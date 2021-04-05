@@ -1,17 +1,15 @@
 #include "renderingstrategyboard.h"
 
 #include <QPainter>
+#include <QDebug>
 
 RenderingStrategyBoard::RenderingStrategyBoard(ModelAbstract *model)
     : RenderingStrategy(model)
 {
-    clearColorBrush = QBrush(Qt::red);
+    clearColorBrush = QBrush(Qt::black);
 }
 
-void RenderingStrategyBoard::draw(QPainter *p)
+void RenderingStrategyBoard::draw(std::vector<DrawInformation> * items)
 {
-    //Clear the screen
-    p->fillRect(0, 0, 150, 200, clearColorBrush);
-
-    model->drawBoardModel(p);
+    model->drawBoardModel(items);
 }

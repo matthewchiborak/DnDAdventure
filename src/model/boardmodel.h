@@ -8,13 +8,15 @@
 
 class BoardObjectAbstract;
 
-class BoardModel : public GameModelAbstract
+class BoardModel //: public GameModelAbstract
 {
 public:
     BoardModel();
 
-    void draw(QPainter *p);
+    //void draw(QPainter *p);
     void load(std::string loadInfo);
+
+    std::vector<BoardObjectAbstract*> * getObjects();
 
 private:
     std::vector<BoardObjectAbstract*> boardObjects;

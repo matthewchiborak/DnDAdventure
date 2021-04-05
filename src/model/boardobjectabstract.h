@@ -30,4 +30,8 @@ protected:
     std::string spriteName;
 };
 
+//////////////////
+
+
+
 #endif // BOARDOBJECTABSTRACT_H

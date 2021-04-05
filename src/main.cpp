@@ -27,15 +27,15 @@ int main(int argc, char *argv[])
     SpriteFlyweightFactoryAbstract * spriteFactory =
             new SpriteFlyweightFactory("D:\\Qt Projects\\DnDAdventure\\src\\test\\SpritePaths.txt");
 
-    ModelAbstract * testModel = new ModelConcrete(spriteFactory);
-    testModel->loadBoardModel("testobstaclefile.txt");
+    ModelAbstract * testModel = new ModelConcrete();
+    testModel->loadBoardModel("D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefilesprites.txt");
 
     RenderingStrategy * renderStrat = new RenderingStrategyBoard(testModel);
 
-    AbstractView * window = new OpenGLWindow(testModel);
+    AbstractView * window = new OpenGLWindow(testModel, spriteFactory);
     window->setStrategy(renderStrat);
 
-    window->resize(450, 600);
+    window->resize(1600, 900);
     QSurfaceFormat fmt;
     fmt.setDepthBufferSize(24);
     fmt.setStencilBufferSize(8);

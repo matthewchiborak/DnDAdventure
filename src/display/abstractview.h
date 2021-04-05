@@ -18,7 +18,7 @@
 class AbstractView : public QOpenGLWindow
 {
 public:
-    AbstractView(ModelAbstract * model); //Should take model
+    AbstractView(ModelAbstract * model, SpriteFlyweightFactoryAbstract * factory); //Should take model
 
     void setStrategy(RenderingStrategy * renderStrat);
 
@@ -29,7 +29,7 @@ protected:
 
     ModelAbstract * model;
     RenderingStrategy * renderStrat;
-
+    SpriteFlyweightFactoryAbstract * spriteFactory;
 };
 
 #endif // ABSTRACTVIEW_H

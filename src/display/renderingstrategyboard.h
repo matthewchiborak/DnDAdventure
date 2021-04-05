@@ -10,7 +10,7 @@ class RenderingStrategyBoard : public RenderingStrategy
 public:
     RenderingStrategyBoard(ModelAbstract * model);
 
-    void draw(QPainter * p);
+    void draw(std::vector<DrawInformation> * items);
 
 private:
     QBrush clearColorBrush;
