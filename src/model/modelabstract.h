@@ -10,11 +10,10 @@ class ModelAbstract
 {
 public:
     ModelAbstract();
-    virtual void drawBoardModel(std::vector<DrawInformation> * items);
+    virtual void drawBoardModel(std::vector<DrawInformation> * items, float *xOffset, float *yOffset);
     virtual void loadBoardModel(std::string loadInfo);
 
-protected:
-    BoardModel boardModel;
+    virtual void movePlayer(int x, int y, float t);
 };
 
 #endif // MODELABSTRACT_H

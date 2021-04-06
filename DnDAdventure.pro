@@ -11,6 +11,9 @@ CONFIG += c++11
 LIBS+ = -lGL -lGLU
 
 SOURCES += \
+    src/controller/gamecontroller.cpp \
+    src/controller/keyinputstate.cpp \
+    src/controller/keyinputstateboard.cpp \
     src/display/abstractview.cpp \
     src/display/drawinformation.cpp \
     src/display/fglut.cpp \
@@ -22,6 +25,8 @@ SOURCES += \
     src/display/spriteflyweightfactoryabstract.cpp \
     src/display/stb_image.c \
     src/factory/boardobjectfactory.cpp \
+    src/factory/inputstatefactory.cpp \
+    src/factory/inputstatefactoryabstract.cpp \
     src/factory/worldobjectfactoryabstract.cpp \
     src/filemanagment/fileReader.cpp \
     src/main.cpp \
@@ -43,6 +48,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    src/controller/gamecontroller.h \
+    src/controller/keyinputstate.h \
+    src/controller/keyinputstateboard.h \
     src/display/abstractview.h \
     src/display/drawinformation.h \
     src/display/fglut.h \
@@ -55,6 +63,8 @@ HEADERS += \
     src/display/spriteflyweightfactoryabstract.h \
     src/display/stb_image.h \
     src/factory/boardobjectfactory.h \
+    src/factory/inputstatefactory.h \
+    src/factory/inputstatefactoryabstract.h \
     src/factory/worldobjectfactoryabstract.h \
     src/filemanagment/fileReader.h \
     src/model/EnemyModel.h \

@@ -6,6 +6,8 @@
 
 #include "../factory/boardobjectfactory.h"
 #include "../model/boardobjectobstacle.h"
+#include "../factory/inputstatefactory.h"
+#include "../model/modelconcrete.h"
 
 FileReaderTester::FileReaderTester()
 {
@@ -39,6 +41,11 @@ bool FileReaderTester::execute()
         qDebug() << "FileReaderTest 4 Failed";
         return false;
     }
+    if(!factoryForMakingStatesTest())
+    {
+        qDebug() << "FileReaderTest 5 Failed";
+        return false;
+    }
 
     return true;
 }
@@ -65,8 +72,10 @@ bool FileReaderTester::boardObjectFactoryPopulateVectorBasedOnTextFileTest()
 {
     BoardObjectFactory factory;
     std::vector<BoardObjectAbstract*> madeObjects;
+    int xPos;
+    int yPos;
 
-    factory.populate(&madeObjects, "D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefile.txt");
+    factory.populate(&madeObjects,  &xPos, &yPos, "D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefile.txt");
 
     if(madeObjects.size() != 2)
         return false;
@@ -80,6 +89,10 @@ bool FileReaderTester::boardObjectFactoryPopulateVectorBasedOnTextFileTest()
     if(madeObjects.at(0)->getHeight() != 3)
         return false;
     if(madeObjects.at(0)->getSpriteName() != "Delphox")
+        return false;
+    if(xPos != 6)
+        return false;
+    if(yPos != 7)
         return false;
 
     return true;
@@ -114,6 +127,19 @@ bool FileReaderTester::splitStringsTest()
     std::vector<std::string> res = testReader.splitString(stringToSplit, ',');
 
     if(res.at(0) == expected)
+        return false;
+
+    return true;
+}
+
+bool FileReaderTester::factoryForMakingStatesTest()
+{
+    ModelConcrete model;
+    std::queue<int> que;
+    InputStateFactory fact(&model, &que);
+    KeyInputState * testPointer = fact.getState("Board");
+
+    if(testPointer == nullptr)
         return false;
 
     return true;

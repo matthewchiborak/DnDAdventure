@@ -1,5 +1,6 @@
 #include <iostream>
 #include <QDebug>
+#include <queue>
 
 #include "testmain.h"
 
@@ -10,6 +11,11 @@
 #include "display/renderingstrategyboard.h"
 
 #include "display/spriteflyweightfactory.h"
+
+#include "controller/gamecontroller.h"
+
+#include "factory/inputstatefactory.h"
+
 
 
 int main(int argc, char *argv[])
@@ -32,8 +38,15 @@ int main(int argc, char *argv[])
 
     RenderingStrategy * renderStrat = new RenderingStrategyBoard(testModel);
 
-    AbstractView * window = new OpenGLWindow(testModel, spriteFactory);
+    std::queue<int> keyboardEventQueue;
+
+    AbstractView * window = new OpenGLWindow(testModel, &keyboardEventQueue, spriteFactory);
     window->setStrategy(renderStrat);
+
+    InputStateFactoryAbstract * inputStateFact = new InputStateFactory(testModel, &keyboardEventQueue);
+
+    GameController gameController(testModel, window, &keyboardEventQueue, inputStateFact);
+    gameController.start();
 
     window->resize(1600, 900);
     QSurfaceFormat fmt;

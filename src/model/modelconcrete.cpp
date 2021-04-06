@@ -12,8 +12,11 @@ ModelConcrete::ModelConcrete()
 
 }
 
-void ModelConcrete::drawBoardModel(std::vector<DrawInformation> * items)
+void ModelConcrete::drawBoardModel(std::vector<DrawInformation> * items, float *xOffset, float *yOffset)
 {
+    (*xOffset) = boardModel.getXOffset();
+    (*yOffset) = boardModel.getYOffset();
+
     std::vector<BoardObjectAbstract*> * bobjs = boardModel.getObjects();
     for(int i = 0; i < bobjs->size(); i++)
     {
@@ -25,5 +28,10 @@ void ModelConcrete::drawBoardModel(std::vector<DrawInformation> * items)
 void ModelConcrete::loadBoardModel(std::string loadInfo)
 {
     boardModel.load(loadInfo);
+}
+
+void ModelConcrete::movePlayer(int x, int y, float t)
+{
+    boardModel.movePlayer(x, y, t);
 }
 

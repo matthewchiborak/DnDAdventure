@@ -9,7 +9,7 @@ RenderingStrategyBoard::RenderingStrategyBoard(ModelAbstract *model)
     clearColorBrush = QBrush(Qt::black);
 }
 
-void RenderingStrategyBoard::draw(std::vector<DrawInformation> * items)
+void RenderingStrategyBoard::draw(std::vector<DrawInformation> * items, float *xOffset, float *yOffset)
 {
-    model->drawBoardModel(items);
+    model->drawBoardModel(items, xOffset, yOffset);
 }

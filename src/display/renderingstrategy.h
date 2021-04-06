@@ -10,7 +10,7 @@ class RenderingStrategy
 public:
     RenderingStrategy(ModelAbstract * model);
 
-    virtual void draw(std::vector<DrawInformation> * items);
+    virtual void draw(std::vector<DrawInformation> * items, float * xOffset, float * yOffset);
 
 protected:
     ModelAbstract * model;

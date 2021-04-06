@@ -8,12 +8,13 @@ class OpenGLWindow : public AbstractView
     Q_OBJECT
 
 public:
-    OpenGLWindow(ModelAbstract * model, SpriteFlyweightFactoryAbstract * factory);
+    OpenGLWindow(ModelAbstract * model, std::queue<int> * keyboardEventQueue, SpriteFlyweightFactoryAbstract * factory);
 
 protected:
     void paintGL() Q_DECL_OVERRIDE;
     void resizeGL(int w, int h) Q_DECL_OVERRIDE;
     void keyPressEvent(QKeyEvent *e) Q_DECL_OVERRIDE;
+    void keyReleaseEvent(QKeyEvent *e) Q_DECL_OVERRIDE;
 
 private:
     QMatrix4x4 m_window_normalised_matrix;
@@ -24,8 +25,6 @@ private:
     QMatrix4x4 m_model_text;
     QBrush m_brush;
 
-    float xOffset;
-    float yOffset;
 };
 
 #endif // OPENGLWINDOW_H

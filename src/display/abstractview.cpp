@@ -1,10 +1,11 @@
 #include "abstractview.h"
 
-AbstractView::AbstractView(ModelAbstract * model, SpriteFlyweightFactoryAbstract *factory)
+AbstractView::AbstractView(ModelAbstract * model, std::queue<int> * keyboardEventQueue, SpriteFlyweightFactoryAbstract *factory)
     : QOpenGLWindow(QOpenGLWindow::NoPartialUpdate)
 {
     this->model = model;
     this->spriteFactory = factory;
+    this->keyboardEventQueue = keyboardEventQueue;
 }
 
 void AbstractView::setStrategy(RenderingStrategy *renderStrat)
@@ -26,5 +27,11 @@ void AbstractView::keyPressEvent(QKeyEvent *e)
 {
 
 }
+
+void AbstractView::keyReleaseEvent(QKeyEvent *e)
+{
+
+}
+
 
 

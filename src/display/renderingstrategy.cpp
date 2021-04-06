@@ -5,7 +5,7 @@ RenderingStrategy::RenderingStrategy(ModelAbstract *model)
     this->model = model;
 }
 
-void RenderingStrategy::draw(std::vector<DrawInformation> * items)
+void RenderingStrategy::draw(std::vector<DrawInformation> * items, float *xOffset, float *yOffset)
 {
 
 }

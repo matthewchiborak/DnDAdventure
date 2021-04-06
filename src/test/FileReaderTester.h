@@ -15,6 +15,7 @@ private :
     bool boardObjectFactoryPopulateVectorBasedOnTextFileTest();
     bool readFileThatHasSpaces();
     bool splitStringsTest();
+    bool factoryForMakingStatesTest();
 };
 
 #endif

@@ -3,8 +3,8 @@
 #include "drawinformation.h"
 
 
-OpenGLWindow::OpenGLWindow(ModelAbstract *model, SpriteFlyweightFactoryAbstract *factory)
-    : AbstractView(model, factory)
+OpenGLWindow::OpenGLWindow(ModelAbstract *model, std::queue<int> * keyboardEventQueue, SpriteFlyweightFactoryAbstract *factory)
+    : AbstractView(model, keyboardEventQueue, factory)
 {
     m_view.lookAt(QVector3D(0,0,0),
                   QVector3D(0,0,0),
@@ -15,9 +15,6 @@ OpenGLWindow::OpenGLWindow(ModelAbstract *model, SpriteFlyweightFactoryAbstract 
     gradient.setColorAt(1, Qt::green);
 
     m_brush = QBrush(Qt::red);
-
-    xOffset = 12.0f;
-    yOffset = 7.0f;
 
     connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
 }
@@ -34,9 +31,11 @@ void OpenGLWindow::paintGL()
     p.setTransform(mvp.toTransform(), false);
 
     std::vector<DrawInformation> itemsToDraw;
+    float xOffset;// = 12.0f;
+    float yOffset;// = 7.0f;
 
     //based on the current stregy, draw the objects
-    renderStrat->draw(&itemsToDraw);
+    renderStrat->draw(&itemsToDraw, &xOffset, &yOffset);
 
     for(int i = 0; i < itemsToDraw.size(); i++)
     {
@@ -89,7 +88,9 @@ void OpenGLWindow::resizeGL(int w, int h)
 
     //glOrtho(0.0f, 240.0f, 5.0f, 135.0f, 0.1f, 100.0f);
     //1600 900
-    glOrtho( -12.f, 12.f, -6.75f, 6.75f, -1, 1);
+    //glOrtho( -12.f, 12.f, -6.75f, 6.75f, -1, 1);
+    //glOrtho( -8.25f, 8.25f, -4.640625f, 4.640625f, -1, 1);
+    glOrtho(-7.5f, 8.5f, -4.f, 5.f, -1, 1);
 
     //glOrtho( -w/2.f, w/2.f, -h/2.f, h/2.f, -1, 1);
 
@@ -97,5 +98,15 @@ void OpenGLWindow::resizeGL(int w, int h)
 
 void OpenGLWindow::keyPressEvent(QKeyEvent *e)
 {
-
+    qDebug() << "==============================";
+    if(keyboardEventQueue->empty())
+        keyboardEventQueue->push(e->key());
 }
+
+void OpenGLWindow::keyReleaseEvent(QKeyEvent *e)
+{
+    while(!keyboardEventQueue->empty())
+        keyboardEventQueue->pop();
+}
+
+
