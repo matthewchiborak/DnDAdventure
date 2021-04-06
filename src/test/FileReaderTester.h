@@ -16,6 +16,7 @@ private :
     bool readFileThatHasSpaces();
     bool splitStringsTest();
     bool factoryForMakingStatesTest();
+    bool testFillingPlayerBaseStats();
 };
 
 #endif

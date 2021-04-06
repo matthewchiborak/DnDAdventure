@@ -38,6 +38,7 @@ SOURCES += \
     src/model/gamemodelabstract.cpp \
     src/model/modelabstract.cpp \
     src/model/modelconcrete.cpp \
+    src/model/playercharacterstats.cpp \
     src/test/FileReaderTester.cpp \
     src/test/tester.cpp \
     src/testmain.cpp
@@ -75,6 +76,7 @@ HEADERS += \
     src/model/gamemodelabstract.h \
     src/model/modelabstract.h \
     src/model/modelconcrete.h \
+    src/model/playercharacterstats.h \
     src/test/FileReaderTester.h \
     src/test/tester.h \
     src/testmain.h

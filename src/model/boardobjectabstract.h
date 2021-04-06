@@ -24,6 +24,8 @@ public:
     std::string getSpriteName();
     bool getSolid();
 
+    bool isOccupyThisSpace(int x, int y);
+
 protected:
     int xpos;
     int ypos;

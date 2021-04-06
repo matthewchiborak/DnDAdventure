@@ -44,3 +44,17 @@ bool BoardObjectAbstract::getSolid()
 {
     return solid;
 }
+
+bool BoardObjectAbstract::isOccupyThisSpace(int x, int y)
+{
+    if(x >= ypos
+            && x < (xpos + width)
+            && y >= ypos
+            && y < (ypos + height)
+            )
+    {
+        return true;
+    }
+
+    return false;
+}

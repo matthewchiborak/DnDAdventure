@@ -1,0 +1,8 @@
+Name,Allura
+BaseHP,1
+BaseAtt,2
+BaseDef,3
+BaseMAtt,4
+BaseMDef,5
+BaseSpeed,6
+Sprite,Duke

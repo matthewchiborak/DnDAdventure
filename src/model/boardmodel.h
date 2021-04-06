@@ -34,6 +34,7 @@ private:
     float xOffset;
     float yOffset;
 
+    bool playerCanMoveThisWay(int x, int y);
 };
 
 #endif // BOARDMODEL_H

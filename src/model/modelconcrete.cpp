@@ -20,9 +20,13 @@ void ModelConcrete::drawBoardModel(std::vector<DrawInformation> * items, float *
     std::vector<BoardObjectAbstract*> * bobjs = boardModel.getObjects();
     for(int i = 0; i < bobjs->size(); i++)
     {
-        DrawInformation info(bobjs->at(i)->getXpos(), bobjs->at(i)->getYpos(), bobjs->at(i)->getWidth(), bobjs->at(i)->getHeight(), bobjs->at(i)->getSpriteName());
+        DrawInformation info(bobjs->at(i)->getXpos(), bobjs->at(i)->getYpos(), bobjs->at(i)->getWidth(), bobjs->at(i)->getHeight(), bobjs->at(i)->getSpriteName(), true);
         items->push_back(info);
     }
+
+    //Active player character for moving
+    DrawInformation charinfo(0, 0, 1, 1, playerCharacters.at(0)->getSpriteKey(), false);
+    items->push_back(charinfo);
 }
 
 void ModelConcrete::loadBoardModel(std::string loadInfo)

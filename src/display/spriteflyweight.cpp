@@ -29,13 +29,6 @@ void SpriteFlyweight::generate()
     {
         qDebug() << "Load texture failed" << filepath.c_str();
     }
-    else
-    {
-        qDebug() << "Load Texture Success! " << filepath.c_str();
-        //int max_texture_size;
-        //glGetIntegerv (GL_MAX_TEXTURE_SIZE, &max_texture_size);
-       //qDebug() << "Texture Data" << m_filePath << width << height << numComponents;// << max_texture_size;
-    }
 
     //Generate space for the data in opengl
     //This is generate space for 1 texture

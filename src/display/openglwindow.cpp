@@ -21,6 +21,9 @@ OpenGLWindow::OpenGLWindow(ModelAbstract *model, std::queue<int> * keyboardEvent
 
 void OpenGLWindow::paintGL()
 {
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
 
@@ -46,21 +49,42 @@ void OpenGLWindow::paintGL()
         focusFlyweight->bind(0);
         glBegin(GL_QUADS);
 
-        glTexCoord2f(0, 1);
-        glVertex3f(itemsToDraw.at(i).x - xOffset,
-                   itemsToDraw.at(i).y - yOffset, 0.0f);
+        if(itemsToDraw.at(i).isRelativeToWorld)
+        {
+            glTexCoord2f(0, 1);
+            glVertex3f(itemsToDraw.at(i).x - xOffset,
+                       itemsToDraw.at(i).y - yOffset, 0.0f);
 
-        glTexCoord2f(1, 1);
-        glVertex3f(itemsToDraw.at(i).x - xOffset + itemsToDraw.at(i).w,
-                   itemsToDraw.at(i).y - yOffset, 0.0f);
+            glTexCoord2f(1, 1);
+            glVertex3f(itemsToDraw.at(i).x - xOffset + itemsToDraw.at(i).w,
+                       itemsToDraw.at(i).y - yOffset, 0.0f);
 
-        glTexCoord2f(1, 0);
-        glVertex3f(itemsToDraw.at(i).x - xOffset + itemsToDraw.at(i).w,
-                   itemsToDraw.at(i).y + itemsToDraw.at(i).h - yOffset, 0.0f);
+            glTexCoord2f(1, 0);
+            glVertex3f(itemsToDraw.at(i).x - xOffset + itemsToDraw.at(i).w,
+                       itemsToDraw.at(i).y + itemsToDraw.at(i).h - yOffset, 0.0f);
 
-        glTexCoord2f(0, 0);
-        glVertex3f(itemsToDraw.at(i).x - xOffset,
-                   itemsToDraw.at(i).y + itemsToDraw.at(i).h - yOffset, 0.0f);
+            glTexCoord2f(0, 0);
+            glVertex3f(itemsToDraw.at(i).x - xOffset,
+                       itemsToDraw.at(i).y + itemsToDraw.at(i).h - yOffset, 0.0f);
+        }
+        else
+        {
+            glTexCoord2f(0, 1);
+            glVertex3f(itemsToDraw.at(i).x,
+                       itemsToDraw.at(i).y, 0.0f);
+
+            glTexCoord2f(1, 1);
+            glVertex3f(itemsToDraw.at(i).x + itemsToDraw.at(i).w,
+                       itemsToDraw.at(i).y, 0.0f);
+
+            glTexCoord2f(1, 0);
+            glVertex3f(itemsToDraw.at(i).x + itemsToDraw.at(i).w,
+                       itemsToDraw.at(i).y + itemsToDraw.at(i).h, 0.0f);
+
+            glTexCoord2f(0, 0);
+            glVertex3f(itemsToDraw.at(i).x,
+                       itemsToDraw.at(i).y + itemsToDraw.at(i).h, 0.0f);
+        }
 
         glEnd();
 
@@ -98,7 +122,6 @@ void OpenGLWindow::resizeGL(int w, int h)
 
 void OpenGLWindow::keyPressEvent(QKeyEvent *e)
 {
-    qDebug() << "==============================";
     if(keyboardEventQueue->empty())
         keyboardEventQueue->push(e->key());
 }

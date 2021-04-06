@@ -8,6 +8,7 @@
 #include "../model/boardobjectobstacle.h"
 #include "../factory/inputstatefactory.h"
 #include "../model/modelconcrete.h"
+#include "../model/playercharacterstats.h"
 
 FileReaderTester::FileReaderTester()
 {
@@ -44,6 +45,11 @@ bool FileReaderTester::execute()
     if(!factoryForMakingStatesTest())
     {
         qDebug() << "FileReaderTest 5 Failed";
+        return false;
+    }
+    if(!testFillingPlayerBaseStats())
+    {
+        qDebug() << "FileReaderTest 6 Failed";
         return false;
     }
 
@@ -141,6 +147,23 @@ bool FileReaderTester::factoryForMakingStatesTest()
 
     if(testPointer == nullptr)
         return false;
+
+    return true;
+}
+
+bool FileReaderTester::testFillingPlayerBaseStats()
+{
+    PlayerCharacterStats stats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Bullent.txt");
+
+    if(stats.getName() != "Bullent")
+        return false;
+
+    if(stats.getCurrentHealth() != 1)
+        return false;
+
+    if(stats.getSpriteKey() != "Bullent")
+        return false;
+
 
     return true;
 }

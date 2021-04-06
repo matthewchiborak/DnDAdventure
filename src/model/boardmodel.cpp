@@ -2,6 +2,8 @@
 
 #include <QDebug>
 
+#include "boardobjectabstract.h"
+
 BoardModel::BoardModel()
 {
 
@@ -21,6 +23,10 @@ std::vector<BoardObjectAbstract *> *BoardModel::getObjects()
 
 void BoardModel::movePlayer(int x, int y, float t)
 {
+    //Check if even can move
+    if(!playerCanMoveThisWay(x, y))
+        return;
+
     if(t > 1)
     {
         xPos += x;
@@ -54,5 +60,21 @@ int BoardModel::getXPos()
 int BoardModel::getYPos()
 {
     return yPos;
+}
+
+bool BoardModel::playerCanMoveThisWay(int x, int y)
+{
+    for(int i = 0; i < boardObjects.size(); i++)
+    {
+        if(boardObjects.at(i)->getSolid())
+        {
+            if(boardObjects.at(i)->isOccupyThisSpace((xPos + x), (yPos + y)))
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
 

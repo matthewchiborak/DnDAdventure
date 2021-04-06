@@ -5,6 +5,19 @@ ModelAbstract::ModelAbstract()
 
 }
 
+ModelAbstract::~ModelAbstract()
+{
+    for(int i = 0; i < playerCharacters.size(); i++)
+    {
+        delete playerCharacters.at(i);
+    }
+}
+
+void ModelAbstract::addPlayerCharacter(PlayerCharacterStats *character)
+{
+    playerCharacters.push_back(character);
+}
+
 
 void ModelAbstract::drawBoardModel(std::vector<DrawInformation> * items, float *xOffset, float *yOffset)
 {

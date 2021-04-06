@@ -34,6 +34,10 @@ int main(int argc, char *argv[])
             new SpriteFlyweightFactory("D:\\Qt Projects\\DnDAdventure\\src\\test\\SpritePaths.txt");
 
     ModelAbstract * testModel = new ModelConcrete();
+    testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Bullent.txt"));
+    testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Chad.txt"));
+    testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Allura.txt"));
+    testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Duke.txt"));
     testModel->loadBoardModel("D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefilesprites.txt");
 
     RenderingStrategy * renderStrat = new RenderingStrategyBoard(testModel);
@@ -55,7 +59,7 @@ int main(int argc, char *argv[])
     window->setFormat(fmt);
     window->show();
 
-    std::cout << "Application Running...\n";
+    qDebug() << "Application Running...\n";
 
     return app.exec();
 }
