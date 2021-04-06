@@ -3,6 +3,8 @@
 #include <QDebug>
 
 #include "keyinputstate.h"
+#include "../display/renderingstrategy.h"
+#include "../display/abstractview.h"
 
 GameController::GameController(ModelAbstract *model, AbstractView *view, std::queue<int> *keyboardEventQueue, InputStateFactoryAbstract *inputStateFactory)
 {
@@ -32,6 +34,7 @@ void GameController::handleState()
     {
         KeyInputState * temp = keyInputState;
         keyInputState = inputStateFactory->getState(nextStateKey);
+        this->view->setStrategy(inputStateFactory->getRenderStrategy(nextStateKey));
         delete temp;
     }
 }

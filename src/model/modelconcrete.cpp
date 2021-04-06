@@ -46,3 +46,14 @@ void ModelConcrete::movePlayer(int x, int y, float t)
     boardModel.movePlayer(x, y, t);
 }
 
+void ModelConcrete::drawPauseMenu(std::vector<DrawInformation> *items)
+{
+    //Background first
+    DrawInformation info(-8, -4, 17, 9, "PauseMenuBG", false);
+    items->push_back(info);
+
+    //Options
+    DrawInformation info2(0, 0, 0, 0, "", false, "Party");
+    items->push_back(info2);
+}
+

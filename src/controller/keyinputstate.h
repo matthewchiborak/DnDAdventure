@@ -27,6 +27,12 @@ protected:
     std::queue<int> * keyboardEventQueue;
 
     int keyToHandle;
+    bool eventBeenSetUp;
+
+    float movementLockTimeMil;
+    long long theTimeNow;
+    long long timeOfLastButtonEvent;
+    double elapsed_millies;
 
 };
 

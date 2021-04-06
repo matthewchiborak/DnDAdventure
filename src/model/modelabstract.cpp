@@ -38,3 +38,8 @@ void ModelAbstract::movePlayer(int x, int y, float t)
 
 }
 
+void ModelAbstract::drawPauseMenu(std::vector<DrawInformation> *items)
+{
+
+}
+

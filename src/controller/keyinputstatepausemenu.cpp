@@ -1,31 +1,25 @@
-#include "keyinputstateboard.h"
+#include "keyinputstatepausemenu.h"
 
-#include <queue>
-#include <QDebug>
-
-#include "../model/modelabstract.h"
-
-KeyInputStateBoard::KeyInputStateBoard(ModelAbstract *model, std::queue<int> *keyboardEventQueue)
+KeyInputStatePauseMenu::KeyInputStatePauseMenu(ModelAbstract *model, std::queue<int> *keyboardEventQueue)
     : KeyInputState(model, keyboardEventQueue)
 {
     movementLockTimeMil = 300;
 }
 
-bool KeyInputStateBoard::handle(std::string *nextState)
+KeyInputStatePauseMenu::~KeyInputStatePauseMenu()
+{
+
+}
+
+bool KeyInputStatePauseMenu::handle(std::string *nextState)
 {
     if(handleUserInput(nextState))
         return true;
 
-    //Else handle other possible events
-    //Doorways
-    if(handleCollisionTriggers(nextState))
-        return true;
-
-    //Random encounters
     return false;
 }
 
-bool KeyInputStateBoard::handleUserInput(std::string *nextState)
+bool KeyInputStatePauseMenu::handleUserInput(std::string *nextState)
 {
     if(!eventBeenSetUp)
     {
@@ -38,7 +32,7 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
                 || keyToHandle == Qt::Key_S
                 || keyToHandle == Qt::Key_A
                 || keyToHandle == Qt::Key_D
-                || keyToHandle == Qt::Key_E
+                || keyToHandle == Qt::Key_Escape
                 )
         {
             auto nowTime = std::chrono::system_clock::now().time_since_epoch();
@@ -51,26 +45,27 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
         return false;
     }
 
+    //Process the event
     //Prcoess the event
     auto nowTime = std::chrono::system_clock::now().time_since_epoch();
     auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(nowTime).count();
     theTimeNow =(millis);
     elapsed_millies = theTimeNow - timeOfLastButtonEvent;
 
-    if(keyToHandle == Qt::Key_W)
-        this->model->movePlayer(0, 1, ((elapsed_millies/movementLockTimeMil)));
-    else if(keyToHandle == Qt::Key_S)
-        this->model->movePlayer(0, -1, ((elapsed_millies/movementLockTimeMil)));
-    else if(keyToHandle == Qt::Key_A)
-        this->model->movePlayer(-1, 0, ((elapsed_millies/movementLockTimeMil)));
-    else if(keyToHandle == Qt::Key_D)
-        this->model->movePlayer(1, 0, ((elapsed_millies/movementLockTimeMil)));
-    else if(keyToHandle == Qt::Key_E)
+    //if(keyToHandle == Qt::Key_W)
+        //this->model->movePlayer(0, 1, ((elapsed_millies/movementLockTimeMil)));
+    //else if(keyToHandle == Qt::Key_S)
+        //this->model->movePlayer(0, -1, ((elapsed_millies/movementLockTimeMil)));
+    //else if(keyToHandle == Qt::Key_A)
+        //this->model->movePlayer(-1, 0, ((elapsed_millies/movementLockTimeMil)));
+    //else if(keyToHandle == Qt::Key_D)
+        //this->model->movePlayer(1, 0, ((elapsed_millies/movementLockTimeMil)));
+    if(keyToHandle == Qt::Key_Escape)
     {
         eventBeenSetUp = false;
         while(!keyboardEventQueue->empty())
             keyboardEventQueue->pop();
-        (*nextState) = "PauseMenu";
+        (*nextState) = "Board";
         return true;
     }
 
@@ -78,15 +73,6 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
     {
         eventBeenSetUp = false;
     }
-
-    return false;
-}
-
-bool KeyInputStateBoard::handleCollisionTriggers(std::string *nextState)
-{
-    std::string res = model->handleBoardCollisionTriggers();
-    if(res == "HUH")
-        return false;
 
     return false;
 }

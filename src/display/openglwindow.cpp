@@ -42,6 +42,13 @@ void OpenGLWindow::paintGL()
 
     for(int i = 0; i < itemsToDraw.size(); i++)
     {
+        //Text items
+        if(itemsToDraw.at(i).text != "")
+        {
+
+            continue;
+        }
+
         SpriteFlyweight * focusFlyweight = spriteFactory->getFlyweight(itemsToDraw.at(i).key);
 
         focusFlyweight->generate();
@@ -103,7 +110,8 @@ void OpenGLWindow::resizeGL(int w, int h)
     m_window_painter_matrix.translate(w / 2.0, h / 2.0);
 
     m_projection.setToIdentity();
-    m_projection.ortho(0.0f, 240.0f, 5.0f, 135.0f, 0.1f, 100.0f);
+    m_projection.ortho(-7.5f, 8.5f, -4.f, 5.f, -1.f, 1.f);
+    //m_projection.ortho(0.0f, 240.0f, 5.0f, 135.0f, 0.1f, 100.0f);
     //m_projection.ortho(0.0f, 320.0f, 0.0f, 180.0f, 0.1f, 100.0f);
     //m_projection.ortho(0.0f, 160.0f, 0.0f, 90.0f, 0.1f, 100.0f);
     //m_projection.ortho(0.0f, 150.0f, 0.0f, 200.0f, 0.1f, 100.0f);

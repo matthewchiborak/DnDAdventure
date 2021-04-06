@@ -13,13 +13,6 @@ public:
     bool handle(std::string * nextState);
 
 private:
-    bool eventBeenSetUp;
-
-    float movementLockTimeMil;
-    long long theTimeNow;
-    long long timeOfLastButtonEvent;
-    double elapsed_millies;
-
     bool handleUserInput(std::string * nextState);
     bool handleCollisionTriggers(std::string * nextState);
 };

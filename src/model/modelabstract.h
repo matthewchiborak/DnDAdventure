@@ -20,6 +20,7 @@ public:
 
     virtual void movePlayer(int x, int y, float t);
 
+    virtual void drawPauseMenu(std::vector<DrawInformation> * items);
 
     std::vector<PlayerCharacterStats*> playerCharacters;
 };

@@ -1,6 +1,6 @@
 #include "drawinformation.h"
 
-DrawInformation::DrawInformation(int x, int y, int w, int h, std::string key, bool worldRel)
+DrawInformation::DrawInformation(int x, int y, int w, int h, std::string key, bool worldRel, std::string text)
 {
     this->x = x;
     this->y = y;
@@ -8,4 +8,5 @@ DrawInformation::DrawInformation(int x, int y, int w, int h, std::string key, bo
     this->h = h;
     this->key = key;
     this->isRelativeToWorld = worldRel;
+    this->text = text;
 }

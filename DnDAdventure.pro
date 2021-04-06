@@ -14,12 +14,14 @@ SOURCES += \
     src/controller/gamecontroller.cpp \
     src/controller/keyinputstate.cpp \
     src/controller/keyinputstateboard.cpp \
+    src/controller/keyinputstatepausemenu.cpp \
     src/display/abstractview.cpp \
     src/display/drawinformation.cpp \
     src/display/fglut.cpp \
     src/display/openglwindow.cpp \
     src/display/renderingstrategy.cpp \
     src/display/renderingstrategyboard.cpp \
+    src/display/renderingstrategypausemenu.cpp \
     src/display/spriteflyweight.cpp \
     src/display/spriteflyweightfactory.cpp \
     src/display/spriteflyweightfactoryabstract.cpp \
@@ -53,6 +55,7 @@ HEADERS += \
     src/controller/gamecontroller.h \
     src/controller/keyinputstate.h \
     src/controller/keyinputstateboard.h \
+    src/controller/keyinputstatepausemenu.h \
     src/display/abstractview.h \
     src/display/drawinformation.h \
     src/display/fglut.h \
@@ -60,6 +63,7 @@ HEADERS += \
     src/display/openglwindow.h \
     src/display/renderingstrategy.h \
     src/display/renderingstrategyboard.h \
+    src/display/renderingstrategypausemenu.h \
     src/display/spriteflyweight.h \
     src/display/spriteflyweightfactory.h \
     src/display/spriteflyweightfactoryabstract.h \

@@ -10,3 +10,8 @@ KeyInputState *InputStateFactoryAbstract::getState(std::string key)
 {
     return nullptr;
 }
+
+RenderingStrategy *InputStateFactoryAbstract::getRenderStrategy(std::string key)
+{
+    return nullptr;
+}

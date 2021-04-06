@@ -6,11 +6,16 @@ AbstractView::AbstractView(ModelAbstract * model, std::queue<int> * keyboardEven
     this->model = model;
     this->spriteFactory = factory;
     this->keyboardEventQueue = keyboardEventQueue;
+    this->renderStrat = nullptr;
 }
 
 void AbstractView::setStrategy(RenderingStrategy *renderStrat)
 {
+    RenderingStrategy * oldStrat = this->renderStrat;
     this->renderStrat = renderStrat;
+
+    if(oldStrat != nullptr)
+        delete oldStrat;
 }
 
 void AbstractView::paintGL()
