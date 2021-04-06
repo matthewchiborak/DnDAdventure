@@ -13,6 +13,8 @@ public:
 private :
     bool readFileContentsTest();
     bool boardObjectFactoryPopulateVectorBasedOnTextFileTest();
+    bool readFileThatHasSpaces();
+    bool splitStringsTest();
 };
 
 #endif

@@ -29,6 +29,16 @@ bool FileReaderTester::execute()
         qDebug() << "FileReaderTest 2 Failed";
         return false;
     }
+    if(!readFileThatHasSpaces())
+    {
+        qDebug() << "FileReaderTest 3 Failed";
+        return false;
+    }
+    if(!splitStringsTest())
+    {
+        qDebug() << "FileReaderTest 4 Failed";
+        return false;
+    }
 
     return true;
 }
@@ -70,6 +80,40 @@ bool FileReaderTester::boardObjectFactoryPopulateVectorBasedOnTextFileTest()
     if(madeObjects.at(0)->getHeight() != 3)
         return false;
     if(madeObjects.at(0)->getSpriteName() != "Delphox")
+        return false;
+
+    return true;
+}
+
+bool FileReaderTester::readFileThatHasSpaces()
+{
+    std::string expected("This has spaces in it.");
+
+    FileReader testReader("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestTextFileSpaces.txt");
+
+    if(!testReader.hasNext())
+        return false;
+
+    if(testReader.next() != expected)
+        return false;
+
+    if(testReader.hasNext())
+        return false;
+
+    return true;
+}
+
+bool FileReaderTester::splitStringsTest()
+{
+    std::string expected("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestTextFileSpaces.txt");
+
+    FileReader testReader("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestTextFileSpaces.txt");
+
+    std::string stringToSplit("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestTextFileSpaces.txt,ThiscanBeAnyThing");
+
+    std::vector<std::string> res = testReader.splitString(stringToSplit, ',');
+
+    if(res.at(0) == expected)
         return false;
 
     return true;

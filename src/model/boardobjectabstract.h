@@ -12,15 +12,17 @@ public:
             int ypos,
             int width,
             int height,
-            std::string spriteName);
+            std::string spriteName,
+            bool solid);
 
-    void interact();
+    virtual void interact();
 
     int getXpos();
     int getYpos();
     int getWidth();
     int getHeight();
     std::string getSpriteName();
+    bool getSolid();
 
 protected:
     int xpos;
@@ -28,6 +30,7 @@ protected:
     int width;
     int height;
     std::string spriteName;
+    bool solid;
 };
 
 //////////////////

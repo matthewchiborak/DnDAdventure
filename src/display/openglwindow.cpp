@@ -24,6 +24,9 @@ OpenGLWindow::OpenGLWindow(ModelAbstract *model, SpriteFlyweightFactoryAbstract 
 
 void OpenGLWindow::paintGL()
 {
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+
     QPainter p(this);
     p.setWorldTransform(m_window_normalised_matrix.toTransform());
 

@@ -1,12 +1,13 @@
 #include "boardobjectabstract.h"
 
-BoardObjectAbstract::BoardObjectAbstract(int xpos, int ypos, int width, int height, std::string spriteName)
+BoardObjectAbstract::BoardObjectAbstract(int xpos, int ypos, int width, int height, std::string spriteName, bool solid)
 {
     this->xpos = xpos;
     this->ypos = ypos;
     this->width = width;
     this->height = height;
     this->spriteName = spriteName;
+    this->solid = solid;
 }
 
 void BoardObjectAbstract::interact()
@@ -37,4 +38,9 @@ int BoardObjectAbstract::getHeight()
 std::string BoardObjectAbstract::getSpriteName()
 {
     return spriteName;
+}
+
+bool BoardObjectAbstract::getSolid()
+{
+    return solid;
 }

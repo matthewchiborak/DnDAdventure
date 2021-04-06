@@ -22,8 +22,6 @@ void SpriteFlyweight::generate()
 
     int width, height, numComponents;
 
-    filepath = "D:\\Qt Projects\\DnDAdventure\\src\\test\\sprites\\test.png";
-
     //Load texture data
     unsigned char* imageData = stbi_load(filepath.c_str(), &width, &height, &numComponents, 4);
 

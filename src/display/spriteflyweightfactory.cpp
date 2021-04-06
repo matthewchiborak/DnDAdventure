@@ -3,6 +3,7 @@
 #include "spriteflyweight.h"
 
 #include <QDebug>
+#include <QDir>
 
 SpriteFlyweightFactory::SpriteFlyweightFactory(std::string spriteListFilepath)
     : SpriteFlyweightFactoryAbstract(spriteListFilepath)
@@ -24,8 +25,10 @@ SpriteFlyweight *SpriteFlyweightFactory::getFlyweight(std::string key)
 
 SpriteFlyweight *SpriteFlyweightFactory::createFlyweight(std::string key)
 {
+    QDir dir(QDir::current());
+    dir.cdUp();
     //Get the image location from the other map, create and store the flyweight
-    std::string spriteFilePath = keyToImageLocationMap[key];
+    std::string spriteFilePath = dir.path().toStdString()+ "/DnDAdventure/src/test/sprites/" + keyToImageLocationMap[key];
 
     //Create it. Return it.
     SpriteFlyweight * newSpr = new SpriteFlyweight(spriteFilePath);

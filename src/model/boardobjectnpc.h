@@ -1,20 +1,21 @@
-#ifndef BOARDOBJECTOBSTACLE_H
-#define BOARDOBJECTOBSTACLE_H
+#ifndef BOARDOBJECTNPC_H
+#define BOARDOBJECTNPC_H
 
 #include "boardobjectabstract.h"
 
-class BoardObjectObstacle : public BoardObjectAbstract
+class BoardObjectNPC : public BoardObjectAbstract
 {
 public:
-    BoardObjectObstacle(
+    BoardObjectNPC(
             int xpos,
             int ypos,
             int width,
             int height,
             std::string spriteName,
-            bool solid);
+            bool solid
+            );
 
     void interact();
 };
 
-#endif // BOARDOBJECTOBSTACLE_H
+#endif // BOARDOBJECTNPC_H
