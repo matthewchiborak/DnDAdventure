@@ -28,7 +28,13 @@ void ModelAbstract::loadBoardModel(std::string loadInfo)
 
 }
 
+std::string ModelAbstract::handleBoardCollisionTriggers()
+{
+    return "None";
+}
+
 void ModelAbstract::movePlayer(int x, int y, float t)
 {
 
 }
+

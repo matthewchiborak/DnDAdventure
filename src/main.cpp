@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Chad.txt"));
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Allura.txt"));
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Duke.txt"));
-    testModel->loadBoardModel("D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefilesprites.txt");
+    testModel->loadBoardModel("D:\\Qt Projects\\DnDAdventure\\src\\test\\Boards\\testobstaclefilesprites.txt");
 
     RenderingStrategy * renderStrat = new RenderingStrategyBoard(testModel);
 

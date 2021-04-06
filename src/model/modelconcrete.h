@@ -9,6 +9,7 @@ public:
     ModelConcrete();
     void drawBoardModel(std::vector<DrawInformation> * items, float *xOffset, float *yOffset);
     void loadBoardModel(std::string loadInfo);
+    std::string handleBoardCollisionTriggers();
 
     void movePlayer(int x, int y, float t);
 

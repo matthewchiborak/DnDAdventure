@@ -34,6 +34,13 @@ void ModelConcrete::loadBoardModel(std::string loadInfo)
     boardModel.load(loadInfo);
 }
 
+std::string ModelConcrete::handleBoardCollisionTriggers()
+{
+    boardModel.checkAndActivateDoor();
+
+    return "None";
+}
+
 void ModelConcrete::movePlayer(int x, int y, float t)
 {
     boardModel.movePlayer(x, y, t);

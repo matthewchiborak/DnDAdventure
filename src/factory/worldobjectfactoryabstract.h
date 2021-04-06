@@ -5,6 +5,7 @@
 #include <iostream>
 
 class BoardObjectAbstract;
+class Doorway;
 
 class WorldObjectFactoryAbstract
 {

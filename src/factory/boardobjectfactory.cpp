@@ -4,13 +4,14 @@
 
 #include "../filemanagment/fileReader.h"
 #include "../model/boardobjectobstacle.h"
+#include "../model/doorway.h"
 
 BoardObjectFactory::BoardObjectFactory()
 {
 
 }
 
-void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjects, int *xPos, int *yPos, std::string boardFileName)
+void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjects, std::vector<Doorway*> * doors, int *xPos, int *yPos, std::string boardFileName)
 {
     FileReader reader(boardFileName);
 
@@ -31,6 +32,8 @@ void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjec
                 (*xPos) = std::stoi(vect.at(1));
                 (*yPos) = std::stoi(vect.at(2));
             }
+            else if(vect.at(0) == "door")
+                doors->push_back(createDoorway(vect));
         }
     }
 }
@@ -68,5 +71,18 @@ BoardObjectAbstract *BoardObjectFactory::createNPC(std::vector<std::string> info
                                    std::stoi(info.at(4)),
                                    info.at(5),
                                    true
+                );
+}
+
+Doorway *BoardObjectFactory::createDoorway(std::vector<std::string> info)
+{
+    return new Doorway(
+                std::stoi(info.at(1)),
+                std::stoi(info.at(2)),
+                std::stoi(info.at(3)),
+                std::stoi(info.at(4)),
+                info.at(5),
+                std::stoi(info.at(6)),
+                std::stoi(info.at(7))
                 );
 }

@@ -16,8 +16,10 @@ public:
 
     virtual void drawBoardModel(std::vector<DrawInformation> * items, float *xOffset, float *yOffset);
     virtual void loadBoardModel(std::string loadInfo);
+    virtual std::string handleBoardCollisionTriggers();
 
     virtual void movePlayer(int x, int y, float t);
+
 
     std::vector<PlayerCharacterStats*> playerCharacters;
 };

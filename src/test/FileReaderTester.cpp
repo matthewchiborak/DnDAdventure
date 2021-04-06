@@ -9,6 +9,7 @@
 #include "../factory/inputstatefactory.h"
 #include "../model/modelconcrete.h"
 #include "../model/playercharacterstats.h"
+#include "../model/doorway.h"
 
 FileReaderTester::FileReaderTester()
 {
@@ -78,10 +79,11 @@ bool FileReaderTester::boardObjectFactoryPopulateVectorBasedOnTextFileTest()
 {
     BoardObjectFactory factory;
     std::vector<BoardObjectAbstract*> madeObjects;
+    std::vector<Doorway*> doors;
     int xPos;
     int yPos;
 
-    factory.populate(&madeObjects,  &xPos, &yPos, "D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefile.txt");
+    factory.populate(&madeObjects, &doors, &xPos, &yPos, "D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefile.txt");
 
     if(madeObjects.size() != 2)
         return false;
@@ -99,6 +101,10 @@ bool FileReaderTester::boardObjectFactoryPopulateVectorBasedOnTextFileTest()
     if(xPos != 6)
         return false;
     if(yPos != 7)
+        return false;
+    if(doors.size() != 1)
+        return false;
+    if(doors.at(0)->getBoardKey() != "D:/Qt Projects/DnDAdventure/src/test/Boards/testobstaclefilesprites2.txt")
         return false;
 
     return true;

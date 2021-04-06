@@ -12,14 +12,16 @@ public:
 
     bool handle(std::string * nextState);
 
+private:
     bool eventBeenSetUp;
 
-    int keyToCheck;
     float movementLockTimeMil;
     long long theTimeNow;
     long long timeOfLastButtonEvent;
     double elapsed_millies;
-    bool keepIncrLoop;
+
+    bool handleUserInput(std::string * nextState);
+    bool handleCollisionTriggers(std::string * nextState);
 };
 
 #endif // KEYINPUTSTATEBOARD_H

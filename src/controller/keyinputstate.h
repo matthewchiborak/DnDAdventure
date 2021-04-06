@@ -8,6 +8,9 @@
 
 class ModelAbstract;
 
+//I have decided this shouldnt have been called key input state because its more general than that. It should be game state.
+//If it bothers me enough I will change it. But it shouldn't be a problem
+
 class KeyInputState
 {
 public:

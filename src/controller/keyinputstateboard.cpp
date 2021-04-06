@@ -9,11 +9,23 @@ KeyInputStateBoard::KeyInputStateBoard(ModelAbstract *model, std::queue<int> *ke
     : KeyInputState(model, keyboardEventQueue)
 {
     movementLockTimeMil = 300;
-    keepIncrLoop = false;
     eventBeenSetUp = false;
 }
 
 bool KeyInputStateBoard::handle(std::string *nextState)
+{
+    if(handleUserInput(nextState))
+        return true;
+
+    //Else handle other possible events
+    //Doorways
+    if(handleCollisionTriggers(nextState))
+        return true;
+
+    //Random encounters
+}
+
+bool KeyInputStateBoard::handleUserInput(std::string *nextState)
 {
     if(!eventBeenSetUp)
     {
@@ -55,10 +67,17 @@ bool KeyInputStateBoard::handle(std::string *nextState)
 
     if((elapsed_millies / movementLockTimeMil) >= 1)
     {
-        //keyboardEventQueue->pop();
         eventBeenSetUp = false;
     }
 
     return false;
+}
 
+bool KeyInputStateBoard::handleCollisionTriggers(std::string *nextState)
+{
+    std::string res = model->handleBoardCollisionTriggers();
+    if(res == "HUH")
+        return false;
+
+    return false;
 }

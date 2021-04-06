@@ -12,13 +12,13 @@ class BoardObjectFactory : public WorldObjectFactoryAbstract
 public:
     BoardObjectFactory();
 
-    void populate(std::vector<BoardObjectAbstract*> * boardObjects, int * xPos, int * yPos, std::string boardFileName);
+    void populate(std::vector<BoardObjectAbstract*> * boardObjects, std::vector<Doorway*> * doors, int * xPos, int * yPos, std::string boardFileName);
 
 private:
     BoardObjectAbstract * createObstacle(std::vector<std::string> info);
     BoardObjectAbstract * createMap(std::vector<std::string> info);
     BoardObjectAbstract * createNPC(std::vector<std::string> info);
-    //Create other
+    Doorway * createDoorway(std::vector<std::string> info);
 };
 
 #endif // BOARDOBJECTFACTORY_H

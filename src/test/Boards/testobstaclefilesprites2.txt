@@ -1,0 +1,6 @@
+playerpos,0,0
+map,0,0,4,3,TestShip
+npc,0,0,1,1,Duke
+obs,3,3,1,1,Blank
+npc,2,-2,1,1,Duke
+door,-1,0,1,1,testobstaclefilesprites.txt,3,2

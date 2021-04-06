@@ -3,6 +3,7 @@
 #include <QDebug>
 
 #include "boardobjectabstract.h"
+#include "doorway.h"
 
 BoardModel::BoardModel()
 {
@@ -11,9 +12,23 @@ BoardModel::BoardModel()
 
 void BoardModel::load(std::string loadInfo)
 {
-    factory.populate(&boardObjects, &xPos, &yPos, loadInfo);
+    factory.populate(&boardObjects, &doors, &xPos, &yPos, loadInfo);
     xOffset = xPos;// + 12.f;
     yOffset = yPos;// + 0.5f;// + 7.5f;
+}
+
+void BoardModel::clear()
+{
+    for(int i = 0; i < boardObjects.size(); i++)
+    {
+        delete boardObjects.at(i);
+    }
+    boardObjects.clear();
+    for(int i = 0; i < doors.size(); i++)
+    {
+        delete doors.at(i);
+    }
+    doors.clear();
 }
 
 std::vector<BoardObjectAbstract *> *BoardModel::getObjects()
@@ -60,6 +75,26 @@ int BoardModel::getXPos()
 int BoardModel::getYPos()
 {
     return yPos;
+}
+
+void BoardModel::checkAndActivateDoor()
+{
+    for(int i = 0; i < doors.size(); i++)
+    {
+        if(doors.at(i)->isOccupyThisSpace(xPos, yPos))
+        {
+            int tempx = doors.at(i)->getNewXPos();
+            int tempy = doors.at(i)->getNewYPos();
+            std::string tempPath = doors.at(i)->getBoardKey();
+            clear();
+            load(tempPath);
+            xPos = tempx;
+            yPos = tempy;
+            xOffset = (xPos);
+            yOffset = (yPos);
+            return;
+        }
+    }
 }
 
 bool BoardModel::playerCanMoveThisWay(int x, int y)

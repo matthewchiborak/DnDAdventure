@@ -23,6 +23,11 @@ void GameController::start()
 
 void GameController::eventLoopTimerTimeout()
 {
+    handleState();
+}
+
+void GameController::handleState()
+{
     if(keyInputState->handle(&nextStateKey))
     {
         KeyInputState * temp = keyInputState;

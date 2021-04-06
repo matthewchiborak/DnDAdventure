@@ -15,6 +15,7 @@ public:
 
     //void draw(QPainter *p);
     void load(std::string loadInfo);
+    void clear();
 
     std::vector<BoardObjectAbstract*> * getObjects();
 
@@ -25,8 +26,11 @@ public:
     int getXPos();
     int getYPos();
 
+    void checkAndActivateDoor();
+
 private:
     std::vector<BoardObjectAbstract*> boardObjects;
+    std::vector<Doorway*> doors;
     BoardObjectFactory factory;
 
     int xPos;

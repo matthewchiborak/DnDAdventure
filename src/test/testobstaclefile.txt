@@ -1,3 +1,4 @@
 playerpos,6,7
 obs,0,1,2,3,Delphox
-obs,3,4,3,2,Prim
+obs,3,4,3,2,Prim,
+door,-1,0,1,1,testobstaclefilesprites2.txt,10,10

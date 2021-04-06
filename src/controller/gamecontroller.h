@@ -40,6 +40,10 @@ private:
     std::string nextStateKey;
     InputStateFactoryAbstract * inputStateFactory;
 
+    void handleState();
+    void checkDoors();
+    void checkRandomEncounter();
+
 };
 
 #endif // GAMECONTROLLER_H
