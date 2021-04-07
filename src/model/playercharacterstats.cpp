@@ -38,6 +38,8 @@ PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
             spriteKey = splits.at(1);
         if(splits.at(0) == "MenuSprite")
             menuSpriteKey = splits.at(1);
+        if(splits.at(0) == "TimeLineSprite")
+            timelineSpriteKey = splits.at(1);
         if(splits.at(0) == "IVHP")
             IVHP = std::stoi(splits.at(1));
         if(splits.at(0) == "IVAtt")
@@ -143,6 +145,11 @@ std::string PlayerCharacterStats::getSpriteKey()
 std::string PlayerCharacterStats::getMenuSpriteKey()
 {
     return menuSpriteKey;
+}
+
+std::string PlayerCharacterStats::getTimelineSpriteKey()
+{
+    return timelineSpriteKey;
 }
 
 void PlayerCharacterStats::setLevel(int lvl)

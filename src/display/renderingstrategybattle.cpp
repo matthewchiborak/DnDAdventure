@@ -8,7 +8,7 @@ RenderingStrategyBattle::RenderingStrategyBattle(ModelAbstract *model)
 
 void RenderingStrategyBattle::draw(std::vector<DrawInformation> *items, float *xOffset, float *yOffset)
 {
-    (*xOffset) = 0;
+    (*xOffset) = -800;
     (*yOffset) = 0;
     model->drawBattleModel(items);
 }

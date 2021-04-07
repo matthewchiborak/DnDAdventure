@@ -11,7 +11,7 @@ BoardObjectFactory::BoardObjectFactory()
 
 }
 
-void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjects, std::vector<Doorway*> * doors, std::vector<std::string> *encTable, int *xPos, int *yPos, std::string boardFileName)
+void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjects, std::vector<Doorway*> * doors, std::vector<std::string> *encTable, std::string *battleBackgroundKey, int *xPos, int *yPos, std::string boardFileName)
 {
     FileReader reader(boardFileName);
 
@@ -29,6 +29,8 @@ void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjec
                     boardObjects->push_back(createMap(vect));
             else if(vect.at(0) == "ranenc")
                     encTable->push_back(vect.at(1));
+            else if(vect.at(0) == "battleBG")
+                    (*battleBackgroundKey) = (vect.at(1));
             else if(vect.at(0) == "playerpos")
             {
                 (*xPos) = std::stoi(vect.at(1));

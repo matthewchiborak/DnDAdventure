@@ -5,3 +5,4 @@ obs,3,3,1,1,Blank
 npc,2,2,1,1,Duke
 door,-1,0,1,1,testobstaclefilesprites2.txt,3,-2
 ranenc,TestEncounter1
+battleBG,TestBattleBG

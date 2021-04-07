@@ -87,7 +87,7 @@ bool ModelConcrete::tryToStartABattle()
         return false;
 
     //Load the enoucter in the battle model
-    //Reset values
+    battleModel.load(encounterKey, &playerCharacters);
 
     //Set the render and input states
     return true;
@@ -95,6 +95,10 @@ bool ModelConcrete::tryToStartABattle()
 
 void ModelConcrete::drawBattleModel(std::vector<DrawInformation> *items)
 {
+    //Background first
+    DrawInformation info(-750, -120, 1600, 620, boardModel.getBattleBackgroundKey(), false);
+    items->push_back(info);
+
     battleModel.draw(items);
 }
 

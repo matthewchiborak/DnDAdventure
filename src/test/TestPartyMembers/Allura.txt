@@ -8,6 +8,7 @@ BaseMDef,116
 BaseSpeed,60
 Sprite,Duke
 MenuSprite,AlluraMenu
+TimeLineSprite,AlluraTimeLine
 IVHP,0
 IVMP,16
 IVAtt,0

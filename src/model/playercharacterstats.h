@@ -23,6 +23,7 @@ public:
     std::string getName();
     std::string getSpriteKey();
     std::string getMenuSpriteKey();
+    std::string getTimelineSpriteKey();
 
     void setLevel(int lvl);
     void setXP(int xp);
@@ -39,6 +40,7 @@ private:
     int currentHealth;
     std::string spriteKey;
     std::string menuSpriteKey;
+    std::string timelineSpriteKey;
     int currentMP;
 
     //base stats

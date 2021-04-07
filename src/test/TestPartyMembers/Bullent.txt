@@ -8,6 +8,7 @@ BaseMDef,71
 BaseSpeed,122
 Sprite,Bullent
 MenuSprite,BullentMenu
+TimeLineSprite,BullentTimeLine
 IVHP,0
 IVMP,0
 IVAtt,31

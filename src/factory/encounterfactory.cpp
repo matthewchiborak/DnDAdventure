@@ -3,6 +3,8 @@
 #include "../filemanagment/fileReader.h"
 #include "enemyfactory.h"
 
+#include <QDebug>
+
 EncounterFactory::EncounterFactory(std::string encounterFilePath)
 {
     FileReader reader(encounterFilePath);
@@ -14,7 +16,7 @@ EncounterFactory::EncounterFactory(std::string encounterFilePath)
 
         if(vect.size() > 1)
         {
-            keyToEnemyFiles.insert(std::pair<std::string,std::string>(vect.at(0), readString.substr(readString.find(","))));
+            keyToEnemyFiles.insert(std::pair<std::string,std::string>(vect.at(0), readString.substr(readString.find(",")).substr(1)));
         }
     }
 }

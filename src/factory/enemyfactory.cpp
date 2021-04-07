@@ -16,7 +16,7 @@ EnemyModel *EnemyFactory::createEnemy(std::string key)
     QDir dir(QDir::current());
     dir.cdUp();
     //Get the image location from the other map, create and store the flyweight
-    std::string enemyFilePath = dir.path().toStdString()+ "/DnDAdventure/src/test/Enemies/" + key;
+    std::string enemyFilePath = dir.path().toStdString()+ "/DnDAdventure/src/test/Enemies/" + key + ".txt";
 
     FileReader fr(enemyFilePath);
 

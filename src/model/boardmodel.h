@@ -30,12 +30,15 @@ public:
 
     bool tryToGetAnEnounter(std::string * keyToReturn);
 
+    std::string getBattleBackgroundKey();
+
 private:
     std::vector<BoardObjectAbstract*> boardObjects;
     std::vector<Doorway*> doors;
     BoardObjectFactory factory;
 
     std::vector<std::string> encounterTable;
+    std::string battleBackgroundKey;
 
     int xPos;
     int yPos;

@@ -16,7 +16,7 @@ public:
 
     void clear();
     void load(std::string key, std::vector<PlayerCharacterStats*> * characters);
-    void draw(std::vector<DrawInformation> * drawInfo);
+    void draw(std::vector<DrawInformation> * items);
     void passTime(float value);
 
 private:

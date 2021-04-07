@@ -81,10 +81,11 @@ bool FileReaderTester::boardObjectFactoryPopulateVectorBasedOnTextFileTest()
     std::vector<BoardObjectAbstract*> madeObjects;
     std::vector<Doorway*> doors;
     std::vector<std::string> encounterTable;
+    std::string battleBG;
     int xPos;
     int yPos;
 
-    factory.populate(&madeObjects, &doors, &encounterTable, &xPos, &yPos, "D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefile.txt");
+    factory.populate(&madeObjects, &doors, &encounterTable, &battleBG, &xPos, &yPos, "D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefile.txt");
 
     if(madeObjects.size() != 2)
         return false;

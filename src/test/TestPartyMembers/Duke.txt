@@ -8,6 +8,7 @@ BaseMDef,100
 BaseSpeed,104
 Sprite,Duke
 MenuSprite,DukeMenu
+TimeLineSprite,DukeTimeLine
 IVHP,0
 IVMP,16
 IVAtt,0

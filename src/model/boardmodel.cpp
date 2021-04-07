@@ -12,7 +12,7 @@ BoardModel::BoardModel()
 
 void BoardModel::load(std::string loadInfo)
 {
-    factory.populate(&boardObjects, &doors, &encounterTable, &xPos, &yPos, loadInfo);
+    factory.populate(&boardObjects, &doors, &encounterTable, &battleBackgroundKey, &xPos, &yPos, loadInfo);
     xOffset = xPos;// + 12.f;
     yOffset = yPos;// + 0.5f;// + 7.5f;
 }
@@ -106,13 +106,19 @@ bool BoardModel::tryToGetAnEnounter(std::string *keyToReturn)
     int randVal = rand()%20;
     //qDebug() << randVal;
 
-    if(randVal == 1)
+    //if(randVal == 1)
+    if(true)
     {
         (*keyToReturn) = encounterTable.at(rand()%encounterTable.size());
         return true;
     }
 
     return false;
+}
+
+std::string BoardModel::getBattleBackgroundKey()
+{
+    return battleBackgroundKey;
 }
 
 bool BoardModel::playerCanMoveThisWay(int x, int y)

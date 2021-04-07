@@ -8,6 +8,7 @@ BaseMDef,75
 BaseSpeed,64
 Sprite,Duke
 MenuSprite,ChadMenu
+TimeLineSprite,ChadTimeLine
 IVHP,31
 IVMP,6
 IVAtt,16
