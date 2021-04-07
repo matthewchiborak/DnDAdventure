@@ -5,11 +5,12 @@
 #include "boardobjectabstract.h"
 #include "../display/matrixes.h"
 #include "../display/drawinformation.h"
+#include "../controller/pausemenustatemain.h"
 
 ModelConcrete::ModelConcrete()
     : ModelAbstract()
 {
-
+    currentMenuState = new PauseMenuStateMain(this);
 }
 
 void ModelConcrete::drawBoardModel(std::vector<DrawInformation> * items, float *xOffset, float *yOffset)
@@ -52,8 +53,25 @@ void ModelConcrete::drawPauseMenu(std::vector<DrawInformation> *items)
     DrawInformation info(-8, -4, 17, 9, "PauseMenuBG", false);
     items->push_back(info);
 
-    //Options
-    DrawInformation info2(0, 0, 0, 0, "", false, "Party");
-    items->push_back(info2);
+    currentMenuState->drawPauseMenu(items);
+}
+
+void ModelConcrete::moveMenuCursor(int x, int y)
+{
+    currentMenuState->moveMenuCursor(x, y);
+}
+
+void ModelConcrete::enterMenu()
+{
+    PauseMenuDrawState * temp = currentMenuState;
+    currentMenuState = currentMenuState->enterMenu();
+
+    if(temp != currentMenuState)
+        delete temp;
+}
+
+void ModelConcrete::closeMenu()
+{
+    currentMenuState = currentMenuState->closeMenu();
 }
 

@@ -3,6 +3,8 @@
 #include "drawinformation.h"
 
 
+
+
 OpenGLWindow::OpenGLWindow(ModelAbstract *model, std::queue<int> * keyboardEventQueue, SpriteFlyweightFactoryAbstract *factory)
     : AbstractView(model, keyboardEventQueue, factory)
 {
@@ -15,8 +17,25 @@ OpenGLWindow::OpenGLWindow(ModelAbstract *model, std::queue<int> * keyboardEvent
     gradient.setColorAt(1, Qt::green);
 
     m_brush = QBrush(Qt::red);
+    font.setPixelSize(48);
 
     connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
+
+    windowWidth = 1600;
+    windowHeight = 900;
+
+//    if (FT_Init_FreeType(&ft))
+//    {
+//        std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+//    }
+
+
+//    if (FT_New_Face(ft, "fonts/arial.ttf", 0, &face))
+//    {
+//        std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+//    }
+
+    //FT_Set_Pixel_Sizes(face, 0, 48);
 }
 
 void OpenGLWindow::paintGL()
@@ -28,10 +47,12 @@ void OpenGLWindow::paintGL()
     glEnable(GL_BLEND);
 
     QPainter p(this);
-    p.setWorldTransform(m_window_normalised_matrix.toTransform());
+    p.setFont(font);
+    p.setBrush(m_brush);
+    //p.setWorldTransform(m_window_normalised_matrix.toTransform());
 
     QMatrix4x4 mvp = m_projection * m_view;
-    p.setTransform(mvp.toTransform(), false);
+    //p.setTransform(mvp.toTransform(), false);
 
     std::vector<DrawInformation> itemsToDraw;
     float xOffset;// = 12.0f;
@@ -45,7 +66,12 @@ void OpenGLWindow::paintGL()
         //Text items
         if(itemsToDraw.at(i).text != "")
         {
-
+            QPointF textPos(convertXLocationToPixels(itemsToDraw.at(i).x), convertYLocationToPixels(itemsToDraw.at(i).y));
+            p.drawText(convertXLocationToPixels(itemsToDraw.at(i).x),
+                       convertYLocationToPixels(itemsToDraw.at(i).y),
+                       convertXLocationToPixels(itemsToDraw.at(i).w),
+                       convertXLocationToPixels(itemsToDraw.at(i).h),
+                       Qt::AlignCenter, QString::fromStdString(itemsToDraw.at(i).text));
             continue;
         }
 
@@ -97,11 +123,13 @@ void OpenGLWindow::paintGL()
 
         glDisable(GL_TEXTURE_2D);
     }
-
 }
 
 void OpenGLWindow::resizeGL(int w, int h)
 {
+    windowWidth = w;
+    windowHeight = h;
+
     m_window_normalised_matrix.setToIdentity();
     m_window_normalised_matrix.translate(w / 2.0, h / 2.0);
     m_window_normalised_matrix.scale(w / 2.0, -h / 2.0);
@@ -138,6 +166,16 @@ void OpenGLWindow::keyReleaseEvent(QKeyEvent *e)
 {
     while(!keyboardEventQueue->empty())
         keyboardEventQueue->pop();
+}
+
+int OpenGLWindow::convertXLocationToPixels(int value)
+{
+    return value * 100;
+}
+
+int OpenGLWindow::convertYLocationToPixels(int value)
+{
+    return windowHeight - (value * 100);
 }
 
 

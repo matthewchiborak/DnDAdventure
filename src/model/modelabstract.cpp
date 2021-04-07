@@ -43,3 +43,18 @@ void ModelAbstract::drawPauseMenu(std::vector<DrawInformation> *items)
 
 }
 
+void ModelAbstract::moveMenuCursor(int x, int y)
+{
+
+}
+
+void ModelAbstract::enterMenu()
+{
+
+}
+
+void ModelAbstract::closeMenu()
+{
+
+}
+

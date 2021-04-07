@@ -15,6 +15,9 @@ SOURCES += \
     src/controller/keyinputstate.cpp \
     src/controller/keyinputstateboard.cpp \
     src/controller/keyinputstatepausemenu.cpp \
+    src/controller/pausemenustate.cpp \
+    src/controller/pausemenustatemain.cpp \
+    src/controller/pausemenustateparty.cpp \
     src/display/abstractview.cpp \
     src/display/drawinformation.cpp \
     src/display/fglut.cpp \
@@ -56,6 +59,9 @@ HEADERS += \
     src/controller/keyinputstate.h \
     src/controller/keyinputstateboard.h \
     src/controller/keyinputstatepausemenu.h \
+    src/controller/pausemenustate.h \
+    src/controller/pausemenustatemain.h \
+    src/controller/pausemenustateparty.h \
     src/display/abstractview.h \
     src/display/drawinformation.h \
     src/display/fglut.h \

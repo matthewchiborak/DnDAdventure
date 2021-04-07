@@ -1,9 +1,11 @@
 #include "keyinputstatepausemenu.h"
 
+#include "../model/modelabstract.h"
+
 KeyInputStatePauseMenu::KeyInputStatePauseMenu(ModelAbstract *model, std::queue<int> *keyboardEventQueue)
     : KeyInputState(model, keyboardEventQueue)
 {
-    movementLockTimeMil = 300;
+    movementLockTimeMil = 150;
 }
 
 KeyInputStatePauseMenu::~KeyInputStatePauseMenu()
@@ -32,6 +34,7 @@ bool KeyInputStatePauseMenu::handleUserInput(std::string *nextState)
                 || keyToHandle == Qt::Key_S
                 || keyToHandle == Qt::Key_A
                 || keyToHandle == Qt::Key_D
+                || keyToHandle == Qt::Key_E
                 || keyToHandle == Qt::Key_Escape
                 )
         {
@@ -40,6 +43,13 @@ bool KeyInputStatePauseMenu::handleUserInput(std::string *nextState)
             theTimeNow = (millis);
             timeOfLastButtonEvent = theTimeNow;
             eventBeenSetUp = true;
+
+            if(keyToHandle == Qt::Key_W)
+                this->model->moveMenuCursor(0, 1);
+            else if(keyToHandle == Qt::Key_S)
+                this->model->moveMenuCursor(0, -1);
+            else if(keyToHandle == Qt::Key_E)
+                this->model->enterMenu();
         }
 
         return false;

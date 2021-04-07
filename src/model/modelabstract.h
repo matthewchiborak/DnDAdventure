@@ -21,6 +21,9 @@ public:
     virtual void movePlayer(int x, int y, float t);
 
     virtual void drawPauseMenu(std::vector<DrawInformation> * items);
+    virtual void moveMenuCursor(int x, int y);
+    virtual void enterMenu();
+    virtual void closeMenu();
 
     std::vector<PlayerCharacterStats*> playerCharacters;
 };

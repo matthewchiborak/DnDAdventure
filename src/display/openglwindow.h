@@ -24,7 +24,12 @@ private:
     QMatrix4x4 m_model_triangle;
     QMatrix4x4 m_model_text;
     QBrush m_brush;
+    QFont font;
+    int windowWidth;
+    int windowHeight;
 
+    int convertXLocationToPixels(int value);
+    int convertYLocationToPixels(int value);
 };
 
 #endif // OPENGLWINDOW_H

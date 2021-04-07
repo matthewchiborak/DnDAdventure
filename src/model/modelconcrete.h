@@ -3,6 +3,8 @@
 
 #include "modelabstract.h"
 
+class PauseMenuDrawState;
+
 class ModelConcrete : public ModelAbstract
 {
 public:
@@ -14,9 +16,16 @@ public:
 
     //
     void drawPauseMenu(std::vector<DrawInformation> * items);
+    void moveMenuCursor(int x, int y);
+    void enterMenu();
+    void closeMenu();
 
 private:
     BoardModel boardModel;
+
+    PauseMenuDrawState * currentMenuState;
+
+
 };
 
 #endif // MODELCONCRETE_H

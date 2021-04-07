@@ -38,7 +38,7 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
                 || keyToHandle == Qt::Key_S
                 || keyToHandle == Qt::Key_A
                 || keyToHandle == Qt::Key_D
-                || keyToHandle == Qt::Key_E
+                || keyToHandle == Qt::Key_Escape
                 )
         {
             auto nowTime = std::chrono::system_clock::now().time_since_epoch();
@@ -65,7 +65,7 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
         this->model->movePlayer(-1, 0, ((elapsed_millies/movementLockTimeMil)));
     else if(keyToHandle == Qt::Key_D)
         this->model->movePlayer(1, 0, ((elapsed_millies/movementLockTimeMil)));
-    else if(keyToHandle == Qt::Key_E)
+    else if(keyToHandle == Qt::Key_Escape)
     {
         eventBeenSetUp = false;
         while(!keyboardEventQueue->empty())
