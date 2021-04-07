@@ -28,10 +28,14 @@ public:
 
     void checkAndActivateDoor();
 
+    bool tryToGetAnEnounter(std::string * keyToReturn);
+
 private:
     std::vector<BoardObjectAbstract*> boardObjects;
     std::vector<Doorway*> doors;
     BoardObjectFactory factory;
+
+    std::vector<std::string> encounterTable;
 
     int xPos;
     int yPos;

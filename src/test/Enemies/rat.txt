@@ -1,0 +1,8 @@
+Name,Rat
+HP,75
+Att,69
+Def,72
+MAtt,114
+MDef,100
+Speed,104
+Sprite,Rat

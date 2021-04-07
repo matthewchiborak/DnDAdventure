@@ -7,12 +7,12 @@
 
 BoardModel::BoardModel()
 {
-
+    srand (time(NULL));
 }
 
 void BoardModel::load(std::string loadInfo)
 {
-    factory.populate(&boardObjects, &doors, &xPos, &yPos, loadInfo);
+    factory.populate(&boardObjects, &doors, &encounterTable, &xPos, &yPos, loadInfo);
     xOffset = xPos;// + 12.f;
     yOffset = yPos;// + 0.5f;// + 7.5f;
 }
@@ -95,6 +95,24 @@ void BoardModel::checkAndActivateDoor()
             return;
         }
     }
+}
+
+bool BoardModel::tryToGetAnEnounter(std::string *keyToReturn)
+{
+    if(encounterTable.size() <= 0)
+        return false;
+
+
+    int randVal = rand()%20;
+    //qDebug() << randVal;
+
+    if(randVal == 1)
+    {
+        (*keyToReturn) = encounterTable.at(rand()%encounterTable.size());
+        return true;
+    }
+
+    return false;
 }
 
 bool BoardModel::playerCanMoveThisWay(int x, int y)

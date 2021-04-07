@@ -33,6 +33,7 @@ void GameController::handleState()
     if(keyInputState->handle(&nextStateKey))
     {
         KeyInputState * temp = keyInputState;
+
         keyInputState = inputStateFactory->getState(nextStateKey);
         this->view->setStrategy(inputStateFactory->getRenderStrategy(nextStateKey));
         delete temp;

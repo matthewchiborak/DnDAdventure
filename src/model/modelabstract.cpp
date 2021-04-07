@@ -58,3 +58,13 @@ void ModelAbstract::closeMenu()
 
 }
 
+bool ModelAbstract::tryToStartABattle()
+{
+    return false;
+}
+
+void ModelAbstract::drawBattleModel(std::vector<DrawInformation> *items)
+{
+
+}
+

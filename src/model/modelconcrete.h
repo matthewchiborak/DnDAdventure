@@ -2,6 +2,7 @@
 #define MODELCONCRETE_H
 
 #include "modelabstract.h"
+#include "battlemodel.h"
 
 class PauseMenuDrawState;
 
@@ -20,8 +21,12 @@ public:
     void enterMenu();
     void closeMenu();
 
+    bool tryToStartABattle();
+    void drawBattleModel(std::vector<DrawInformation> * items);
+
 private:
     BoardModel boardModel;
+    BattleModel battleModel;
 
     PauseMenuDrawState * currentMenuState;
 

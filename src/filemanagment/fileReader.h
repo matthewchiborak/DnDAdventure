@@ -12,7 +12,7 @@ public:
     bool hasNext();
     std::string next();
 
-    std::vector<std::string> splitString(std::string line, char delimeter);
+    static std::vector<std::string> splitString(std::string line, char delimeter);
 
 private:
     std::string fileName;

@@ -25,6 +25,11 @@ public:
     virtual void enterMenu();
     virtual void closeMenu();
 
+    //Will return true if a battle starts
+    virtual bool tryToStartABattle();
+    virtual void drawBattleModel(std::vector<DrawInformation> * items);
+
+
     std::vector<PlayerCharacterStats*> playerCharacters;
 };
 

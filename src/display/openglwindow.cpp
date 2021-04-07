@@ -66,12 +66,26 @@ void OpenGLWindow::paintGL()
         //Text items
         if(itemsToDraw.at(i).text != "")
         {
-            QPointF textPos(convertXLocationToPixels(itemsToDraw.at(i).x), convertYLocationToPixels(itemsToDraw.at(i).y));
-            p.drawText(convertXLocationToPixels(itemsToDraw.at(i).x),
-                       convertYLocationToPixels(itemsToDraw.at(i).y),
-                       convertXLocationToPixels(itemsToDraw.at(i).w),
-                       convertXLocationToPixels(itemsToDraw.at(i).h),
-                       Qt::AlignCenter, QString::fromStdString(itemsToDraw.at(i).text));
+            if(!itemsToDraw.at(i).isLeftAlign)
+            {
+                font.setPixelSize(itemsToDraw.at(i).fontSize);
+                p.setFont(font);
+                p.drawText((itemsToDraw.at(i).x),
+                           (itemsToDraw.at(i).y),
+                           (itemsToDraw.at(i).w),
+                           (itemsToDraw.at(i).h),
+                           Qt::AlignCenter, QString::fromStdString(itemsToDraw.at(i).text));
+            }
+            else
+            {
+                font.setPixelSize(itemsToDraw.at(i).fontSize);
+                p.setFont(font);
+                p.drawText((itemsToDraw.at(i).x),
+                           (itemsToDraw.at(i).y),
+                           (itemsToDraw.at(i).w),
+                           (itemsToDraw.at(i).h),
+                           Qt::AlignLeft, QString::fromStdString(itemsToDraw.at(i).text));
+            }
             continue;
         }
 
@@ -103,20 +117,20 @@ void OpenGLWindow::paintGL()
         else
         {
             glTexCoord2f(0, 1);
-            glVertex3f(itemsToDraw.at(i).x,
-                       itemsToDraw.at(i).y, 0.0f);
+            glVertex3f(itemsToDraw.at(i).x/100.f,
+                       ((itemsToDraw.at(i).y)/100.f), 0.0f);
 
             glTexCoord2f(1, 1);
-            glVertex3f(itemsToDraw.at(i).x + itemsToDraw.at(i).w,
-                       itemsToDraw.at(i).y, 0.0f);
+            glVertex3f((itemsToDraw.at(i).x + itemsToDraw.at(i).w)/100.f,
+                       ((itemsToDraw.at(i).y)/100.f), 0.0f);
 
             glTexCoord2f(1, 0);
-            glVertex3f(itemsToDraw.at(i).x + itemsToDraw.at(i).w,
-                       itemsToDraw.at(i).y + itemsToDraw.at(i).h, 0.0f);
+            glVertex3f((itemsToDraw.at(i).x + itemsToDraw.at(i).w)/100.f,
+                       ((itemsToDraw.at(i).y + itemsToDraw.at(i).h)/100.f), 0.0f);
 
             glTexCoord2f(0, 0);
-            glVertex3f(itemsToDraw.at(i).x,
-                       itemsToDraw.at(i).y + itemsToDraw.at(i).h, 0.0f);
+            glVertex3f((itemsToDraw.at(i).x)/100.f,
+                       ((itemsToDraw.at(i).y + itemsToDraw.at(i).h)/100.f), 0.0f);
         }
 
         glEnd();

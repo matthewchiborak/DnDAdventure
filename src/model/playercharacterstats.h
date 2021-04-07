@@ -18,8 +18,11 @@ public:
     int getLevel();
     int getXP();
     bool getIsActive();
+    int getCurrentMP();
+    int getMaxMP();
     std::string getName();
     std::string getSpriteKey();
+    std::string getMenuSpriteKey();
 
     void setLevel(int lvl);
     void setXP(int xp);
@@ -35,15 +38,25 @@ private:
     int xp;
     int currentHealth;
     std::string spriteKey;
+    std::string menuSpriteKey;
+    int currentMP;
 
     //base stats
-    int maxHealth;
+    int baseHealth;
+    int baseMP;
     int attack;
     int defence;
     int magicAttack;
     int magicDefence;
     int speed;
 
+    int IVHP;
+    int IVMP;
+    int IVAtt;
+    int IVDef;
+    int IVMAtt;
+    int IVMDef;
+    int IVSpeed;
 };
 
 #endif // PLAYERCHARACTERSTATS_H

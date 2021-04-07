@@ -11,6 +11,52 @@ EnemyModel::EnemyModel(int maxHP, int att, int def, int mAtt, int mDef, int spee
     this->speed = speed;
 }
 
+EnemyModel::EnemyModel()
+{
+
+}
+
+void EnemyModel::setMaxHealth(int value)
+{
+    this->maxHealth = value;
+    this->currentHealth = value;
+}
+
+void EnemyModel::setAttack(int value)
+{
+    this->attack = value;
+}
+
+void EnemyModel::setDefence(int value)
+{
+    this->defence = value;
+}
+
+void EnemyModel::setMagicAttack(int value)
+{
+    this->magicAttack = value;
+}
+
+void EnemyModel::setMagicDefence(int value)
+{
+    this->magicDefence = value;
+}
+
+void EnemyModel::setSpeed(int value)
+{
+    this->speed = value;
+}
+
+void EnemyModel::setSpriteKey(std::string value)
+{
+    this->spriteKey = value;
+}
+
+void EnemyModel::setName(std::string value)
+{
+    this->name = value;
+}
+
 int EnemyModel::getCurrentHealth()
 {
     return currentHealth;
@@ -38,4 +84,14 @@ int EnemyModel::getMagicDefence()
 int EnemyModel::getSpeed()
 {
     return speed;
+}
+
+std::string EnemyModel::getSpriteKey()
+{
+    return spriteKey;
+}
+
+std::string EnemyModel::getName()
+{
+    return name;
 }

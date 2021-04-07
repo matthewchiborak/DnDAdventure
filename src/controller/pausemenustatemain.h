@@ -14,7 +14,7 @@ public:
     void drawPauseMenu(std::vector<DrawInformation> * items);
 
 private:
-    int currentPos = 4;
+    int currentPos = 5;
 };
 
 #endif // PAUSEMENUSTATEMAIN_H

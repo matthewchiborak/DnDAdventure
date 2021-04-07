@@ -15,6 +15,9 @@ public:
 
 private:
     int currentPos = 0;
+
+    bool swapping = false;
+    int firstSwapSelection;
 };
 
 #endif // PAUSEMENUSTATEPARTY_H

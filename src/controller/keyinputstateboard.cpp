@@ -77,6 +77,15 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
     if((elapsed_millies / movementLockTimeMil) >= 1)
     {
         eventBeenSetUp = false;
+
+        //Hey guess what. try to trigger a random enounter
+        if(model->tryToStartABattle())
+        {
+            while(!keyboardEventQueue->empty())
+                keyboardEventQueue->pop();
+            (*nextState) = "RandomEncounter";
+            return true;
+        }
     }
 
     return false;

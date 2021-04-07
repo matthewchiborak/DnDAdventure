@@ -13,6 +13,7 @@ LIBS+ = -lGL -lGLU
 SOURCES += \
     src/controller/gamecontroller.cpp \
     src/controller/keyinputstate.cpp \
+    src/controller/keyinputstatebattle.cpp \
     src/controller/keyinputstateboard.cpp \
     src/controller/keyinputstatepausemenu.cpp \
     src/controller/pausemenustate.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
     src/display/fglut.cpp \
     src/display/openglwindow.cpp \
     src/display/renderingstrategy.cpp \
+    src/display/renderingstrategybattle.cpp \
     src/display/renderingstrategyboard.cpp \
     src/display/renderingstrategypausemenu.cpp \
     src/display/spriteflyweight.cpp \
@@ -30,12 +32,15 @@ SOURCES += \
     src/display/spriteflyweightfactoryabstract.cpp \
     src/display/stb_image.c \
     src/factory/boardobjectfactory.cpp \
+    src/factory/encounterfactory.cpp \
+    src/factory/enemyfactory.cpp \
     src/factory/inputstatefactory.cpp \
     src/factory/inputstatefactoryabstract.cpp \
     src/factory/worldobjectfactoryabstract.cpp \
     src/filemanagment/fileReader.cpp \
     src/main.cpp \
     src/model/EnemyModel.cpp \
+    src/model/battlemodel.cpp \
     src/model/boardmodel.cpp \
     src/model/boardobjectabstract.cpp \
     src/model/boardobjectnpc.cpp \
@@ -57,6 +62,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     src/controller/gamecontroller.h \
     src/controller/keyinputstate.h \
+    src/controller/keyinputstatebattle.h \
     src/controller/keyinputstateboard.h \
     src/controller/keyinputstatepausemenu.h \
     src/controller/pausemenustate.h \
@@ -68,6 +74,7 @@ HEADERS += \
     src/display/matrixes.h \
     src/display/openglwindow.h \
     src/display/renderingstrategy.h \
+    src/display/renderingstrategybattle.h \
     src/display/renderingstrategyboard.h \
     src/display/renderingstrategypausemenu.h \
     src/display/spriteflyweight.h \
@@ -75,11 +82,14 @@ HEADERS += \
     src/display/spriteflyweightfactoryabstract.h \
     src/display/stb_image.h \
     src/factory/boardobjectfactory.h \
+    src/factory/encounterfactory.h \
+    src/factory/enemyfactory.h \
     src/factory/inputstatefactory.h \
     src/factory/inputstatefactoryabstract.h \
     src/factory/worldobjectfactoryabstract.h \
     src/filemanagment/fileReader.h \
     src/model/EnemyModel.h \
+    src/model/battlemodel.h \
     src/model/boardmodel.h \
     src/model/boardobjectabstract.h \
     src/model/boardobjectnpc.h \

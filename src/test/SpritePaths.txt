@@ -5,3 +5,7 @@ Blank,blank.png
 Duke,Duke.png
 Bullent,Bullent.PNG,
 PauseMenuBG,PauseMenuBG.jpg
+BullentMenu,BullentMenu.png
+DukeMenu,DukeMenu.png
+ChadMenu,ChadMenu.png
+AlluraMenu,AlluraMenu.png

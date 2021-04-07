@@ -6,7 +6,7 @@
 class DrawInformation
 {
 public:
-    DrawInformation(int x, int y, int w, int h, std::string key, bool worldRel, std::string text = "");
+    DrawInformation(int x, int y, int w, int h, std::string key, bool worldRel, std::string text = "", bool isLeftAlign = false, float fontSize = 48.f);
 
     int x;
     int y;
@@ -15,6 +15,8 @@ public:
     std::string key;
     bool isRelativeToWorld; //false means to screen
     std::string text;
+    bool isLeftAlign;
+    float fontSize;
 };
 
 #endif // DRAWINFORMATION_H

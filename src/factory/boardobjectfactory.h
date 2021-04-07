@@ -12,7 +12,7 @@ class BoardObjectFactory : public WorldObjectFactoryAbstract
 public:
     BoardObjectFactory();
 
-    void populate(std::vector<BoardObjectAbstract*> * boardObjects, std::vector<Doorway*> * doors, int * xPos, int * yPos, std::string boardFileName);
+    void populate(std::vector<BoardObjectAbstract*> * boardObjects, std::vector<Doorway*> * doors, std::vector<std::string> * encTable, int * xPos, int * yPos, std::string boardFileName);
 
 private:
     BoardObjectAbstract * createObstacle(std::vector<std::string> info);
