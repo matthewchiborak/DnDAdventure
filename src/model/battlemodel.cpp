@@ -3,6 +3,8 @@
 #include "../factory/encounterfactory.h"
 #include "../display/drawinformation.h"
 #include "playercharacterstats.h"
+#include "../controller/battlemenustatemain.h"
+#include "../controller/battlemenustatetimeflow.h"
 
 #include <QDir>
 #include <QDebug>
@@ -16,6 +18,8 @@ BattleModel::BattleModel()
 
 
     this->encounterFact = new EncounterFactory(encounterFilepath);
+
+    this->battleMenuState = new BattleMenuStateTimeFlow(this);
 }
 
 void BattleModel::clear()
@@ -26,6 +30,10 @@ void BattleModel::clear()
         delete enemies.at(i);
     }
     enemies.clear();
+
+    BattleMenuState * temp = battleMenuState;
+    this->battleMenuState = new BattleMenuStateTimeFlow(this);
+    delete temp;
 }
 
 void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *characters)
@@ -49,9 +57,9 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     DrawInformation player2(-500, 0, 200, 200, characters->at(1)->getSpriteKey(), false);
     items->push_back(player2);
 
-    DrawInformation player1TL(-100, -60, 36, 48, characters->at(0)->getTimelineSpriteKey(), false);
+    DrawInformation player1TL((timeLineOffset) + timelineP1Pos, -60, 36, 48, characters->at(0)->getTimelineSpriteKey(), false);
     items->push_back(player1TL);
-    DrawInformation player2TL(-500, -60, 36, 48, characters->at(1)->getTimelineSpriteKey(), false);
+    DrawInformation player2TL((timeLineOffset) + timelineP2Pos, -60, 36, 48, characters->at(1)->getTimelineSpriteKey(), false);
     items->push_back(player2TL);
 
     for(int i = 0; i < enemies.size(); i++)
@@ -60,41 +68,38 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
         {
             DrawInformation en(300, 50, 200, 200, enemies.at(i)->getSpriteKey(), false);
             items->push_back(en);
-            DrawInformation enTL(-100, -108, 36, 48, "Enemy1TimeLine", false);
+            DrawInformation enTL(timeLineOffset + enemies.at(i)->getTimeLinePos(), -108, 36, 48, "Enemy1TimeLine", false);
             items->push_back(enTL);
         }
         else if(i == 1)
         {
             DrawInformation en(100, 0, 200, 200, enemies.at(i)->getSpriteKey(), false);
             items->push_back(en);
-            DrawInformation enTL(100, -108, 36, 48, "Enemy2TimeLine", false);
+            DrawInformation enTL(timeLineOffset + enemies.at(i)->getTimeLinePos(), -108, 36, 48, "Enemy2TimeLine", false);
             items->push_back(enTL);
         }
         else if(i == 2)
         {
             DrawInformation en(500, 0, 200, 200, enemies.at(i)->getSpriteKey(), false);
             items->push_back(en);
-            DrawInformation enTL(200, -108, 36, 48, "Enemy3TimeLine", false);
+            DrawInformation enTL(timeLineOffset + enemies.at(i)->getTimeLinePos(), -108, 36, 48, "Enemy3TimeLine", false);
             items->push_back(enTL);
         }
         else if(i == 3)
         {
             DrawInformation en(100, 200, 200, 200, enemies.at(i)->getSpriteKey(), false);
             items->push_back(en);
-            DrawInformation enTL(300, -108, 36, 48, "Enemy4TimeLine", false);
+            DrawInformation enTL(timeLineOffset + enemies.at(i)->getTimeLinePos(), -108, 36, 48, "Enemy4TimeLine", false);
             items->push_back(enTL);
         }
         else if(i == 4)
         {
             DrawInformation en(500, 200, 200, 200, enemies.at(i)->getSpriteKey(), false);
             items->push_back(en);
-            DrawInformation enTL(-400, -108, 36, 48, "Enemy5TimeLine", false);
+            DrawInformation enTL(timeLineOffset + enemies.at(i)->getTimeLinePos(), -108, 36, 48, "Enemy5TimeLine", false);
             items->push_back(enTL);
         }
     }
-
-
-
 
     //Bottem menu
     DrawInformation menuBG(-750, -405, 1600, 290, "BattleMenuBG", false);
@@ -107,15 +112,11 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     items->push_back(pgtop);
 
     //Top Text Box
-    DrawInformation topTextBox(-700, 350, 1500, 140, "BattleMenuBG", false);
-    items->push_back(topTextBox);
+    //DrawInformation topTextBox(-700, 350, 1500, 140, "BattleMenuBG", false);
+    //items->push_back(topTextBox);
 
-    //Character portraits
-    //images first
-    DrawInformation port1(-300, -275, 150, 150, characters->at(0)->getMenuSpriteKey(), false);
-    items->push_back(port1);
-    DrawInformation port2(250, -275, 150, 150, characters->at(1)->getMenuSpriteKey(), false);
-    items->push_back(port2);
+    //Draw the dynamic parts of the menu that arn't static
+    battleMenuState->drawBattleMenu(items);
 
     //TEXT IS LAST
     //DrawInformation attackText(-750, -400, 200, 75, "", false, "Attack");
@@ -127,38 +128,66 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     items->push_back(partyText);
     DrawInformation fleeText(100, 817, 200, 75, "", false, "Flee", true);
     items->push_back(fleeText);
-    DrawInformation mainCursor(50, 643 + (0 * 60), 75, 75, "", false, ">", true);
-    items->push_back(mainCursor);
 
-    //Default menu text
-    DrawInformation p1Name(625, 620, 300, 75, "", false, characters->at(0)->getName(), true);
-    items->push_back(p1Name);
-    DrawInformation p1hp(625, 670, 300, 75, "", false,
-                         "HP: " + std::to_string(characters->at(0)->getCurrentHealth()) + "/"
-                         + std::to_string(characters->at(0)->getMaxHealth())
-                         , true);
-    items->push_back(p1hp);
-    DrawInformation p1mp(625, 720, 300, 75, "", false,
-                         "MP: " + std::to_string(characters->at(0)->getCurrentMP()) + "/"
-                         + std::to_string(characters->at(0)->getMaxMP())
-                         , true);
-    items->push_back(p1mp);
-    DrawInformation p2Name(625 + 550, 620, 300, 75, "", false, characters->at(1)->getName(), true);
-    items->push_back(p2Name);
-    DrawInformation p2hp(625 + 550, 670, 300, 75, "", false,
-                         "HP: " + std::to_string(characters->at(1)->getCurrentHealth()) + "/"
-                         + std::to_string(characters->at(1)->getMaxHealth())
-                         , true);
-    items->push_back(p2hp);
-    DrawInformation p2mp(625 + 550, 720, 300, 75, "", false,
-                         "MP: " + std::to_string(characters->at(1)->getCurrentMP()) + "/"
-                         + std::to_string(characters->at(1)->getMaxMP())
-                         , true);
-    items->push_back(p2mp);
+
+
 }
 
 void BattleModel::passTime(float value)
 {
+    BattleMenuState * temp = battleMenuState;
+    battleMenuState = battleMenuState->passTime(value);
+    if(temp != battleMenuState)
+        delete temp;
+}
 
+void BattleModel::moveMenuCursor(int x, int y)
+{
+    battleMenuState->moveMenuCursor(x, y);
+}
 
+void BattleModel::enterMenu()
+{
+    BattleMenuState * temp = battleMenuState;
+    battleMenuState = battleMenuState->enterMenu();
+    if(temp != battleMenuState)
+        delete temp;
+}
+
+void BattleModel::closeMenu()
+{
+    BattleMenuState * temp = battleMenuState;
+    battleMenuState = battleMenuState->closeMenu();
+    if(temp != battleMenuState)
+        delete temp;
+}
+
+std::vector<PlayerCharacterStats *> *BattleModel::getCharacters()
+{
+    return characters;
+}
+
+std::vector<EnemyModel *> *BattleModel::getEnemies()
+{
+    return &enemies;
+}
+
+float BattleModel::getP1TimeLinePos()
+{
+    return timelineP1Pos;
+}
+
+float BattleModel::getP2TimeLinePos()
+{
+    return timelineP2Pos;
+}
+
+void BattleModel::setP1TimeLinePos(float value)
+{
+    timelineP1Pos = value;
+}
+
+void BattleModel::setP2TimeLinePos(float value)
+{
+    timelineP2Pos = value;
 }

@@ -11,6 +11,12 @@ CONFIG += c++11
 LIBS+ = -lGL -lGLU
 
 SOURCES += \
+    src/controller/battlemenustate.cpp \
+    src/controller/battlemenustateattack.cpp \
+    src/controller/battlemenustatemain.cpp \
+    src/controller/battlemenustatespecial.cpp \
+    src/controller/battlemenustateswitch.cpp \
+    src/controller/battlemenustatetimeflow.cpp \
     src/controller/gamecontroller.cpp \
     src/controller/keyinputstate.cpp \
     src/controller/keyinputstatebattle.cpp \
@@ -60,6 +66,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    src/controller/battlemenustate.h \
+    src/controller/battlemenustateattack.h \
+    src/controller/battlemenustatemain.h \
+    src/controller/battlemenustatespecial.h \
+    src/controller/battlemenustateswitch.h \
+    src/controller/battlemenustatetimeflow.h \
     src/controller/gamecontroller.h \
     src/controller/keyinputstate.h \
     src/controller/keyinputstatebattle.h \

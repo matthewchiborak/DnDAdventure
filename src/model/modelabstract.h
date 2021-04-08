@@ -21,14 +21,14 @@ public:
     virtual void movePlayer(int x, int y, float t);
 
     virtual void drawPauseMenu(std::vector<DrawInformation> * items);
-    virtual void moveMenuCursor(int x, int y);
-    virtual void enterMenu();
-    virtual void closeMenu();
+    virtual void moveMenuCursor(int x, int y, std::string key);
+    virtual void enterMenu(std::string key);
+    virtual void closeMenu(std::string key);
 
     //Will return true if a battle starts
     virtual bool tryToStartABattle();
     virtual void drawBattleModel(std::vector<DrawInformation> * items);
-
+    virtual void passTime(float value);
 
     std::vector<PlayerCharacterStats*> playerCharacters;
 };

@@ -45,11 +45,11 @@ bool KeyInputStatePauseMenu::handleUserInput(std::string *nextState)
             eventBeenSetUp = true;
 
             if(keyToHandle == Qt::Key_W)
-                this->model->moveMenuCursor(0, 1);
+                this->model->moveMenuCursor(0, 1, "Pause");
             else if(keyToHandle == Qt::Key_S)
-                this->model->moveMenuCursor(0, -1);
+                this->model->moveMenuCursor(0, -1, "Pause");
             else if(keyToHandle == Qt::Key_E)
-                this->model->enterMenu();
+                this->model->enterMenu("Pause");
         }
 
         return false;

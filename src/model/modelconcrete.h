@@ -17,12 +17,13 @@ public:
 
     //
     void drawPauseMenu(std::vector<DrawInformation> * items);
-    void moveMenuCursor(int x, int y);
-    void enterMenu();
-    void closeMenu();
+    void moveMenuCursor(int x, int y, std::string key);
+    void enterMenu(std::string key);
+    void closeMenu(std::string key);
 
     bool tryToStartABattle();
     void drawBattleModel(std::vector<DrawInformation> * items);
+    void passTime(float value);
 
 private:
     BoardModel boardModel;

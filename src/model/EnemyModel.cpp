@@ -9,11 +9,12 @@ EnemyModel::EnemyModel(int maxHP, int att, int def, int mAtt, int mDef, int spee
     this->magicAttack = mAtt;
     this->magicDefence = mDef;
     this->speed = speed;
+    this->timelinePos = 0;
 }
 
 EnemyModel::EnemyModel()
 {
-
+    this->timelinePos = 0;
 }
 
 void EnemyModel::setMaxHealth(int value)
@@ -94,4 +95,14 @@ std::string EnemyModel::getSpriteKey()
 std::string EnemyModel::getName()
 {
     return name;
+}
+
+float EnemyModel::getTimeLinePos()
+{
+    return timelinePos;
+}
+
+void EnemyModel::setTimeLinePos(float value)
+{
+    timelinePos = value;
 }

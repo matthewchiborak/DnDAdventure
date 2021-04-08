@@ -57,23 +57,36 @@ void ModelConcrete::drawPauseMenu(std::vector<DrawInformation> *items)
     currentMenuState->drawPauseMenu(items);
 }
 
-void ModelConcrete::moveMenuCursor(int x, int y)
+void ModelConcrete::moveMenuCursor(int x, int y, std::string key)
 {
-    currentMenuState->moveMenuCursor(x, y);
+    if(key == "Pause")
+        currentMenuState->moveMenuCursor(x, y);
+    else if(key == "Battle")
+        battleModel.moveMenuCursor(x, y);
 }
 
-void ModelConcrete::enterMenu()
+void ModelConcrete::enterMenu(std::string key)
 {
-    PauseMenuDrawState * temp = currentMenuState;
-    currentMenuState = currentMenuState->enterMenu();
+    if(key == "Pause")
+    {
+        PauseMenuDrawState * temp = currentMenuState;
+        currentMenuState = currentMenuState->enterMenu();
 
-    if(temp != currentMenuState)
-        delete temp;
+        if(temp != currentMenuState)
+            delete temp;
+    }
+    else if(key == "Battle")
+    {
+        battleModel.enterMenu();
+    }
 }
 
-void ModelConcrete::closeMenu()
+void ModelConcrete::closeMenu(std::string key)
 {
-    currentMenuState = currentMenuState->closeMenu();
+    if(key == "Pause")
+        currentMenuState = currentMenuState->closeMenu();
+    else if(key == "Battle")
+        battleModel.closeMenu();
 }
 
 bool ModelConcrete::tryToStartABattle()
@@ -100,5 +113,10 @@ void ModelConcrete::drawBattleModel(std::vector<DrawInformation> *items)
     items->push_back(info);
 
     battleModel.draw(items);
+}
+
+void ModelConcrete::passTime(float value)
+{
+    battleModel.passTime(value);
 }
 

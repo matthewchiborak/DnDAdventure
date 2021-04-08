@@ -43,17 +43,17 @@ void ModelAbstract::drawPauseMenu(std::vector<DrawInformation> *items)
 
 }
 
-void ModelAbstract::moveMenuCursor(int x, int y)
+void ModelAbstract::moveMenuCursor(int x, int y, std::string key)
 {
 
 }
 
-void ModelAbstract::enterMenu()
+void ModelAbstract::enterMenu(std::string key)
 {
 
 }
 
-void ModelAbstract::closeMenu()
+void ModelAbstract::closeMenu(std::string key)
 {
 
 }
@@ -64,6 +64,11 @@ bool ModelAbstract::tryToStartABattle()
 }
 
 void ModelAbstract::drawBattleModel(std::vector<DrawInformation> *items)
+{
+
+}
+
+void ModelAbstract::passTime(float value)
 {
 
 }

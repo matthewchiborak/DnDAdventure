@@ -30,6 +30,8 @@ public:
     int getSpeed();
     std::string getSpriteKey();
     std::string getName();
+    float getTimeLinePos();
+    void setTimeLinePos(float value);
 
 private:
     int maxHealth;
@@ -41,6 +43,7 @@ private:
     int speed;
     std::string spriteKey;
     std::string name;
+    float timelinePos;
 };
 
 #endif
