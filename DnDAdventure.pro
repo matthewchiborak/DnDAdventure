@@ -46,6 +46,7 @@ SOURCES += \
     src/filemanagment/fileReader.cpp \
     src/main.cpp \
     src/model/EnemyModel.cpp \
+    src/model/attackmodel.cpp \
     src/model/battlemodel.cpp \
     src/model/boardmodel.cpp \
     src/model/boardobjectabstract.cpp \
@@ -101,6 +102,7 @@ HEADERS += \
     src/factory/worldobjectfactoryabstract.h \
     src/filemanagment/fileReader.h \
     src/model/EnemyModel.h \
+    src/model/attackmodel.h \
     src/model/battlemodel.h \
     src/model/boardmodel.h \
     src/model/boardobjectabstract.h \

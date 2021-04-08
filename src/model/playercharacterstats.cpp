@@ -1,6 +1,7 @@
 #include "playercharacterstats.h"
 
 #include "../filemanagment/fileReader.h"
+#include "attackmodel.h"
 
 #include <string>
 #include <vector>
@@ -12,7 +13,8 @@ PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
 
     while(fr.hasNext())
     {
-        std::vector<std::string> splits = fr.splitString(fr.next(), ',');
+        std::string nextLine = fr.next();
+        std::vector<std::string> splits = fr.splitString(nextLine, ',');
 
         if(splits.at(0) == "BaseHP")
         {
@@ -54,6 +56,8 @@ PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
             IVSpeed = std::stoi(splits.at(1));
         if(splits.at(0) == "IVMP")
             IVMP = std::stoi(splits.at(1));
+        if(splits.at(0) == "Attack")
+            attacks.push_back(new AttackModel(nextLine));
 
     }
 
@@ -63,6 +67,14 @@ PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
 
     currentHealth = getMaxHealth();
     currentMP = getMaxMP();
+}
+
+PlayerCharacterStats::~PlayerCharacterStats()
+{
+    for(int i = 0; i < attacks.size(); i++)
+    {
+        delete attacks.at(i);
+    }
 }
 
 int PlayerCharacterStats::getCurrentHealth()
@@ -180,4 +192,9 @@ void PlayerCharacterStats::changeCurrentHealth(int amount)
 void PlayerCharacterStats::setIsActive(bool value)
 {
     this->isActive = value;
+}
+
+std::vector<AttackModel *> *PlayerCharacterStats::getAttacks()
+{
+    return &attacks;
 }

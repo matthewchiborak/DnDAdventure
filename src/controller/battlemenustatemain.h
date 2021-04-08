@@ -15,7 +15,7 @@ public:
     void drawBattleMenu(std::vector<DrawInformation> * items);
 
 private:
-    int currentPos = 3;
+    int currentPos = 4;
 };
 
 #endif // BATTLEMENUSTATEMAIN_H

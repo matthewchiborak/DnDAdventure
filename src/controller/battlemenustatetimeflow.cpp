@@ -46,8 +46,8 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
     float p1PosBefore = model->getP1TimeLinePos();
     float p2PosBefore = model->getP2TimeLinePos();
 
-    model->setP1TimeLinePos(p1PosBefore + (model->getCharacters()->at(0)->getSpeed() * (elapsed_millies/1000.f)));
-    model->setP2TimeLinePos(p2PosBefore + (model->getCharacters()->at(1)->getSpeed() * (elapsed_millies/1000.f)));
+    model->setP1TimeLinePos(p1PosBefore + (model->getCharacters()->at(0)->getSpeed() * (elapsed_millies/100.f)));
+    model->setP2TimeLinePos(p2PosBefore + (model->getCharacters()->at(1)->getSpeed() * (elapsed_millies/100.f)));
 
     for(int i = 0; i < model->getEnemies()->size(); i++)
     {

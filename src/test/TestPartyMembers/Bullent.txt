@@ -16,3 +16,10 @@ IVDef,8
 IVMAtt,16
 IVMDef,0
 IVSpeed,31
+Attack,Crossbow,200,0,10,Basic Attack
+Attack,BigCrossBow6,400,20,20,Big Basic Attack6
+Attack,Crossbow2,200,0,10,Basic Attack2
+Attack,Crossbow3,200,0,10,Basic Attack3
+Attack,Crossbow4,200,0,10,Basic Attack4
+Attack,Crossbow5,200,0,10,Basic Attack5
+Attack,Crossbow7,200,0,10,Basic Attack7

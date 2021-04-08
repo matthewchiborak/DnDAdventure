@@ -120,13 +120,15 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
 
     //TEXT IS LAST
     //DrawInformation attackText(-750, -400, 200, 75, "", false, "Attack");
-    DrawInformation attackText(100, 637, 200, 75, "", false, "Attack", true);
+    DrawInformation attackText(100, 637, 200, 75, "", false, "Attack", true, 36);
     items->push_back(attackText);
-    DrawInformation specialText(100, 697, 200, 75, "", false, "Special", true);
+    DrawInformation guardText(100, 687, 200, 75, "", false, "Guard", true, 36);
+    items->push_back(guardText);
+    DrawInformation specialText(100, 737, 200, 75, "", false, "Special", true, 36);
     items->push_back(specialText);
-    DrawInformation partyText(100, 757, 200, 75, "", false, "Party", true);
+    DrawInformation partyText(100, 787, 200, 75, "", false, "Party", true, 36);
     items->push_back(partyText);
-    DrawInformation fleeText(100, 817, 200, 75, "", false, "Flee", true);
+    DrawInformation fleeText(100, 837, 200, 75, "", false, "Flee", true, 36);
     items->push_back(fleeText);
 
 

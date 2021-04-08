@@ -2,11 +2,15 @@
 #define PLAYERCHARACTERSTATS_H
 
 #include <iostream>
+#include <vector>
+
+class AttackModel;
 
 class PlayerCharacterStats
 {
 public:
     PlayerCharacterStats(std::string filepath);
+    ~PlayerCharacterStats();
 
     int getCurrentHealth();
     int getMaxHealth();
@@ -31,6 +35,8 @@ public:
     void setCurrentHealth(int hp);
     void changeCurrentHealth(int amount);
     void setIsActive(bool value);
+
+    std::vector<AttackModel*> * getAttacks();
 
 private:
     std::string name;
@@ -59,6 +65,8 @@ private:
     int IVMAtt;
     int IVMDef;
     int IVSpeed;
+
+    std::vector<AttackModel*> attacks;
 };
 
 #endif // PLAYERCHARACTERSTATS_H

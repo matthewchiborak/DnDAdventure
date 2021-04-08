@@ -13,6 +13,10 @@ public:
     BattleMenuState * closeMenu();
     BattleMenuState * passTime(float value);
     void drawBattleMenu(std::vector<DrawInformation> * items);
+
+private:
+    int currentPosX = 0;
+    int currentPosY = 0;
 };
 
 #endif // BATTLEMENUSTATEATTACK_H

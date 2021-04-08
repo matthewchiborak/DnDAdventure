@@ -4,6 +4,9 @@
 #include "../model/battlemodel.h"
 #include "../model/playercharacterstats.h"
 #include "battlemenustateswitch.h"
+#include "battlemenustateattack.h"
+#include "battlemenustatetimeflow.h"
+#include "battlemenustatespecial.h"
 
 BattleMenuStateMain::BattleMenuStateMain(BattleModel *model)
     : BattleMenuState(model)
@@ -15,16 +18,24 @@ void BattleMenuStateMain::moveMenuCursor(int x, int y)
 {
     currentPos += y;
 
-    if(currentPos > 3)
+    if(currentPos > 4)
         currentPos = 0;
     if(currentPos < 0)
-        currentPos = 3;
+        currentPos = 4;
 }
 
 BattleMenuState *BattleMenuStateMain::enterMenu()
 {
+    if(currentPos == 4)
+        return new BattleMenuStateAttack(model);
+    if(currentPos == 3)
+        return new BattleMenuStateTimeFlow(model);
+    if(currentPos == 2)
+        return new BattleMenuStateSpecial(model);
     if(currentPos == 1)
         return new BattleMenuStateSwitch(model);
+    if(currentPos == 0)
+        return new BattleMenuStateTimeFlow(model);
 
     return this;
 }
@@ -74,6 +85,6 @@ void BattleMenuStateMain::drawBattleMenu(std::vector<DrawInformation> *items)
                          , true);
     items->push_back(p2mp);
 
-    DrawInformation mainCursor(50, 635 + ((3 - currentPos) * 60), 75, 75, "", false, ">", true);
+    DrawInformation mainCursor(50, 637 + ((4 - currentPos) * 50), 75, 75, "", false, ">", true, 36);
     items->push_back(mainCursor);
 }
