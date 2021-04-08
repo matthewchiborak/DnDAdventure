@@ -73,3 +73,8 @@ void ModelAbstract::passTime(float value)
 
 }
 
+bool ModelAbstract::isBattleDone()
+{
+    return true;
+}
+

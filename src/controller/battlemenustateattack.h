@@ -17,6 +17,10 @@ public:
 private:
     int currentPosX = 0;
     int currentPosY = 0;
+
+    int currentTarget;
+
+    bool isSelectingTarget = false;
 };
 
 #endif // BATTLEMENUSTATEATTACK_H

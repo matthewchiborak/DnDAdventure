@@ -3,6 +3,7 @@
 #include "../filemanagment/fileReader.h"
 #include "../model/EnemyModel.h"
 #include <QDir>
+#include "../model/attackmodel.h"
 
 EnemyFactory::EnemyFactory()
 {
@@ -22,7 +23,8 @@ EnemyModel *EnemyFactory::createEnemy(std::string key)
 
     while(fr.hasNext())
     {
-        std::vector<std::string> splits = fr.splitString(fr.next(), ',');
+        std::string nextLine = fr.next();
+        std::vector<std::string> splits = fr.splitString(nextLine, ',');
 
         if(splits.at(0) == "HP")
         {
@@ -46,6 +48,10 @@ EnemyModel *EnemyFactory::createEnemy(std::string key)
             newEnemy->setSpeed(std::stoi(splits.at(1)));
         if(splits.at(0) == "Sprite")
             newEnemy->setSpriteKey(splits.at(1));
+        if(splits.at(0) == "Level")
+            newEnemy->setLevel(std::stoi(splits.at(1)));
+        if(splits.at(0) == "Attack")
+            newEnemy->addAttack(new AttackModel(nextLine));
     }
 
     return newEnemy;

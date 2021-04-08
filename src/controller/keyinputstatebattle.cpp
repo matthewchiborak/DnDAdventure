@@ -21,6 +21,12 @@ bool KeyInputStateBattle::handle(std::string *nextState)
 
     model->passTime(0);
 
+    if(model->isBattleDone())
+    {
+        (*nextState) = "Board";
+        return true;
+    }
+
     return false;
 }
 

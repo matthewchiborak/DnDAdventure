@@ -7,6 +7,7 @@
 #include "../display/drawinformation.h"
 #include "../model/battlemodel.h"
 #include "../model/playercharacterstats.h"
+#include "../model/playercharacterstatsbattle.h"
 
 BattleMenuStateSwitch::BattleMenuStateSwitch(BattleModel *model)
     : BattleMenuState(model)
@@ -26,9 +27,9 @@ void BattleMenuStateSwitch::moveMenuCursor(int x, int y)
 
 BattleMenuState *BattleMenuStateSwitch::enterMenu()
 {
-    PlayerCharacterStats * temp1 = model->getCharacters()->at(0);
-    PlayerCharacterStats * temp2 = model->getCharacters()->at(2 + currentPos);
-    model->getCharacters()->at(0) = temp2;
+    PlayerCharacterStatsBattle * temp1 = model->getCharacters()->at(model->getFocusPartyMember());
+    PlayerCharacterStatsBattle * temp2 = model->getCharacters()->at(2 + currentPos);
+    model->getCharacters()->at(model->getFocusPartyMember()) = temp2;
     model->getCharacters()->at(2 + currentPos) = temp1;
 
     return new BattleMenuStateTimeFlow(model);

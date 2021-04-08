@@ -21,8 +21,10 @@ EncounterFactory::EncounterFactory(std::string encounterFilePath)
     }
 }
 
-void EncounterFactory::populate(std::vector<EnemyModel *> *enemies, std::string key)
+int EncounterFactory::populate(std::vector<EnemyModel *> *enemies, std::string key)
 {
+    int numOfEnemies = 0;
+
     EnemyFactory enemyfact;
 
     std::string enemiesInEncounter = keyToEnemyFiles[key];
@@ -32,5 +34,8 @@ void EncounterFactory::populate(std::vector<EnemyModel *> *enemies, std::string 
     for(int i = 0; i < enemyKeys.size(); i++)
     {
         enemies->push_back(enemyfact.createEnemy(enemyKeys.at(i)));
+        numOfEnemies++;
     }
+
+    return numOfEnemies;
 }

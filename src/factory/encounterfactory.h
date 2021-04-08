@@ -12,7 +12,7 @@ class EncounterFactory
 public:
     EncounterFactory(std::string encounterFilePath);
 
-    void populate(std::vector<EnemyModel*> * enemies, std::string key);
+    int populate(std::vector<EnemyModel*> * enemies, std::string key);
 
 private:
     std::map<std::string, std::string> keyToEnemyFiles;

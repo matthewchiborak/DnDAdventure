@@ -6,7 +6,7 @@ BaseDef,126
 BaseMAtt,74
 BaseMDef,116
 BaseSpeed,60
-Sprite,Duke
+Sprite,Allura
 MenuSprite,AlluraMenu
 TimeLineSprite,AlluraTimeLine
 IVHP,0
@@ -16,3 +16,5 @@ IVDef,31
 IVMAtt,16
 IVMDef,31
 IVSpeed,0
+Attack,AlluraAttack1,200,0,10,Basic Attack5,0,0
+Attack,AlluraAttack2,200,20,10,Basic Attack7,0,0

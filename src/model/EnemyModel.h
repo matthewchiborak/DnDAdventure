@@ -2,6 +2,9 @@
 #define ENEMY_MODEL_HEADER
 
 #include <string>
+#include <vector>
+
+class AttackModel;
 
 //Class for storing all the information relating to enemies in the game.
 class EnemyModel
@@ -12,6 +15,7 @@ public:
 
     void addAttack();
 
+    void setLevel(int level);
     void setMaxHealth(int value);
     void setAttack(int value);
     void setDefence(int value);
@@ -21,6 +25,7 @@ public:
     void setSpriteKey(std::string value);
     void setName(std::string value);
 
+    int getLevel();
     int getCurrentHealth();
     int getMaxHealth();
     int getAttack();
@@ -33,7 +38,21 @@ public:
     float getTimeLinePos();
     void setTimeLinePos(float value);
 
+    void changeHealth(int amount);
+
+    float getElementalMultiplier(int element);
+
+    void addAttack(AttackModel * newAtt);
+    std::vector<AttackModel*> * getAttacks();
+
+    void stopCasting();
+    void castARandomAttack(bool p1Alive, bool p2Alive);
+    bool getIsCasting();
+    AttackModel * getCastingAttack();
+    int getAttackTarget();
+
 private:
+    int level;
     int maxHealth;
     int currentHealth;
     int attack;
@@ -44,6 +63,12 @@ private:
     std::string spriteKey;
     std::string name;
     float timelinePos;
+
+    std::vector<AttackModel*> attacks;
+
+    bool isCasting = false;
+    int attackIndex = 0;
+    int attackTarget = 0;
 };
 
 #endif

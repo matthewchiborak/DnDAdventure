@@ -3,12 +3,15 @@
 
 #include <vector>
 #include <string>
+#include <queue>
 #include "../controller/battlemenustate.h"
 
 class PlayerCharacterStats;
 class DrawInformation;
 class EnemyModel;
+class AttackModel;
 class EncounterFactory;
+class PlayerCharacterStatsBattle;
 
 class BattleModel
 {
@@ -16,7 +19,7 @@ public:
     BattleModel();
 
     void clear();
-    void load(std::string key, std::vector<PlayerCharacterStats*> * characters);
+    void load(std::string key, std::vector<PlayerCharacterStats*> * charactersInput);
     void draw(std::vector<DrawInformation> * items);
     void passTime(float value);
 
@@ -24,30 +27,57 @@ public:
     void enterMenu();
     void closeMenu();
 
-    std::vector<PlayerCharacterStats*> * getCharacters();
+    std::vector<PlayerCharacterStatsBattle*> * getCharacters();
     std::vector<EnemyModel*> * getEnemies();
     float getP1TimeLinePos();
     float getP2TimeLinePos();
     void setP1TimeLinePos(float value);
     void setP2TimeLinePos(float value);
+    int getFocusPartyMember();
+    void setFocusPartyMember(int index);
+
+    void applyAttack(PlayerCharacterStatsBattle * attacker,
+                     EnemyModel * defender,
+                     AttackModel * attack
+                     );
+    void applyAttack(EnemyModel * attacker,
+                     PlayerCharacterStatsBattle * defender,
+                     AttackModel * attack
+                     );
+
+    bool isTheBattleDone();
+    int getNumberOfEnemies();
+
+    void displayMessage(std::string message);
+    void forceClearDisplayMessage();
 
 private:
     //factory for building the enounter
     EncounterFactory * encounterFact;
 
+    int focusPartyMember = 0;
     float timelineP1Pos = 0; // scale of 0-1200. 1000 being the attack time?
     float timelineP2Pos = 0;
     const float timeLineOffset = -618;
 
     //vector of enemies
     std::vector<EnemyModel*> enemies;
+    int numberOfEnemies = 0;
 
     std::string backgroundImageKey;
 
-    //buffs defuffs?
+    std::string messageToDisplay;
+    const double durationOfMessage = 3000;
+    long long theTimeNow;
+    long long timeOfLastEvent;
+    double elapsed_millies;
 
-    std::vector<PlayerCharacterStats*> * characters;
+    std::vector<PlayerCharacterStatsBattle*> characters;
     BattleMenuState * battleMenuState;
+
+    bool battleIsDone = false;
+
+    void checkIfEnemiesAreDead();
 };
 
 #endif // BATTLEMODEL_H

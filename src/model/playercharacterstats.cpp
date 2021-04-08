@@ -7,6 +7,7 @@
 #include <vector>
 #include <math.h>
 
+
 PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
 {
     FileReader fr(filepath);
@@ -198,3 +199,5 @@ std::vector<AttackModel *> *PlayerCharacterStats::getAttacks()
 {
     return &attacks;
 }
+
+

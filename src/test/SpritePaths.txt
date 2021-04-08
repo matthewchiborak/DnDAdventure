@@ -4,6 +4,8 @@ TestShip,testship.jpg
 Blank,blank.png
 Duke,Duke.png
 Bullent,Bullent.PNG,
+Chad,Chad.png
+Allura,Allura.png
 PauseMenuBG,PauseMenuBG.jpg
 BullentMenu,BullentMenu.png
 DukeMenu,DukeMenu.png

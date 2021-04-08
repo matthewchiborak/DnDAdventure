@@ -120,3 +120,8 @@ void ModelConcrete::passTime(float value)
     battleModel.passTime(value);
 }
 
+bool ModelConcrete::isBattleDone()
+{
+    return battleModel.isTheBattleDone();
+}
+

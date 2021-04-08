@@ -19,6 +19,7 @@ public:
 
 protected:
     BattleModel * model;
+
 };
 
 #endif // BATTLEMENUSTATE_H

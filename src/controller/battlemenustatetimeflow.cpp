@@ -5,6 +5,8 @@
 #include "../model/playercharacterstats.h"
 #include "../model/EnemyModel.h"
 #include "../controller/battlemenustatemain.h"
+#include "../model/playercharacterstatsbattle.h"
+#include "../model/attackmodel.h"
 
 #include <chrono>
 
@@ -46,31 +48,85 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
     float p1PosBefore = model->getP1TimeLinePos();
     float p2PosBefore = model->getP2TimeLinePos();
 
-    model->setP1TimeLinePos(p1PosBefore + (model->getCharacters()->at(0)->getSpeed() * (elapsed_millies/100.f)));
-    model->setP2TimeLinePos(p2PosBefore + (model->getCharacters()->at(1)->getSpeed() * (elapsed_millies/100.f)));
+    if(!model->getCharacters()->at(0)->getIsCasting())
+        model->setP1TimeLinePos(p1PosBefore + (model->getCharacters()->at(0)->getSpeed() * (elapsed_millies/100.f)));
+    else
+        model->setP1TimeLinePos(p1PosBefore + ((elapsed_millies * 200) / model->getCharacters()->at(0)->getCastingAttack()->getCastTime()));
+
+    if(!model->getCharacters()->at(1)->getIsCasting())
+        model->setP2TimeLinePos(p2PosBefore + (model->getCharacters()->at(1)->getSpeed() * (elapsed_millies/100.f)));
+    else
+        model->setP2TimeLinePos(p2PosBefore + ((elapsed_millies * 200) / model->getCharacters()->at(1)->getCastingAttack()->getCastTime()));
 
     for(int i = 0; i < model->getEnemies()->size(); i++)
     {
-        float enPosBefore =  model->getEnemies()->at(i)->getTimeLinePos();
-        model->getEnemies()->at(i)->setTimeLinePos(enPosBefore
-                                                   + (model->getEnemies()->at(i)->getSpeed() * (elapsed_millies/1000.f)));
+        if(model->getEnemies()->at(i)->getCurrentHealth() > 0)
+        {
+            float enPosBefore =  model->getEnemies()->at(i)->getTimeLinePos();
+            if(!model->getEnemies()->at(i)->getIsCasting())
+                model->getEnemies()->at(i)->setTimeLinePos(enPosBefore + (model->getEnemies()->at(i)->getSpeed() * (elapsed_millies/100.f)));
+            else
+                model->getEnemies()->at(i)->setTimeLinePos(enPosBefore + ((elapsed_millies * 200) / model->getEnemies()->at(i)->getCastingAttack()->getCastTime()));
 
-        if(model->getEnemies()->at(i)->getTimeLinePos() >= 1200)
-            model->getEnemies()->at(i)->setTimeLinePos(0);
+            if(enPosBefore < 1000 && model->getEnemies()->at(i)->getTimeLinePos() >= 1000)
+            {
+                model->getEnemies()->at(i)->setTimeLinePos(1000);
+                model->getEnemies()->at(i)->castARandomAttack(model->getCharacters()->at(0)->getCurrentHealth() > 0,
+                                                              model->getCharacters()->at(1)->getCurrentHealth() > 0
+                                                              );
+            }
+
+            if(model->getEnemies()->at(i)->getTimeLinePos() >= 1200)
+            {
+                model->applyAttack(model->getEnemies()->at(i),
+                                   model->getCharacters()->at(model->getEnemies()->at(i)->getAttackTarget()),
+                                   model->getEnemies()->at(i)->getCastingAttack()
+                                   );
+                model->getEnemies()->at(i)->setTimeLinePos(0);
+            }
+        }
     }
 
     //Thats why it was always speeding up
     timeOfLastEvent = theTimeNow;
 
     if(p1PosBefore < 1000 && model->getP1TimeLinePos() >= 1000)
+    {
+        model->setP1TimeLinePos(1000);
+        model->setFocusPartyMember(0);
         return new BattleMenuStateMain(model);
+    }
     if(p2PosBefore < 1000 && model->getP2TimeLinePos() >= 1000)
+    {
+        model->setP2TimeLinePos(1000);
+        model->setFocusPartyMember(1);
         return new BattleMenuStateMain(model);
+    }
 
     if(model->getP1TimeLinePos() >= 1200)
+    {
+        if(model->getCharacters()->at(0)->getIsCasting())
+        {
+            model->applyAttack(model->getCharacters()->at(0),
+                           model->getEnemies()->at(model->getCharacters()->at(0)->getAttackTarget()),
+                           model->getCharacters()->at(0)->getCastingAttack()
+                           );
+            model->getCharacters()->at(0)->stopCasting();
+        }
         model->setP1TimeLinePos(0);
+    }
     if(model->getP2TimeLinePos() >= 1200)
+    {
+        if(model->getCharacters()->at(1)->getIsCasting())
+        {
+            model->applyAttack(model->getCharacters()->at(1),
+                               model->getEnemies()->at(model->getCharacters()->at(1)->getAttackTarget()),
+                               model->getCharacters()->at(1)->getCastingAttack()
+                               );
+            model->getCharacters()->at(1)->stopCasting();
+        }
         model->setP2TimeLinePos(0);
+    }
 
     return this;
 }

@@ -6,7 +6,7 @@ BaseDef,122
 BaseMAtt,74
 BaseMDef,75
 BaseSpeed,64
-Sprite,Duke
+Sprite,Chad
 MenuSprite,ChadMenu
 TimeLineSprite,ChadTimeLine
 IVHP,31
@@ -16,3 +16,5 @@ IVDef,31
 IVMAtt,0
 IVMDef,4
 IVSpeed,0
+Attack,ChadAttack1,6000,0,10,Basic Attack5,0,0
+Attack,ChadAttack2,6000,20,10,Basic Attack7,0,0

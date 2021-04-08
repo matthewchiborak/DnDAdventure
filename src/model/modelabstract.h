@@ -29,6 +29,7 @@ public:
     virtual bool tryToStartABattle();
     virtual void drawBattleModel(std::vector<DrawInformation> * items);
     virtual void passTime(float value);
+    virtual bool isBattleDone();
 
     std::vector<PlayerCharacterStats*> playerCharacters;
 };

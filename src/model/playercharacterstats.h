@@ -38,7 +38,8 @@ public:
 
     std::vector<AttackModel*> * getAttacks();
 
-private:
+
+protected:
     std::string name;
     bool isActive;
     int level;
@@ -67,6 +68,7 @@ private:
     int IVSpeed;
 
     std::vector<AttackModel*> attacks;
+
 };
 
 #endif // PLAYERCHARACTERSTATS_H

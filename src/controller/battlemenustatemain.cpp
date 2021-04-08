@@ -7,6 +7,7 @@
 #include "battlemenustateattack.h"
 #include "battlemenustatetimeflow.h"
 #include "battlemenustatespecial.h"
+#include "../model/playercharacterstatsbattle.h"
 
 BattleMenuStateMain::BattleMenuStateMain(BattleModel *model)
     : BattleMenuState(model)

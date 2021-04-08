@@ -24,6 +24,7 @@ public:
     bool tryToStartABattle();
     void drawBattleModel(std::vector<DrawInformation> * items);
     void passTime(float value);
+    bool isBattleDone();
 
 private:
     BoardModel boardModel;
