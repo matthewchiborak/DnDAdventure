@@ -20,12 +20,7 @@ EnemyModel::EnemyModel()
 
 void EnemyModel::applyTime(float t)
 {
-    if(statusEffectModel.sleep)
-    {
-        statusEffectModel.sleepCount += t;
-        if(statusEffectModel.sleepCount > statusEffectModel.sleepDuration)
-            statusEffectModel.sleep = false;
-    }
+    statusEffectModel.applyTime(t);
 }
 
 void EnemyModel::justGotToEndOfTimeLine()
@@ -229,4 +224,17 @@ void EnemyModel::applyStatusEffect(std::string se)
 StatusEffectModel *EnemyModel::getStatusEffectModel()
 {
     return &statusEffectModel;
+}
+
+bool EnemyModel::tryInterrupt(float amount)
+{
+    if(!isCasting)
+    {
+        return false;
+    }
+
+    isCasting = false;
+    timelinePos -= amount;
+
+    return true;
 }

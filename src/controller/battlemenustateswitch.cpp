@@ -28,6 +28,12 @@ void BattleMenuStateSwitch::moveMenuCursor(int x, int y)
 
 BattleMenuState *BattleMenuStateSwitch::enterMenu()
 {
+    //Can't make it so you swap in dead characters if other party member is dead
+    if(model->getCharacters()->at(2 + currentPos)->getCurrentHealth() <= 0)
+    {
+        return this;
+    }
+
     PlayerCharacterStatsBattle * temp1 = model->getCharacters()->at(model->getFocusPartyMember());
     PlayerCharacterStatsBattle * temp2 = model->getCharacters()->at(2 + currentPos);
     model->getCharacters()->at(model->getFocusPartyMember()) = temp2;

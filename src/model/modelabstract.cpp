@@ -78,3 +78,8 @@ bool ModelAbstract::isBattleDone()
     return true;
 }
 
+bool ModelAbstract::isGameOver()
+{
+    return false;
+}
+

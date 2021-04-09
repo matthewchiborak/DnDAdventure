@@ -45,7 +45,10 @@ public:
                      AttackModel * attack
                      );
 
+    void checkIfNeedToSwapDeadCharacters();
+
     bool isTheBattleDone();
+    bool isGameOver();
     int getNumberOfEnemies();
 
     void displayMessage(std::string message);
@@ -76,6 +79,7 @@ private:
     BattleMenuState * battleMenuState;
 
     bool battleIsDone = false;
+    bool gameOver = false;
 
     void checkIfEnemiesAreDead();
 };

@@ -125,3 +125,8 @@ bool ModelConcrete::isBattleDone()
     return battleModel.isTheBattleDone();
 }
 
+bool ModelConcrete::isGameOver()
+{
+    return battleModel.isGameOver();
+}
+

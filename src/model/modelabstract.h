@@ -30,6 +30,7 @@ public:
     virtual void drawBattleModel(std::vector<DrawInformation> * items);
     virtual void passTime(float value);
     virtual bool isBattleDone();
+    virtual bool isGameOver();
 
     std::vector<PlayerCharacterStats*> playerCharacters;
 };

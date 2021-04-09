@@ -51,15 +51,21 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
     model->getCharacters()->at(0)->applyTime(elapsed_millies);
     model->getCharacters()->at(1)->applyTime(elapsed_millies);
 
-    if(!model->getCharacters()->at(0)->getIsCasting())
-        model->setP1TimeLinePos(p1PosBefore + (model->getCharacters()->at(0)->getSpeed() * (elapsed_millies/100.f)));
-    else
-        model->setP1TimeLinePos(p1PosBefore + ((elapsed_millies * 200) / model->getCharacters()->at(0)->getCastingAttack()->getCastTime()));
+    if(model->getCharacters()->at(0)->getCurrentHealth() > 0)
+    {
+        if(!model->getCharacters()->at(0)->getIsCasting())
+            model->setP1TimeLinePos(p1PosBefore + (model->getCharacters()->at(0)->getSpeed() * (elapsed_millies/100.f)));
+        else
+            model->setP1TimeLinePos(p1PosBefore + ((elapsed_millies * 200) / model->getCharacters()->at(0)->getCastingAttack()->getCastTime()));
+    }
 
-    if(!model->getCharacters()->at(1)->getIsCasting())
-        model->setP2TimeLinePos(p2PosBefore + (model->getCharacters()->at(1)->getSpeed() * (elapsed_millies/100.f)));
-    else
-        model->setP2TimeLinePos(p2PosBefore + ((elapsed_millies * 200) / model->getCharacters()->at(1)->getCastingAttack()->getCastTime()));
+    if(model->getCharacters()->at(1)->getCurrentHealth() > 0)
+    {
+        if(!model->getCharacters()->at(1)->getIsCasting())
+            model->setP2TimeLinePos(p2PosBefore + (model->getCharacters()->at(1)->getSpeed() * (elapsed_millies/100.f)));
+        else
+            model->setP2TimeLinePos(p2PosBefore + ((elapsed_millies * 200) / model->getCharacters()->at(1)->getCastingAttack()->getCastTime()));
+    }
 
     for(int i = 0; i < model->getEnemies()->size(); i++)
     {
@@ -98,12 +104,14 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
 
     if(p1PosBefore < 1000 && model->getP1TimeLinePos() >= 1000)
     {
+        model->getCharacters()->at(0)->getStatusEffectModel()->guard = false;
         model->setP1TimeLinePos(1000);
         model->setFocusPartyMember(0);
         return new BattleMenuStateMain(model);
     }
     if(p2PosBefore < 1000 && model->getP2TimeLinePos() >= 1000)
     {
+        model->getCharacters()->at(1)->getStatusEffectModel()->guard = false;
         model->setP2TimeLinePos(1000);
         model->setFocusPartyMember(1);
         return new BattleMenuStateMain(model);
@@ -184,6 +192,19 @@ void BattleMenuStateTimeFlow::drawStatusEffects(std::vector<DrawInformation> * i
     int p1LowerStatusCount = 0;
     int p2UpperStatusCount = 0;
     int p2LowerStatusCount = 0;
+
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->guard)
+    {
+        DrawInformation port1(-300, -275, 50, 50, "Guard", false);
+        items->push_back(port1);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->guard)
+    {
+        DrawInformation port1(250, -275, 50, 50, "Guard", false);
+        items->push_back(port1);
+    }
+
+    //////////////
 
     if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_att > 0)
     {

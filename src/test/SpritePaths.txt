@@ -39,3 +39,4 @@ SESlow,SESlow.png
 SEPoison,SEPoison.png
 SESleep,SESleep.png
 SESilence,SESilence.png
+Guard,Guard.png

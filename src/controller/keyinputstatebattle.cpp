@@ -23,6 +23,12 @@ bool KeyInputStateBattle::handle(std::string *nextState)
 
     if(model->isBattleDone())
     {
+        if(model->isGameOver())
+        {
+            qDebug() << "GAME OVER";
+            return false;
+        }
+
         (*nextState) = "Board";
         return true;
     }

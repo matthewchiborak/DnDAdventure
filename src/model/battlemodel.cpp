@@ -33,6 +33,7 @@ void BattleModel::clear()
     timeOfLastEvent = theTimeNow - durationOfMessage;
 
     battleIsDone = false;
+    gameOver = false;
     timelineP1Pos = 0;
     timelineP2Pos = 0;
 
@@ -87,6 +88,7 @@ void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *cha
         enemies.at(i)->setTimeLinePos((rand()%500) * ((float)enemies.at(i)->getSpeed() / (float)maxSpeed));
     }
 
+
 }
 
 void BattleModel::draw(std::vector<DrawInformation> *items)
@@ -99,10 +101,16 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     items->push_back(timeline);
 
     //TODO get a background into the board file? Or encounter file?
-    DrawInformation player1(-300, 100, 200, 200, characters.at(0)->getSpriteKey(), false);
-    items->push_back(player1);
-    DrawInformation player2(-500, 0, 200, 200, characters.at(1)->getSpriteKey(), false);
-    items->push_back(player2);
+    if(characters.at(0)->getCurrentHealth() > 0)
+    {
+        DrawInformation player1(-300, 100, 200, 200, characters.at(0)->getSpriteKey(), false);
+        items->push_back(player1);
+    }
+    if(characters.at(1)->getCurrentHealth() > 0)
+    {
+        DrawInformation player2(-500, 0, 200, 200, characters.at(1)->getSpriteKey(), false);
+        items->push_back(player2);
+    }
 
     DrawInformation player1TL((timeLineOffset) + timelineP1Pos, -60, 36, 48, characters.at(0)->getTimelineSpriteKey(), false);
     items->push_back(player1TL);
@@ -319,6 +327,15 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
     defender->changeHealth(-1 * damage);
     defender->applyStatusEffect(attack->getAdditionalEffect());
 
+    //Try interrupt
+    if(damage > 0)
+    {
+        if(defender->tryInterrupt(500))
+        {
+
+        }
+    }
+
 }
 
 void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *defender, AttackModel *attack)
@@ -364,13 +381,100 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
         }
     }
 
+    qDebug() << "Test" << defender->getDefence() << defender->getMagicDefence();
+
     defender->changeCurrentHealth(-1 * damage);
     defender->applyStatusEffect(attack->getAdditionalEffect());
+
+    //Try interrupt
+    if(damage > 0)
+    {
+        if(defender->getIsCasting())
+        {
+            if(attacker->getAttackTarget() == 0)
+                timelineP1Pos -= 500;
+            else
+                timelineP2Pos -= 500;
+        }
+    }
+
+
+}
+
+void BattleModel::checkIfNeedToSwapDeadCharacters()
+{
+    if(characters.at(0)->getCurrentHealth() <= 0)
+    {
+        if(characters.at(2)->getCurrentHealth() > 0)
+        {
+            PlayerCharacterStatsBattle * temp1 = characters.at(0);
+            PlayerCharacterStatsBattle * temp2 = characters.at(2);
+            characters.at(0) = temp2;
+            characters.at(2) = temp1;
+        }
+        else if(characters.at(3)->getCurrentHealth() > 0)
+        {
+            PlayerCharacterStatsBattle * temp1 = characters.at(0);
+            PlayerCharacterStatsBattle * temp2 = characters.at(3);
+            characters.at(0) = temp2;
+            characters.at(3) = temp1;
+        }
+    }
+    if(characters.at(1)->getCurrentHealth() <= 0)
+    {
+        if(characters.at(2)->getCurrentHealth() > 0)
+        {
+            PlayerCharacterStatsBattle * temp1 = characters.at(1);
+            PlayerCharacterStatsBattle * temp2 = characters.at(2);
+            characters.at(0) = temp2;
+            characters.at(2) = temp1;
+        }
+        else if(characters.at(3)->getCurrentHealth() > 0)
+        {
+            PlayerCharacterStatsBattle * temp1 = characters.at(1);
+            PlayerCharacterStatsBattle * temp2 = characters.at(3);
+            characters.at(1) = temp2;
+            characters.at(3) = temp1;
+        }
+    }
+//    if(characters.at(0)->getCurrentHealth() <= 0 && characters.at(1)->getCurrentHealth() <= 0)
+//    {
+//        if(characters.at(2)->getCurrentHealth() > 0 && characters.at(3)->getCurrentHealth() > 0)
+//        {
+//            PlayerCharacterStatsBattle * temp1 = characters.at(0);
+//            PlayerCharacterStatsBattle * temp2 = characters.at(2);
+//            characters.at(0) = temp2;
+//            characters.at(2) = temp1;
+//            PlayerCharacterStatsBattle * temp4 = characters.at(1);
+//            PlayerCharacterStatsBattle * temp3 = characters.at(3);
+//            characters.at(1) = temp3;
+//            characters.at(3) = temp4;
+//        }
+//        else if(characters.at(2)->getCurrentHealth() > 0 && characters.at(3)->getCurrentHealth() <= 0)
+//        {
+//            PlayerCharacterStatsBattle * temp1 = characters.at(recentTarget);
+//            PlayerCharacterStatsBattle * temp2 = characters.at(2);
+//            characters.at(recentTarget) = temp2;
+//            characters.at(2) = temp1;
+//        }
+//        else if(characters.at(2)->getCurrentHealth() <= 0 && characters.at(3)->getCurrentHealth() > 0)
+//        {
+//            PlayerCharacterStatsBattle * temp1 = characters.at(recentTarget);
+//            PlayerCharacterStatsBattle * temp2 = characters.at(3);
+//            characters.at(recentTarget) = temp2;
+//            characters.at(3) = temp1;
+//        }
+//    }
 }
 
 bool BattleModel::isTheBattleDone()
 {
     return battleIsDone;
+}
+
+bool BattleModel::isGameOver()
+{
+    return gameOver;
 }
 
 int BattleModel::getNumberOfEnemies()
@@ -398,6 +502,26 @@ void BattleModel::checkIfEnemiesAreDead()
 {
     if(battleIsDone)
         return;
+
+    int characterCount = 0;
+    int deadCount = 0;
+    for(int i = 0; i < characters.size(); i++)
+    {
+        characterCount++;
+        if(characters.at(i)->getCurrentHealth() <= 0)
+            deadCount++;
+    }
+
+    if(deadCount >= characterCount)
+    {
+        gameOver = true;
+        battleIsDone = true;
+    }
+    else
+    {
+        checkIfNeedToSwapDeadCharacters();
+    }
+
 
     int deadEnemyCount = 0;
 

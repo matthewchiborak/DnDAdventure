@@ -30,7 +30,10 @@ BattleMenuState *BattleMenuStateMain::enterMenu()
     if(currentPos == 4)
         return new BattleMenuStateAttack(model);
     if(currentPos == 3)
+    {
+        model->getCharacters()->at(model->getFocusPartyMember())->getStatusEffectModel()->guard = true;
         return new BattleMenuStateTimeFlow(model);
+    }
     if(currentPos == 2)
         return new BattleMenuStateSpecial(model);
     if(currentPos == 1)
@@ -98,6 +101,19 @@ void BattleMenuStateMain::drawStatusEffects(std::vector<DrawInformation> *items)
     int p1LowerStatusCount = 0;
     int p2UpperStatusCount = 0;
     int p2LowerStatusCount = 0;
+
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->guard)
+    {
+        DrawInformation port1(-300, -275, 50, 50, "Guard", false);
+        items->push_back(port1);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->guard)
+    {
+        DrawInformation port1(250, -275, 50, 50, "Guard", false);
+        items->push_back(port1);
+    }
+
+    //////////////
 
     if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_att > 0)
     {

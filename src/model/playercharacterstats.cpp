@@ -188,6 +188,11 @@ void PlayerCharacterStats::setCurrentHealth(int hp)
 void PlayerCharacterStats::changeCurrentHealth(int amount)
 {
     this->currentHealth += amount;
+
+    if(this->currentHealth > getMaxHealth())
+        this->currentHealth = getMaxHealth();
+    if(this->currentHealth < 0)
+        this->currentHealth = 0;
 }
 
 void PlayerCharacterStats::setIsActive(bool value)

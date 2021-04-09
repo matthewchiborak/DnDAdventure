@@ -25,6 +25,7 @@ public:
     void drawBattleModel(std::vector<DrawInformation> * items);
     void passTime(float value);
     bool isBattleDone();
+    bool isGameOver();
 
 private:
     BoardModel boardModel;

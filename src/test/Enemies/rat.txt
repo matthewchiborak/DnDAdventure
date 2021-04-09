@@ -1,6 +1,6 @@
 Name,Rat
 Level,1
-HP,1
+HP,100
 Att,23
 Def,15
 MAtt,10
@@ -9,4 +9,4 @@ Speed,34
 XP,5
 Sprite,Rat
 Attack,Bite,2000,0,10,100,Basic Attack,0,0
-Attack,Scratch,6000,0,30,100,Basic Attack,0,0
+Attack,Scratch,6000,0,10,100,Basic Attack,0,0

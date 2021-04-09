@@ -62,6 +62,8 @@ public:
 
     StatusEffectModel * getStatusEffectModel();
 
+    bool tryInterrupt(float amount);
+
 private:
     int level;
     int maxHealth;

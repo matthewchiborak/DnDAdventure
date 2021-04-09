@@ -27,62 +27,112 @@ void StatusEffectModel::applyStatusEffect(std::string se)
         wet = true;
     else if(se == "AttackUp")
     {
+        attackCount = 0;
         SE_att++;
         if(SE_att > 1)
             SE_att = 1;
     }
     else if(se == "AttackDown")
     {
+        attackCount = 0;
         SE_att--;
         if(SE_att < -1)
             SE_att = -1;
     }
     else if(se == "DefenceUp")
     {
+        defenceCount = 0;
         SE_def++;
         if(SE_def > 1)
             SE_def = 1;
     }
     else if(se == "DefenceDown")
     {
+        defenceCount = 0;
         SE_def--;
         if(SE_def < -1)
             SE_def = -1;
     }
     else if(se == "MagicUp")
     {
+        magicCount = 0;
         SE_magic++;
         if(SE_magic > 1)
             SE_magic = 1;
     }
     else if(se == "MagicDown")
     {
+        magicCount = 0;
         SE_magic--;
         if(SE_magic < -1)
             SE_magic = -1;
     }
     else if(se == "MagicDefenceUp")
     {
+        magicDefenceCount = 0;
         SE_magicDef++;
         if(SE_magicDef > 1)
             SE_magicDef = 1;
     }
     else if(se == "MagicDefenceDown")
     {
+        magicDefenceCount = 0;
         SE_magicDef--;
         if(SE_magicDef < -1)
             SE_magicDef = -1;
     }
     else if(se == "Haste")
     {
+        speedCount = 0;
         SE_speed++;
         if(SE_speed > 1)
             SE_speed = 1;
     }
     else if(se == "Slow")
     {
+        speedCount = 0;
         SE_speed--;
         if(SE_speed < -1)
             SE_speed = -1;
+    }
+}
+
+void StatusEffectModel::applyTime(float t)
+{
+    if(sleep)
+    {
+        sleepCount += t;
+        if(sleepCount > sleepDuration)
+            sleep = false;
+    }
+    if(SE_att != 0)
+    {
+        attackCount += t;
+        if(attackCount > buffDuration)
+            SE_att = 0;
+    }
+    if(SE_def != 0)
+    {
+        defenceCount += t;
+        if(defenceCount > buffDuration)
+            SE_def = 0;
+    }
+    if(SE_magic != 0)
+    {
+        magicCount += t;
+        if(magicCount > buffDuration)
+            SE_magic = 0;
+    }
+    if(SE_magicDef != 0)
+    {
+        magicDefenceCount += t;
+        if(magicDefenceCount > buffDuration)
+            SE_magicDef = 0;
+    }
+    if(SE_speed != 0)
+    {
+        speedCount += t;
+        if(speedCount > buffDuration)
+            SE_speed = 0;
     }
 }

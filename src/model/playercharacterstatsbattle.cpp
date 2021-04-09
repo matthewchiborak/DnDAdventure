@@ -7,12 +7,7 @@ PlayerCharacterStatsBattle::PlayerCharacterStatsBattle(PlayerCharacterStats *cha
 
 void PlayerCharacterStatsBattle::applyTime(float t)
 {
-    if(statusEffectModel.sleep)
-    {
-        statusEffectModel.sleepCount += t;
-        if(statusEffectModel.sleepCount > statusEffectModel.sleepDuration)
-            statusEffectModel.sleep = false;
-    }
+    statusEffectModel.applyTime(t);
 }
 
 void PlayerCharacterStatsBattle::justGotToEndOfTimeLine()
@@ -41,6 +36,9 @@ int PlayerCharacterStatsBattle::getAttack()
 
 int PlayerCharacterStatsBattle::getDefence()
 {
+    if(statusEffectModel.guard)
+        return stats->getDefence() * 0.5f;
+
     if(statusEffectModel.SE_def != 0)
         return statusEffectModel.SE_def * 1.5f * stats->getDefence();
 
@@ -57,6 +55,9 @@ int PlayerCharacterStatsBattle::getMagicAttack()
 
 int PlayerCharacterStatsBattle::getMagicDefence()
 {
+    if(statusEffectModel.guard)
+        return stats->getMagicDefence() * 0.5f;
+
     if(statusEffectModel.SE_magicDef != 0)
         return statusEffectModel.SE_magicDef * 1.5f * stats->getMagicDefence();
 
@@ -195,5 +196,7 @@ StatusEffectModel *PlayerCharacterStatsBattle::getStatusEffectModel()
 {
     return &statusEffectModel;
 }
+
+
 
 
