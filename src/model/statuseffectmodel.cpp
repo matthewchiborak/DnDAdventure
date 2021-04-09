@@ -95,6 +95,30 @@ void StatusEffectModel::applyStatusEffect(std::string se)
         if(SE_speed < -1)
             SE_speed = -1;
     }
+    else if(se == "Overdrive")
+    {
+        overdriveCount = 0;
+        overdrive = true;
+    }
+}
+
+void StatusEffectModel::cureAllNegativeStatusEffects()
+{
+    poison = false;
+    sleep = false;
+    silenced = false;
+    wet = false;
+
+    if(SE_att < 0)
+        SE_att = 0;
+    if(SE_def < 0)
+        SE_def = 0;
+    if(SE_magic < 0)
+        SE_magic = 0;
+    if(SE_magicDef < 0)
+        SE_magicDef = 0;
+    if(SE_speed < 0)
+        SE_speed = 0;
 }
 
 void StatusEffectModel::applyTime(float t)
@@ -134,5 +158,11 @@ void StatusEffectModel::applyTime(float t)
         speedCount += t;
         if(speedCount > buffDuration)
             SE_speed = 0;
+    }
+    if(overdrive)
+    {
+        overdriveCount += t;
+        if(overdriveCount > overdriveDuration)
+            overdrive = false;
     }
 }

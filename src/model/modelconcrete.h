@@ -33,6 +33,7 @@ private:
 
     PauseMenuDrawState * currentMenuState;
 
+    int partyGaugeValue = 0;
 
 };
 

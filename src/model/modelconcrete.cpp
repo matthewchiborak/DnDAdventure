@@ -91,8 +91,6 @@ void ModelConcrete::closeMenu(std::string key)
 
 bool ModelConcrete::tryToStartABattle()
 {
-    //qDebug() << "Trying to start a fight";
-
     std::string encounterKey;
     bool isStartBattle = boardModel.tryToGetAnEnounter(&encounterKey);
 
@@ -100,7 +98,7 @@ bool ModelConcrete::tryToStartABattle()
         return false;
 
     //Load the enoucter in the battle model
-    battleModel.load(encounterKey, &playerCharacters);
+    battleModel.load(encounterKey, &playerCharacters, &partyGaugeValue);
 
     //Set the render and input states
     return true;

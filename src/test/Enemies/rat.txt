@@ -1,13 +1,13 @@
 Name,Big_Rat
 Level,1
 HP,100
-Att,23
+Att,230
 Def,15
 MAtt,10
 MDef,15
 Speed,34
 XP,5
 Sprite,Rat
-Attack,Bite,2000,0,10,100,Basic Attack,0,0
-Attack,Scratch,6000,0,10,100,Basic Attack,0,0
+Attack,Bite,2000,0,100,100,Basic Attack,0,0
+Attack,Scratch,6000,0,100,100,Basic Attack,0,0
 Absorb,1

@@ -113,6 +113,19 @@ void BattleMenuStateMain::drawStatusEffects(std::vector<DrawInformation> *items)
         items->push_back(port1);
     }
 
+    //
+
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->overdrive)
+    {
+        DrawInformation port1(-250, -275, 50, 50, "Overdrive", false);
+        items->push_back(port1);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->overdrive)
+    {
+        DrawInformation port1(300, -275, 50, 50, "Overdrive", false);
+        items->push_back(port1);
+    }
+
     //////////////
 
     if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_att > 0)

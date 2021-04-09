@@ -53,6 +53,7 @@ public:
 
     float getElementalMultiplier(int element);
     void applyStatusEffect(std::string se);
+    void cureAllStatusEffects();
 
     StatusEffectModel * getStatusEffectModel();
 

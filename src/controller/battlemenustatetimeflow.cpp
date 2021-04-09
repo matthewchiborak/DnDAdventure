@@ -91,14 +91,18 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
             {
                 if(model->getEnemies()->at(i)->getCastingAttack()->getMultitarget() == 1)
                 {
+                    model->incrementPartyGauge(false);
                     model->applyAttackAllAllies(model->getEnemies()->at(i), model->getEnemies()->at(i)->getCastingAttack());
                 }
                 else if(model->getEnemies()->at(i)->getCastingAttack()->getMultitarget() == 2)
                 {
+                    model->incrementPartyGauge(false);
                     model->applyAttackAllEnemies(model->getEnemies()->at(i), model->getEnemies()->at(i)->getCastingAttack());
                 }
                 else
                 {
+                    model->incrementPartyGauge(false);
+
                     if(!model->getEnemies()->at(i)->getAttackTargetAlly())
                     {
                         model->applyAttack(model->getEnemies()->at(i),
@@ -118,6 +122,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
                 if(poiDam != 0)
                     model->addAboveHeadBattleMessage(true, i, "Hurt", std::to_string(-1 * poiDam), 5000);
                 model->getEnemies()->at(i)->setTimeLinePos(0);
+
             }
         }
     }
@@ -171,6 +176,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
             }
             model->getCharacters()->at(0)->changeCurrentMP(-1 * model->getCharacters()->at(0)->getCastingAttack()->getMpcost());
             model->getCharacters()->at(0)->stopCasting();
+            model->incrementPartyGauge(true);
         }
         int poiDam = model->getCharacters()->at(0)->justGotToEndOfTimeLine();
         if(poiDam != 0)
@@ -206,6 +212,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
                                        );
                 }
             }
+            model->incrementPartyGauge(true);
             model->getCharacters()->at(1)->changeCurrentMP(-1 * model->getCharacters()->at(1)->getCastingAttack()->getMpcost());
             model->getCharacters()->at(1)->stopCasting();
         }
@@ -272,6 +279,19 @@ void BattleMenuStateTimeFlow::drawStatusEffects(std::vector<DrawInformation> * i
     if(model->getCharacters()->at(1)->getStatusEffectModel()->guard)
     {
         DrawInformation port1(250, -275, 50, 50, "Guard", false);
+        items->push_back(port1);
+    }
+
+    //
+
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->overdrive)
+    {
+        DrawInformation port1(-250, -275, 50, 50, "Overdrive", false);
+        items->push_back(port1);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->overdrive)
+    {
+        DrawInformation port1(300, -275, 50, 50, "Overdrive", false);
         items->push_back(port1);
     }
 

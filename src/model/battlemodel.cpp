@@ -50,8 +50,10 @@ void BattleModel::clear()
     delete temp;
 }
 
-void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput)
+void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue)
 {
+    this->partyGaugeValue = partyGaugeValue;
+
     for(int i = 0; i < charactersInput->size(); i++)
     {
         PlayerCharacterStatsBattle * temp;
@@ -100,7 +102,6 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     DrawInformation timeline(-600, -70, 1200, 20, "TimeLine", false);
     items->push_back(timeline);
 
-    //TODO get a background into the board file? Or encounter file?
     if(characters.at(0)->getCurrentHealth() > 0)
     {
         DrawInformation player1(-300, 100, 200, 200, characters.at(0)->getSpriteKey(), false);
@@ -161,10 +162,12 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     items->push_back(menuBG);
 
     //Party guage
-    DrawInformation pg(-400, -395, 50, 270, "PartyGauge", false);
+    DrawInformation pg(-400, -395, 50, 270*((float)(*partyGaugeValue)/1000.f), "PartyGauge", false);
     items->push_back(pg);
     DrawInformation pgtop(-400, -395, 50, 270, "PartyGaugeTop", false);
     items->push_back(pgtop);
+    DrawInformation pgmarker(-450, -395 + ((270/4) * ((*partyGaugeValue)/250)), 40, 4, "GaugeMarker", false);
+    items->push_back(pgmarker);
 
     //Top Text Box
     elapsed_millies = theTimeNow - timeOfLastEvent;
@@ -915,6 +918,39 @@ void BattleModel::addAboveHeadBattleMessage(bool enemy, int index, std::string k
                                       );
         aboveHeadBattleMessagesText.push_back(newMes);
     }
+}
+
+void BattleModel::incrementPartyGauge(bool isAttacking)
+{
+    if(isAttacking)
+        (*partyGaugeValue) = (*partyGaugeValue) + partyGaugeIncrementAttack;
+    else
+        (*partyGaugeValue) = (*partyGaugeValue) + partyGaugeIncrementHit;
+
+    if((*partyGaugeValue) > 1000)
+        (*partyGaugeValue) = 1000;
+
+}
+
+int BattleModel::getPartyGaugeValue()
+{
+    return (*partyGaugeValue);
+}
+
+void BattleModel::changePartyGaugeValue(int amount)
+{
+    (*partyGaugeValue) = (*partyGaugeValue) + amount;
+
+    if((*partyGaugeValue) < 0)
+        (*partyGaugeValue) = 0;
+    if((*partyGaugeValue) > 1000)
+        (*partyGaugeValue) = 1000;
+}
+
+void BattleModel::activateSuper(int focusCharacter)
+{
+    AttackModel superAttack("Attack,Super_Attack,1,0," + std::to_string(characters.at(focusCharacter)->getLevel() * 50) + ",100,Attack_All_Enemies,0,0,None,1");
+    applyAttackAllEnemies(characters.at(focusCharacter), &superAttack);
 }
 
 void BattleModel::checkIfEnemiesAreDead()

@@ -34,6 +34,9 @@ int PlayerCharacterStatsBattle::getMaxHealth()
 
 int PlayerCharacterStatsBattle::getAttack()
 {
+    if(statusEffectModel.overdrive)
+        return stats->getAttack() * 2.f;
+
     if(statusEffectModel.SE_att != 0)
         return (1.f + (statusEffectModel.SE_att * 0.25f)) * stats->getAttack();
 
@@ -53,6 +56,9 @@ int PlayerCharacterStatsBattle::getDefence()
 
 int PlayerCharacterStatsBattle::getMagicAttack()
 {
+    if(statusEffectModel.overdrive)
+        return stats->getMagicAttack() * 2.f;
+
     if(statusEffectModel.SE_magic != 0)
         return (1.f + (statusEffectModel.SE_magic * 0.25f)) * stats->getMagicAttack();
 
@@ -72,6 +78,9 @@ int PlayerCharacterStatsBattle::getMagicDefence()
 
 int PlayerCharacterStatsBattle::getSpeed()
 {
+    if(statusEffectModel.overdrive)
+        return stats->getSpeed() * 2.f;
+
     if(statusEffectModel.sleep)
         return 0;
 
@@ -217,6 +226,11 @@ float PlayerCharacterStatsBattle::getElementalMultiplier(int element)
 void PlayerCharacterStatsBattle::applyStatusEffect(std::string se)
 {
     statusEffectModel.applyStatusEffect(se);
+}
+
+void PlayerCharacterStatsBattle::cureAllStatusEffects()
+{
+    statusEffectModel.cureAllNegativeStatusEffects();
 }
 
 StatusEffectModel *PlayerCharacterStatsBattle::getStatusEffectModel()

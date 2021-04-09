@@ -9,6 +9,7 @@ public:
     StatusEffectModel();
 
     void applyStatusEffect(std::string se);
+    void cureAllNegativeStatusEffects();
 
     void applyTime(float t);
 
@@ -34,6 +35,10 @@ public:
     int magicCount = 0;
     int magicDefenceCount = 0;
     int speedCount = 0;
+
+    bool overdrive = false;
+    const int overdriveDuration = 20000;
+    int overdriveCount = 0;
 };
 
 #endif // STATUSEFFECTMODEL_H

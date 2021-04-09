@@ -251,20 +251,17 @@ void BattleMenuStateAttack::drawEnemyStatusEffect(std::vector<DrawInformation> *
         if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_att > 0)
         {
             DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEAttackUp", false);
-            qDebug() << SEAttUp.x << enemyStatusCount;
             items->push_back(SEAttUp);
         }
         if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_att < 0)
         {
             DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEAttackDown", false);
             items->push_back(SEAttUp);
-             qDebug() << SEAttUp.x << enemyStatusCount;
         }
         if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_def > 0)
         {
             DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEDefenceUp", false);
             items->push_back(SEAttUp);
-             qDebug() << SEAttUp.x << enemyStatusCount << "?";
         }
         if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_def < 0)
         {
@@ -324,20 +321,17 @@ void BattleMenuStateAttack::drawEnemyStatusEffect(std::vector<DrawInformation> *
         if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_att > 0)
         {
             DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEAttackUp", false);
-            qDebug() << SEAttUp.x << enemyStatusCount;
             items->push_back(SEAttUp);
         }
         if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_att < 0)
         {
             DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEAttackDown", false);
             items->push_back(SEAttUp);
-             qDebug() << SEAttUp.x << enemyStatusCount;
         }
         if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_def > 0)
         {
             DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEDefenceUp", false);
             items->push_back(SEAttUp);
-             qDebug() << SEAttUp.x << enemyStatusCount << "?";
         }
         if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_def < 0)
         {
