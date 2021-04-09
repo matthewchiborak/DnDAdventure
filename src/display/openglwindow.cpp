@@ -46,6 +46,7 @@ void OpenGLWindow::paintGL()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
 
+    QColor theColor(0, 0, 0);
     QPainter p(this);
     p.setFont(font);
     p.setBrush(m_brush);
@@ -66,6 +67,13 @@ void OpenGLWindow::paintGL()
         //Text items
         if(itemsToDraw.at(i).text != "")
         {
+            theColor.setRed(itemsToDraw.at(i).r);
+            theColor.setGreen(itemsToDraw.at(i).g);
+            theColor.setBlue(itemsToDraw.at(i).b);
+            //m_brush.setColor(theColor);
+            QPen thePen(theColor);
+            p.setPen(thePen);
+
             if(!itemsToDraw.at(i).isLeftAlign)
             {
                 font.setPixelSize(itemsToDraw.at(i).fontSize);

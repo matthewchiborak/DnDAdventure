@@ -246,73 +246,149 @@ void BattleMenuStateAttack::drawEnemyStatusEffect(std::vector<DrawInformation> *
 
     int enemyStatusCount = 1;
 
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_att > 0)
+    if(!currentTargetAllies)
     {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEAttackUp", false);
-        qDebug() << SEAttUp.x << enemyStatusCount;
-        items->push_back(SEAttUp);
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_att > 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEAttackUp", false);
+            qDebug() << SEAttUp.x << enemyStatusCount;
+            items->push_back(SEAttUp);
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_att < 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEAttackDown", false);
+            items->push_back(SEAttUp);
+             qDebug() << SEAttUp.x << enemyStatusCount;
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_def > 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEDefenceUp", false);
+            items->push_back(SEAttUp);
+             qDebug() << SEAttUp.x << enemyStatusCount << "?";
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_def < 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEDefenceDown", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_magic > 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicUp", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_magic < 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicDown", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_magicDef > 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicDefenceUp", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_magicDef < 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicDefenceDown", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_speed > 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEHaste", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_speed < 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESlow", false);
+            items->push_back(SEAttUp);
+        }
+        /////////////////
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->poison)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEPoison", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->sleep)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESleep", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->silenced)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESilence", false);
+            items->push_back(SEAttUp);
+        }
     }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_att < 0)
+    else
     {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEAttackDown", false);
-        items->push_back(SEAttUp);
-         qDebug() << SEAttUp.x << enemyStatusCount;
-    }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_def > 0)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEDefenceUp", false);
-        items->push_back(SEAttUp);
-         qDebug() << SEAttUp.x << enemyStatusCount << "?";
-    }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_def < 0)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEDefenceDown", false);
-        items->push_back(SEAttUp);
-    }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_magic > 0)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicUp", false);
-        items->push_back(SEAttUp);
-    }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_magic < 0)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicDown", false);
-        items->push_back(SEAttUp);
-    }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_magicDef > 0)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicDefenceUp", false);
-        items->push_back(SEAttUp);
-    }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_magicDef < 0)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicDefenceDown", false);
-        items->push_back(SEAttUp);
-    }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_speed > 0)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEHaste", false);
-        items->push_back(SEAttUp);
-    }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->SE_speed < 0)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESlow", false);
-        items->push_back(SEAttUp);
-    }
-    /////////////////
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->poison)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEPoison", false);
-        items->push_back(SEAttUp);
-    }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->sleep)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESleep", false);
-        items->push_back(SEAttUp);
-    }
-    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->silenced)
-    {
-        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESilence", false);
-        items->push_back(SEAttUp);
+        //Allies
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_att > 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEAttackUp", false);
+            qDebug() << SEAttUp.x << enemyStatusCount;
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_att < 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEAttackDown", false);
+            items->push_back(SEAttUp);
+             qDebug() << SEAttUp.x << enemyStatusCount;
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_def > 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEDefenceUp", false);
+            items->push_back(SEAttUp);
+             qDebug() << SEAttUp.x << enemyStatusCount << "?";
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_def < 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEDefenceDown", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_magic > 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicUp", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_magic < 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicDown", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_magicDef > 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicDefenceUp", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_magicDef < 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEMagicDefenceDown", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_speed > 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEHaste", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->SE_speed < 0)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESlow", false);
+            items->push_back(SEAttUp);
+        }
+        /////////////////
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->poison)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEPoison", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->sleep)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESleep", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->silenced)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESilence", false);
+            items->push_back(SEAttUp);
+        }
     }
 }

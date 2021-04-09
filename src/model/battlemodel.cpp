@@ -7,6 +7,7 @@
 #include "../controller/battlemenustatetimeflow.h"
 #include "playercharacterstatsbattle.h"
 #include "attackmodel.h"
+#include "../display/aboveheadbattlemessage.h"
 
 #include <QDir>
 #include <QDebug>
@@ -173,6 +174,9 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
         items->push_back(topTextBox);
     }
 
+    for(int i = 0; i < aboveHeadBattleMessages.size(); i++)
+        items->push_back(aboveHeadBattleMessages.at(i));
+
     //Draw the dynamic parts of the menu that arn't static
     battleMenuState->drawBattleMenu(items);
 
@@ -198,7 +202,8 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     DrawInformation fleeText(100, 837, 200, 75, "", false, "Flee", true, 36);
     items->push_back(fleeText);
 
-
+    for(int i = 0; i < aboveHeadBattleMessagesText.size(); i++)
+        items->push_back(aboveHeadBattleMessagesText.at(i));
 
 }
 
@@ -212,6 +217,23 @@ void BattleModel::passTime(float value)
     battleMenuState = battleMenuState->passTime(value);
     if(temp != battleMenuState)
         delete temp;
+
+    for(int i = 0; i < aboveHeadBattleMessages.size(); i++)
+    {
+        if(aboveHeadBattleMessages.at(i).applyTime())
+        {
+            aboveHeadBattleMessages.erase(aboveHeadBattleMessages.begin() + i);
+            i--;
+        }
+    }
+    for(int i = 0; i < aboveHeadBattleMessagesText.size(); i++)
+    {
+        if(aboveHeadBattleMessagesText.at(i).applyTime())
+        {
+            aboveHeadBattleMessagesText.erase(aboveHeadBattleMessagesText.begin() + i);
+            i--;
+        }
+    }
 
     checkIfEnemiesAreDead();
 }
@@ -283,7 +305,10 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
 
     if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
     {
+
         displayMessage(attacker->getName() + "'s attack misses...");
+        if(defender->getCurrentHealth() > 0)
+            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Miss", "", 5000);
         return;
     }
 
@@ -330,14 +355,19 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
         damage = 0;
 
     defender->changeHealth(-1 * damage);
+    if(damage > 0)
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000);
+    if(damage < 0)
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000);
     defender->applyStatusEffect(attack->getAdditionalEffect());
+    addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
 
     //Try interrupt
     if(damage > 0)
     {
         if(defender->tryInterrupt(500))
         {
-
+            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Interrupt", "", 5000);
         }
     }
 
@@ -350,6 +380,8 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
     if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
     {
         displayMessage(attacker->getName() + "'s attack misses...");
+        if(defender->getCurrentHealth() > 0)
+            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Miss", "", 5000);
         return;
     }
 
@@ -393,7 +425,12 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
     }
 
     defender->changeCurrentHealth(-1 * damage);
+    if(damage > 0)
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000);
+    if(damage < 0)
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000);
     defender->applyStatusEffect(attack->getAdditionalEffect());
+    addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
 
     //Try interrupt
     if(damage > 0)
@@ -410,6 +447,8 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
                 defender->stopCasting();
                 timelineP2Pos -= 500;
             }
+
+            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Interrupt", "", 5000);
         }
     }
 
@@ -423,6 +462,8 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
     if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
     {
         displayMessage(attacker->getName() + "'s attack misses...");
+        if(defender->getCurrentHealth() > 0)
+            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Miss", "", 5000);
         return;
     }
 
@@ -466,7 +507,13 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
     }
 
     defender->changeCurrentHealth(-1 * damage);
+    if(damage > 0)
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000);
+    if(damage < 0)
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Heal", std::to_string(-1 * damage), 5000);
+
     defender->applyStatusEffect(attack->getAdditionalEffect());
+    addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
 
     //Try interrupt
     if(damage > 0)
@@ -483,6 +530,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
                 defender->stopCasting();
                 timelineP2Pos -= 500;
             }
+            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Interrupt", "", 5000);
         }
     }
 }
@@ -494,6 +542,8 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
     if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
     {
         displayMessage(attacker->getName() + "'s attack misses...");
+        if(defender->getCurrentHealth() > 0)
+            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Miss", "", 5000);
         return;
     }
 
@@ -540,14 +590,20 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
         damage = 0;
 
     defender->changeHealth(-1 * damage);
+    if(damage > 0)
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000);
+    if(damage < 0)
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1 * damage), 5000);
+
     defender->applyStatusEffect(attack->getAdditionalEffect());
+    addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
 
     //Try interrupt
     if(damage > 0)
     {
         if(defender->tryInterrupt(500))
         {
-
+            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Interrupt", "", 5000);
         }
     }
 }
@@ -556,13 +612,16 @@ void BattleModel::applyAttackAllEnemies(PlayerCharacterStatsBattle * attacker, A
 {
     for(int i = 0; i < enemies.size(); i++)
     {
+        attacker->setTarget(i);
         applyAttack(attacker, enemies.at(i), attack);
     }
 }
 
 void BattleModel::applyAttackAllAllies(PlayerCharacterStatsBattle * attacker, AttackModel *attack)
 {
+    attacker->setTarget(0);
     applyAttack(attacker, characters.at(0), attack);
+    attacker->setTarget(1);
     applyAttack(attacker, characters.at(1), attack);
 }
 
@@ -570,13 +629,16 @@ void BattleModel::applyAttackAllEnemies(EnemyModel *attacker, AttackModel *attac
 {
     for(int i = 0; i < enemies.size(); i++)
     {
+        attacker->setTarget(i);
         applyAttack(attacker, enemies.at(i), attack);
     }
 }
 
 void BattleModel::applyAttackAllAllies(EnemyModel *attacker, AttackModel *attack)
 {
+    attacker->setTarget(0);
     applyAttack(attacker, characters.at(0), attack);
+    attacker->setTarget(1);
     applyAttack(attacker, characters.at(1), attack);
 }
 
@@ -675,6 +737,184 @@ void BattleModel::forceClearDisplayMessage()
     auto nowTime = std::chrono::system_clock::now().time_since_epoch();
     auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(nowTime).count();
     timeOfLastEvent =(millis) - durationOfMessage;
+}
+
+void BattleModel::addAboveHeadBattleMessage(bool enemy, int index, std::string key, std::string text, int duration)
+{
+    duration = 1000;
+
+    int textX;
+    int textY;
+    int textW=200;
+    int textH=75;
+
+    if(enemy)
+    {
+        if(index == 0)
+        {
+            textX = 700+300;
+            textY = 300+50;
+        }
+        else if(index == 1)
+        {
+            textX = 700+100;
+            textY = 200+200;
+        }
+        else if(index == 2)
+        {
+            textX = 700+500;
+            textY = 200+200;
+        }
+        else if(index == 3)
+        {
+            textX = 700+100;
+            textY = 200+0;
+        }
+        else if(index == 4)
+        {
+            textX = 700+500;
+            textY = 200+0;
+        }
+    }
+    else
+    {
+        if(index == 0)
+        {
+            textX = 450;
+            textY = 250;
+        }
+        else if(index == 1)
+        {
+            textX = 250;
+            textY = 350;
+        }
+    }
+
+
+
+    if(key == "Miss")
+    {
+        AboveHeadBattleMessage newMes(duration,
+                                      textX,
+                                      textY,
+                                      textW,
+                                      textH,
+                                      "",
+                                      false,
+                                      "MISS"
+                                      );
+        aboveHeadBattleMessagesText.push_back(newMes);
+    }
+    else if(key == "Hurt")
+    {
+        AboveHeadBattleMessage newMes(duration,
+                                      textX,
+                                      textY,
+                                      textW,
+                                      textH,
+                                      "",
+                                      false,
+                                      text,
+                                      false,
+                                      48.f,
+                                      255
+                                      );
+        aboveHeadBattleMessagesText.push_back(newMes);
+    }
+    else if(key == "Heal")
+    {
+        AboveHeadBattleMessage newMes(duration,
+                                      textX,
+                                      textY,
+                                      textW,
+                                      textH,
+                                      "",
+                                      false,
+                                      text,
+                                      false,
+                                      48.f,
+                                      0,
+                                      255
+                                      );
+        aboveHeadBattleMessagesText.push_back(newMes);
+    }
+    else if(key == "Interrupt")
+    {
+        AboveHeadBattleMessage newMes(2000,
+                                      textX,
+                                      textY+75,
+                                      textW,
+                                      textH,
+                                      "",
+                                      false,
+                                      "INTERRUPT",
+                                      false,
+                                      36,
+                                      120,120,120
+                                      );
+        aboveHeadBattleMessagesText.push_back(newMes);
+    }
+    else if(key == "Poison"
+            || key == "Sleep"
+            || key == "Silence"
+            )
+    {
+        AboveHeadBattleMessage newMes(2000,
+                                      textX,
+                                      textY-75,
+                                      textW,
+                                      textH,
+                                      "",
+                                      false,
+                                      key,
+                                      false,
+                                      36,
+                                      128,0,128
+                                      );
+        aboveHeadBattleMessagesText.push_back(newMes);
+    }
+    else if(key == "AttackUp"
+            || key == "DefenceUp"
+            || key == "MagicUp"
+            || key == "MagicDefenceUp"
+            || key == "Haste"
+            )
+    {
+        AboveHeadBattleMessage newMes(2000,
+                                      textX,
+                                      textY-75,
+                                      textW,
+                                      textH,
+                                      "",
+                                      false,
+                                      key,
+                                      false,
+                                      36,
+                                      0,255,255
+                                      );
+        aboveHeadBattleMessagesText.push_back(newMes);
+    }
+    else if(key == "AttackDown"
+            || key == "DefenceDown"
+            || key == "MagicDown"
+            || key == "MagicDefenceDown"
+            || key == "Slow"
+            )
+    {
+        AboveHeadBattleMessage newMes(2000,
+                                      textX,
+                                      textY-75,
+                                      textW,
+                                      textH,
+                                      "",
+                                      false,
+                                      key,
+                                      false,
+                                      36,
+                                      255,0,0
+                                      );
+        aboveHeadBattleMessagesText.push_back(newMes);
+    }
 }
 
 void BattleModel::checkIfEnemiesAreDead()

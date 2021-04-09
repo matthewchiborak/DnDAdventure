@@ -13,7 +13,7 @@ public:
     PlayerCharacterStatsBattle(PlayerCharacterStats * characterInfo);
 
     void applyTime(float t);
-    void justGotToEndOfTimeLine();
+    int justGotToEndOfTimeLine();
 
     int getCurrentHealth();
     int getMaxHealth();
@@ -48,6 +48,8 @@ public:
     AttackModel * getCastingAttack();
     int getAttackTarget();
     bool getIsTargetAllies();
+
+    void setTarget(int value);
 
     float getElementalMultiplier(int element);
     void applyStatusEffect(std::string se);

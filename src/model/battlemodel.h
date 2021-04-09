@@ -5,6 +5,7 @@
 #include <string>
 #include <queue>
 #include "../controller/battlemenustate.h"
+#include "../display/aboveheadbattlemessage.h"
 
 class PlayerCharacterStats;
 class DrawInformation;
@@ -12,6 +13,7 @@ class EnemyModel;
 class AttackModel;
 class EncounterFactory;
 class PlayerCharacterStatsBattle;
+
 
 class BattleModel
 {
@@ -66,6 +68,8 @@ public:
     void displayMessage(std::string message);
     void forceClearDisplayMessage();
 
+    void addAboveHeadBattleMessage(bool enemy, int index, std::string key, std::string text, int duration);
+
 private:
     //factory for building the enounter
     EncounterFactory * encounterFact;
@@ -92,6 +96,9 @@ private:
 
     bool battleIsDone = false;
     bool gameOver = false;
+
+    std::vector<AboveHeadBattleMessage> aboveHeadBattleMessages;
+    std::vector<AboveHeadBattleMessage> aboveHeadBattleMessagesText;
 
     void checkIfEnemiesAreDead();
 };

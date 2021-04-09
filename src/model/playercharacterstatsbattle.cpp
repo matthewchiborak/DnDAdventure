@@ -10,10 +10,16 @@ void PlayerCharacterStatsBattle::applyTime(float t)
     statusEffectModel.applyTime(t);
 }
 
-void PlayerCharacterStatsBattle::justGotToEndOfTimeLine()
+int PlayerCharacterStatsBattle::justGotToEndOfTimeLine()
 {
+    int totalDamnage = 0;
+
     if(statusEffectModel.poison)
-        changeCurrentHealth(-1 * statusEffectModel.poisonDamagePercentagePerAction * getMaxHealth());
+       totalDamnage = (-1 * statusEffectModel.poisonDamagePercentagePerAction * getMaxHealth());
+
+    changeCurrentHealth(totalDamnage);
+
+    return totalDamnage;
 }
 
 int PlayerCharacterStatsBattle::getCurrentHealth()
@@ -196,6 +202,11 @@ int PlayerCharacterStatsBattle::getAttackTarget()
 bool PlayerCharacterStatsBattle::getIsTargetAllies()
 {
     return attackTargetAllies;
+}
+
+void PlayerCharacterStatsBattle::setTarget(int value)
+{
+    attackTarget = value;
 }
 
 float PlayerCharacterStatsBattle::getElementalMultiplier(int element)

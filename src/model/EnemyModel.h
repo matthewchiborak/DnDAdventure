@@ -16,7 +16,7 @@ public:
     EnemyModel();
 
     void applyTime(float t);
-    void justGotToEndOfTimeLine();
+    int justGotToEndOfTimeLine();
 
     void addAttack();
 
@@ -70,6 +70,8 @@ public:
     StatusEffectModel * getStatusEffectModel();
 
     bool tryInterrupt(float amount);
+
+    void setTarget(int value);
 
 private:
     int level;

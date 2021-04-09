@@ -23,10 +23,16 @@ void EnemyModel::applyTime(float t)
     statusEffectModel.applyTime(t);
 }
 
-void EnemyModel::justGotToEndOfTimeLine()
+int EnemyModel::justGotToEndOfTimeLine()
 {
+    int totalDamnage = 0;
+
     if(statusEffectModel.poison)
-        changeHealth(-1 * statusEffectModel.poisonDamagePercentagePerAction * getMaxHealth());
+         totalDamnage = (-1 * statusEffectModel.poisonDamagePercentagePerAction * getMaxHealth());
+
+    changeHealth(totalDamnage);
+
+    return totalDamnage;
 }
 
 void EnemyModel::addWeakness(int value)
@@ -293,4 +299,9 @@ bool EnemyModel::tryInterrupt(float amount)
     timelinePos -= amount;
 
     return true;
+}
+
+void EnemyModel::setTarget(int value)
+{
+    attackTarget = value;
 }

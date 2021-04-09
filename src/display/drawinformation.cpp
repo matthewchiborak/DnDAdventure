@@ -1,6 +1,6 @@
 #include "drawinformation.h"
 
-DrawInformation::DrawInformation(int x, int y, int w, int h, std::string key, bool worldRel, std::string text, bool isLeftAlign, float fontSize)
+DrawInformation::DrawInformation(int x, int y, int w, int h, std::string key, bool worldRel, std::string text, bool isLeftAlign, float fontSize, int r, int g, int b)
 {
     this->x = x;
     this->y = y;
@@ -11,4 +11,7 @@ DrawInformation::DrawInformation(int x, int y, int w, int h, std::string key, bo
     this->text = text;
     this->fontSize = fontSize;
     this->isLeftAlign = isLeftAlign;
+    this->r = r;
+    this->g = g;
+    this->b = b;
 }

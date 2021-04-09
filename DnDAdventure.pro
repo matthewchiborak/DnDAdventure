@@ -25,6 +25,7 @@ SOURCES += \
     src/controller/pausemenustate.cpp \
     src/controller/pausemenustatemain.cpp \
     src/controller/pausemenustateparty.cpp \
+    src/display/aboveheadbattlemessage.cpp \
     src/display/abstractview.cpp \
     src/display/drawinformation.cpp \
     src/display/fglut.cpp \
@@ -83,6 +84,7 @@ HEADERS += \
     src/controller/pausemenustate.h \
     src/controller/pausemenustatemain.h \
     src/controller/pausemenustateparty.h \
+    src/display/aboveheadbattlemessage.h \
     src/display/abstractview.h \
     src/display/drawinformation.h \
     src/display/fglut.h \
