@@ -87,8 +87,6 @@ void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *cha
         enemies.at(i)->setTimeLinePos((rand()%500) * ((float)enemies.at(i)->getSpeed() / (float)maxSpeed));
     }
 
-    this->characters.at(0)->applyStatusEffect("Silence");
-    this->characters.at(1)->applyStatusEffect("Sleep");
 }
 
 void BattleModel::draw(std::vector<DrawInformation> *items)
@@ -276,7 +274,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
 {
     int damage = 0;
 
-    if(rand()%100 > attack->getAccuracy())
+    if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
     {
         displayMessage(attacker->getName() + "'s attack misses...");
         return;
@@ -327,7 +325,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
 {
     int damage = 0;
 
-    if(rand()%100 > attack->getAccuracy())
+    if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
     {
         displayMessage(attacker->getName() + "'s attack misses...");
         return;
@@ -398,14 +396,29 @@ void BattleModel::forceClearDisplayMessage()
 
 void BattleModel::checkIfEnemiesAreDead()
 {
+    if(battleIsDone)
+        return;
+
     int deadEnemyCount = 0;
 
-    for(int i = 0; i < enemies.size(); i++)
+    for(int i = 0; i < numberOfEnemies; i++)
     {
         if(enemies.at(i)->getCurrentHealth() <= 0)
             deadEnemyCount++;
     }
 
-    if(deadEnemyCount >= enemies.size())
+    if(deadEnemyCount >= numberOfEnemies)
+    {
+        int xpEarned = 0;
+        for(int i = 0; i < numberOfEnemies; i++)
+        {
+            xpEarned += enemies.at(i)->getXP();
+        }
+        for(int i = 0; i < characters.size(); i++)
+        {
+            characters.at(i)->changeXP(xpEarned);
+        }
+        displayMessage("VICTORY! Experience earned: " + std::to_string(xpEarned));
         battleIsDone = true;
+    }
 }

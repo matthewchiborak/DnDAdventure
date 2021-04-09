@@ -47,7 +47,7 @@ EnemyModel *EnemyFactory::createEnemy(std::string key)
         if(splits.at(0) == "Speed")
             newEnemy->setSpeed(std::stoi(splits.at(1)));
         if(splits.at(0) == "XP")
-            newEnemy->setSpeed(std::stoi(splits.at(1)));
+            newEnemy->setXP(std::stoi(splits.at(1)));
         if(splits.at(0) == "Sprite")
             newEnemy->setSpriteKey(splits.at(1));
         if(splits.at(0) == "Level")

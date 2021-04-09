@@ -8,6 +8,7 @@
 #include "../model/battlemodel.h"
 #include "../model/playercharacterstats.h"
 #include "../model/playercharacterstatsbattle.h"
+#include "battlemenustatemain.h"
 
 BattleMenuStateSwitch::BattleMenuStateSwitch(BattleModel *model)
     : BattleMenuState(model)
@@ -32,7 +33,7 @@ BattleMenuState *BattleMenuStateSwitch::enterMenu()
     model->getCharacters()->at(model->getFocusPartyMember()) = temp2;
     model->getCharacters()->at(2 + currentPos) = temp1;
 
-    return new BattleMenuStateTimeFlow(model);
+    return new BattleMenuStateMain(model);
 }
 
 BattleMenuState *BattleMenuStateSwitch::closeMenu()
