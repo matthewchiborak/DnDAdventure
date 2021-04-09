@@ -89,19 +89,30 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
 
             if(model->getEnemies()->at(i)->getTimeLinePos() >= 1200)
             {
-                if(!model->getEnemies()->at(i)->getAttackTargetAlly())
+                if(model->getEnemies()->at(i)->getCastingAttack()->getMultitarget() == 1)
                 {
-                    model->applyAttack(model->getEnemies()->at(i),
-                                       model->getCharacters()->at(model->getEnemies()->at(i)->getAttackTarget()),
-                                       model->getEnemies()->at(i)->getCastingAttack()
-                                       );
+                    model->applyAttackAllAllies(model->getEnemies()->at(i), model->getEnemies()->at(i)->getCastingAttack());
+                }
+                else if(model->getEnemies()->at(i)->getCastingAttack()->getMultitarget() == 2)
+                {
+                    model->applyAttackAllEnemies(model->getEnemies()->at(i), model->getEnemies()->at(i)->getCastingAttack());
                 }
                 else
                 {
-                    model->applyAttack(model->getEnemies()->at(i),
-                                       model->getEnemies()->at(model->getEnemies()->at(i)->getAttackTarget()),
-                                       model->getEnemies()->at(i)->getCastingAttack()
-                                       );
+                    if(!model->getEnemies()->at(i)->getAttackTargetAlly())
+                    {
+                        model->applyAttack(model->getEnemies()->at(i),
+                                           model->getCharacters()->at(model->getEnemies()->at(i)->getAttackTarget()),
+                                           model->getEnemies()->at(i)->getCastingAttack()
+                                           );
+                    }
+                    else
+                    {
+                        model->applyAttack(model->getEnemies()->at(i),
+                                           model->getEnemies()->at(model->getEnemies()->at(i)->getAttackTarget()),
+                                           model->getEnemies()->at(i)->getCastingAttack()
+                                           );
+                    }
                 }
                 model->getEnemies()->at(i)->justGotToEndOfTimeLine();
                 model->getEnemies()->at(i)->setTimeLinePos(0);
@@ -131,19 +142,30 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
     {
         if(model->getCharacters()->at(0)->getIsCasting())
         {
-            if(!model->getCharacters()->at(0)->getIsTargetAllies())
+            if(model->getCharacters()->at(0)->getCastingAttack()->getMultitarget() == 1)
             {
-                model->applyAttack(model->getCharacters()->at(0),
-                               model->getEnemies()->at(model->getCharacters()->at(0)->getAttackTarget()),
-                               model->getCharacters()->at(0)->getCastingAttack()
-                               );
+                model->applyAttackAllEnemies(model->getCharacters()->at(0), model->getCharacters()->at(0)->getCastingAttack());
+            }
+            else if(model->getCharacters()->at(0)->getCastingAttack()->getMultitarget() == 2)
+            {
+                model->applyAttackAllAllies(model->getCharacters()->at(0), model->getCharacters()->at(0)->getCastingAttack());
             }
             else
             {
-                model->applyAttack(model->getCharacters()->at(0),
-                               model->getCharacters()->at(model->getCharacters()->at(0)->getAttackTarget()),
-                               model->getCharacters()->at(0)->getCastingAttack()
-                               );
+                if(!model->getCharacters()->at(0)->getIsTargetAllies())
+                {
+                    model->applyAttack(model->getCharacters()->at(0),
+                                   model->getEnemies()->at(model->getCharacters()->at(0)->getAttackTarget()),
+                                   model->getCharacters()->at(0)->getCastingAttack()
+                                   );
+                }
+                else
+                {
+                    model->applyAttack(model->getCharacters()->at(0),
+                                   model->getCharacters()->at(model->getCharacters()->at(0)->getAttackTarget()),
+                                   model->getCharacters()->at(0)->getCastingAttack()
+                                   );
+                }
             }
             model->getCharacters()->at(0)->changeCurrentMP(-1 * model->getCharacters()->at(0)->getCastingAttack()->getMpcost());
             model->getCharacters()->at(0)->stopCasting();
@@ -155,19 +177,30 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
     {
         if(model->getCharacters()->at(1)->getIsCasting())
         {
-            if(!model->getCharacters()->at(1)->getIsTargetAllies())
+            if(model->getCharacters()->at(1)->getCastingAttack()->getMultitarget() == 1)
             {
-                model->applyAttack(model->getCharacters()->at(1),
-                                   model->getEnemies()->at(model->getCharacters()->at(1)->getAttackTarget()),
-                                   model->getCharacters()->at(1)->getCastingAttack()
-                                   );
+                model->applyAttackAllEnemies(model->getCharacters()->at(1), model->getCharacters()->at(1)->getCastingAttack());
+            }
+            else if(model->getCharacters()->at(1)->getCastingAttack()->getMultitarget() == 2)
+            {
+                model->applyAttackAllAllies(model->getCharacters()->at(1), model->getCharacters()->at(1)->getCastingAttack());
             }
             else
             {
-                model->applyAttack(model->getCharacters()->at(1),
-                                   model->getCharacters()->at(model->getCharacters()->at(1)->getAttackTarget()),
-                                   model->getCharacters()->at(1)->getCastingAttack()
-                                   );
+                if(!model->getCharacters()->at(1)->getIsTargetAllies())
+                {
+                    model->applyAttack(model->getCharacters()->at(1),
+                                       model->getEnemies()->at(model->getCharacters()->at(1)->getAttackTarget()),
+                                       model->getCharacters()->at(1)->getCastingAttack()
+                                       );
+                }
+                else
+                {
+                    model->applyAttack(model->getCharacters()->at(1),
+                                       model->getCharacters()->at(model->getCharacters()->at(1)->getAttackTarget()),
+                                       model->getCharacters()->at(1)->getCastingAttack()
+                                       );
+                }
             }
             model->getCharacters()->at(1)->changeCurrentMP(-1 * model->getCharacters()->at(1)->getCastingAttack()->getMpcost());
             model->getCharacters()->at(1)->stopCasting();

@@ -13,6 +13,7 @@ public:
     std::string next();
 
     static std::vector<std::string> splitString(std::string line, char delimeter);
+    static std::string replaceCharacter(std::string line, char before, char after);
 
 private:
     std::string fileName;

@@ -29,6 +29,31 @@ void EnemyModel::justGotToEndOfTimeLine()
         changeHealth(-1 * statusEffectModel.poisonDamagePercentagePerAction * getMaxHealth());
 }
 
+void EnemyModel::addWeakness(int value)
+{
+    weaknesses.push_back(value);
+}
+
+void EnemyModel::addHalfed(int value)
+{
+    halved.push_back(value);
+}
+
+void EnemyModel::addResistance(int value)
+{
+    resistances.push_back(value);
+}
+
+void EnemyModel::addImmunity(int value)
+{
+    immunities.push_back(value);
+}
+
+void EnemyModel::addAbsorbed(int value)
+{
+    absorbed.push_back(value);
+}
+
 void EnemyModel::setLevel(int level)
 {
     this->level = level;
@@ -169,6 +194,32 @@ void EnemyModel::changeHealth(int amount)
 
 float EnemyModel::getElementalMultiplier(int element)
 {
+    for(int i = 0; i < weaknesses.size(); i++)
+    {
+        if(weaknesses.at(i) == element)
+            return 2.f;
+    }
+    for(int i = 0; i < resistances.size(); i++)
+    {
+        if(resistances.at(i) == element)
+            return 0.25f;
+    }
+    for(int i = 0; i < halved.size(); i++)
+    {
+        if(halved.at(i) == element)
+            return 0.5f;
+    }
+    for(int i = 0; i < immunities.size(); i++)
+    {
+        if(immunities.at(i) == element)
+            return 0.0f;
+    }
+    for(int i = 0; i < absorbed.size(); i++)
+    {
+        if(absorbed.at(i) == element)
+            return -1.f;
+    }
+
     return 1.f;
 }
 

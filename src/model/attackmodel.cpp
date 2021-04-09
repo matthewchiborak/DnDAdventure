@@ -6,12 +6,12 @@ AttackModel::AttackModel(std::string info)
 {
     std::vector<std::string> split = FileReader::splitString(info, ',');
 
-    name = split.at(1);
+    name = FileReader::replaceCharacter(split.at(1), '_', ' ');
     castTime = std::stoi(split.at(2));
     mpcost = std::stoi(split.at(3));
     power = std::stoi(split.at(4));
     accuracy = std::stoi(split.at(5));
-    description = split.at(6);
+    description = FileReader::replaceCharacter(split.at(6), '_', ' ');
     attackType = std::stoi(split.at(7));
     element = std::stoi(split.at(8));
 
@@ -19,6 +19,13 @@ AttackModel::AttackModel(std::string info)
         additionalEffect = split.at(9);
     else
         additionalEffect = "None";
+
+    if(split.size() > 10)
+        multitarget = std::stoi(split.at(10));
+    else
+        multitarget = 0;
+
+
 }
 
 std::string AttackModel::getName()
@@ -72,4 +79,9 @@ std::string AttackModel::getAdditionalEffect()
 int AttackModel::getAccuracy()
 {
     return accuracy;
+}
+
+int AttackModel::getMultitarget()
+{
+    return multitarget;
 }

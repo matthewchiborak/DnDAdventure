@@ -35,7 +35,7 @@ EnemyModel *EnemyFactory::createEnemy(std::string key)
 //            baseMP = std::stoi(splits.at(1));
 //        }
         if(splits.at(0) == "Name")
-            newEnemy->setName(splits.at(1));
+            newEnemy->setName(FileReader::replaceCharacter(splits.at(1), '_', ' '));
         if(splits.at(0) == "Att")
             newEnemy->setAttack(std::stoi(splits.at(1)));
         if(splits.at(0) == "Def")
@@ -54,6 +54,16 @@ EnemyModel *EnemyFactory::createEnemy(std::string key)
             newEnemy->setLevel(std::stoi(splits.at(1)));
         if(splits.at(0) == "Attack")
             newEnemy->addAttack(new AttackModel(nextLine));
+        if(splits.at(0) == "Weak")
+            newEnemy->addWeakness(std::stoi(splits.at(1)));
+        if(splits.at(0) == "Res")
+            newEnemy->addResistance(std::stoi(splits.at(1)));
+        if(splits.at(0) == "Half")
+            newEnemy->addHalfed(std::stoi(splits.at(1)));
+        if(splits.at(0) == "Immune")
+            newEnemy->addImmunity(std::stoi(splits.at(1)));
+        if(splits.at(0) == "Absorb")
+            newEnemy->addAbsorbed(std::stoi(splits.at(1)));
     }
 
     return newEnemy;

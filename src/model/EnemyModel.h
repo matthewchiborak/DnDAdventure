@@ -20,6 +20,12 @@ public:
 
     void addAttack();
 
+    void addWeakness(int value);
+    void addHalfed(int value);
+    void addResistance(int value);
+    void addImmunity(int value);
+    void addAbsorbed(int value);
+
     void setLevel(int level);
     void setMaxHealth(int value);
     void setAttack(int value);
@@ -87,6 +93,12 @@ private:
     bool attackTargetAlly = false;
 
     StatusEffectModel statusEffectModel;
+
+    std::vector<int> weaknesses;
+    std::vector<int> resistances;
+    std::vector<int> immunities;
+    std::vector<int> halved;
+    std::vector<int> absorbed;
 };
 
 #endif

@@ -552,6 +552,34 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
     }
 }
 
+void BattleModel::applyAttackAllEnemies(PlayerCharacterStatsBattle * attacker, AttackModel *attack)
+{
+    for(int i = 0; i < enemies.size(); i++)
+    {
+        applyAttack(attacker, enemies.at(i), attack);
+    }
+}
+
+void BattleModel::applyAttackAllAllies(PlayerCharacterStatsBattle * attacker, AttackModel *attack)
+{
+    applyAttack(attacker, characters.at(0), attack);
+    applyAttack(attacker, characters.at(1), attack);
+}
+
+void BattleModel::applyAttackAllEnemies(EnemyModel *attacker, AttackModel *attack)
+{
+    for(int i = 0; i < enemies.size(); i++)
+    {
+        applyAttack(attacker, enemies.at(i), attack);
+    }
+}
+
+void BattleModel::applyAttackAllAllies(EnemyModel *attacker, AttackModel *attack)
+{
+    applyAttack(attacker, characters.at(0), attack);
+    applyAttack(attacker, characters.at(1), attack);
+}
+
 void BattleModel::checkIfNeedToSwapDeadCharacters()
 {
     if(characters.at(0)->getCurrentHealth() <= 0)

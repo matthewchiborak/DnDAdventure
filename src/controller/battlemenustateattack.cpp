@@ -114,6 +114,16 @@ BattleMenuState *BattleMenuStateAttack::enterMenu()
         return this;
     }
 
+    if(model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(((currentPosX) * 5) + (currentPosY))->getMultitarget() == 1
+            || model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(((currentPosX) * 5) + (currentPosY))->getMultitarget() == 2
+            )
+    {
+        model->getCharacters()->at(model->getFocusPartyMember())->beginCasting(((currentPosX) * 5) + (currentPosY), currentTarget,
+                              model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(((currentPosX) * 5) + (currentPosY))->getMultitarget() == 2
+                                                                               );
+        return new BattleMenuStateTimeFlow(model);
+    }
+
     isSelectingTarget = true;
 
     return this;

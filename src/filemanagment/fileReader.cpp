@@ -62,3 +62,20 @@ std::vector<std::string> FileReader::splitString(std::string line, char delimete
 
     return vect;
 }
+
+std::string FileReader::replaceCharacter(std::string line, char before, char after)
+{
+    std::string result = "";
+    for(int i = 0; i < line.size(); i++)
+    {
+        if(line.at(i) == before)
+        {
+            result.push_back(after);
+        }
+        else
+        {
+            result.push_back(line.at(i));
+        }
+    }
+    return result;
+}

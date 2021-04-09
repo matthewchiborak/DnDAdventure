@@ -52,6 +52,10 @@ public:
                      EnemyModel * defender,
                      AttackModel * attack
                      );
+    void applyAttackAllEnemies(PlayerCharacterStatsBattle * attacker, AttackModel * attack);
+    void applyAttackAllAllies(PlayerCharacterStatsBattle * attacker, AttackModel * attack);
+    void applyAttackAllEnemies(EnemyModel * attacker, AttackModel * attack);
+    void applyAttackAllAllies(EnemyModel * attacker, AttackModel * attack);
 
     void checkIfNeedToSwapDeadCharacters();
 
