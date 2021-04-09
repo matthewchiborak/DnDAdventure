@@ -18,6 +18,22 @@ EnemyModel::EnemyModel()
     this->timelinePos = 0;
 }
 
+void EnemyModel::applyTime(float t)
+{
+    if(statusEffectModel.sleep)
+    {
+        statusEffectModel.sleepCount += t;
+        if(statusEffectModel.sleepCount > statusEffectModel.sleepDuration)
+            statusEffectModel.sleep = false;
+    }
+}
+
+void EnemyModel::justGotToEndOfTimeLine()
+{
+    if(statusEffectModel.poison)
+        changeHealth(-1 * statusEffectModel.poisonDamagePercentagePerAction * getMaxHealth());
+}
+
 void EnemyModel::setLevel(int level)
 {
     this->level = level;
@@ -64,6 +80,11 @@ void EnemyModel::setName(std::string value)
     this->name = value;
 }
 
+void EnemyModel::setXP(int value)
+{
+    this->xp = value;
+}
+
 int EnemyModel::getLevel()
 {
     return level;
@@ -79,23 +100,46 @@ int EnemyModel::getMaxHealth()
 }
 int EnemyModel::getAttack()
 {
+    if(statusEffectModel.SE_att != 0)
+        return statusEffectModel.SE_att * 1.5f * attack;
+
     return attack;
 }
 int EnemyModel::getDefence()
 {
+    if(statusEffectModel.SE_def != 0)
+        return statusEffectModel.SE_def * 1.5f * defence;
+
     return defence;
 }
 int EnemyModel::getMagicAttack()
 {
+    if(statusEffectModel.SE_magic != 0)
+        return statusEffectModel.SE_magic * 1.5f * magicAttack;
+
     return magicAttack;
 }
 int EnemyModel::getMagicDefence()
 {
+    if(statusEffectModel.SE_magicDef != 0)
+        return statusEffectModel.SE_magicDef * 1.5f * magicDefence;
+
     return magicDefence;
 }
 int EnemyModel::getSpeed()
 {
+    if(statusEffectModel.sleep)
+        return 0;
+
+    if(statusEffectModel.SE_speed != 0)
+        return statusEffectModel.SE_speed * 1.5f * speed;
+
     return speed;
+}
+
+int EnemyModel::getXP()
+{
+    return xp;
 }
 
 std::string EnemyModel::getSpriteKey()
@@ -175,4 +219,14 @@ AttackModel *EnemyModel::getCastingAttack()
 int EnemyModel::getAttackTarget()
 {
     return attackTarget;
+}
+
+void EnemyModel::applyStatusEffect(std::string se)
+{
+    statusEffectModel.applyStatusEffect(se);
+}
+
+StatusEffectModel *EnemyModel::getStatusEffectModel()
+{
+    return &statusEffectModel;
 }

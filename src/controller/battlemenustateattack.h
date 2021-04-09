@@ -21,6 +21,8 @@ private:
     int currentTarget;
 
     bool isSelectingTarget = false;
+
+    void drawEnemyStatusEffect(std::vector<DrawInformation> * items);
 };
 
 #endif // BATTLEMENUSTATEATTACK_H

@@ -5,6 +5,22 @@ PlayerCharacterStatsBattle::PlayerCharacterStatsBattle(PlayerCharacterStats *cha
     this->stats = characterInfo;
 }
 
+void PlayerCharacterStatsBattle::applyTime(float t)
+{
+    if(statusEffectModel.sleep)
+    {
+        statusEffectModel.sleepCount += t;
+        if(statusEffectModel.sleepCount > statusEffectModel.sleepDuration)
+            statusEffectModel.sleep = false;
+    }
+}
+
+void PlayerCharacterStatsBattle::justGotToEndOfTimeLine()
+{
+    if(statusEffectModel.poison)
+        changeCurrentHealth(-1 * statusEffectModel.poisonDamagePercentagePerAction * getMaxHealth());
+}
+
 int PlayerCharacterStatsBattle::getCurrentHealth()
 {
     return stats->getCurrentHealth();
@@ -17,26 +33,44 @@ int PlayerCharacterStatsBattle::getMaxHealth()
 
 int PlayerCharacterStatsBattle::getAttack()
 {
+    if(statusEffectModel.SE_att != 0)
+        return statusEffectModel.SE_att * 1.5f * stats->getAttack();
+
     return stats->getAttack();
 }
 
 int PlayerCharacterStatsBattle::getDefence()
 {
+    if(statusEffectModel.SE_def != 0)
+        return statusEffectModel.SE_def * 1.5f * stats->getDefence();
+
     return stats->getDefence();
 }
 
 int PlayerCharacterStatsBattle::getMagicAttack()
 {
+    if(statusEffectModel.SE_magic != 0)
+        return statusEffectModel.SE_magic * 1.5f * stats->getMagicAttack();
+
     return stats->getMagicAttack();
 }
 
 int PlayerCharacterStatsBattle::getMagicDefence()
 {
+    if(statusEffectModel.SE_magicDef != 0)
+        return statusEffectModel.SE_magicDef * 1.5f * stats->getMagicDefence();
+
     return stats->getMagicDefence();
 }
 
 int PlayerCharacterStatsBattle::getSpeed()
 {
+    if(statusEffectModel.sleep)
+        return 0;
+
+    if(statusEffectModel.SE_speed != 0)
+        return statusEffectModel.SE_speed * 1.5f * stats->getSpeed();
+
     return stats->getSpeed();
 }
 
@@ -150,6 +184,16 @@ int PlayerCharacterStatsBattle::getAttackTarget()
 float PlayerCharacterStatsBattle::getElementalMultiplier(int element)
 {
     return 1;
+}
+
+void PlayerCharacterStatsBattle::applyStatusEffect(std::string se)
+{
+    statusEffectModel.applyStatusEffect(se);
+}
+
+StatusEffectModel *PlayerCharacterStatsBattle::getStatusEffectModel()
+{
+    return &statusEffectModel;
 }
 
 

@@ -58,6 +58,7 @@ SOURCES += \
     src/model/modelconcrete.cpp \
     src/model/playercharacterstats.cpp \
     src/model/playercharacterstatsbattle.cpp \
+    src/model/statuseffectmodel.cpp \
     src/test/FileReaderTester.cpp \
     src/test/tester.cpp \
     src/testmain.cpp
@@ -115,6 +116,7 @@ HEADERS += \
     src/model/modelconcrete.h \
     src/model/playercharacterstats.h \
     src/model/playercharacterstatsbattle.h \
+    src/model/statuseffectmodel.h \
     src/test/FileReaderTester.h \
     src/test/tester.h \
     src/testmain.h

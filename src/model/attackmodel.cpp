@@ -10,9 +10,15 @@ AttackModel::AttackModel(std::string info)
     castTime = std::stoi(split.at(2));
     mpcost = std::stoi(split.at(3));
     power = std::stoi(split.at(4));
-    description = split.at(5);
-    attackType = std::stoi(split.at(6));
-    element = std::stoi(split.at(7));
+    accuracy = std::stoi(split.at(5));
+    description = split.at(6);
+    attackType = std::stoi(split.at(7));
+    element = std::stoi(split.at(8));
+
+    if(split.size() > 9)
+        additionalEffect = split.at(9);
+    else
+        additionalEffect = "None";
 }
 
 std::string AttackModel::getName()
@@ -56,4 +62,14 @@ int AttackModel::getAttackType()
 int AttackModel::getElement()
 {
     return element;
+}
+
+std::string AttackModel::getAdditionalEffect()
+{
+    return additionalEffect;
+}
+
+int AttackModel::getAccuracy()
+{
+    return accuracy;
 }

@@ -16,6 +16,8 @@ public:
 
 private:
     int currentPos = 4;
+
+    void drawStatusEffects(std::vector<DrawInformation> *items);
 };
 
 #endif // BATTLEMENUSTATEMAIN_H

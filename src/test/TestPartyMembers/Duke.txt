@@ -16,5 +16,5 @@ IVDef,0
 IVMAtt,31
 IVMDef,31
 IVSpeed,16
-Attack,DukeAttack1,200,0,10,Basic Attack5,0,0
-Attack,DukeAttack2,200,20,10,Basic Attack7,0,0
+Attack,DukeAttack1,200,0,10,100,Basic Attack5,0,0
+Attack,DukeAttack2,200,20,10,100,Basic Attack7,0,0

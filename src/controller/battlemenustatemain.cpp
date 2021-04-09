@@ -60,6 +60,8 @@ void BattleMenuStateMain::drawBattleMenu(std::vector<DrawInformation> *items)
     DrawInformation port2(250, -275, 150, 150, model->getCharacters()->at(1)->getMenuSpriteKey(), false);
     items->push_back(port2);
 
+    drawStatusEffects(items);
+
     //Default menu text
     DrawInformation p1Name(625, 620, 300, 75, "", false, model->getCharacters()->at(0)->getName(), true);
     items->push_back(p1Name);
@@ -88,4 +90,146 @@ void BattleMenuStateMain::drawBattleMenu(std::vector<DrawInformation> *items)
 
     DrawInformation mainCursor(50, 637 + ((4 - currentPos) * 50), 75, 75, "", false, ">", true, 36);
     items->push_back(mainCursor);
+}
+
+void BattleMenuStateMain::drawStatusEffects(std::vector<DrawInformation> *items)
+{
+    int p1UpperStatusCount = 0;
+    int p1LowerStatusCount = 0;
+    int p2UpperStatusCount = 0;
+    int p2LowerStatusCount = 0;
+
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_att > 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEAttackUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_att < 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEAttackDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_def > 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEDefenceUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_def < 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEDefenceDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_magic > 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEMagicUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_magic < 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_magicDef > 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDefenceUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_magicDef < 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDefenceDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_speed > 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEHaste", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_speed < 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SESlow", false);
+        items->push_back(SEAttUp);
+    }
+    /////////////////
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->poison)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SEPoison", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->sleep)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SESleep", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->silenced)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SESilence", false);
+        items->push_back(SEAttUp);
+    }
+    ////////////////
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_att > 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEAttackUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_att < 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEAttackDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_def > 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEDefenceUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_def < 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEDefenceDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_magic > 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEMagicUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_magic < 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_magicDef > 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDefenceUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_magicDef < 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDefenceDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_speed > 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEHaste", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_speed < 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SESlow", false);
+        items->push_back(SEAttUp);
+    }
+    /////////////////
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->poison)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SEPoison", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->sleep)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SESleep", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->silenced)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SESilence", false);
+        items->push_back(SEAttUp);
+    }
 }

@@ -16,5 +16,5 @@ IVDef,31
 IVMAtt,16
 IVMDef,31
 IVSpeed,0
-Attack,AlluraAttack1,200,0,10,Basic Attack5,0,0
-Attack,AlluraAttack2,200,20,10,Basic Attack7,0,0
+Attack,AlluraAttack1,200,0,10,100,Basic Attack5,0,0
+Attack,AlluraAttack2,200,20,10,100,Basic Attack7,0,0

@@ -26,3 +26,16 @@ Enemy5TimeLine,Enemy5TimeLine.png
 TestBattleBG,TestBattleBG.jpeg
 PartyGaugeTop,PartyGaugeTop.png
 PartyGauge,PartyGauge.png
+SEAttackUp,SEAttackUp.png
+SEAttackDown,SEAttackDown.png
+SEDefenceUp,SEDefenceUp.png
+SEDefenceDown,SEDefenceDown.png
+SEMagicUp,SEMagicUp.png
+SEMagicDown,SEMagicDown.png
+SEMagicDefenceUp,SEMagicDefenceUp.png
+SEMagicDefenceDown,SEMagicDefenceDown.png
+SEHaste,SEHaste.png
+SESlow,SESlow.png
+SEPoison,SEPoison.png
+SESleep,SESleep.png
+SESilence,SESilence.png

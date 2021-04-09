@@ -48,6 +48,9 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
     float p1PosBefore = model->getP1TimeLinePos();
     float p2PosBefore = model->getP2TimeLinePos();
 
+    model->getCharacters()->at(0)->applyTime(elapsed_millies);
+    model->getCharacters()->at(1)->applyTime(elapsed_millies);
+
     if(!model->getCharacters()->at(0)->getIsCasting())
         model->setP1TimeLinePos(p1PosBefore + (model->getCharacters()->at(0)->getSpeed() * (elapsed_millies/100.f)));
     else
@@ -62,6 +65,8 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
     {
         if(model->getEnemies()->at(i)->getCurrentHealth() > 0)
         {
+            model->getEnemies()->at(i)->applyTime(elapsed_millies);
+
             float enPosBefore =  model->getEnemies()->at(i)->getTimeLinePos();
             if(!model->getEnemies()->at(i)->getIsCasting())
                 model->getEnemies()->at(i)->setTimeLinePos(enPosBefore + (model->getEnemies()->at(i)->getSpeed() * (elapsed_millies/100.f)));
@@ -82,6 +87,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
                                    model->getCharacters()->at(model->getEnemies()->at(i)->getAttackTarget()),
                                    model->getEnemies()->at(i)->getCastingAttack()
                                    );
+                model->getEnemies()->at(i)->justGotToEndOfTimeLine();
                 model->getEnemies()->at(i)->setTimeLinePos(0);
             }
         }
@@ -113,6 +119,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
                            );
             model->getCharacters()->at(0)->stopCasting();
         }
+        model->getCharacters()->at(0)->justGotToEndOfTimeLine();
         model->setP1TimeLinePos(0);
     }
     if(model->getP2TimeLinePos() >= 1200)
@@ -125,6 +132,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
                                );
             model->getCharacters()->at(1)->stopCasting();
         }
+        model->getCharacters()->at(1)->justGotToEndOfTimeLine();
         model->setP2TimeLinePos(0);
     }
 
@@ -139,6 +147,9 @@ void BattleMenuStateTimeFlow::drawBattleMenu(std::vector<DrawInformation> *items
     items->push_back(port1);
     DrawInformation port2(250, -275, 150, 150, model->getCharacters()->at(1)->getMenuSpriteKey(), false);
     items->push_back(port2);
+
+    //Status effects
+    drawStatusEffects(items);
 
     //Default menu text
     DrawInformation p1Name(625, 620, 300, 75, "", false, model->getCharacters()->at(0)->getName(), true);
@@ -165,4 +176,146 @@ void BattleMenuStateTimeFlow::drawBattleMenu(std::vector<DrawInformation> *items
                          + std::to_string(model->getCharacters()->at(1)->getMaxMP())
                          , true);
     items->push_back(p2mp);
+}
+
+void BattleMenuStateTimeFlow::drawStatusEffects(std::vector<DrawInformation> * items)
+{
+    int p1UpperStatusCount = 0;
+    int p1LowerStatusCount = 0;
+    int p2UpperStatusCount = 0;
+    int p2LowerStatusCount = 0;
+
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_att > 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEAttackUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_att < 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEAttackDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_def > 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEDefenceUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_def < 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEDefenceDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_magic > 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEMagicUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_magic < 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_magicDef > 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDefenceUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_magicDef < 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDefenceDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_speed > 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SEHaste", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->SE_speed < 0)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1UpperStatusCount++), -275-50-10, 50, 50, "SESlow", false);
+        items->push_back(SEAttUp);
+    }
+    /////////////////
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->poison)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SEPoison", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->sleep)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SESleep", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->silenced)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SESilence", false);
+        items->push_back(SEAttUp);
+    }
+    ////////////////
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_att > 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEAttackUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_att < 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEAttackDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_def > 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEDefenceUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_def < 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEDefenceDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_magic > 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEMagicUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_magic < 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_magicDef > 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDefenceUp", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_magicDef < 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEMagicDefenceDown", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_speed > 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SEHaste", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_speed < 0)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2UpperStatusCount++), -275-50-10, 50, 50, "SESlow", false);
+        items->push_back(SEAttUp);
+    }
+    /////////////////
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->poison)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SEPoison", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->sleep)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SESleep", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->silenced)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SESilence", false);
+        items->push_back(SEAttUp);
+    }
 }

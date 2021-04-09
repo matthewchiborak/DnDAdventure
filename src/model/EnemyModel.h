@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "statuseffectmodel.h"
+
 class AttackModel;
 
 //Class for storing all the information relating to enemies in the game.
@@ -12,6 +14,9 @@ class EnemyModel
 public:
     EnemyModel(int maxHP, int att, int def, int mAtt, int mDef, int speed);
     EnemyModel();
+
+    void applyTime(float t);
+    void justGotToEndOfTimeLine();
 
     void addAttack();
 
@@ -24,6 +29,7 @@ public:
     void setSpeed(int value);
     void setSpriteKey(std::string value);
     void setName(std::string value);
+    void setXP(int value);
 
     int getLevel();
     int getCurrentHealth();
@@ -33,6 +39,7 @@ public:
     int getMagicAttack();
     int getMagicDefence();
     int getSpeed();
+    int getXP();
     std::string getSpriteKey();
     std::string getName();
     float getTimeLinePos();
@@ -51,6 +58,10 @@ public:
     AttackModel * getCastingAttack();
     int getAttackTarget();
 
+    void applyStatusEffect(std::string se);
+
+    StatusEffectModel * getStatusEffectModel();
+
 private:
     int level;
     int maxHealth;
@@ -63,12 +74,15 @@ private:
     std::string spriteKey;
     std::string name;
     float timelinePos;
+    int xp;
 
     std::vector<AttackModel*> attacks;
 
     bool isCasting = false;
     int attackIndex = 0;
     int attackTarget = 0;
+
+    StatusEffectModel statusEffectModel;
 };
 
 #endif

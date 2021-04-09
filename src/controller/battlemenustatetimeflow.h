@@ -18,6 +18,8 @@ private:
     long long theTimeNow;
     long long timeOfLastEvent;
     double elapsed_millies;
+
+    void drawStatusEffects(std::vector<DrawInformation> * items);
 };
 
 #endif // BATTLEMENUSTATETIMEFLOW_H

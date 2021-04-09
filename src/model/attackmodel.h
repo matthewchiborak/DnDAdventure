@@ -16,6 +16,8 @@ public:
     std::string getDescription();
     int getAttackType();
     int getElement();
+    std::string getAdditionalEffect();
+    int getAccuracy();
 
 private:
     std::string name;
@@ -25,9 +27,11 @@ private:
     std::string description;
     int attackType; //0 = phys, 1 = magic ,2 = none
     int element; //0 = none, 1= fire, i can decide these later
-    //or even make an enum
+    //or even make an enum. Or just a string
+    int accuracy;
 
-    //Additional effects? Lets get basic attack done first
+    std::string additionalEffect;
+    //Poison, Sleep, Silence, Slow, Haste, AttackUp, etc.
 };
 
 #endif // ATTACKMODEL_H

@@ -86,6 +86,9 @@ void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *cha
     {
         enemies.at(i)->setTimeLinePos((rand()%500) * ((float)enemies.at(i)->getSpeed() / (float)maxSpeed));
     }
+
+    this->characters.at(0)->applyStatusEffect("Silence");
+    this->characters.at(1)->applyStatusEffect("Sleep");
 }
 
 void BattleModel::draw(std::vector<DrawInformation> *items)
@@ -273,6 +276,12 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
 {
     int damage = 0;
 
+    if(rand()%100 > attack->getAccuracy())
+    {
+        displayMessage(attacker->getName() + "'s attack misses...");
+        return;
+    }
+
     if(attack->getAttackType() == 0)
     {
         //Phys
@@ -280,7 +289,14 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
                   * (float)attack->getPower() * ((float)attacker->getAttack()/(float)defender->getDefence())) / 50.f) + 2)
                 * (defender->getElementalMultiplier(attack->getElement()) * (((rand()%15)+85)/100.f));
 
-        displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        if(attack->getPower() == 0)
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+        }
+        else
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        }
     }
     else if(attack->getAttackType() == 1)
     {
@@ -289,10 +305,21 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
                   * (float)attack->getPower() * ((float)attacker->getMagicAttack()/(float)defender->getMagicDefence())) / 50.f) + 2.f)
                 * ((float)defender->getElementalMultiplier(attack->getElement()) * ((rand()%100)/100.f));
 
-        displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        if(attack->getPower() == 0)
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+        }
+        else
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        }
     }
 
+    if(attack->getPower() == 0)
+        damage = 0;
+
     defender->changeHealth(-1 * damage);
+    defender->applyStatusEffect(attack->getAdditionalEffect());
 
 }
 
@@ -300,6 +327,12 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
 {
     int damage = 0;
 
+    if(rand()%100 > attack->getAccuracy())
+    {
+        displayMessage(attacker->getName() + "'s attack misses...");
+        return;
+    }
+
     if(attack->getAttackType() == 0)
     {
         //Phys
@@ -307,7 +340,14 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
                   * (float)attack->getPower() * ((float)attacker->getAttack()/(float)defender->getDefence())) / 50.f) + 2)
                 * (defender->getElementalMultiplier(attack->getElement()) * (((rand()%15)+85)/100.f));
 
-        displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        if(attack->getPower() == 0)
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+        }
+        else
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        }
     }
     else if(attack->getAttackType() == 1)
     {
@@ -316,10 +356,18 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
                   * (float)attack->getPower() * ((float)attacker->getMagicAttack()/(float)defender->getMagicDefence())) / 50.f) + 2.f)
                 * ((float)defender->getElementalMultiplier(attack->getElement()) * ((rand()%100)/100.f));
 
-        displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        if(attack->getPower() == 0)
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+        }
+        else
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        }
     }
 
     defender->changeCurrentHealth(-1 * damage);
+    defender->applyStatusEffect(attack->getAdditionalEffect());
 }
 
 bool BattleModel::isTheBattleDone()

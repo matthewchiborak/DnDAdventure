@@ -2,6 +2,7 @@
 #define PLAYERCHARACTERSTATSBATTLE_H
 
 #include "playercharacterstats.h"
+#include "statuseffectmodel.h"
 
 //Acts as middle so can apply out of battle non persistant stats
 //like buffs and debuffs.
@@ -10,6 +11,9 @@ class PlayerCharacterStatsBattle
 {
 public:
     PlayerCharacterStatsBattle(PlayerCharacterStats * characterInfo);
+
+    void applyTime(float t);
+    void justGotToEndOfTimeLine();
 
     int getCurrentHealth();
     int getMaxHealth();
@@ -44,7 +48,9 @@ public:
     int getAttackTarget();
 
     float getElementalMultiplier(int element);
+    void applyStatusEffect(std::string se);
 
+    StatusEffectModel * getStatusEffectModel();
 
 private:
     PlayerCharacterStats * stats;
@@ -55,7 +61,7 @@ private:
     int attackTarget = 0;
 
     //Effects to apply to stat retrieval
-
+    StatusEffectModel statusEffectModel;
 };
 
 #endif // PLAYERCHARACTERSTATSBATTLE_H
