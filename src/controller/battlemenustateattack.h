@@ -17,6 +17,7 @@ public:
 private:
     int currentPosX = 0;
     int currentPosY = 0;
+    bool currentTargetAllies = false;
 
     int currentTarget;
 

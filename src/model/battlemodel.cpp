@@ -88,7 +88,6 @@ void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *cha
         enemies.at(i)->setTimeLinePos((rand()%500) * ((float)enemies.at(i)->getSpeed() / (float)maxSpeed));
     }
 
-
 }
 
 void BattleModel::draw(std::vector<DrawInformation> *items)
@@ -320,6 +319,12 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
             displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
         }
     }
+    else if(attack->getAttackType() == 2)
+    {
+        //No stats allies. Just the raw value
+        damage = attack->getPower();
+        displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+    }
 
     if(attack->getPower() == 0)
         damage = 0;
@@ -380,8 +385,12 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
             displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
         }
     }
-
-    qDebug() << "Test" << defender->getDefence() << defender->getMagicDefence();
+    else if(attack->getAttackType() == 2)
+    {
+        //No stats allies. Just the raw value
+        damage = attack->getPower();
+        displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+    }
 
     defender->changeCurrentHealth(-1 * damage);
     defender->applyStatusEffect(attack->getAdditionalEffect());
@@ -392,13 +401,155 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
         if(defender->getIsCasting())
         {
             if(attacker->getAttackTarget() == 0)
+            {
+                defender->stopCasting();
                 timelineP1Pos -= 500;
+            }
             else
+            {
+                defender->stopCasting();
                 timelineP2Pos -= 500;
+            }
         }
     }
 
 
+}
+
+void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharacterStatsBattle *defender, AttackModel *attack)
+{
+    int damage = 0;
+
+    if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
+    {
+        displayMessage(attacker->getName() + "'s attack misses...");
+        return;
+    }
+
+    if(attack->getAttackType() == 0)
+    {
+        //Phys
+        damage = ((((((2.f*((float)attacker->getLevel() + 15.f)) / 5.f) + 2.f)
+                  * (float)attack->getPower() * ((float)attacker->getAttack()/(float)defender->getDefence())) / 50.f) + 2)
+                * (defender->getElementalMultiplier(attack->getElement()) * (((rand()%15)+85)/100.f));
+
+        if(attack->getPower() == 0)
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+        }
+        else
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        }
+    }
+    else if(attack->getAttackType() == 1)
+    {
+        //Magic
+        damage = ((((((2.f*((float)attacker->getLevel() + 15.f)) / 5.f) + 2.f)
+                  * (float)attack->getPower() * ((float)attacker->getMagicAttack()/(float)defender->getMagicDefence())) / 50.f) + 2.f)
+                * ((float)defender->getElementalMultiplier(attack->getElement()) * ((rand()%100)/100.f));
+
+        if(attack->getPower() == 0)
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+        }
+        else
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        }
+    }
+    else if(attack->getAttackType() == 2)
+    {
+        //No stats allies. Just the raw value
+        damage = attack->getPower();
+        displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+    }
+
+    defender->changeCurrentHealth(-1 * damage);
+    defender->applyStatusEffect(attack->getAdditionalEffect());
+
+    //Try interrupt
+    if(damage > 0)
+    {
+        if(defender->getIsCasting())
+        {
+            if(attacker->getAttackTarget() == 0)
+            {
+                defender->stopCasting();
+                timelineP1Pos -= 500;
+            }
+            else
+            {
+                defender->stopCasting();
+                timelineP2Pos -= 500;
+            }
+        }
+    }
+}
+
+void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, AttackModel *attack)
+{
+    int damage = 0;
+
+    if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
+    {
+        displayMessage(attacker->getName() + "'s attack misses...");
+        return;
+    }
+
+    if(attack->getAttackType() == 0)
+    {
+        //Phys
+        damage = ((((((2.f*((float)attacker->getLevel() + 15.f)) / 5.f) + 2.f)
+                  * (float)attack->getPower() * ((float)attacker->getAttack()/(float)defender->getDefence())) / 50.f) + 2)
+                * (defender->getElementalMultiplier(attack->getElement()) * (((rand()%15)+85)/100.f));
+
+        if(attack->getPower() == 0)
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+        }
+        else
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        }
+    }
+    else if(attack->getAttackType() == 1)
+    {
+        //Magic
+        damage = ((((((2.f*((float)attacker->getLevel() + 15.f)) / 5.f) + 2.f)
+                  * (float)attack->getPower() * ((float)attacker->getMagicAttack()/(float)defender->getMagicDefence())) / 50.f) + 2.f)
+                * ((float)defender->getElementalMultiplier(attack->getElement()) * ((rand()%100)/100.f));
+
+        if(attack->getPower() == 0)
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+        }
+        else
+        {
+            displayMessage(attacker->getName() + " uses " + attack->getName() + "! " + defender->getName() + " takes " + std::to_string(damage) + " damage");
+        }
+    }
+    else if(attack->getAttackType() == 2)
+    {
+        //No stats allies. Just the raw value
+        damage = attack->getPower();
+        displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
+    }
+
+    if(attack->getPower() == 0)
+        damage = 0;
+
+    defender->changeHealth(-1 * damage);
+    defender->applyStatusEffect(attack->getAdditionalEffect());
+
+    //Try interrupt
+    if(damage > 0)
+    {
+        if(defender->tryInterrupt(500))
+        {
+
+        }
+    }
 }
 
 void BattleModel::checkIfNeedToSwapDeadCharacters()

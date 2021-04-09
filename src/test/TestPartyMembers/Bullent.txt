@@ -19,7 +19,7 @@ IVSpeed,31
 Attack,Crossbow,1000,0,10,100,Basic Attack,0,0
 Attack,BigCrossBow6,4000,20,20,100,Big Basic Attack6,0,0
 Attack,PoisonBolt,1000,0,0,50,Basic Attack2,0,0,Poison
-Attack,Crossbow3,200,0,10,100,Basic Attack3,0,0
+Attack,Heal,2000,0,-10,100,Healing,2,0
 Attack,Crossbow4,200,0,10,100,Basic Attack4,0,0
 Attack,Crossbow5,200,0,10,100,Basic Attack5,0,0
 Attack,Crossbow7,200,0,10,100,Basic Attack7,0,0

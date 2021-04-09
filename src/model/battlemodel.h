@@ -44,6 +44,14 @@ public:
                      PlayerCharacterStatsBattle * defender,
                      AttackModel * attack
                      );
+    void applyAttack(PlayerCharacterStatsBattle * attacker,
+                     PlayerCharacterStatsBattle * defender,
+                     AttackModel * attack
+                     );
+    void applyAttack(EnemyModel * attacker,
+                     EnemyModel * defender,
+                     AttackModel * attack
+                     );
 
     void checkIfNeedToSwapDeadCharacters();
 

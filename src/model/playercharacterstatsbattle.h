@@ -37,15 +37,17 @@ public:
     void changeXP(int amount);
     void setCurrentHealth(int hp);
     void changeCurrentHealth(int amount);
+    void changeCurrentMP(int amount);
     void setIsActive(bool value);
 
     std::vector<AttackModel*> * getAttacks();
 
     void stopCasting();
-    void beginCasting(int attackIndex, int attackTarget);
+    void beginCasting(int attackIndex, int attackTarget, bool isForAllies);
     bool getIsCasting();
     AttackModel * getCastingAttack();
     int getAttackTarget();
+    bool getIsTargetAllies();
 
     float getElementalMultiplier(int element);
     void applyStatusEffect(std::string se);
@@ -59,6 +61,7 @@ private:
     bool isCasting = false;
     int attackIndex = 0;
     int attackTarget = 0;
+    bool attackTargetAllies = false;
 
     //Effects to apply to stat retrieval
     StatusEffectModel statusEffectModel;

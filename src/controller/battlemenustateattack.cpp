@@ -47,17 +47,47 @@ void BattleMenuStateAttack::moveMenuCursor(int x, int y)
         currentPosY = potY;
     }
     else
-    {
-        do
+    {        
+        if(x < 0 || x > 0)
         {
-            currentTarget += x;
-
-            if(currentTarget >= model->getNumberOfEnemies())
+            if(!currentTargetAllies)
+            {
                 currentTarget = 0;
-            else if(currentTarget < 0)
-                currentTarget = (model->getNumberOfEnemies()) - 1;
+                if(model->getCharacters()->at(0)->getCurrentHealth() <= 0)
+                {
+                    currentTarget = 1;
+                }
+                currentTargetAllies = true;
+            }
+            else
+            {
+                currentTarget = 0;
+                while(model->getEnemies()->at(currentTarget)->getCurrentHealth() <= 0)
+                {
+                    currentTarget++;
+                }
 
-        }while(model->getEnemies()->at(currentTarget)->getCurrentHealth() <= 0);
+                currentTargetAllies = false;
+            }
+        }
+
+        if(!currentTargetAllies)
+        {
+            do
+            {
+                currentTarget += y;
+
+                if(currentTarget >= model->getNumberOfEnemies())
+                    currentTarget = 0;
+                else if(currentTarget < 0)
+                    currentTarget = (model->getNumberOfEnemies()) - 1;
+
+            }while(model->getEnemies()->at(currentTarget)->getCurrentHealth() <= 0);
+        }
+        else
+        {
+            currentTarget = (currentTarget+1)%2;
+        }
     }
 }
 
@@ -65,8 +95,7 @@ BattleMenuState *BattleMenuStateAttack::enterMenu()
 {
     if(isSelectingTarget)
     {
-        //Attack attack to queue
-        model->getCharacters()->at(model->getFocusPartyMember())->beginCasting(((currentPosX) * 5) + (currentPosY), currentTarget);
+        model->getCharacters()->at(model->getFocusPartyMember())->beginCasting(((currentPosX) * 5) + (currentPosY), currentTarget, currentTargetAllies);
         return new BattleMenuStateTimeFlow(model);
     }
 
@@ -77,6 +106,12 @@ BattleMenuState *BattleMenuStateAttack::enterMenu()
         {
             return this;
         }
+    }
+
+    if(model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(((currentPosX) * 5) + (currentPosY))->getMpcost()
+            > model->getCharacters()->at(model->getFocusPartyMember())->getCurrentMP())
+    {
+        return this;
     }
 
     isSelectingTarget = true;
@@ -127,38 +162,60 @@ void BattleMenuStateAttack::drawBattleMenu(std::vector<DrawInformation> *items)
 
     if(isSelectingTarget)
     {
-        if(currentTarget == 0)
+        if(!currentTargetAllies)
         {
-            DrawInformation en(700+300, 300+50, 75, 75, "", false, ">", true);
-            //DrawInformation en(300, 50, 75, 75, "", false, ">", true);
-            items->push_back(en);
-        }
-        else if(currentTarget == 1)
-        {
-            DrawInformation en(700+100, 200+200, 75, 75, "", false, ">", true);
-            items->push_back(en);
-        }
-        else if(currentTarget == 2)
-        {
-            DrawInformation en(700+500, 200+200, 75, 75, "", false, ">", true);
-            items->push_back(en);
-        }
-        else if(currentTarget == 3)
-        {
-            DrawInformation en(700+100, 200+0, 75, 75, "", false, ">", true);
-            items->push_back(en);
-        }
-        else if(currentTarget == 4)
-        {
-            DrawInformation en(700+500, 200+0, 75, 75, "", false, ">", true);
-            items->push_back(en);
-        }
+            if(currentTarget == 0)
+            {
+                DrawInformation en(700+300, 300+50, 75, 75, "", false, ">", true);
+                //DrawInformation en(300, 50, 75, 75, "", false, ">", true);
+                items->push_back(en);
+            }
+            else if(currentTarget == 1)
+            {
+                DrawInformation en(700+100, 200+200, 75, 75, "", false, ">", true);
+                items->push_back(en);
+            }
+            else if(currentTarget == 2)
+            {
+                DrawInformation en(700+500, 200+200, 75, 75, "", false, ">", true);
+                items->push_back(en);
+            }
+            else if(currentTarget == 3)
+            {
+                DrawInformation en(700+100, 200+0, 75, 75, "", false, ">", true);
+                items->push_back(en);
+            }
+            else if(currentTarget == 4)
+            {
+                DrawInformation en(700+500, 200+0, 75, 75, "", false, ">", true);
+                items->push_back(en);
+            }
 
-        DrawInformation attackDesc(0, 10, 1500, 140, "",
-                                false,
-                                   "[" + std::to_string(currentTarget+1) + "] " + model->getEnemies()->at(currentTarget)->getName()
-                                   );
-        items->push_back(attackDesc);
+            DrawInformation attackDesc(0, 10, 1500, 140, "",
+                                    false,
+                                       "[" + std::to_string(currentTarget+1) + "] " + model->getEnemies()->at(currentTarget)->getName()
+                                       );
+            items->push_back(attackDesc);
+        }
+        else
+        {
+            if(currentTarget == 0)
+            {
+                DrawInformation en(450, 250, 75, 75, "", false, ">", true);
+                items->push_back(en);
+            }
+            else if(currentTarget == 1)
+            {
+                DrawInformation en(250, 350, 75, 75, "", false, ">", true);
+                items->push_back(en);
+            }
+
+            DrawInformation attackDesc(0, 10, 1500, 140, "",
+                                    false,
+                                       model->getCharacters()->at(currentTarget)->getName()
+                                       );
+            items->push_back(attackDesc);
+        }
     }
 
     //Currently selected attack

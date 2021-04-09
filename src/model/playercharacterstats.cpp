@@ -195,6 +195,16 @@ void PlayerCharacterStats::changeCurrentHealth(int amount)
         this->currentHealth = 0;
 }
 
+void PlayerCharacterStats::changeCurrentMP(int mp)
+{
+    this->currentMP += mp;
+
+    if(this->currentMP > getMaxMP())
+        this->currentMP = getMaxMP();
+    if(this->currentMP < 0)
+        this->currentMP = 0;
+}
+
 void PlayerCharacterStats::setIsActive(bool value)
 {
     this->isActive = value;

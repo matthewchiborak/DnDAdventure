@@ -57,6 +57,7 @@ public:
     bool getIsCasting();
     AttackModel * getCastingAttack();
     int getAttackTarget();
+    bool getAttackTargetAlly();
 
     void applyStatusEffect(std::string se);
 
@@ -83,6 +84,7 @@ private:
     bool isCasting = false;
     int attackIndex = 0;
     int attackTarget = 0;
+    bool attackTargetAlly = false;
 
     StatusEffectModel statusEffectModel;
 };

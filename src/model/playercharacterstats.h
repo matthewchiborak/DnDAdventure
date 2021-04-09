@@ -34,6 +34,7 @@ public:
     void changeXP(int amount);
     void setCurrentHealth(int hp);
     void changeCurrentHealth(int amount);
+    void changeCurrentMP(int mp);
     void setIsActive(bool value);
 
     std::vector<AttackModel*> * getAttacks();

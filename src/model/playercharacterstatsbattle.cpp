@@ -29,7 +29,7 @@ int PlayerCharacterStatsBattle::getMaxHealth()
 int PlayerCharacterStatsBattle::getAttack()
 {
     if(statusEffectModel.SE_att != 0)
-        return statusEffectModel.SE_att * 1.5f * stats->getAttack();
+        return (1.f + (statusEffectModel.SE_att * 0.25f)) * stats->getAttack();
 
     return stats->getAttack();
 }
@@ -37,10 +37,10 @@ int PlayerCharacterStatsBattle::getAttack()
 int PlayerCharacterStatsBattle::getDefence()
 {
     if(statusEffectModel.guard)
-        return stats->getDefence() * 0.5f;
+        return stats->getDefence() * 2.f;
 
     if(statusEffectModel.SE_def != 0)
-        return statusEffectModel.SE_def * 1.5f * stats->getDefence();
+        return (1.f + (statusEffectModel.SE_def * 0.25f)) * stats->getDefence();
 
     return stats->getDefence();
 }
@@ -48,7 +48,7 @@ int PlayerCharacterStatsBattle::getDefence()
 int PlayerCharacterStatsBattle::getMagicAttack()
 {
     if(statusEffectModel.SE_magic != 0)
-        return statusEffectModel.SE_magic * 1.5f * stats->getMagicAttack();
+        return (1.f + (statusEffectModel.SE_magic * 0.25f)) * stats->getMagicAttack();
 
     return stats->getMagicAttack();
 }
@@ -56,10 +56,10 @@ int PlayerCharacterStatsBattle::getMagicAttack()
 int PlayerCharacterStatsBattle::getMagicDefence()
 {
     if(statusEffectModel.guard)
-        return stats->getMagicDefence() * 0.5f;
+        return stats->getMagicDefence() * 2.f;
 
     if(statusEffectModel.SE_magicDef != 0)
-        return statusEffectModel.SE_magicDef * 1.5f * stats->getMagicDefence();
+        return (1.f + (statusEffectModel.SE_magicDef * 0.25f)) * stats->getMagicDefence();
 
     return stats->getMagicDefence();
 }
@@ -69,10 +69,15 @@ int PlayerCharacterStatsBattle::getSpeed()
     if(statusEffectModel.sleep)
         return 0;
 
-    if(statusEffectModel.SE_speed != 0)
-        return statusEffectModel.SE_speed * 1.5f * stats->getSpeed();
+    float multiplier = 1.f;
 
-    return stats->getSpeed();
+    if(statusEffectModel.SE_speed != 0)
+        multiplier *= (1.f + (statusEffectModel.SE_speed * 0.25f));
+
+    if(statusEffectModel.guard)
+        multiplier *= 1.5f;
+
+    return stats->getSpeed() * multiplier;
 }
 
 int PlayerCharacterStatsBattle::getLevel()
@@ -145,6 +150,11 @@ void PlayerCharacterStatsBattle::changeCurrentHealth(int amount)
     stats->changeCurrentHealth(amount);
 }
 
+void PlayerCharacterStatsBattle::changeCurrentMP(int amount)
+{
+    stats->changeCurrentMP(amount);
+}
+
 void PlayerCharacterStatsBattle::setIsActive(bool value)
 {
     stats->setIsActive(value);
@@ -160,10 +170,11 @@ void PlayerCharacterStatsBattle::stopCasting()
     isCasting = false;
 }
 
-void PlayerCharacterStatsBattle::beginCasting(int attackIndex, int attackTarget)
+void PlayerCharacterStatsBattle::beginCasting(int attackIndex, int attackTarget, bool isForAllies)
 {
     this->attackIndex = attackIndex;
     this->attackTarget = attackTarget;
+    this->attackTargetAllies = isForAllies;
     isCasting = true;
 }
 
@@ -180,6 +191,11 @@ AttackModel *PlayerCharacterStatsBattle::getCastingAttack()
 int PlayerCharacterStatsBattle::getAttackTarget()
 {
     return attackTarget;
+}
+
+bool PlayerCharacterStatsBattle::getIsTargetAllies()
+{
+    return attackTargetAllies;
 }
 
 float PlayerCharacterStatsBattle::getElementalMultiplier(int element)

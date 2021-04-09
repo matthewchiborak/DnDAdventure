@@ -96,28 +96,28 @@ int EnemyModel::getMaxHealth()
 int EnemyModel::getAttack()
 {
     if(statusEffectModel.SE_att != 0)
-        return statusEffectModel.SE_att * 1.5f * attack;
+        return (1.f + (statusEffectModel.SE_att * 0.25f)) * attack;
 
     return attack;
 }
 int EnemyModel::getDefence()
 {
     if(statusEffectModel.SE_def != 0)
-        return statusEffectModel.SE_def * 1.5f * defence;
+        return (1.f + (statusEffectModel.SE_def * 0.25f)) * defence;
 
     return defence;
 }
 int EnemyModel::getMagicAttack()
 {
     if(statusEffectModel.SE_magic != 0)
-        return statusEffectModel.SE_magic * 1.5f * magicAttack;
+        return (1.f + (statusEffectModel.SE_magic * 0.25f)) * magicAttack;
 
     return magicAttack;
 }
 int EnemyModel::getMagicDefence()
 {
     if(statusEffectModel.SE_magicDef != 0)
-        return statusEffectModel.SE_magicDef * 1.5f * magicDefence;
+        return (1.f + (statusEffectModel.SE_magicDef * 0.25f)) * magicDefence;
 
     return magicDefence;
 }
@@ -127,7 +127,7 @@ int EnemyModel::getSpeed()
         return 0;
 
     if(statusEffectModel.SE_speed != 0)
-        return statusEffectModel.SE_speed * 1.5f * speed;
+        return (1.f + (statusEffectModel.SE_speed * 0.25f)) * speed;
 
     return speed;
 }
@@ -214,6 +214,11 @@ AttackModel *EnemyModel::getCastingAttack()
 int EnemyModel::getAttackTarget()
 {
     return attackTarget;
+}
+
+bool EnemyModel::getAttackTargetAlly()
+{
+    return attackTargetAlly;
 }
 
 void EnemyModel::applyStatusEffect(std::string se)
