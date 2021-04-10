@@ -1,4 +1,5 @@
 Name,Duke
+EquipmentId,3
 BaseHP,75
 BaseMP,150
 BaseAtt,69

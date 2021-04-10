@@ -54,3 +54,6 @@ SlashIcon,SlashIcon.png
 PierceIcon,PierceIcon.png
 InstantTurnQ,InstantTurnQ.png
 InstantTurnR,InstantTurnR.png
+AccessoryIcon,AccessoryIcon.png
+WeaponIcon,SlashIcon.png
+ArmorIcon,Guard.png

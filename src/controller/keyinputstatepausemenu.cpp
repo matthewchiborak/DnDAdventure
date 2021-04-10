@@ -6,6 +6,7 @@ KeyInputStatePauseMenu::KeyInputStatePauseMenu(ModelAbstract *model, std::queue<
     : KeyInputState(model, keyboardEventQueue)
 {
     movementLockTimeMil = 150;
+    model->setPauseIsDone(false);
 }
 
 KeyInputStatePauseMenu::~KeyInputStatePauseMenu()
@@ -36,6 +37,7 @@ bool KeyInputStatePauseMenu::handleUserInput(std::string *nextState)
                 || keyToHandle == Qt::Key_D
                 || keyToHandle == Qt::Key_E
                 || keyToHandle == Qt::Key_Escape
+                || keyToHandle == Qt::Key_X
                 )
         {
             auto nowTime = std::chrono::system_clock::now().time_since_epoch();
@@ -48,8 +50,26 @@ bool KeyInputStatePauseMenu::handleUserInput(std::string *nextState)
                 this->model->moveMenuCursor(0, 1, "Pause");
             else if(keyToHandle == Qt::Key_S)
                 this->model->moveMenuCursor(0, -1, "Pause");
+            else if(keyToHandle == Qt::Key_A)
+                this->model->moveMenuCursor(-1, 0, "Pause");
+            else if(keyToHandle == Qt::Key_D)
+                this->model->moveMenuCursor(1, 0, "Pause");
             else if(keyToHandle == Qt::Key_E)
                 this->model->enterMenu("Pause");
+            else if(keyToHandle == Qt::Key_X)
+                this->model->specialMessage("RemoveEquipment", "Pause");
+            else if(keyToHandle == Qt::Key_Escape)
+            {
+                this->model->closeMenu("Pause");
+                if(this->model->getPauseIsDone())
+                {
+                    eventBeenSetUp = false;
+                    while(!keyboardEventQueue->empty())
+                        keyboardEventQueue->pop();
+                    (*nextState) = "Board";
+                    return true;
+                }
+            }
         }
 
         return false;
@@ -70,14 +90,14 @@ bool KeyInputStatePauseMenu::handleUserInput(std::string *nextState)
         //this->model->movePlayer(-1, 0, ((elapsed_millies/movementLockTimeMil)));
     //else if(keyToHandle == Qt::Key_D)
         //this->model->movePlayer(1, 0, ((elapsed_millies/movementLockTimeMil)));
-    if(keyToHandle == Qt::Key_Escape)
-    {
-        eventBeenSetUp = false;
-        while(!keyboardEventQueue->empty())
-            keyboardEventQueue->pop();
-        (*nextState) = "Board";
-        return true;
-    }
+//    if(keyToHandle == Qt::Key_Escape)
+//    {
+//        eventBeenSetUp = false;
+//        while(!keyboardEventQueue->empty())
+//            keyboardEventQueue->pop();
+//        (*nextState) = "Board";
+//        return true;
+//    }
 
     if((elapsed_millies / movementLockTimeMil) >= 1)
     {

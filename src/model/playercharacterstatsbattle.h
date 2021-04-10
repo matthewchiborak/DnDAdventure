@@ -52,13 +52,16 @@ public:
     void setTarget(int value);
 
     float getElementalMultiplier(int element);
-    void applyStatusEffect(std::string se);
+    bool applyStatusEffect(std::string se);
     void cureAllStatusEffects();
 
     StatusEffectModel * getStatusEffectModel();
 
     void setIsVisible(bool newIsVisible);
     bool getIsVisible();
+
+    float getAttackingMultiplier(int attackType);
+    float getDefendingMultiplier(int attackType);
 
 private:
     PlayerCharacterStats * stats;

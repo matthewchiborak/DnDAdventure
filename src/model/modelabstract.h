@@ -6,6 +6,7 @@
 #include "../model/playercharacterstats.h"
 
 class DrawInformation;
+class EquipmentModel;
 
 class ModelAbstract
 {
@@ -32,8 +33,24 @@ public:
     virtual bool isBattleDone();
     virtual bool isGameOver();
     virtual void qrPressed(bool wasQ);
+    virtual void specialMessage(std::string message, std::string key);
 
     std::vector<PlayerCharacterStats*> playerCharacters;
+
+    void addEquipment(std::string info);
+    std::vector<EquipmentModel> * getEquipment();
+
+    bool getPauseIsDone();
+    void setPauseIsDone(bool value);
+
+protected:
+    bool pauseIsDone = false;
+    //Bag
+    int gold = 0;
+    int numberOfPotions = 0;
+    int numberOfRemedies = 0;
+    std::vector<EquipmentModel> equipment;
+
 };
 
 #endif // MODELABSTRACT_H

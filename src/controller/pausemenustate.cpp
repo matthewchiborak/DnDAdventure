@@ -25,3 +25,13 @@ void PauseMenuDrawState::drawPauseMenu(std::vector<DrawInformation> *items)
 {
 
 }
+
+bool PauseMenuDrawState::isMain()
+{
+    return false;
+}
+
+void PauseMenuDrawState::speicalMessage(std::string message)
+{
+
+}

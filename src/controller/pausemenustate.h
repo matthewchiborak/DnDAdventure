@@ -5,6 +5,7 @@ class ModelAbstract;
 class DrawInformation;
 
 #include <vector>
+#include <string>
 
 class PauseMenuDrawState
 {
@@ -15,6 +16,10 @@ public:
     virtual PauseMenuDrawState * enterMenu();
     virtual PauseMenuDrawState * closeMenu();
     virtual void drawPauseMenu(std::vector<DrawInformation> * items);
+
+    virtual bool isMain();
+
+    virtual void speicalMessage(std::string message);
 
 protected:
     ModelAbstract * model;

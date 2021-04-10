@@ -95,3 +95,13 @@ void PauseMenuStateParty::drawPauseMenu(std::vector<DrawInformation> *items)
         items->push_back(info7);
     }
 }
+
+bool PauseMenuStateParty::isMain()
+{
+    return false;
+}
+
+void PauseMenuStateParty::speicalMessage(std::string message)
+{
+
+}

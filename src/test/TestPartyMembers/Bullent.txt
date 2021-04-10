@@ -1,4 +1,5 @@
 Name,Bullent
+EquipmentId,0
 BaseHP,72
 BaseMP,0
 BaseAtt,103
@@ -16,7 +17,7 @@ IVDef,8
 IVMAtt,16
 IVMDef,0
 IVSpeed,31
-Attack,Crossbow,1000,0,10,100,Basic Attack,0,0
+Attack,Crossbow,1000,0,10,100,Basic Attack,0,9
 Attack,BigCrossBow6,4000,20,20,100,Big Basic Attack6,0,0
 Attack,Poison_Bolt,1000,0,0,100,Basic Attack2,0,0,Poison
 Attack,Heal,2000,0,-10,100,Healing,2,0

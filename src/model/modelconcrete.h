@@ -27,6 +27,7 @@ public:
     bool isBattleDone();
     bool isGameOver();
     void qrPressed(bool wasQ);
+    void specialMessage(std::string message, std::string key);
 
 private:
     BoardModel boardModel;

@@ -224,9 +224,14 @@ float PlayerCharacterStatsBattle::getElementalMultiplier(int element)
     return 1;
 }
 
-void PlayerCharacterStatsBattle::applyStatusEffect(std::string se)
+bool PlayerCharacterStatsBattle::applyStatusEffect(std::string se)
 {
+    //Based on equipement, check if resist
+    if(rand()%100 < stats->getResistantValueBasedOnEquipmentAndAbilites(se))
+        return false;
+
     statusEffectModel.applyStatusEffect(se);
+    return true;
 }
 
 void PlayerCharacterStatsBattle::cureAllStatusEffects()
@@ -247,6 +252,16 @@ void PlayerCharacterStatsBattle::setIsVisible(bool newIsVisible)
 bool PlayerCharacterStatsBattle::getIsVisible()
 {
     return isVisible;
+}
+
+float PlayerCharacterStatsBattle::getAttackingMultiplier(int attackType)
+{
+    return stats->getAttackElementalMultiplier(attackType);
+}
+
+float PlayerCharacterStatsBattle::getDefendingMultiplier(int attackType)
+{
+    return stats->getDefenceElementalMultiplier(attackType);
 }
 
 

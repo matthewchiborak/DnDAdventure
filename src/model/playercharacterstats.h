@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include "equipmentmodel.h"
 
 class AttackModel;
 
@@ -39,6 +40,20 @@ public:
 
     std::vector<AttackModel*> * getAttacks();
 
+    void setWeapon(EquipmentModel * weapon);
+    EquipmentModel * getWeapon();
+    void setArmor(EquipmentModel * armor);
+    EquipmentModel * getArmor();
+    void setAccessory1(EquipmentModel * acc);
+    EquipmentModel * getAccessory1();
+    void setAccessory2(EquipmentModel * acc);
+    EquipmentModel * getAccessory2();
+
+    int getEquipmentID();
+
+    int getResistantValueBasedOnEquipmentAndAbilites(std::string key);
+    float getAttackElementalMultiplier(int element);
+    float getDefenceElementalMultiplier(int element);
 
 protected:
     std::string name;
@@ -69,6 +84,14 @@ protected:
     int IVSpeed;
 
     std::vector<AttackModel*> attacks;
+
+    int equipmentID;
+    EquipmentModel * equippedWeapon;
+    EquipmentModel * equippedArmor;
+    EquipmentModel * equippedAccessory1;
+    EquipmentModel * equippedAccessory2;
+
+    bool isAValidElement(std::string input);
 
 };
 

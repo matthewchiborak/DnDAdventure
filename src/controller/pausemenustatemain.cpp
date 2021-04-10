@@ -2,6 +2,7 @@
 
 #include "../display/drawinformation.h"
 #include "pausemenustateparty.h"
+#include "pausemenustateequipment.h"
 
 PauseMenuStateMain::PauseMenuStateMain(ModelAbstract *model)
     : PauseMenuDrawState(model)
@@ -23,6 +24,16 @@ PauseMenuDrawState * PauseMenuStateMain::enterMenu()
 {
     if(currentPos == 5)
         return new PauseMenuStateParty(model);
+    if(currentPos == 4)
+        return this;
+    if(currentPos == 3)
+        return new PauseMenuStateEquipment(model);
+    if(currentPos == 2)
+        return this;
+    if(currentPos == 1)
+        return this;
+    if(currentPos == 0)
+        return this;
 
     return this;
 }
@@ -39,14 +50,24 @@ void PauseMenuStateMain::drawPauseMenu(std::vector<DrawInformation> *items)
     items->push_back(info2);
     DrawInformation info9(700, 300, 200, 100, "", false, "Skills");
     items->push_back(info9);
-    DrawInformation info3(700, 350, 200, 100, "", false, "Bag");
+    DrawInformation info3(700, 350, 250, 100, "", false, "Equipment");
     items->push_back(info3);
-    DrawInformation info4(700, 400, 200, 100, "", false, "DDMM");
+    DrawInformation info4(700, 400, 200, 100, "", false, "Bag");
     items->push_back(info4);
-    DrawInformation info5(700, 450, 200, 100, "", false, "Save");
+    DrawInformation info5(700, 450, 200, 100, "", false, "DDMM");
     items->push_back(info5);
     DrawInformation info6(700, 500, 200, 100, "", false, "Quit");
     items->push_back(info6);
     DrawInformation info7(600, 500 - (currentPos*50), 100, 100, "", false, ">");
     items->push_back(info7);
+}
+
+bool PauseMenuStateMain::isMain()
+{
+    return true;
+}
+
+void PauseMenuStateMain::speicalMessage(std::string message)
+{
+
 }

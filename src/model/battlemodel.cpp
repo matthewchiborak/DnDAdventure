@@ -328,6 +328,8 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
         damage = ((((((2.f*((float)attacker->getLevel() + 15.f)) / 5.f) + 2.f)
                   * (float)attack->getPower() * ((float)attacker->getAttack()/(float)defender->getDefence())) / 50.f) + 2)
                 * (defender->getElementalMultiplier(attack->getElement()) * (((rand()%15)+85)/100.f));
+        //Apply player boosts
+        damage *= attacker->getAttackingMultiplier(attack->getElement());
 
         if(attack->getPower() == 0)
         {
@@ -344,6 +346,8 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
         damage = ((((((2.f*((float)attacker->getLevel() + 15.f)) / 5.f) + 2.f)
                   * (float)attack->getPower() * ((float)attacker->getMagicAttack()/(float)defender->getMagicDefence())) / 50.f) + 2.f)
                 * ((float)defender->getElementalMultiplier(attack->getElement()) * ((rand()%100)/100.f));
+        //Apply player boosts
+        damage *= attacker->getAttackingMultiplier(attack->getElement());
 
         if(attack->getPower() == 0)
         {
@@ -358,6 +362,8 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
     {
         //No stats allies. Just the raw value
         damage = attack->getPower();
+        //Apply player boosts
+        damage *= attacker->getAttackingMultiplier(attack->getElement());
         displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
     }
 
@@ -371,8 +377,8 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000);
     if(defender->applyStatusEffect(attack->getAdditionalEffect()))
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
-    else
-        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Immune", "", 2000);
+    //else
+        //addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Immune", "", 2000);
 
     //Try interrupt
     if(damage > 0)
@@ -403,6 +409,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
         damage = ((((((2.f*((float)attacker->getLevel() + 15.f)) / 5.f) + 2.f)
                   * (float)attack->getPower() * ((float)attacker->getAttack()/(float)defender->getDefence())) / 50.f) + 2)
                 * (defender->getElementalMultiplier(attack->getElement()) * (((rand()%15)+85)/100.f));
+        damage *= defender->getDefendingMultiplier(attack->getElement());
 
         if(attack->getPower() == 0)
         {
@@ -419,6 +426,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
         damage = ((((((2.f*((float)attacker->getLevel() + 15.f)) / 5.f) + 2.f)
                   * (float)attack->getPower() * ((float)attacker->getMagicAttack()/(float)defender->getMagicDefence())) / 50.f) + 2.f)
                 * ((float)defender->getElementalMultiplier(attack->getElement()) * ((rand()%100)/100.f));
+        damage *= defender->getDefendingMultiplier(attack->getElement());
 
         if(attack->getPower() == 0)
         {
@@ -433,6 +441,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
     {
         //No stats allies. Just the raw value
         damage = attack->getPower();
+        damage *= defender->getDefendingMultiplier(attack->getElement());
         displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
     }
 
@@ -441,8 +450,8 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
         addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000);
     if(damage < 0)
         addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000);
-    defender->applyStatusEffect(attack->getAdditionalEffect());
-    addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
+    if(defender->applyStatusEffect(attack->getAdditionalEffect()))
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
 
     //Try interrupt
     if(damage > 0)
@@ -485,6 +494,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
         damage = ((((((2.f*((float)attacker->getLevel() + 15.f)) / 5.f) + 2.f)
                   * (float)attack->getPower() * ((float)attacker->getAttack()/(float)defender->getDefence())) / 50.f) + 2)
                 * (defender->getElementalMultiplier(attack->getElement()) * (((rand()%15)+85)/100.f));
+        damage *= attacker->getAttackingMultiplier(attack->getElement()) * defender->getDefendingMultiplier(attack->getElement());
 
         if(attack->getPower() == 0)
         {
@@ -501,6 +511,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
         damage = ((((((2.f*((float)attacker->getLevel() + 15.f)) / 5.f) + 2.f)
                   * (float)attack->getPower() * ((float)attacker->getMagicAttack()/(float)defender->getMagicDefence())) / 50.f) + 2.f)
                 * ((float)defender->getElementalMultiplier(attack->getElement()) * ((rand()%100)/100.f));
+        damage *= attacker->getAttackingMultiplier(attack->getElement()) * defender->getDefendingMultiplier(attack->getElement());
 
         if(attack->getPower() == 0)
         {
@@ -515,8 +526,11 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
     {
         //No stats allies. Just the raw value
         damage = attack->getPower();
+        damage *= attacker->getAttackingMultiplier(attack->getElement()) * defender->getDefendingMultiplier(attack->getElement());
         displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
     }
+
+
 
     defender->changeCurrentHealth(-1 * damage);
     if(damage > 0)
@@ -524,8 +538,8 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
     if(damage < 0)
         addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Heal", std::to_string(-1 * damage), 5000);
 
-    defender->applyStatusEffect(attack->getAdditionalEffect());
-    addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
+    if(defender->applyStatusEffect(attack->getAdditionalEffect()))
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
 
     //Try interrupt
     if(damage > 0)

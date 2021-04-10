@@ -26,6 +26,7 @@ SOURCES += \
     src/controller/keyinputstateboard.cpp \
     src/controller/keyinputstatepausemenu.cpp \
     src/controller/pausemenustate.cpp \
+    src/controller/pausemenustateequipment.cpp \
     src/controller/pausemenustatemain.cpp \
     src/controller/pausemenustateparty.cpp \
     src/display/aboveheadbattlemessage.cpp \
@@ -57,6 +58,7 @@ SOURCES += \
     src/model/boardobjectnpc.cpp \
     src/model/boardobjectobstacle.cpp \
     src/model/doorway.cpp \
+    src/model/equipmentmodel.cpp \
     src/model/gamemodelabstract.cpp \
     src/model/modelabstract.cpp \
     src/model/modelconcrete.cpp \
@@ -88,6 +90,7 @@ HEADERS += \
     src/controller/keyinputstateboard.h \
     src/controller/keyinputstatepausemenu.h \
     src/controller/pausemenustate.h \
+    src/controller/pausemenustateequipment.h \
     src/controller/pausemenustatemain.h \
     src/controller/pausemenustateparty.h \
     src/display/aboveheadbattlemessage.h \
@@ -119,6 +122,7 @@ HEADERS += \
     src/model/boardobjectnpc.h \
     src/model/boardobjectobstacle.h \
     src/model/doorway.h \
+    src/model/equipmentmodel.h \
     src/model/gamemodelabstract.h \
     src/model/modelabstract.h \
     src/model/modelconcrete.h \

@@ -1,4 +1,5 @@
 Name,Chad
+EquipmentId,1
 BaseHP,88
 BaseMP,50
 BaseAtt,107

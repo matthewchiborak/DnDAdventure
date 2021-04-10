@@ -84,7 +84,13 @@ void ModelConcrete::enterMenu(std::string key)
 void ModelConcrete::closeMenu(std::string key)
 {
     if(key == "Pause")
+    {
+        this->pauseIsDone = currentMenuState->isMain();
+        PauseMenuDrawState * temp = currentMenuState;
         currentMenuState = currentMenuState->closeMenu();
+        if(temp != currentMenuState)
+            delete temp;
+    }
     else if(key == "Battle")
         battleModel.closeMenu();
 }
@@ -131,5 +137,13 @@ bool ModelConcrete::isGameOver()
 void ModelConcrete::qrPressed(bool wasQ)
 {
     battleModel.qrPressed(wasQ);
+}
+
+void ModelConcrete::specialMessage(std::string message, std::string key)
+{
+    if(key == "Pause")
+    {
+        currentMenuState->speicalMessage(message);
+    }
 }
 

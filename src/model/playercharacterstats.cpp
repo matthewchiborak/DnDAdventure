@@ -5,7 +5,9 @@
 
 #include <string>
 #include <vector>
+#include <QDebug>
 #include <math.h>
+#include <cmath>
 
 
 PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
@@ -27,6 +29,8 @@ PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
         }
         if(splits.at(0) == "Name")
             name = splits.at(1);
+        if(splits.at(0) == "EquipmentId")
+            equipmentID = std::stoi(splits.at(1));
         if(splits.at(0) == "BaseAtt")
             attack = std::stoi(splits.at(1));
         if(splits.at(0) == "BaseDef")
@@ -68,6 +72,11 @@ PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
 
     currentHealth = getMaxHealth();
     currentMP = getMaxMP();
+
+    equippedWeapon = nullptr;
+    equippedArmor = nullptr;
+    equippedAccessory1 = nullptr;
+    equippedAccessory2 = nullptr;
 }
 
 PlayerCharacterStats::~PlayerCharacterStats()
@@ -214,5 +223,215 @@ std::vector<AttackModel *> *PlayerCharacterStats::getAttacks()
 {
     return &attacks;
 }
+
+void PlayerCharacterStats::setWeapon(EquipmentModel *weapon)
+{
+    this->equippedWeapon = weapon;
+}
+
+EquipmentModel *PlayerCharacterStats::getWeapon()
+{
+    return equippedWeapon;
+}
+
+void PlayerCharacterStats::setArmor(EquipmentModel *armor)
+{
+    this->equippedArmor = armor;
+}
+
+EquipmentModel *PlayerCharacterStats::getArmor()
+{
+    return equippedArmor;
+}
+
+void PlayerCharacterStats::setAccessory1(EquipmentModel *acc)
+{
+    this->equippedAccessory1 = acc;
+}
+
+EquipmentModel *PlayerCharacterStats::getAccessory1()
+{
+    return equippedAccessory1;
+}
+
+void PlayerCharacterStats::setAccessory2(EquipmentModel *acc)
+{
+    this->equippedAccessory2 = acc;
+}
+
+EquipmentModel *PlayerCharacterStats::getAccessory2()
+{
+    return equippedAccessory2;
+}
+
+int PlayerCharacterStats::getEquipmentID()
+{
+    return equipmentID;
+}
+
+int PlayerCharacterStats::getResistantValueBasedOnEquipmentAndAbilites(std::string key)
+{
+    int resValue = 0;
+
+    if(equippedArmor != nullptr)
+    {
+        if(equippedArmor->getEffect() == key)
+        {
+            resValue += equippedArmor->getMultiplier();
+        }
+    }
+    if(equippedAccessory1 != nullptr)
+    {
+        if(equippedAccessory1->getEffect() == key)
+        {
+            resValue += equippedAccessory1->getMultiplier();
+        }
+    }
+    if(equippedAccessory2 != nullptr)
+    {
+        if(equippedAccessory2->getEffect() == key)
+        {
+            resValue += equippedAccessory2->getMultiplier();
+        }
+    }
+
+    return resValue;
+}
+
+float PlayerCharacterStats::getAttackElementalMultiplier(int element)
+{
+    int resValue = 100;
+
+    if(equippedWeapon != nullptr)
+    {
+        if(isAValidElement(equippedWeapon->getEffect()))
+        {
+            if(std::stoi(equippedWeapon->getEffect()) == element)
+            {
+                resValue += equippedWeapon->getMultiplier();
+            }
+        }
+    }
+    if(equippedAccessory1 != nullptr)
+    {
+        if(isAValidElement(equippedAccessory1->getEffect()))
+        {
+            if(std::stoi(equippedAccessory1->getEffect()) > 0)
+            {
+                if(std::stoi(equippedAccessory1->getEffect()) == element)
+                {
+                    resValue += equippedAccessory1->getMultiplier();
+                }
+            }
+        }
+    }
+    if(equippedAccessory2 != nullptr)
+    {
+        if(isAValidElement(equippedAccessory2->getEffect()))
+        {
+            if(std::stoi(equippedAccessory2->getEffect()) > 0)
+            {
+                if(std::stoi(equippedAccessory2->getEffect()) == element)
+                {
+                    resValue += equippedAccessory2->getMultiplier();
+                }
+            }
+        }
+    }
+
+    return resValue/100.f;
+}
+
+float PlayerCharacterStats::getDefenceElementalMultiplier(int element)
+{
+    int resValue = 100;
+
+    if(equippedArmor != nullptr)
+    {
+        if(isAValidElement(equippedArmor->getEffect()))
+        {
+            if(std::stoi(equippedArmor->getEffect()) == element)
+            {
+                resValue -= equippedArmor->getMultiplier();
+            }
+        }
+    }
+    if(equippedAccessory1 != nullptr)
+    {
+        if(isAValidElement(equippedAccessory1->getEffect()))
+        {
+            if(std::stoi(equippedAccessory1->getEffect()) < 0)
+            {
+                if(std::abs(std::stoi(equippedAccessory1->getEffect())) == element)
+                {
+                    resValue -= equippedAccessory1->getMultiplier();
+                }
+            }
+        }
+    }
+    if(equippedAccessory2 != nullptr)
+    {
+        if(isAValidElement(equippedAccessory2->getEffect()))
+        {
+            if(std::stoi(equippedAccessory2->getEffect()) < 0)
+            {
+                if(std::abs(std::stoi(equippedAccessory2->getEffect())) == element)
+                {
+                    resValue -= equippedAccessory2->getMultiplier();
+                }
+            }
+        }
+    }
+
+    if(resValue < 0)
+        resValue = 0;
+
+    return resValue/100.f;
+}
+
+bool PlayerCharacterStats::isAValidElement(std::string input)
+{
+    if(input == "0")
+        return true;
+    if(input == "1")
+        return true;
+    if(input == "2")
+        return true;
+    if(input == "3")
+        return true;
+    if(input == "4")
+        return true;
+    if(input == "5")
+        return true;
+    if(input == "6")
+        return true;
+    if(input == "7")
+        return true;
+    if(input == "8")
+        return true;
+    if(input == "9")
+        return true;
+    if(input == "-1")
+        return true;
+    if(input == "-2")
+        return true;
+    if(input == "-3")
+        return true;
+    if(input == "-4")
+        return true;
+    if(input == "-5")
+        return true;
+    if(input == "-6")
+        return true;
+    if(input == "-7")
+        return true;
+    if(input == "-8")
+        return true;
+    if(input == "-9")
+        return true;
+
+    return false;
+}
+
 
 

@@ -13,6 +13,11 @@ public:
     PauseMenuDrawState * closeMenu();
     void drawPauseMenu(std::vector<DrawInformation> * items);
 
+
+    bool isMain();
+
+    void speicalMessage(std::string message);
+
 private:
     int currentPos = 5;
 };
