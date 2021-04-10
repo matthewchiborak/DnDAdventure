@@ -318,7 +318,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
 
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
-            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Miss", "", 5000);
+            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Miss", "", 5000, 0);
         return;
     }
 
@@ -333,6 +333,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
 
         if(attack->getPower() == 0)
         {
+            damage = 0;
             displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
         }
         else
@@ -351,6 +352,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
 
         if(attack->getPower() == 0)
         {
+            damage = 0;
             displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
         }
         else
@@ -372,11 +374,11 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
 
     defender->changeHealth(-1 * damage);
     if(damage > 0)
-        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000);
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000, attack->getElement());
     if(damage < 0)
-        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000);
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000, attack->getElement());
     if(defender->applyStatusEffect(attack->getAdditionalEffect()))
-        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000, attack->getElement());
     //else
         //addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Immune", "", 2000);
 
@@ -385,7 +387,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
     {
         if(defender->tryInterrupt(500))
         {
-            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Interrupt", "", 5000);
+            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Interrupt", "", 5000, attack->getElement());
         }
     }
 
@@ -399,7 +401,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
     {
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
-            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Miss", "", 5000);
+            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Miss", "", 5000, 0);
         return;
     }
 
@@ -413,6 +415,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
 
         if(attack->getPower() == 0)
         {
+            damage = 0;
             displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
         }
         else
@@ -430,6 +433,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
 
         if(attack->getPower() == 0)
         {
+            damage = 0;
             displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
         }
         else
@@ -447,11 +451,11 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
 
     defender->changeCurrentHealth(-1 * damage);
     if(damage > 0)
-        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000);
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000, attack->getElement());
     if(damage < 0)
-        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000);
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000, attack->getElement());
     if(defender->applyStatusEffect(attack->getAdditionalEffect()))
-        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000, attack->getElement());
 
     //Try interrupt
     if(damage > 0)
@@ -469,7 +473,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
                 timelineP2Pos -= 500;
             }
 
-            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Interrupt", "", 5000);
+            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Interrupt", "", 5000, attack->getElement());
         }
     }
 
@@ -484,7 +488,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
     {
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
-            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Miss", "", 5000);
+            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Miss", "", 5000, 0);
         return;
     }
 
@@ -498,6 +502,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
 
         if(attack->getPower() == 0)
         {
+            damage = 0;
             displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
         }
         else
@@ -515,6 +520,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
 
         if(attack->getPower() == 0)
         {
+            damage = 0;
             displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
         }
         else
@@ -534,12 +540,12 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
 
     defender->changeCurrentHealth(-1 * damage);
     if(damage > 0)
-        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000);
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000, attack->getElement());
     if(damage < 0)
-        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Heal", std::to_string(-1 * damage), 5000);
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Heal", std::to_string(-1 * damage), 5000, attack->getElement());
 
     if(defender->applyStatusEffect(attack->getAdditionalEffect()))
-        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
+        addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000, attack->getElement());
 
     //Try interrupt
     if(damage > 0)
@@ -556,7 +562,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
                 defender->stopCasting();
                 timelineP2Pos -= 500;
             }
-            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Interrupt", "", 5000);
+            addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Interrupt", "", 5000, attack->getElement());
         }
     }
 }
@@ -569,7 +575,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
     {
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
-            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Miss", "", 5000);
+            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Miss", "", 5000, 0);
         return;
     }
 
@@ -582,6 +588,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
 
         if(attack->getPower() == 0)
         {
+            damage = 0;
             displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
         }
         else
@@ -598,6 +605,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
 
         if(attack->getPower() == 0)
         {
+            damage = 0;
             displayMessage(attacker->getName() + " uses " + attack->getName() + "!");
         }
         else
@@ -617,21 +625,21 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
 
     defender->changeHealth(-1 * damage);
     if(damage > 0)
-        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000);
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000, attack->getElement());
     if(damage < 0)
-        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1 * damage), 5000);
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1 * damage), 5000, attack->getElement());
 
     if(defender->applyStatusEffect(attack->getAdditionalEffect()))
-        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000, attack->getElement());
     else
-        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Immune", "", 2000);
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Immune", "", 2000, attack->getElement());
 
     //Try interrupt
     if(damage > 0)
     {
         if(defender->tryInterrupt(500))
         {
-            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Interrupt", "", 5000);
+            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Interrupt", "", 5000, attack->getElement());
         }
     }
 }
@@ -778,7 +786,7 @@ void BattleModel::forceClearDisplayMessage()
     timeOfLastEvent =(millis) - durationOfMessage;
 }
 
-void BattleModel::addAboveHeadBattleMessage(bool enemy, int index, std::string key, std::string text, int duration)
+void BattleModel::addAboveHeadBattleMessage(bool enemy, int index, std::string key, std::string text, int duration, int element)
 {
     duration = 1000;
 
@@ -856,7 +864,9 @@ void BattleModel::addAboveHeadBattleMessage(bool enemy, int index, std::string k
                                       text,
                                       false,
                                       48.f,
-                                      255
+                                      getElementR(element),
+                                      getElementG(element),
+                                      getElementB(element)
                                       );
         aboveHeadBattleMessagesText.push_back(newMes);
     }
@@ -1052,11 +1062,60 @@ void BattleModel::checkIfEnemiesAreDead()
         }
         for(int i = 0; i < characters.size(); i++)
         {
-            characters.at(i)->changeXP(xpEarned);
+            if(characters.at(i)->getCurrentHealth() > 0)
+                characters.at(i)->changeXP(xpEarned);
         }
         this->lastXPEarned = xpEarned;
         BattleMenuState * temp = battleMenuState;
         battleMenuState = new BattleMenuStateBattleOver(this);
         delete temp;
     }
+}
+
+int BattleModel::getElementR(int ele)
+{
+    if(ele == 0 || ele == 7 || ele == 8 || ele == 9)
+        return 255;
+    if(ele == 1)
+        return 255;
+    if(ele == 3)
+        return 255;
+    if(ele == 6)
+        return 210;
+    if(ele == -1)
+        return 128;
+
+    return 0;
+}
+
+int BattleModel::getElementG(int ele)
+{
+    if(ele == 0 || ele == 7 || ele == 8 || ele == 9)
+        return 255;
+    if(ele == 2)
+        return 255;
+    if(ele == 3)
+        return 255;
+    if(ele == 5)
+        return 128;
+    if(ele == 6)
+        return 180;
+
+    return 0;
+}
+
+int BattleModel::getElementB(int ele)
+{
+    if(ele == 0 || ele == 7 || ele == 8 || ele == 9)
+        return 255;
+    if(ele == 2)
+        return 255;
+    if(ele == 4)
+        return 255;
+    if(ele == 6)
+        return 140;
+    if(ele == -1)
+        return 128;
+
+    return 0;
 }

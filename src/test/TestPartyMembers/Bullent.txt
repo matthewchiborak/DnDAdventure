@@ -24,3 +24,4 @@ Attack,Heal,2000,0,-10,100,Healing,2,0
 Attack,Arrow_Rain,2000,0,100,100,Attack_All_Enemies,0,0,None,1
 Attack,Haste_All,2000,0,0,100,MultitargetAllies,0,0,Poison,2
 Attack,CrossbowFire,1000,0,10,100,Basic Attack,0,1
+Attack,Buff_Self,2000,0,0,100,Self_Buff,0,0,AttackUp,3

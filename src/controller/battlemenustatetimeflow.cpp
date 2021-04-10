@@ -120,7 +120,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
                 }
                 int poiDam = model->getEnemies()->at(i)->justGotToEndOfTimeLine();
                 if(poiDam != 0)
-                    model->addAboveHeadBattleMessage(true, i, "Hurt", std::to_string(-1 * poiDam), 5000);
+                    model->addAboveHeadBattleMessage(true, i, "Hurt", std::to_string(-1 * poiDam), 5000, -1);
                 model->getEnemies()->at(i)->setTimeLinePos(0);
 
             }
@@ -180,7 +180,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
         }
         int poiDam = model->getCharacters()->at(0)->justGotToEndOfTimeLine();
         if(poiDam != 0)
-            model->addAboveHeadBattleMessage(false, 0, "Hurt", std::to_string(-1 * poiDam), 5000);
+            model->addAboveHeadBattleMessage(false, 0, "Hurt", std::to_string(-1 * poiDam), 5000, -1);
         model->setP1TimeLinePos(0);
     }
     if(model->getP2TimeLinePos() >= 1200)
@@ -218,7 +218,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
         }
         int poiDam = model->getCharacters()->at(1)->justGotToEndOfTimeLine();
         if(poiDam != 0)
-            model->addAboveHeadBattleMessage(false, 1, "Hurt", std::to_string(-1 * poiDam), 5000);
+            model->addAboveHeadBattleMessage(false, 1, "Hurt", std::to_string(-1 * poiDam), 5000, -1);
         model->setP2TimeLinePos(0);
     }
 

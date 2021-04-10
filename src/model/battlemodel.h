@@ -71,7 +71,7 @@ public:
     void displayMessage(std::string message);
     void forceClearDisplayMessage();
 
-    void addAboveHeadBattleMessage(bool enemy, int index, std::string key, std::string text, int duration);
+    void addAboveHeadBattleMessage(bool enemy, int index, std::string key, std::string text, int duration, int element);
 
     void incrementPartyGauge(bool isAttacking);
 
@@ -124,6 +124,10 @@ private:
     std::vector<AboveHeadBattleMessage> aboveHeadBattleMessagesText;
 
     void checkIfEnemiesAreDead();
+
+    int getElementR(int ele);
+    int getElementG(int ele);
+    int getElementB(int ele);
 };
 
 #endif // BATTLEMODEL_H

@@ -13,6 +13,11 @@ BattleMenuStateBattleOver::BattleMenuStateBattleOver(BattleModel * model)
 
 BattleMenuState *BattleMenuStateBattleOver::enterMenu()
 {
+    for(int i = 0; i < model->getCharacters()->size(); i++)
+    {
+        if(model->getCharacters()->at(i)->getCurrentHealth() <= 0)
+            model->getCharacters()->at(i)->setCurrentHealth(1);
+    }
     model->setBattleIsDoneManual(true);
     return this;
 }

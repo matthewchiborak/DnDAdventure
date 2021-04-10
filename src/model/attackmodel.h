@@ -30,7 +30,7 @@ private:
     int element; //0 = none, 1= fire, 2 = ice, 3 = Lightning, 4 = Water, 5 = Wind, 6 = Earth, 7 = Bash, 8 = Slash, 9 = Pierce
 
     int accuracy;
-    int multitarget; //0 = no, 1 = all enemeis, 2 = all allies
+    int multitarget; //0 = no, 1 = all enemeis, 2 = all allies, 3 = self
 
     std::string additionalEffect;
     //Poison, Sleep, Silence, Slow, Haste, AttackUp, etc.

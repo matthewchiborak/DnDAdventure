@@ -123,6 +123,11 @@ BattleMenuState *BattleMenuStateAttack::enterMenu()
                                                                                );
         return new BattleMenuStateTimeFlow(model);
     }
+    else if(model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(((currentPosX) * 5) + (currentPosY))->getMultitarget() == 3)
+    {
+        model->getCharacters()->at(model->getFocusPartyMember())->beginCasting(((currentPosX) * 5) + (currentPosY), model->getFocusPartyMember(), true);
+        return new BattleMenuStateTimeFlow(model);
+    }
 
     isSelectingTarget = true;
 
