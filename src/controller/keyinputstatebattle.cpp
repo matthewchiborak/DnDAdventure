@@ -51,6 +51,8 @@ bool KeyInputStateBattle::handleUserInput(std::string *nextState)
                 || keyToHandle == Qt::Key_D
                 || keyToHandle == Qt::Key_E
                 || keyToHandle == Qt::Key_Escape
+                || keyToHandle == Qt::Key_R
+                || keyToHandle == Qt::Key_Q
                 )
         {
             auto nowTime = std::chrono::system_clock::now().time_since_epoch();
@@ -71,6 +73,10 @@ bool KeyInputStateBattle::handleUserInput(std::string *nextState)
                 this->model->enterMenu("Battle");
             else if(keyToHandle == Qt::Key_Escape)
                 this->model->closeMenu("Battle");
+            else if(keyToHandle == Qt::Key_Q)
+                this->model->qrPressed(true);
+            else if(keyToHandle == Qt::Key_R)
+                this->model->qrPressed(false);
         }
 
         return false;

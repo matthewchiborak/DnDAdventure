@@ -16,6 +16,7 @@ public:
     virtual BattleMenuState * closeMenu();
     virtual BattleMenuState * passTime(float value);
     virtual void drawBattleMenu(std::vector<DrawInformation> * items);
+    virtual BattleMenuState * qrPressed(bool wasQ);
 
 protected:
     BattleModel * model;

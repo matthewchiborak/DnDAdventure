@@ -13,6 +13,7 @@ public:
     BattleMenuState * closeMenu();
     BattleMenuState * passTime(float value);
     void drawBattleMenu(std::vector<DrawInformation> * items);
+    BattleMenuState * qrPressed(bool wasQ);
 
 private:
     int currentPosX = 0;

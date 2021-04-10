@@ -128,3 +128,8 @@ bool ModelConcrete::isGameOver()
     return battleModel.isGameOver();
 }
 
+void ModelConcrete::qrPressed(bool wasQ)
+{
+    battleModel.qrPressed(wasQ);
+}
+

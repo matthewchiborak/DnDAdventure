@@ -234,6 +234,21 @@ void BattleMenuStateTimeFlow::drawBattleMenu(std::vector<DrawInformation> *items
     DrawInformation port2(250, -275, 150, 150, model->getCharacters()->at(1)->getMenuSpriteKey(), false);
     items->push_back(port2);
 
+    //Draw if can instant turn
+    if(model->getPartyGaugeValue() >= 250)
+    {
+        if(model->getP1TimeLinePos() < 1000 && model->getCharacters()->at(0)->getCurrentHealth() > 0)
+        {
+            DrawInformation port1(-300, -275 + 125, 25, 25, "InstantTurnR", false);
+            items->push_back(port1);
+        }
+        if(model->getP2TimeLinePos() < 1000 && model->getCharacters()->at(1)->getCurrentHealth() > 0)
+        {
+            DrawInformation port1(250, -275 + 125, 25, 25, "InstantTurnQ", false);
+            items->push_back(port1);
+        }
+    }
+
     //Status effects
     drawStatusEffects(items);
 
@@ -262,6 +277,32 @@ void BattleMenuStateTimeFlow::drawBattleMenu(std::vector<DrawInformation> *items
                          + std::to_string(model->getCharacters()->at(1)->getMaxMP())
                          , true);
     items->push_back(p2mp);
+}
+
+BattleMenuState *BattleMenuStateTimeFlow::qrPressed(bool wasQ)
+{
+    //instant turn
+    if(model->getPartyGaugeValue() >= 250)
+    {
+        if(!wasQ)
+        {
+            if(model->getP1TimeLinePos() < 1000 && model->getCharacters()->at(0)->getCurrentHealth() > 0)
+                model->setP1TimeLinePos(999);
+            else
+                return this;
+        }
+        else
+        {
+            if(model->getP2TimeLinePos() < 1000 && model->getCharacters()->at(1)->getCurrentHealth() > 0)
+                model->setP2TimeLinePos(999);
+            else
+                return this;
+        }
+
+        model->changePartyGaugeValue(-250);
+    }
+
+    return this;
 }
 
 void BattleMenuStateTimeFlow::drawStatusEffects(std::vector<DrawInformation> * items)

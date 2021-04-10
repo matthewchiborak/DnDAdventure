@@ -26,6 +26,7 @@ public:
     void passTime(float value);
     bool isBattleDone();
     bool isGameOver();
+    void qrPressed(bool wasQ);
 
 private:
     BoardModel boardModel;

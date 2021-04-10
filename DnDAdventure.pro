@@ -14,6 +14,8 @@ SOURCES += \
     src/controller/battlemenustate.cpp \
     src/controller/battlemenustateaccess.cpp \
     src/controller/battlemenustateattack.cpp \
+    src/controller/battlemenustatebattleover.cpp \
+    src/controller/battlemenustateflee.cpp \
     src/controller/battlemenustatemain.cpp \
     src/controller/battlemenustatespecial.cpp \
     src/controller/battlemenustateswitch.cpp \
@@ -74,6 +76,8 @@ HEADERS += \
     src/controller/battlemenustate.h \
     src/controller/battlemenustateaccess.h \
     src/controller/battlemenustateattack.h \
+    src/controller/battlemenustatebattleover.h \
+    src/controller/battlemenustateflee.h \
     src/controller/battlemenustatemain.h \
     src/controller/battlemenustatespecial.h \
     src/controller/battlemenustateswitch.h \

@@ -31,6 +31,7 @@ public:
     virtual void passTime(float value);
     virtual bool isBattleDone();
     virtual bool isGameOver();
+    virtual void qrPressed(bool wasQ);
 
     std::vector<PlayerCharacterStats*> playerCharacters;
 };

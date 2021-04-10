@@ -83,3 +83,8 @@ bool ModelAbstract::isGameOver()
     return false;
 }
 
+void ModelAbstract::qrPressed(bool wasQ)
+{
+
+}
+

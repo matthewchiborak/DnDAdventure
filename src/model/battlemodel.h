@@ -24,6 +24,7 @@ public:
     void load(std::string key, std::vector<PlayerCharacterStats*> * charactersInput, int *partyGaugeValue);
     void draw(std::vector<DrawInformation> * items);
     void passTime(float value);
+    void qrPressed(bool wasQ);
 
     void moveMenuCursor(int x, int y);
     void enterMenu();
@@ -64,6 +65,8 @@ public:
     bool isTheBattleDone();
     bool isGameOver();
     int getNumberOfEnemies();
+    void setBattleIsDoneManual(bool status);
+    void setGameIsOverManual(bool status);
 
     void displayMessage(std::string message);
     void forceClearDisplayMessage();
@@ -80,6 +83,7 @@ public:
     void setEnemyToAccess(int index);
     EnemyModel * getEnemyToAccess();
 
+    int getLastXPEarned();
 
 private:
     //factory for building the enounter
@@ -93,7 +97,7 @@ private:
     int indexOfEnemyAccesing = 0;
 
     int * partyGaugeValue;
-    const int partyGaugeIncrementAttack = 1000;
+    const int partyGaugeIncrementAttack = 20;
     const int partyGaugeIncrementHit = 40;
 
     //vector of enemies
@@ -113,6 +117,8 @@ private:
 
     bool battleIsDone = false;
     bool gameOver = false;
+    int lastXPEarned = 0;
+    bool enteredBattleOverState = false;
 
     std::vector<AboveHeadBattleMessage> aboveHeadBattleMessages;
     std::vector<AboveHeadBattleMessage> aboveHeadBattleMessagesText;

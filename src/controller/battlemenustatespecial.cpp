@@ -142,12 +142,12 @@ BattleMenuState *BattleMenuStateSpecial::passTime(float value)
 
 void BattleMenuStateSpecial::drawBattleMenu(std::vector<DrawInformation> *items)
 {
+    //Top Text Box
+    DrawInformation topTextBox(-700, 350, 1500, 140, "BattleMenuBG", false);
+    items->push_back(topTextBox);
+
     if(isSelecting)
     {
-        //Top Text Box
-        DrawInformation topTextBox(-700, 350, 1500, 140, "BattleMenuBG", false);
-        items->push_back(topTextBox);
-
         drawEnemyStatusEffect(items);
 
         int currentTarget = accessPos;
@@ -185,6 +185,42 @@ void BattleMenuStateSpecial::drawBattleMenu(std::vector<DrawInformation> *items)
                                    );
         items->push_back(attackDesc);
     }
+    else
+    {
+        //Need top descriptions
+        if(currentPos == 0)
+        {
+            DrawInformation attackDesc(0, 10, 1500, 140, "",
+                                    false,
+                                       "Reveal information about an enemy"
+                                       );
+            items->push_back(attackDesc);
+        }
+        else if(currentPos == 1)
+        {
+            DrawInformation attackDesc(0, 10, 1500, 140, "",
+                                    false,
+                                       "Revive all defeated allies"
+                                       );
+            items->push_back(attackDesc);
+        }
+        else if(currentPos == 2)
+        {
+            DrawInformation attackDesc(0, 10, 1500, 140, "",
+                                    false,
+                                       "Instantly deal massive damage to all enemies"
+                                       );
+            items->push_back(attackDesc);
+        }
+        else if(currentPos == 3)
+        {
+            DrawInformation attackDesc(0, 10, 1500, 140, "",
+                                    false,
+                                       "Massively increase attack, magic, and speed for 20 seconds"
+                                       );
+            items->push_back(attackDesc);
+        }
+    }
 
     DrawInformation accessText(435, (630 + ((0) * 50)), 400, 75, "",
                             false, "Access   (1 BAR)"
@@ -205,6 +241,11 @@ void BattleMenuStateSpecial::drawBattleMenu(std::vector<DrawInformation> *items)
 
     DrawInformation mainCursor(405, 630 + ((currentPos) * 50), 75, 75, "", false, ">", true, 36);
     items->push_back(mainCursor);
+}
+
+BattleMenuState *BattleMenuStateSpecial::qrPressed(bool wasQ)
+{
+    return this;
 }
 
 void BattleMenuStateSpecial::drawEnemyStatusEffect(std::vector<DrawInformation> *items)

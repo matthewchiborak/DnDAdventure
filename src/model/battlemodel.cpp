@@ -8,6 +8,7 @@
 #include "playercharacterstatsbattle.h"
 #include "attackmodel.h"
 #include "../display/aboveheadbattlemessage.h"
+#include "../controller/battlemenustatebattleover.h"
 
 #include <QDir>
 #include <QDebug>
@@ -35,6 +36,7 @@ void BattleModel::clear()
 
     battleIsDone = false;
     gameOver = false;
+    enteredBattleOverState = false;
     timelineP1Pos = 0;
     timelineP2Pos = 0;
 
@@ -102,12 +104,12 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     DrawInformation timeline(-600, -70, 1200, 20, "TimeLine", false);
     items->push_back(timeline);
 
-    if(characters.at(0)->getCurrentHealth() > 0)
+    if(characters.at(0)->getCurrentHealth() > 0 && characters.at(0)->getIsVisible())
     {
         DrawInformation player1(-300, 100, 200, 200, characters.at(0)->getSpriteKey(), false);
         items->push_back(player1);
     }
-    if(characters.at(1)->getCurrentHealth() > 0)
+    if(characters.at(1)->getCurrentHealth() > 0 && characters.at(1)->getIsVisible())
     {
         DrawInformation player2(-500, 0, 200, 200, characters.at(1)->getSpriteKey(), false);
         items->push_back(player2);
@@ -239,6 +241,11 @@ void BattleModel::passTime(float value)
     }
 
     checkIfEnemiesAreDead();
+}
+
+void BattleModel::qrPressed(bool wasQ)
+{
+    battleMenuState->qrPressed(wasQ);
 }
 
 void BattleModel::moveMenuCursor(int x, int y)
@@ -730,6 +737,16 @@ int BattleModel::getNumberOfEnemies()
     return numberOfEnemies;
 }
 
+void BattleModel::setBattleIsDoneManual(bool status)
+{
+    battleIsDone = status;
+}
+
+void BattleModel::setGameIsOverManual(bool status)
+{
+    gameOver = status;
+}
+
 void BattleModel::displayMessage(std::string message)
 {
     messageToDisplay = message;
@@ -741,6 +758,7 @@ void BattleModel::displayMessage(std::string message)
 
 void BattleModel::forceClearDisplayMessage()
 {
+    messageToDisplay = "";
     auto nowTime = std::chrono::system_clock::now().time_since_epoch();
     auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(nowTime).count();
     timeOfLastEvent =(millis) - durationOfMessage;
@@ -968,9 +986,14 @@ EnemyModel *BattleModel::getEnemyToAccess()
     return enemies.at(indexOfEnemyAccesing);
 }
 
+int BattleModel::getLastXPEarned()
+{
+    return lastXPEarned;
+}
+
 void BattleModel::checkIfEnemiesAreDead()
 {
-    if(battleIsDone)
+    if(battleIsDone || enteredBattleOverState)
         return;
 
     int characterCount = 0;
@@ -984,8 +1007,11 @@ void BattleModel::checkIfEnemiesAreDead()
 
     if(deadCount >= characterCount)
     {
+        enteredBattleOverState = true;
         gameOver = true;
-        battleIsDone = true;
+        BattleMenuState * temp = battleMenuState;
+        battleMenuState = new BattleMenuStateBattleOver(this);
+        delete temp;
     }
     else
     {
@@ -1003,6 +1029,8 @@ void BattleModel::checkIfEnemiesAreDead()
 
     if(deadEnemyCount >= numberOfEnemies)
     {
+        enteredBattleOverState = true;
+
         int xpEarned = 0;
         for(int i = 0; i < numberOfEnemies; i++)
         {
@@ -1012,7 +1040,9 @@ void BattleModel::checkIfEnemiesAreDead()
         {
             characters.at(i)->changeXP(xpEarned);
         }
-        displayMessage("VICTORY! Experience earned: " + std::to_string(xpEarned));
-        battleIsDone = true;
+        this->lastXPEarned = xpEarned;
+        BattleMenuState * temp = battleMenuState;
+        battleMenuState = new BattleMenuStateBattleOver(this);
+        delete temp;
     }
 }

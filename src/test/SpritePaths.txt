@@ -52,3 +52,5 @@ EarthIcon,EarthIcon.png
 BluntIcon,BluntIcon.png
 SlashIcon,SlashIcon.png
 PierceIcon,PierceIcon.png
+InstantTurnQ,InstantTurnQ.png
+InstantTurnR,InstantTurnR.png

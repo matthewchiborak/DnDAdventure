@@ -1,20 +1,20 @@
-#ifndef BATTLEMENUSTATEACCESS_H
-#define BATTLEMENUSTATEACCESS_H
+#ifndef BATTLEMENUSTATEFLEE_H
+#define BATTLEMENUSTATEFLEE_H
 
 #include "battlemenustate.h"
 
-class BattleMenuStateAccess : public BattleMenuState
+class BattleMenuStateFlee : public BattleMenuState
 {
 public:
-    BattleMenuStateAccess(BattleModel * model);
-
-    void moveMenuCursor(int x, int y);
+    BattleMenuStateFlee(BattleModel * model);
     BattleMenuState * enterMenu();
     BattleMenuState * closeMenu();
     BattleMenuState * passTime(float value);
     void drawBattleMenu(std::vector<DrawInformation> * items);
     BattleMenuState * qrPressed(bool wasQ);
 
+private:
+    void drawStatusEffects(std::vector<DrawInformation> *items);
 };
 
-#endif // BATTLEMENUSTATEACCESS_H
+#endif // BATTLEMENUSTATEFLEE_H

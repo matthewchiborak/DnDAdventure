@@ -57,6 +57,9 @@ public:
 
     StatusEffectModel * getStatusEffectModel();
 
+    void setIsVisible(bool newIsVisible);
+    bool getIsVisible();
+
 private:
     PlayerCharacterStats * stats;
 
@@ -68,6 +71,8 @@ private:
 
     //Effects to apply to stat retrieval
     StatusEffectModel statusEffectModel;
+
+    bool isVisible = true;
 };
 
 #endif // PLAYERCHARACTERSTATSBATTLE_H

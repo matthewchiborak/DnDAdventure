@@ -239,6 +239,11 @@ void BattleMenuStateAttack::drawBattleMenu(std::vector<DrawInformation> *items)
     }
 }
 
+BattleMenuState *BattleMenuStateAttack::qrPressed(bool wasQ)
+{
+    return this;
+}
+
 void BattleMenuStateAttack::drawEnemyStatusEffect(std::vector<DrawInformation> *items)
 {
     /*    DrawInformation topTextBox(-700, 350, 1500, 140, "BattleMenuBG", false);

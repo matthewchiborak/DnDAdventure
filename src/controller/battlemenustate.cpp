@@ -30,3 +30,8 @@ void BattleMenuState::drawBattleMenu(std::vector<DrawInformation> *items)
 {
 
 }
+
+BattleMenuState *BattleMenuState::qrPressed(bool wasQ)
+{
+    return nullptr;
+}

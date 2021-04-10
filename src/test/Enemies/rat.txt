@@ -1,6 +1,6 @@
 Name,Big_Rat
 Level,1
-HP,100
+HP,10
 Att,230
 Def,15
 MAtt,10

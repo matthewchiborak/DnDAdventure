@@ -3,6 +3,7 @@
 PlayerCharacterStatsBattle::PlayerCharacterStatsBattle(PlayerCharacterStats *characterInfo)
 {
     this->stats = characterInfo;
+    this->isVisible = true;
 }
 
 void PlayerCharacterStatsBattle::applyTime(float t)
@@ -236,6 +237,16 @@ void PlayerCharacterStatsBattle::cureAllStatusEffects()
 StatusEffectModel *PlayerCharacterStatsBattle::getStatusEffectModel()
 {
     return &statusEffectModel;
+}
+
+void PlayerCharacterStatsBattle::setIsVisible(bool newIsVisible)
+{
+    isVisible = newIsVisible;
+}
+
+bool PlayerCharacterStatsBattle::getIsVisible()
+{
+    return isVisible;
 }
 
 

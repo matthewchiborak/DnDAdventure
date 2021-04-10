@@ -1,77 +1,34 @@
-#include "battlemenustatemain.h"
-
-#include "../display/drawinformation.h"
-#include "../model/battlemodel.h"
-#include "../model/playercharacterstats.h"
-#include "battlemenustateswitch.h"
-#include "battlemenustateattack.h"
-#include "battlemenustatetimeflow.h"
-#include "battlemenustatespecial.h"
-#include "../model/playercharacterstatsbattle.h"
 #include "battlemenustateflee.h"
-#include <QDebug>
 
-BattleMenuStateMain::BattleMenuStateMain(BattleModel *model)
+#include "../model/battlemodel.h"
+
+#include "../model/playercharacterstatsbattle.h"
+
+BattleMenuStateFlee::BattleMenuStateFlee(BattleModel *model)
     : BattleMenuState(model)
 {
-
+    model->forceClearDisplayMessage();
 }
 
-void BattleMenuStateMain::moveMenuCursor(int x, int y)
+BattleMenuState *BattleMenuStateFlee::enterMenu()
 {
-    currentPos += y;
-
-    if(currentPos > 4)
-        currentPos = 0;
-    if(currentPos < 0)
-        currentPos = 4;
-}
-
-BattleMenuState *BattleMenuStateMain::enterMenu()
-{
-    if(currentPos == 4)
-        return new BattleMenuStateAttack(model);
-    if(currentPos == 3)
-    {
-        model->getCharacters()->at(model->getFocusPartyMember())->getStatusEffectModel()->guard = true;
-        return new BattleMenuStateTimeFlow(model);
-    }
-    if(currentPos == 2)
-        return new BattleMenuStateSpecial(model);
-    if(currentPos == 1)
-        return new BattleMenuStateSwitch(model);
-    if(currentPos == 0)
-    {
-        if((rand()%2) == 1)
-        {
-            model->displayMessage("Failed to escape");
-            return new BattleMenuStateTimeFlow(model);
-        }
-        else
-        {
-            for(int i = 0; i < model->getCharacters()->size(); i++)
-            {
-                model->getCharacters()->at(i)->setIsVisible(false);
-            }
-            return new BattleMenuStateFlee(model);
-        }
-    }
-
+    model->setBattleIsDoneManual(true);
     return this;
 }
 
-BattleMenuState *BattleMenuStateMain::closeMenu()
+BattleMenuState *BattleMenuStateFlee::closeMenu()
 {
     return this;
 }
 
-BattleMenuState *BattleMenuStateMain::passTime(float value)
+BattleMenuState *BattleMenuStateFlee::passTime(float value)
 {
     return this;
 }
 
-void BattleMenuStateMain::drawBattleMenu(std::vector<DrawInformation> *items)
+void BattleMenuStateFlee::drawBattleMenu(std::vector<DrawInformation> *items)
 {
+
     //Character portraits
     //images first
     DrawInformation port1(-300, -275, 150, 150, model->getCharacters()->at(0)->getMenuSpriteKey(), false);
@@ -79,7 +36,16 @@ void BattleMenuStateMain::drawBattleMenu(std::vector<DrawInformation> *items)
     DrawInformation port2(250, -275, 150, 150, model->getCharacters()->at(1)->getMenuSpriteKey(), false);
     items->push_back(port2);
 
+    DrawInformation topTextBox(-700, 350, 1500, 140, "BattleMenuBG", false);
+    items->push_back(topTextBox);
+
     drawStatusEffects(items);
+
+    DrawInformation attackDesc(0, 10, 1500, 140, "",
+                            false,
+                               "Successfully got away"
+                               );
+    items->push_back(attackDesc);
 
     //Default menu text
     DrawInformation p1Name(625, 620, 300, 75, "", false, model->getCharacters()->at(0)->getName(), true);
@@ -107,16 +73,16 @@ void BattleMenuStateMain::drawBattleMenu(std::vector<DrawInformation> *items)
                          , true);
     items->push_back(p2mp);
 
-    DrawInformation mainCursor(50, 637 + ((4 - currentPos) * 50), 75, 75, "", false, ">", true, 36);
+    DrawInformation mainCursor(50, 637 + ((4 - 0) * 50), 75, 75, "", false, ">", true, 36);
     items->push_back(mainCursor);
 }
 
-BattleMenuState *BattleMenuStateMain::qrPressed(bool wasQ)
+BattleMenuState *BattleMenuStateFlee::qrPressed(bool wasQ)
 {
     return this;
 }
 
-void BattleMenuStateMain::drawStatusEffects(std::vector<DrawInformation> *items)
+void BattleMenuStateFlee::drawStatusEffects(std::vector<DrawInformation> *items)
 {
     int p1UpperStatusCount = 0;
     int p1LowerStatusCount = 0;

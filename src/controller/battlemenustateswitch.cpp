@@ -90,3 +90,8 @@ void BattleMenuStateSwitch::drawBattleMenu(std::vector<DrawInformation> *items)
     DrawInformation mainCursor(425 + (550 * currentPos), 635, 75, 75, "", false, ">", true);
     items->push_back(mainCursor);
 }
+
+BattleMenuState *BattleMenuStateSwitch::qrPressed(bool wasQ)
+{
+    return this;
+}
