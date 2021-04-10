@@ -176,28 +176,28 @@ void BattleMenuStateAttack::drawBattleMenu(std::vector<DrawInformation> *items)
         {
             if(currentTarget == 0)
             {
-                DrawInformation en(700+300, 300+50, 75, 75, "", false, ">", true);
+                DrawInformation en(700+300, 300+50-25, 75, 75, "", false, ">", true);
                 //DrawInformation en(300, 50, 75, 75, "", false, ">", true);
                 items->push_back(en);
             }
             else if(currentTarget == 1)
             {
-                DrawInformation en(700+100, 200+200, 75, 75, "", false, ">", true);
+                DrawInformation en(700+100, 200+200-25, 75, 75, "", false, ">", true);
                 items->push_back(en);
             }
             else if(currentTarget == 2)
             {
-                DrawInformation en(700+500, 200+200, 75, 75, "", false, ">", true);
+                DrawInformation en(700+500, 200+200-25, 75, 75, "", false, ">", true);
                 items->push_back(en);
             }
             else if(currentTarget == 3)
             {
-                DrawInformation en(700+100, 200+0, 75, 75, "", false, ">", true);
+                DrawInformation en(700+100, 200+0-25, 75, 75, "", false, ">", true);
                 items->push_back(en);
             }
             else if(currentTarget == 4)
             {
-                DrawInformation en(700+500, 200+0, 75, 75, "", false, ">", true);
+                DrawInformation en(700+500, 200+0-25, 75, 75, "", false, ">", true);
                 items->push_back(en);
             }
 

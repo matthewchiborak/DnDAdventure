@@ -16,6 +16,11 @@ public:
 
 private:
     int currentPos = 0;
+    int accessPos = 0;
+
+    bool isSelecting = false;
+
+    void drawEnemyStatusEffect(std::vector<DrawInformation> * items);
 };
 
 #endif // BATTLEMENUSTATESPECIAL_H

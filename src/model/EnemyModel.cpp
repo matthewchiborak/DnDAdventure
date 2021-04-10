@@ -229,6 +229,77 @@ float EnemyModel::getElementalMultiplier(int element)
     return 1.f;
 }
 
+std::string EnemyModel::getElementalString(int element)
+{
+    for(int i = 0; i < weaknesses.size(); i++)
+    {
+        if(weaknesses.at(i) == element)
+            return "Weakness";
+    }
+    for(int i = 0; i < resistances.size(); i++)
+    {
+        if(resistances.at(i) == element)
+            return "Resist";
+    }
+    for(int i = 0; i < halved.size(); i++)
+    {
+        if(halved.at(i) == element)
+            return "Halved";
+    }
+    for(int i = 0; i < immunities.size(); i++)
+    {
+        if(immunities.at(i) == element)
+            return "Immune";
+    }
+    for(int i = 0; i < absorbed.size(); i++)
+    {
+        if(absorbed.at(i) == element)
+            return "Absorbed";
+    }
+
+    return "Normal";
+}
+
+void EnemyModel::getRGB(std::string word, int *r, int *g, int *b)
+{
+    if(word == "Weakness")
+    {
+        (*r) = 0;
+        (*g) = 255;
+        (*b) = 0;
+    }
+    else if(word == "Resist")
+    {
+        (*r) = 255;
+        (*g) = 165;
+        (*b) = 0;
+    }
+    else if(word == "Halved")
+    {
+        (*r) = 255;
+        (*g) = 255;
+        (*b) = 0;
+    }
+    else if(word == "Immune")
+    {
+        (*r) = 255;
+        (*g) = 0;
+        (*b) = 0;
+    }
+    else if(word == "Absorbed")
+    {
+        (*r) = 0;
+        (*g) = 0;
+        (*b) = 255;
+    }
+    else
+    {
+        (*r) = 0;
+        (*g) = 0;
+        (*b) = 0;
+    }
+}
+
 void EnemyModel::addAttack(AttackModel *newAtt)
 {
     attacks.push_back(newAtt);
@@ -278,9 +349,26 @@ bool EnemyModel::getAttackTargetAlly()
     return attackTargetAlly;
 }
 
-void EnemyModel::applyStatusEffect(std::string se)
+bool EnemyModel::applyStatusEffect(std::string se)
 {
+    //Check if immune
+    if(isImmuneToThis(se))
+        return false;
+
     statusEffectModel.applyStatusEffect(se);
+
+    return true;
+}
+
+bool EnemyModel::isImmuneToThis(std::string se)
+{
+    for(int i = 0; i < statusImmunities.size(); i++)
+    {
+        if(statusImmunities.at(i) == se)
+            return true;
+    }
+
+    return false;
 }
 
 StatusEffectModel *EnemyModel::getStatusEffectModel()
@@ -304,4 +392,9 @@ bool EnemyModel::tryInterrupt(float amount)
 void EnemyModel::setTarget(int value)
 {
     attackTarget = value;
+}
+
+void EnemyModel::addStatusImmunity(std::string value)
+{
+    statusImmunities.push_back(value);
 }

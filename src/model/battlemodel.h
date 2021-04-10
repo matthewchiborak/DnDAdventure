@@ -77,6 +77,9 @@ public:
 
     void activateSuper(int focusCharacter);
 
+    void setEnemyToAccess(int index);
+    EnemyModel * getEnemyToAccess();
+
 
 private:
     //factory for building the enounter
@@ -86,6 +89,8 @@ private:
     float timelineP1Pos = 0; // scale of 0-1200. 1000 being the attack time?
     float timelineP2Pos = 0;
     const float timeLineOffset = -618;
+
+    int indexOfEnemyAccesing = 0;
 
     int * partyGaugeValue;
     const int partyGaugeIncrementAttack = 1000;

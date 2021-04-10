@@ -54,6 +54,8 @@ public:
     void changeHealth(int amount);
 
     float getElementalMultiplier(int element);
+    std::string getElementalString(int element);
+    void getRGB(std::string word, int * r, int * g, int * b);
 
     void addAttack(AttackModel * newAtt);
     std::vector<AttackModel*> * getAttacks();
@@ -65,13 +67,16 @@ public:
     int getAttackTarget();
     bool getAttackTargetAlly();
 
-    void applyStatusEffect(std::string se);
+    bool applyStatusEffect(std::string se);
+    bool isImmuneToThis(std::string se);
 
     StatusEffectModel * getStatusEffectModel();
 
     bool tryInterrupt(float amount);
 
     void setTarget(int value);
+
+    void addStatusImmunity(std::string value);
 
 private:
     int level;
@@ -88,6 +93,7 @@ private:
     int xp;
 
     std::vector<AttackModel*> attacks;
+    std::vector<std::string> statusImmunities;
 
     bool isCasting = false;
     int attackIndex = 0;

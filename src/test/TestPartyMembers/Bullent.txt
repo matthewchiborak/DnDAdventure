@@ -18,7 +18,7 @@ IVMDef,0
 IVSpeed,31
 Attack,Crossbow,1000,0,10,100,Basic Attack,0,0
 Attack,BigCrossBow6,4000,20,20,100,Big Basic Attack6,0,0
-Attack,Poison_Bolt,1000,0,0,50,Basic Attack2,0,0,Poison
+Attack,Poison_Bolt,1000,0,0,100,Basic Attack2,0,0,Poison
 Attack,Heal,2000,0,-10,100,Healing,2,0
 Attack,Arrow_Rain,2000,0,100,100,Attack_All_Enemies,0,0,None,1
 Attack,Haste_All,2000,0,0,100,MultitargetAllies,0,0,Poison,2

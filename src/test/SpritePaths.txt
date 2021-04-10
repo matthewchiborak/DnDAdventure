@@ -42,3 +42,13 @@ SESilence,SESilence.png
 Guard,Guard.png
 GaugeMarker,GaugeMarker.png
 Overdrive,Overdrive.png
+AccessBG,AccessBG.png
+FireIcon,FireIcon.png
+IceIcon,IceIcon.png
+LightningIcon,LightningIcon.png
+WaterIcon,WaterIcon.png
+WindIcon,WindIcon.png
+EarthIcon,EarthIcon.png
+BluntIcon,BluntIcon.png
+SlashIcon,SlashIcon.png
+PierceIcon,PierceIcon.png

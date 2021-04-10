@@ -64,6 +64,8 @@ EnemyModel *EnemyFactory::createEnemy(std::string key)
             newEnemy->addImmunity(std::stoi(splits.at(1)));
         if(splits.at(0) == "Absorb")
             newEnemy->addAbsorbed(std::stoi(splits.at(1)));
+        if(splits.at(0) == "StatusImmune")
+            newEnemy->addStatusImmunity(splits.at(1));
     }
 
     return newEnemy;

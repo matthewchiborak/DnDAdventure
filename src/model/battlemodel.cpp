@@ -362,8 +362,10 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000);
     if(damage < 0)
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000);
-    defender->applyStatusEffect(attack->getAdditionalEffect());
-    addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
+    if(defender->applyStatusEffect(attack->getAdditionalEffect()))
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
+    else
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Immune", "", 2000);
 
     //Try interrupt
     if(damage > 0)
@@ -598,8 +600,10 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
     if(damage < 0)
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1 * damage), 5000);
 
-    defender->applyStatusEffect(attack->getAdditionalEffect());
-    addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
+    if(defender->applyStatusEffect(attack->getAdditionalEffect()))
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000);
+    else
+        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Immune", "", 2000);
 
     //Try interrupt
     if(damage > 0)
@@ -755,28 +759,28 @@ void BattleModel::addAboveHeadBattleMessage(bool enemy, int index, std::string k
     {
         if(index == 0)
         {
-            textX = 700+300;
-            textY = 300+50;
+            textX = 700+300+50;
+            textY = 300+50-25;
         }
         else if(index == 1)
         {
-            textX = 700+100;
-            textY = 200+200;
+            textX = 700+100+50;
+            textY = 200+200-25;
         }
         else if(index == 2)
         {
-            textX = 700+500;
-            textY = 200+200;
+            textX = 700+500+50;
+            textY = 200+200-25;
         }
         else if(index == 3)
         {
-            textX = 700+100;
-            textY = 200+0;
+            textX = 700+100+50;
+            textY = 200+0-25;
         }
         else if(index == 4)
         {
-            textX = 700+500;
-            textY = 200+0;
+            textX = 700+500+50;
+            textY = 200+0-25;
         }
     }
     else
@@ -860,6 +864,7 @@ void BattleModel::addAboveHeadBattleMessage(bool enemy, int index, std::string k
     else if(key == "Poison"
             || key == "Sleep"
             || key == "Silence"
+            || key == "Immune"
             )
     {
         AboveHeadBattleMessage newMes(2000,
@@ -951,6 +956,16 @@ void BattleModel::activateSuper(int focusCharacter)
 {
     AttackModel superAttack("Attack,Super_Attack,1,0," + std::to_string(characters.at(focusCharacter)->getLevel() * 50) + ",100,Attack_All_Enemies,0,0,None,1");
     applyAttackAllEnemies(characters.at(focusCharacter), &superAttack);
+}
+
+void BattleModel::setEnemyToAccess(int index)
+{
+    indexOfEnemyAccesing = index;
+}
+
+EnemyModel *BattleModel::getEnemyToAccess()
+{
+    return enemies.at(indexOfEnemyAccesing);
 }
 
 void BattleModel::checkIfEnemiesAreDead()

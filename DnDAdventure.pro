@@ -12,6 +12,7 @@ LIBS+ = -lGL -lGLU
 
 SOURCES += \
     src/controller/battlemenustate.cpp \
+    src/controller/battlemenustateaccess.cpp \
     src/controller/battlemenustateattack.cpp \
     src/controller/battlemenustatemain.cpp \
     src/controller/battlemenustatespecial.cpp \
@@ -71,6 +72,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     src/controller/battlemenustate.h \
+    src/controller/battlemenustateaccess.h \
     src/controller/battlemenustateattack.h \
     src/controller/battlemenustatemain.h \
     src/controller/battlemenustatespecial.h \

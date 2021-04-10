@@ -11,3 +11,15 @@ Sprite,Rat
 Attack,Bite,2000,0,100,100,Basic Attack,0,0
 Attack,Scratch,6000,0,100,100,Basic Attack,0,0
 Absorb,1
+Weak,2
+Res,3
+Half,4
+Immune,5
+StatusImmune,Poison
+StatusImmune,Sleep
+StatusImmune,AttackDown
+StatusImmune,DefenceDown
+StatusImmune,MagicDown
+StatusImmune,MagicDefenceDown
+StatusImmune,Slow
+StatusImmune,Silence
