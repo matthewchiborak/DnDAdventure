@@ -1,5 +1,7 @@
 #include "EnemyModel.h"
 
+#include <cmath>
+
 EnemyModel::EnemyModel(int maxHP, int att, int def, int mAtt, int mDef, int speed)
 {
     this->maxHealth = maxHP;
@@ -163,9 +165,16 @@ int EnemyModel::getSpeed()
     return speed;
 }
 
-int EnemyModel::getXP()
+int EnemyModel::getXP(int playerLevel)
 {
-    return xp;
+    int fixedPlayerLevel = playerLevel + 15;
+    int fixedLevel = level + 15;
+    //What was loaded was the base. Use the formula
+    float firstValue = (1 * xp * (fixedLevel)) / (5 * 1);
+    float secondValue = (std::powf((2*fixedLevel) + 10, 2.5f)) / (std::powf(fixedLevel + fixedPlayerLevel + 10, 2.5f));
+    return ((firstValue * secondValue) + 1) * 1 * 1 * 1;
+
+    //return xp;
 }
 
 std::string EnemyModel::getSpriteKey()

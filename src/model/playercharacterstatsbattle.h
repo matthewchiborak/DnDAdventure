@@ -34,7 +34,7 @@ public:
 
     void setLevel(int lvl);
     void setXP(int xp);
-    void changeXP(int amount);
+    bool changeXP(int amount);
     void setCurrentHealth(int hp);
     void changeCurrentHealth(int amount);
     void changeCurrentMP(int amount);

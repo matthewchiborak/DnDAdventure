@@ -151,9 +151,9 @@ void PlayerCharacterStatsBattle::setXP(int xp)
     stats->setXP(xp);
 }
 
-void PlayerCharacterStatsBattle::changeXP(int amount)
+bool PlayerCharacterStatsBattle::changeXP(int amount)
 {
-    stats->changeXP(amount);
+    return stats->changeXP(amount);
 }
 
 void PlayerCharacterStatsBattle::setCurrentHealth(int hp)

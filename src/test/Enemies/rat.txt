@@ -6,7 +6,7 @@ Def,15
 MAtt,10
 MDef,15
 Speed,100
-XP,5
+XP,51
 Sprite,Rat
 Attack,Bite,2000,0,10,100,Basic Attack,0,1,Poison,50
 Attack,Scratch,6000,0,10,100,Basic Attack,0,1,Poison,50

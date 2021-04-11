@@ -13,6 +13,12 @@ BattleMenuStateBattleOver::BattleMenuStateBattleOver(BattleModel * model)
 
 BattleMenuState *BattleMenuStateBattleOver::enterMenu()
 {
+    if(model->getAdvanceDialogLines()->size() > 1)
+    {
+        model->getAdvanceDialogLines()->pop();
+        return this;
+    }
+
     for(int i = 0; i < model->getCharacters()->size(); i++)
     {
         if(model->getCharacters()->at(i)->getCurrentHealth() <= 0)
@@ -51,7 +57,7 @@ void BattleMenuStateBattleOver::drawBattleMenu(std::vector<DrawInformation> *ite
     {
         DrawInformation attackDesc(0, 10, 1500, 140, "",
                                 false,
-                                   "GAME OVER"
+                                   model->getAdvanceDialogLines()->front()
                                    );
         items->push_back(attackDesc);
     }
@@ -59,7 +65,7 @@ void BattleMenuStateBattleOver::drawBattleMenu(std::vector<DrawInformation> *ite
     {
         DrawInformation attackDesc(0, 10, 1500, 140, "",
                                 false,
-                                   "VICTORY! Experience earned: " + std::to_string(model->getLastXPEarned())
+                                   model->getAdvanceDialogLines()->front()
                                    );
         items->push_back(attackDesc);
     }

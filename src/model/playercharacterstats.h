@@ -32,7 +32,8 @@ public:
 
     void setLevel(int lvl);
     void setXP(int xp);
-    void changeXP(int amount);
+    bool changeXP(int amount); //returns true if caused level up
+    int getNextLevelXP();
     void setCurrentHealth(int hp);
     void changeCurrentHealth(int amount);
     void changeCurrentMP(int mp);

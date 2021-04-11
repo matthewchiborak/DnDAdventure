@@ -40,6 +40,9 @@ void BattleModel::clear()
     timelineP1Pos = 0;
     timelineP2Pos = 0;
 
+    while(!advanceDialogLines.empty())
+        advanceDialogLines.pop();
+
     //Clear the vectory. Reset timeline position
     for(int i = 0; i < enemies.size(); i++)
     {
@@ -1058,6 +1061,16 @@ void BattleModel::useARemedy()
     }
 }
 
+void BattleModel::addAdvanceDialogLine(std::string line)
+{
+    advanceDialogLines.push(line);
+}
+
+std::queue<std::string> *BattleModel::getAdvanceDialogLines()
+{
+    return &advanceDialogLines;
+}
+
 void BattleModel::checkIfEnemiesAreDead()
 {
     if(battleIsDone || enteredBattleOverState)
@@ -1076,6 +1089,7 @@ void BattleModel::checkIfEnemiesAreDead()
     {
         enteredBattleOverState = true;
         gameOver = true;
+        addAdvanceDialogLine("GAME OVER");
         BattleMenuState * temp = battleMenuState;
         battleMenuState = new BattleMenuStateBattleOver(this);
         delete temp;
@@ -1101,12 +1115,20 @@ void BattleModel::checkIfEnemiesAreDead()
         int xpEarned = 0;
         for(int i = 0; i < numberOfEnemies; i++)
         {
-            xpEarned += enemies.at(i)->getXP();
+            xpEarned += enemies.at(i)->getXP(characters.at(0)->getLevel());
         }
+
+        addAdvanceDialogLine("VICTORY! Experience earned: " + std::to_string(xpEarned));
+
         for(int i = 0; i < characters.size(); i++)
         {
             if(characters.at(i)->getCurrentHealth() > 0)
-                characters.at(i)->changeXP(xpEarned);
+            {
+                if(characters.at(i)->changeXP(xpEarned))
+                {
+                    addAdvanceDialogLine(characters.at(i)->getName() + " grew to level " + std::to_string(characters.at(i)->getLevel()) + "!");
+                }
+            }
         }
         this->lastXPEarned = xpEarned;
         BattleMenuState * temp = battleMenuState;

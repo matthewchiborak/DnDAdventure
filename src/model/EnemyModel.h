@@ -45,7 +45,7 @@ public:
     int getMagicAttack();
     int getMagicDefence();
     int getSpeed();
-    int getXP();
+    int getXP(int playerLevel);
     std::string getSpriteKey();
     std::string getName();
     float getTimeLinePos();

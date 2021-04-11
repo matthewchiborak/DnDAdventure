@@ -91,6 +91,9 @@ public:
     void useAPotion();
     void useARemedy();
 
+    void addAdvanceDialogLine(std::string line);
+    std::queue<std::string> * getAdvanceDialogLines();
+
 private:
     //factory for building the enounter
     EncounterFactory * encounterFact;
@@ -131,6 +134,8 @@ private:
 
     std::vector<AboveHeadBattleMessage> aboveHeadBattleMessages;
     std::vector<AboveHeadBattleMessage> aboveHeadBattleMessagesText;
+
+    std::queue<std::string> advanceDialogLines;
 
     void checkIfEnemiesAreDead();
 

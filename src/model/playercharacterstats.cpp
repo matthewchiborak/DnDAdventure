@@ -184,9 +184,28 @@ void PlayerCharacterStats::setXP(int xp)
     this->xp = xp;
 }
 
-void PlayerCharacterStats::changeXP(int amount)
+bool PlayerCharacterStats::changeXP(int amount)
 {
     this->xp += amount;
+
+    if(this->xp >= getNextLevelXP())
+    {
+        this->xp = this->xp - getNextLevelXP();
+        level++;
+        return true;
+    }
+
+    return false;
+}
+
+int PlayerCharacterStats::getNextLevelXP()
+{
+    int n = level+15+1;
+    float value1 = (6.f/5.f) * std::powf(n,3);
+    float value2 = (15.f * n * n);
+    float value3 = 100.f * n;
+
+    return value1 - value2 + value3 - 140;
 }
 
 void PlayerCharacterStats::setCurrentHealth(int hp)
