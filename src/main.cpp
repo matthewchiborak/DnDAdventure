@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
             new SpriteFlyweightFactory("D:\\Qt Projects\\DnDAdventure\\src\\test\\SpritePaths.txt");
 
     ModelAbstract * testModel = new ModelConcrete();
+    testModel->loadMonsterManual("D:\\Qt Projects\\DnDAdventure\\src\\test\\monstermanual.txt");
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Bullent.txt"));
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Chad.txt"));
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Allura.txt"));

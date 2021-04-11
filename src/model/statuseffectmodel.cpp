@@ -23,6 +23,8 @@ void StatusEffectModel::applyStatusEffect(std::string se)
     }
     else if(se == "Silence")
         silenced = true;
+    else if(se == "Blind")
+        blind = true;
     else if(se == "Wet")
         wet = true;
     else if(se == "AttackUp")
@@ -107,6 +109,7 @@ void StatusEffectModel::cureAllNegativeStatusEffects()
     poison = false;
     sleep = false;
     silenced = false;
+    blind = false;
     wet = false;
 
     if(SE_att < 0)

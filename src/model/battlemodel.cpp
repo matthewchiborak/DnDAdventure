@@ -9,6 +9,7 @@
 #include "attackmodel.h"
 #include "../display/aboveheadbattlemessage.h"
 #include "../controller/battlemenustatebattleover.h"
+#include "../model/monstermanualentry.h"
 
 #include <QDir>
 #include <QDebug>
@@ -55,11 +56,12 @@ void BattleModel::clear()
     delete temp;
 }
 
-void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue, int *numberOfPotions, int *numberOfRemedies)
+void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue, int *numberOfPotions, int *numberOfRemedies, std::vector<MonsterManualEntry> *monsterManual)
 {
     this->partyGaugeValue = partyGaugeValue;
     this->numberOfPotions = numberOfPotions;
     this->numberOfRemedies = numberOfRemedies;
+    this->monsterManual = monsterManual;
 
     for(int i = 0; i < charactersInput->size(); i++)
     {
@@ -320,7 +322,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
 {
     int damage = 0;
 
-    if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
+    if(rand()%100 > (attack->getAccuracy() * attacker->getAccuracyMultiplier()) || defender->getCurrentHealth() <= 0)
     {
 
         displayMessage(attacker->getName() + "'s attack misses...");
@@ -404,7 +406,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
 {
     int damage = 0;
 
-    if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
+    if(rand()%100 > (attack->getAccuracy() * attacker->getAccuracyMultiplier()) || defender->getCurrentHealth() <= 0)
     {
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
@@ -491,7 +493,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
 {
     int damage = 0;
 
-    if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
+    if(rand()%100 > (attack->getAccuracy() * attacker->getAccuracyMultiplier()) || defender->getCurrentHealth() <= 0)
     {
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
@@ -578,7 +580,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
 {
     int damage = 0;
 
-    if(rand()%100 > attack->getAccuracy() || defender->getCurrentHealth() <= 0)
+    if(rand()%100 > (attack->getAccuracy() * attacker->getAccuracyMultiplier()) || defender->getCurrentHealth() <= 0)
     {
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
@@ -913,6 +915,7 @@ void BattleModel::addAboveHeadBattleMessage(bool enemy, int index, std::string k
     else if(key == "Poison"
             || key == "Sleep"
             || key == "Silence"
+            || key == "Blind"
             || key == "Immune"
             )
     {
@@ -1116,6 +1119,16 @@ void BattleModel::checkIfEnemiesAreDead()
         for(int i = 0; i < numberOfEnemies; i++)
         {
             xpEarned += enemies.at(i)->getXP(characters.at(0)->getLevel());
+
+            for(int j = 0; j < monsterManual->size(); j++)
+            {
+                if(monsterManual->at(i).getKey() == enemies.at(i)->getEnemyKey())
+                {
+                    monsterManual->at(i).defeat();
+                    monsterManual->at(i).setName(enemies.at(i)->getName());
+                    j = monsterManual->size();
+                }
+            }
         }
 
         addAdvanceDialogLine("VICTORY! Experience earned: " + std::to_string(xpEarned));

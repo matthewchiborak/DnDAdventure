@@ -30,6 +30,7 @@ SOURCES += \
     src/controller/pausemenustatebag.cpp \
     src/controller/pausemenustateequipment.cpp \
     src/controller/pausemenustatemain.cpp \
+    src/controller/pausemenustatemonstermanual.cpp \
     src/controller/pausemenustateparty.cpp \
     src/display/aboveheadbattlemessage.cpp \
     src/display/abstractview.cpp \
@@ -64,6 +65,7 @@ SOURCES += \
     src/model/gamemodelabstract.cpp \
     src/model/modelabstract.cpp \
     src/model/modelconcrete.cpp \
+    src/model/monstermanualentry.cpp \
     src/model/playercharacterstats.cpp \
     src/model/playercharacterstatsbattle.cpp \
     src/model/statuseffectmodel.cpp \
@@ -96,6 +98,7 @@ HEADERS += \
     src/controller/pausemenustatebag.h \
     src/controller/pausemenustateequipment.h \
     src/controller/pausemenustatemain.h \
+    src/controller/pausemenustatemonstermanual.h \
     src/controller/pausemenustateparty.h \
     src/display/aboveheadbattlemessage.h \
     src/display/abstractview.h \
@@ -130,6 +133,7 @@ HEADERS += \
     src/model/gamemodelabstract.h \
     src/model/modelabstract.h \
     src/model/modelconcrete.h \
+    src/model/monstermanualentry.h \
     src/model/playercharacterstats.h \
     src/model/playercharacterstatsbattle.h \
     src/model/statuseffectmodel.h \

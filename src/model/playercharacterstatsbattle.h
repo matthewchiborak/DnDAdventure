@@ -63,6 +63,8 @@ public:
     float getAttackingMultiplier(int attackType);
     float getDefendingMultiplier(int attackType);
 
+    float getAccuracyMultiplier();
+
 private:
     PlayerCharacterStats * stats;
 

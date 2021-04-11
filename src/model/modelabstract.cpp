@@ -1,5 +1,9 @@
 #include "modelabstract.h"
 
+#include "../filemanagment/fileReader.h"
+
+#include "../model/monstermanualentry.h"
+
 ModelAbstract::ModelAbstract()
 {
     addEquipment("Weapon,1,Test_Weapon1,Bullent_Only,9,1000");
@@ -169,6 +173,22 @@ void ModelAbstract::changeGold(int amount)
 void ModelAbstract::setGold(int value)
 {
     gold = value;
+}
+
+void ModelAbstract::loadMonsterManual(std::string filepath)
+{
+    FileReader fr(filepath);
+
+    while(fr.hasNext())
+    {
+        MonsterManualEntry en(fr.next(), "----------");
+        monsterManual.push_back(en);
+    }
+}
+
+std::vector<MonsterManualEntry> *ModelAbstract::getMonsterManual()
+{
+    return &monsterManual;
 }
 
 

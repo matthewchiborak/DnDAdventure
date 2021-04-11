@@ -5,6 +5,7 @@
 #include "../display/spriteflyweightfactoryabstract.h"
 #include "../model/playercharacterstats.h"
 
+class MonsterManualEntry;
 class DrawInformation;
 class EquipmentModel;
 
@@ -53,6 +54,10 @@ public:
     void changeGold(int amount);
     void setGold(int value);
 
+    void loadMonsterManual(std::string filepath);
+    std::vector<MonsterManualEntry> * getMonsterManual();
+
+
 protected:
     bool pauseIsDone = false;
     //Bag
@@ -60,6 +65,8 @@ protected:
     int numberOfPotions = 5;
     int numberOfRemedies = 7;
     std::vector<EquipmentModel> equipment;
+
+    std::vector<MonsterManualEntry> monsterManual;
 
 };
 

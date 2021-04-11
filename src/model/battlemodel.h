@@ -6,6 +6,7 @@
 #include <queue>
 #include "../controller/battlemenustate.h"
 #include "../display/aboveheadbattlemessage.h"
+#include <map>
 
 class PlayerCharacterStats;
 class DrawInformation;
@@ -13,6 +14,7 @@ class EnemyModel;
 class AttackModel;
 class EncounterFactory;
 class PlayerCharacterStatsBattle;
+class MonsterManualEntry;
 
 
 class BattleModel
@@ -22,7 +24,7 @@ public:
 
     void clear();
     void load(std::string key, std::vector<PlayerCharacterStats*> * charactersInput, int *partyGaugeValue
-              , int * numberOfPotions, int * numberOfRemedies);
+              , int * numberOfPotions, int * numberOfRemedies, std::vector<MonsterManualEntry> * monsterManual);
     void draw(std::vector<DrawInformation> * items);
     void passTime(float value);
     void qrPressed(bool wasQ);
@@ -136,6 +138,8 @@ private:
     std::vector<AboveHeadBattleMessage> aboveHeadBattleMessagesText;
 
     std::queue<std::string> advanceDialogLines;
+
+    std::vector<MonsterManualEntry> * monsterManual;
 
     void checkIfEnemiesAreDead();
 

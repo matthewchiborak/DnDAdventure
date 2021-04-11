@@ -22,6 +22,7 @@ public:
     bool guard = false;
     bool poison = false;
     bool sleep = false;
+    bool blind = false;
     bool silenced = false;
     bool wet = false;
 

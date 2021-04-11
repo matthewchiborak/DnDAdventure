@@ -407,3 +407,21 @@ void EnemyModel::addStatusImmunity(std::string value)
 {
     statusImmunities.push_back(value);
 }
+
+float EnemyModel::getAccuracyMultiplier()
+{
+    if(statusEffectModel.blind)
+        return 0.5f;
+
+    return 1.f;
+}
+
+void EnemyModel::setEnemyKey(std::string eKey)
+{
+    enemyKey = eKey;
+}
+
+std::string EnemyModel::getEnemyKey()
+{
+    return enemyKey;
+}

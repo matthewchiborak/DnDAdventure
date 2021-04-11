@@ -8,7 +8,7 @@ MDef,15
 Speed,100
 XP,51
 Sprite,Rat
-Attack,Bite,2000,0,10,100,Basic Attack,0,1,Poison,50
+Attack,Bite,2000,0,10,100,Basic Attack,0,1,Blind,100
 Attack,Scratch,6000,0,10,100,Basic Attack,0,1,Poison,50
 Absorb,1
 Weak,2

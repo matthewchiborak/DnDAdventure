@@ -267,6 +267,14 @@ float PlayerCharacterStatsBattle::getDefendingMultiplier(int attackType)
     return stats->getDefenceElementalMultiplier(attackType);
 }
 
+float PlayerCharacterStatsBattle::getAccuracyMultiplier()
+{
+    if(statusEffectModel.blind)
+        return 0.5f;
+
+    return 1.f;
+}
+
 
 
 

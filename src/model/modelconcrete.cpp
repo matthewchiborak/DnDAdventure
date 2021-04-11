@@ -104,7 +104,8 @@ bool ModelConcrete::tryToStartABattle()
         return false;
 
     //Load the enoucter in the battle model
-    battleModel.load(encounterKey, &playerCharacters, &partyGaugeValue, &numberOfPotions, &numberOfRemedies);
+    battleModel.load(encounterKey, &playerCharacters, &partyGaugeValue,
+                     &numberOfPotions, &numberOfRemedies, &monsterManual);
 
     //Set the render and input states
     return true;

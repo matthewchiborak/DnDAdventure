@@ -78,6 +78,11 @@ public:
 
     void addStatusImmunity(std::string value);
 
+    float getAccuracyMultiplier();
+
+    void setEnemyKey(std::string eKey);
+    std::string getEnemyKey();
+
 private:
     int level;
     int maxHealth;
@@ -91,6 +96,7 @@ private:
     std::string name;
     float timelinePos;
     int xp;
+    std::string enemyKey;
 
     std::vector<AttackModel*> attacks;
     std::vector<std::string> statusImmunities;

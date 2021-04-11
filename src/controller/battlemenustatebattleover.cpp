@@ -192,6 +192,11 @@ void BattleMenuStateBattleOver::drawStatusEffects(std::vector<DrawInformation> *
         DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SEPoison", false);
         items->push_back(SEAttUp);
     }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->blind)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SEBlind", false);
+        items->push_back(SEAttUp);
+    }
     if(model->getCharacters()->at(0)->getStatusEffectModel()->sleep)
     {
         DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SESleep", false);
@@ -257,6 +262,11 @@ void BattleMenuStateBattleOver::drawStatusEffects(std::vector<DrawInformation> *
     if(model->getCharacters()->at(1)->getStatusEffectModel()->poison)
     {
         DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SEPoison", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->blind)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SEBlind", false);
         items->push_back(SEAttUp);
     }
     if(model->getCharacters()->at(1)->getStatusEffectModel()->sleep)

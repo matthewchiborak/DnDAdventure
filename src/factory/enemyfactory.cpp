@@ -26,6 +26,8 @@ EnemyModel *EnemyFactory::createEnemy(std::string key)
         std::string nextLine = fr.next();
         std::vector<std::string> splits = fr.splitString(nextLine, ',');
 
+        newEnemy->setEnemyKey(key);
+
         if(splits.at(0) == "HP")
         {
             newEnemy->setMaxHealth(std::stoi(splits.at(1)));
@@ -35,7 +37,9 @@ EnemyModel *EnemyFactory::createEnemy(std::string key)
 //            baseMP = std::stoi(splits.at(1));
 //        }
         if(splits.at(0) == "Name")
+        {
             newEnemy->setName(FileReader::replaceCharacter(splits.at(1), '_', ' '));
+        }
         if(splits.at(0) == "Att")
             newEnemy->setAttack(std::stoi(splits.at(1)));
         if(splits.at(0) == "Def")

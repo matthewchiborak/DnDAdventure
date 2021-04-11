@@ -309,6 +309,11 @@ void BattleMenuStateSpecial::drawEnemyStatusEffect(std::vector<DrawInformation> 
         DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEPoison", false);
         items->push_back(SEAttUp);
     }
+    if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->blind)
+    {
+        DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEBlind", false);
+        items->push_back(SEAttUp);
+    }
     if(model->getEnemies()->at(currentTarget)->getStatusEffectModel()->sleep)
     {
         DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESleep", false);

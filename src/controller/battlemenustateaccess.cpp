@@ -99,6 +99,12 @@ void BattleMenuStateAccess::drawBattleMenu(std::vector<DrawInformation> *items)
         items->push_back(aliment);
         numImm++;
     }
+    if(model->getEnemyToAccess()->isImmuneToThis("Blind"))
+    {
+        DrawInformation aliment(-600 + (((numImm%3) * 50) + 25), 350 - ((numImm/3) * 50), 50, 50, "SEBlind", false);
+        items->push_back(aliment);
+        numImm++;
+    }
     if(model->getEnemyToAccess()->isImmuneToThis("Sleep"))
     {
         DrawInformation aliment(-600 + (((numImm%3) * 50) + 25), 350 - ((numImm/3) * 50), 50, 50, "SESleep", false);
