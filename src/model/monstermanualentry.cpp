@@ -27,7 +27,3 @@ void MonsterManualEntry::defeat()
     defeated = true;
 }
 
-void MonsterManualEntry::setName(std::string name)
-{
-    this->name = name;
-}

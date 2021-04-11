@@ -24,7 +24,7 @@ public:
 
     void clear();
     void load(std::string key, std::vector<PlayerCharacterStats*> * charactersInput, int *partyGaugeValue
-              , int * numberOfPotions, int * numberOfRemedies, std::vector<MonsterManualEntry> * monsterManual);
+              , int * numberOfPotions, int * numberOfRemedies, int * numberOfEthers, int * numberOfJars, std::vector<MonsterManualEntry> * monsterManual);
     void draw(std::vector<DrawInformation> * items);
     void passTime(float value);
     void qrPressed(bool wasQ);
@@ -92,6 +92,10 @@ public:
     int getNumberOfRemedies();
     void useAPotion();
     void useARemedy();
+    int getNumberOfEthers();
+    int getNumberOfJars();
+    void useAEther();
+    void useAJar();
 
     void addAdvanceDialogLine(std::string line);
     std::queue<std::string> * getAdvanceDialogLines();
@@ -113,6 +117,8 @@ private:
 
     int * numberOfPotions;
     int * numberOfRemedies;
+    int * numberOfEthers;
+    int * numberOfJars;
 
     //vector of enemies
     std::vector<EnemyModel*> enemies;

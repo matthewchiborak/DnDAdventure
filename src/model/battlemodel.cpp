@@ -56,12 +56,14 @@ void BattleModel::clear()
     delete temp;
 }
 
-void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue, int *numberOfPotions, int *numberOfRemedies, std::vector<MonsterManualEntry> *monsterManual)
+void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue, int *numberOfPotions, int *numberOfRemedies, int *numberOfEthers, int *numberOfJars, std::vector<MonsterManualEntry> *monsterManual)
 {
     this->partyGaugeValue = partyGaugeValue;
     this->numberOfPotions = numberOfPotions;
     this->numberOfRemedies = numberOfRemedies;
     this->monsterManual = monsterManual;
+    this->numberOfEthers = numberOfEthers;
+    this->numberOfJars = numberOfJars;
 
     for(int i = 0; i < charactersInput->size(); i++)
     {
@@ -1064,6 +1066,39 @@ void BattleModel::useARemedy()
     }
 }
 
+int BattleModel::getNumberOfEthers()
+{
+    return (*numberOfEthers);
+}
+
+int BattleModel::getNumberOfJars()
+{
+    return (*numberOfJars);
+}
+
+void BattleModel::useAEther()
+{
+    if((*numberOfEthers) > 0)
+    {
+        (*numberOfEthers) = (*numberOfEthers) - 1;
+
+        for(int i = 0; i < characters.size(); i++)
+        {
+            characters.at(i)->changeCurrentMP(50);
+        }
+    }
+}
+
+void BattleModel::useAJar()
+{
+    if((*numberOfJars) > 0)
+    {
+        (*numberOfJars) = (*numberOfJars) - 1;
+
+        (*partyGaugeValue) = 1000.f;
+    }
+}
+
 void BattleModel::addAdvanceDialogLine(std::string line)
 {
     advanceDialogLines.push(line);
@@ -1125,7 +1160,6 @@ void BattleModel::checkIfEnemiesAreDead()
                 if(monsterManual->at(i).getKey() == enemies.at(i)->getEnemyKey())
                 {
                     monsterManual->at(i).defeat();
-                    monsterManual->at(i).setName(enemies.at(i)->getName());
                     j = monsterManual->size();
                 }
             }

@@ -54,6 +54,13 @@ public:
     void changeGold(int amount);
     void setGold(int value);
 
+    int getNumberOfEthers();
+    int getNumberOfJars();
+    void setNumberOfEthers(int value);
+    void setNumberofJars(int value);
+    void changeEtherAmount(int amount);
+    void changeJarAmount(int amount);
+
     void loadMonsterManual(std::string filepath);
     std::vector<MonsterManualEntry> * getMonsterManual();
 
@@ -62,8 +69,10 @@ protected:
     bool pauseIsDone = false;
     //Bag
     int gold = 0;
-    int numberOfPotions = 5;
-    int numberOfRemedies = 7;
+    int numberOfPotions = 0;
+    int numberOfRemedies = 0;
+    int numberOfEthers = 6;
+    int numberOfPickleJars = 7;
     std::vector<EquipmentModel> equipment;
 
     std::vector<MonsterManualEntry> monsterManual;

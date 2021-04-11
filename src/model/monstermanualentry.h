@@ -13,8 +13,6 @@ public:
     bool getDefeated();
     void defeat();
 
-    void setName(std::string name);
-
 private:
     std::string name;
     bool defeated;

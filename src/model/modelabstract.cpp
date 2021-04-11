@@ -4,6 +4,8 @@
 
 #include "../model/monstermanualentry.h"
 
+#include <vector>
+
 ModelAbstract::ModelAbstract()
 {
     addEquipment("Weapon,1,Test_Weapon1,Bullent_Only,9,1000");
@@ -143,6 +145,9 @@ void ModelAbstract::setNumberOfPotions(int value)
 void ModelAbstract::changePotionAmount(int amount)
 {
     numberOfPotions += amount;
+
+    if(numberOfPotions < 0)
+        numberOfPotions = 0;
 }
 
 int ModelAbstract::getNumberOfRemedies()
@@ -158,6 +163,9 @@ void ModelAbstract::setNumberOfRemedies(int value)
 void ModelAbstract::changeRemedyAmount(int amount)
 {
     numberOfRemedies += amount;
+
+    if(numberOfRemedies < 0)
+        numberOfRemedies = 0;
 }
 
 int ModelAbstract::getGold()
@@ -168,11 +176,50 @@ int ModelAbstract::getGold()
 void ModelAbstract::changeGold(int amount)
 {
     gold += amount;
+
+    if(gold < 0)
+        gold = 0;
 }
 
 void ModelAbstract::setGold(int value)
 {
     gold = value;
+}
+
+int ModelAbstract::getNumberOfEthers()
+{
+    return numberOfEthers;
+}
+
+int ModelAbstract::getNumberOfJars()
+{
+    return numberOfPickleJars;
+}
+
+void ModelAbstract::setNumberOfEthers(int value)
+{
+    numberOfEthers = value;
+}
+
+void ModelAbstract::setNumberofJars(int value)
+{
+    numberOfPickleJars = value;
+}
+
+void ModelAbstract::changeEtherAmount(int amount)
+{
+    numberOfEthers += amount;
+
+    if(numberOfEthers < 0)
+        numberOfEthers = 0;
+}
+
+void ModelAbstract::changeJarAmount(int amount)
+{
+    numberOfPickleJars += amount;
+
+    if(numberOfPickleJars < 0)
+        numberOfPickleJars = 0;
 }
 
 void ModelAbstract::loadMonsterManual(std::string filepath)
@@ -181,7 +228,8 @@ void ModelAbstract::loadMonsterManual(std::string filepath)
 
     while(fr.hasNext())
     {
-        MonsterManualEntry en(fr.next(), "----------");
+        std::vector<std::string> spt = fr.splitString(fr.next(), ',');
+        MonsterManualEntry en(spt.at(0), spt.at(1));
         monsterManual.push_back(en);
     }
 }
