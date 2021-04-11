@@ -52,9 +52,11 @@ void BattleModel::clear()
     delete temp;
 }
 
-void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue)
+void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue, int *numberOfPotions, int *numberOfRemedies)
 {
     this->partyGaugeValue = partyGaugeValue;
+    this->numberOfPotions = numberOfPotions;
+    this->numberOfRemedies = numberOfRemedies;
 
     for(int i = 0; i < charactersInput->size(); i++)
     {
@@ -195,15 +197,17 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     }
 
     //TEXT IS LAST
-    //DrawInformation attackText(-750, -400, 200, 75, "", false, "Attack");
+    //DrawInformation attackText(-750, -400, 200, 75, "", false, "Attack"); was 50 previously
     DrawInformation attackText(100, 637, 200, 75, "", false, "Attack", true, 36);
     items->push_back(attackText);
-    DrawInformation guardText(100, 687, 200, 75, "", false, "Guard", true, 36);
+    DrawInformation guardText(100, 677, 200, 75, "", false, "Guard", true, 36);
     items->push_back(guardText);
-    DrawInformation specialText(100, 737, 200, 75, "", false, "Special", true, 36);
+    DrawInformation specialText(100, 717, 200, 75, "", false, "Special", true, 36);
     items->push_back(specialText);
-    DrawInformation partyText(100, 787, 200, 75, "", false, "Party", true, 36);
+    DrawInformation partyText(100, 757, 200, 75, "", false, "Party", true, 36);
     items->push_back(partyText);
+    DrawInformation itemText(100, 797, 200, 75, "", false, "Items", true, 36);
+    items->push_back(itemText);
     DrawInformation fleeText(100, 837, 200, 75, "", false, "Flee", true, 36);
     items->push_back(fleeText);
 
@@ -377,7 +381,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000, attack->getElement());
     if(damage < 0)
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000, attack->getElement());
-    if(defender->applyStatusEffect(attack->getAdditionalEffect()))
+    if(defender->applyStatusEffect(attack->getAdditionalEffectRoll()))
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000, attack->getElement());
     //else
         //addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Immune", "", 2000);
@@ -454,7 +458,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
         addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Hurt", std::to_string(damage), 5000, attack->getElement());
     if(damage < 0)
         addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000, attack->getElement());
-    if(defender->applyStatusEffect(attack->getAdditionalEffect()))
+    if(defender->applyStatusEffect(attack->getAdditionalEffectRoll()))
         addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000, attack->getElement());
 
     //Try interrupt
@@ -544,7 +548,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
     if(damage < 0)
         addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Heal", std::to_string(-1 * damage), 5000, attack->getElement());
 
-    if(defender->applyStatusEffect(attack->getAdditionalEffect()))
+    if(defender->applyStatusEffect(attack->getAdditionalEffectRoll()))
         addAboveHeadBattleMessage(false, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000, attack->getElement());
 
     //Try interrupt
@@ -629,7 +633,7 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
     if(damage < 0)
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1 * damage), 5000, attack->getElement());
 
-    if(defender->applyStatusEffect(attack->getAdditionalEffect()))
+    if(defender->applyStatusEffect(attack->getAdditionalEffectRoll()))
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000, attack->getElement());
     else
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Immune", "", 2000, attack->getElement());
@@ -1013,6 +1017,45 @@ EnemyModel *BattleModel::getEnemyToAccess()
 int BattleModel::getLastXPEarned()
 {
     return lastXPEarned;
+}
+
+int BattleModel::getNumberOfPotions()
+{
+    return (*numberOfPotions);
+}
+
+int BattleModel::getNumberOfRemedies()
+{
+    return (*numberOfRemedies);
+}
+
+void BattleModel::useAPotion()
+{
+    if((*numberOfPotions) > 0)
+    {
+        (*numberOfPotions) = (*numberOfPotions) - 1;
+
+        for(int i = 0; i < characters.size(); i++)
+        {
+            if(characters.at(i)->getCurrentHealth() > 0)
+            {
+                characters.at(i)->changeCurrentHealth(50);
+            }
+        }
+    }
+}
+
+void BattleModel::useARemedy()
+{
+    if((*numberOfRemedies) > 0)
+    {
+        (*numberOfRemedies) = (*numberOfRemedies) - 1;
+
+        for(int i = 0; i < characters.size(); i++)
+        {
+            characters.at(i)->cureAllStatusEffects();
+        }
+    }
 }
 
 void BattleModel::checkIfEnemiesAreDead()

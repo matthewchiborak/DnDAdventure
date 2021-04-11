@@ -21,7 +21,8 @@ public:
     BattleModel();
 
     void clear();
-    void load(std::string key, std::vector<PlayerCharacterStats*> * charactersInput, int *partyGaugeValue);
+    void load(std::string key, std::vector<PlayerCharacterStats*> * charactersInput, int *partyGaugeValue
+              , int * numberOfPotions, int * numberOfRemedies);
     void draw(std::vector<DrawInformation> * items);
     void passTime(float value);
     void qrPressed(bool wasQ);
@@ -85,6 +86,11 @@ public:
 
     int getLastXPEarned();
 
+    int getNumberOfPotions();
+    int getNumberOfRemedies();
+    void useAPotion();
+    void useARemedy();
+
 private:
     //factory for building the enounter
     EncounterFactory * encounterFact;
@@ -99,6 +105,9 @@ private:
     int * partyGaugeValue;
     const int partyGaugeIncrementAttack = 20;
     const int partyGaugeIncrementHit = 40;
+
+    int * numberOfPotions;
+    int * numberOfRemedies;
 
     //vector of enemies
     std::vector<EnemyModel*> enemies;

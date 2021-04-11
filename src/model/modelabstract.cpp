@@ -7,7 +7,7 @@ ModelAbstract::ModelAbstract()
     addEquipment("Weapon,3,TestWeapon3,Allura_Only,AttackUp,50");
     addEquipment("Weapon,4,TestWeapon4,Duke_Only,AttackUp,50");
 
-    addEquipment("Armor,5,Test_Armor1NoFire,Light,1,100");
+    addEquipment("Armor,5,No_Fire,Light,1,100");
     addEquipment("Armor,5,Testarm2,Light,AttackUp,50");
     addEquipment("Armor,6,TestWArm3,Heavy,AttackUp,50");
     addEquipment("Armor,6,TestArm4,Heavy,AttackUp,50");
@@ -125,4 +125,51 @@ void ModelAbstract::setPauseIsDone(bool value)
 {
     pauseIsDone = value;
 }
+
+int ModelAbstract::getNumberOfPotions()
+{
+    return numberOfPotions;
+}
+
+void ModelAbstract::setNumberOfPotions(int value)
+{
+    numberOfPotions = value;
+}
+
+void ModelAbstract::changePotionAmount(int amount)
+{
+    numberOfPotions += amount;
+}
+
+int ModelAbstract::getNumberOfRemedies()
+{
+    return numberOfRemedies;
+}
+
+void ModelAbstract::setNumberOfRemedies(int value)
+{
+    numberOfRemedies = value;
+}
+
+void ModelAbstract::changeRemedyAmount(int amount)
+{
+    numberOfRemedies += amount;
+}
+
+int ModelAbstract::getGold()
+{
+    return gold;
+}
+
+void ModelAbstract::changeGold(int amount)
+{
+    gold += amount;
+}
+
+void ModelAbstract::setGold(int value)
+{
+    gold = value;
+}
+
+
 

@@ -16,6 +16,7 @@ SOURCES += \
     src/controller/battlemenustateattack.cpp \
     src/controller/battlemenustatebattleover.cpp \
     src/controller/battlemenustateflee.cpp \
+    src/controller/battlemenustateitem.cpp \
     src/controller/battlemenustatemain.cpp \
     src/controller/battlemenustatespecial.cpp \
     src/controller/battlemenustateswitch.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
     src/controller/keyinputstateboard.cpp \
     src/controller/keyinputstatepausemenu.cpp \
     src/controller/pausemenustate.cpp \
+    src/controller/pausemenustatebag.cpp \
     src/controller/pausemenustateequipment.cpp \
     src/controller/pausemenustatemain.cpp \
     src/controller/pausemenustateparty.cpp \
@@ -80,6 +82,7 @@ HEADERS += \
     src/controller/battlemenustateattack.h \
     src/controller/battlemenustatebattleover.h \
     src/controller/battlemenustateflee.h \
+    src/controller/battlemenustateitem.h \
     src/controller/battlemenustatemain.h \
     src/controller/battlemenustatespecial.h \
     src/controller/battlemenustateswitch.h \
@@ -90,6 +93,7 @@ HEADERS += \
     src/controller/keyinputstateboard.h \
     src/controller/keyinputstatepausemenu.h \
     src/controller/pausemenustate.h \
+    src/controller/pausemenustatebag.h \
     src/controller/pausemenustateequipment.h \
     src/controller/pausemenustatemain.h \
     src/controller/pausemenustateparty.h \

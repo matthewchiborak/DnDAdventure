@@ -3,6 +3,7 @@
 #include "../display/drawinformation.h"
 #include "pausemenustateparty.h"
 #include "pausemenustateequipment.h"
+#include "pausemenustatebag.h"
 
 PauseMenuStateMain::PauseMenuStateMain(ModelAbstract *model)
     : PauseMenuDrawState(model)
@@ -29,7 +30,7 @@ PauseMenuDrawState * PauseMenuStateMain::enterMenu()
     if(currentPos == 3)
         return new PauseMenuStateEquipment(model);
     if(currentPos == 2)
-        return this;
+        return new PauseMenuStateBag(model);
     if(currentPos == 1)
         return this;
     if(currentPos == 0)

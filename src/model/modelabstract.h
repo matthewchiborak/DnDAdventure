@@ -43,12 +43,22 @@ public:
     bool getPauseIsDone();
     void setPauseIsDone(bool value);
 
+    int getNumberOfPotions();
+    void setNumberOfPotions(int value);
+    void changePotionAmount(int amount);
+    int getNumberOfRemedies();
+    void setNumberOfRemedies(int value);
+    void changeRemedyAmount(int amount);
+    int getGold();
+    void changeGold(int amount);
+    void setGold(int value);
+
 protected:
     bool pauseIsDone = false;
     //Bag
     int gold = 0;
-    int numberOfPotions = 0;
-    int numberOfRemedies = 0;
+    int numberOfPotions = 5;
+    int numberOfRemedies = 7;
     std::vector<EquipmentModel> equipment;
 
 };

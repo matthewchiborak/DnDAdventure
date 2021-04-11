@@ -105,7 +105,8 @@ bool BoardModel::tryToGetAnEnounter(std::string *keyToReturn)
 
     int randVal = rand()%10;
 
-    if(randVal == 1)
+    //if(randVal == 1)
+    if(true)
     {
         (*keyToReturn) = encounterTable.at(rand()%encounterTable.size());
         return true;

@@ -226,6 +226,9 @@ float PlayerCharacterStatsBattle::getElementalMultiplier(int element)
 
 bool PlayerCharacterStatsBattle::applyStatusEffect(std::string se)
 {
+    if(se == "None")
+        return false;
+
     //Based on equipement, check if resist
     if(rand()%100 < stats->getResistantValueBasedOnEquipmentAndAbilites(se))
         return false;

@@ -1,12 +1,12 @@
-#ifndef BATTLEMENUSTATEMAIN_H
-#define BATTLEMENUSTATEMAIN_H
+#ifndef BATTLEMENUSTATEITEM_H
+#define BATTLEMENUSTATEITEM_H
 
 #include "battlemenustate.h"
 
-class BattleMenuStateMain : public BattleMenuState
+class BattleMenuStateItem : public BattleMenuState
 {
 public:
-    BattleMenuStateMain(BattleModel * model);
+    BattleMenuStateItem(BattleModel * model);
 
     void moveMenuCursor(int x, int y);
     BattleMenuState * enterMenu();
@@ -16,9 +16,7 @@ public:
     BattleMenuState * qrPressed(bool wasQ);
 
 private:
-    int currentPos = 5;
-
-    void drawStatusEffects(std::vector<DrawInformation> *items);
+    int currentPos = 0;
 };
 
-#endif // BATTLEMENUSTATEMAIN_H
+#endif // BATTLEMENUSTATEITEM_H

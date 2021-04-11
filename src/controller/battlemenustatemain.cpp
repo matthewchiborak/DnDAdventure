@@ -10,6 +10,7 @@
 #include "../model/playercharacterstatsbattle.h"
 #include "battlemenustateflee.h"
 #include <QDebug>
+#include "battlemenustateitem.h"
 
 BattleMenuStateMain::BattleMenuStateMain(BattleModel *model)
     : BattleMenuState(model)
@@ -21,25 +22,27 @@ void BattleMenuStateMain::moveMenuCursor(int x, int y)
 {
     currentPos += y;
 
-    if(currentPos > 4)
+    if(currentPos > 5)
         currentPos = 0;
     if(currentPos < 0)
-        currentPos = 4;
+        currentPos = 5;
 }
 
 BattleMenuState *BattleMenuStateMain::enterMenu()
 {
-    if(currentPos == 4)
+    if(currentPos == 5)
         return new BattleMenuStateAttack(model);
-    if(currentPos == 3)
+    if(currentPos == 4)
     {
         model->getCharacters()->at(model->getFocusPartyMember())->getStatusEffectModel()->guard = true;
         return new BattleMenuStateTimeFlow(model);
     }
-    if(currentPos == 2)
+    if(currentPos == 3)
         return new BattleMenuStateSpecial(model);
-    if(currentPos == 1)
+    if(currentPos == 2)
         return new BattleMenuStateSwitch(model);
+    if(currentPos == 1)
+        return new BattleMenuStateItem(model);
     if(currentPos == 0)
     {
         if((rand()%2) == 1)
@@ -107,7 +110,7 @@ void BattleMenuStateMain::drawBattleMenu(std::vector<DrawInformation> *items)
                          , true);
     items->push_back(p2mp);
 
-    DrawInformation mainCursor(50, 637 + ((4 - currentPos) * 50), 75, 75, "", false, ">", true, 36);
+    DrawInformation mainCursor(50, 637 + ((5 - currentPos) * 40), 75, 75, "", false, ">", true, 36);
     items->push_back(mainCursor);
 }
 

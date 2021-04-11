@@ -21,7 +21,12 @@ AttackModel::AttackModel(std::string info)
         additionalEffect = "None";
 
     if(split.size() > 10)
-        multitarget = std::stoi(split.at(10));
+        chanceOfAdditionalEffect = std::stoi(split.at(10));
+    else
+        chanceOfAdditionalEffect = 100;
+
+    if(split.size() > 11)
+        multitarget = std::stoi(split.at(11));
     else
         multitarget = 0;
 
@@ -73,6 +78,20 @@ int AttackModel::getElement()
 
 std::string AttackModel::getAdditionalEffect()
 {
+    return additionalEffect;
+}
+
+std::string AttackModel::getAdditionalEffectRoll()
+{
+    //if chance is less than 100 do a roll for it
+    if(chanceOfAdditionalEffect >= 100)
+        return additionalEffect;
+
+    if(rand()%100 > chanceOfAdditionalEffect)
+    {
+        return "None";
+    }
+
     return additionalEffect;
 }
 

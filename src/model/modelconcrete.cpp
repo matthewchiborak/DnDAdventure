@@ -88,8 +88,8 @@ void ModelConcrete::closeMenu(std::string key)
         this->pauseIsDone = currentMenuState->isMain();
         PauseMenuDrawState * temp = currentMenuState;
         currentMenuState = currentMenuState->closeMenu();
-        if(temp != currentMenuState)
-            delete temp;
+        //if(temp != currentMenuState)
+            //delete temp;
     }
     else if(key == "Battle")
         battleModel.closeMenu();
@@ -104,7 +104,7 @@ bool ModelConcrete::tryToStartABattle()
         return false;
 
     //Load the enoucter in the battle model
-    battleModel.load(encounterKey, &playerCharacters, &partyGaugeValue);
+    battleModel.load(encounterKey, &playerCharacters, &partyGaugeValue, &numberOfPotions, &numberOfRemedies);
 
     //Set the render and input states
     return true;

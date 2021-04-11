@@ -17,6 +17,7 @@ public:
     int getAttackType();
     int getElement();
     std::string getAdditionalEffect();
+    std::string getAdditionalEffectRoll();
     int getAccuracy();
     int getMultitarget();
 
@@ -33,6 +34,7 @@ private:
     int multitarget; //0 = no, 1 = all enemeis, 2 = all allies, 3 = self
 
     std::string additionalEffect;
+    int chanceOfAdditionalEffect;
     //Poison, Sleep, Silence, Slow, Haste, AttackUp, etc.
 };
 
