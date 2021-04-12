@@ -69,6 +69,7 @@ PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
     isActive = true;
     level = 1;
     xp = 0;
+    AP = 0;
 
     currentHealth = getMaxHealth();
     currentMP = getMaxMP();
@@ -194,14 +195,17 @@ bool PlayerCharacterStats::changeXP(int amount)
 {
     this->xp += amount;
 
-    if(this->xp >= getNextLevelXP())
+    bool valueToReturn = false;
+
+    while(this->xp >= getNextLevelXP())
     {
         this->xp = this->xp - getNextLevelXP();
         level++;
-        return true;
+        AP++;
+        valueToReturn = true;
     }
 
-    return false;
+    return valueToReturn;
 }
 
 int PlayerCharacterStats::getNextLevelXP()
@@ -412,6 +416,21 @@ float PlayerCharacterStats::getDefenceElementalMultiplier(int element)
         resValue = 0;
 
     return resValue/100.f;
+}
+
+int PlayerCharacterStats::getAP()
+{
+    return AP;
+}
+
+void PlayerCharacterStats::setAP(int value)
+{
+    AP = value;
+}
+
+void PlayerCharacterStats::spendAP(int amount)
+{
+    AP -= amount;
 }
 
 bool PlayerCharacterStats::isAValidElement(std::string input)

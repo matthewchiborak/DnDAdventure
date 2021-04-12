@@ -56,6 +56,10 @@ public:
     float getAttackElementalMultiplier(int element);
     float getDefenceElementalMultiplier(int element);
 
+    int getAP();
+    void setAP(int value);
+    void spendAP(int amount);
+
 protected:
     std::string name;
     bool isActive;
@@ -66,6 +70,7 @@ protected:
     std::string menuSpriteKey;
     std::string timelineSpriteKey;
     int currentMP;
+    int AP;
 
     //base stats
     int baseHealth;

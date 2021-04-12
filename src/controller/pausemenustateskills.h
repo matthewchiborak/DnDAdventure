@@ -20,6 +20,7 @@ public:
 private:
     int cursorPos = 0; //0-14
     int pagePos = 0; //0-3 for each character
+    int numberOfCharacters = 0;
 };
 
 #endif // PAUSEMENUSTATESKILLS_H

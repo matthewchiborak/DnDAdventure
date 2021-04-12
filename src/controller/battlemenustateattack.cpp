@@ -99,6 +99,11 @@ BattleMenuState *BattleMenuStateAttack::enterMenu()
         return new BattleMenuStateTimeFlow(model);
     }
 
+    if(!model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(((currentPosX) * 5) + (currentPosY))->isUnlocked())
+    {
+        return this;
+    }
+
     //Make sure not silenced
     if(model->getCharacters()->at(model->getFocusPartyMember())->getStatusEffectModel()->silenced)
     {
@@ -164,11 +169,14 @@ void BattleMenuStateAttack::drawBattleMenu(std::vector<DrawInformation> *items)
     //Text
     for(int i = 0; i < model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->size(); i++)
     {
-        DrawInformation attack1(435 + ((i/5) * 400), (630 + ((i%5) * 50)), 400, 75, "",
-                                false, model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(i)->getName()
-                                + model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(i)->getMPCostString()
-                                , true, 36);
-        items->push_back(attack1);
+        if(model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(i)->isUnlocked())
+        {
+            DrawInformation attack1(435 + ((i/5) * 400), (630 + ((i%5) * 50)), 400, 75, "",
+                                    false, model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(i)->getName()
+                                    + model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(i)->getMPCostString()
+                                    , true, 36);
+            items->push_back(attack1);
+        }
     }
 
 
@@ -236,11 +244,16 @@ void BattleMenuStateAttack::drawBattleMenu(std::vector<DrawInformation> *items)
     //Currently selected attack
     if(!isSelectingTarget)
     {
-        DrawInformation attackDesc(0, 10, 1500, 140, "",
-                                false, model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(
-                                       ((currentPosX * 5) + currentPosY)
-                                       )->getDescription());
-        items->push_back(attackDesc);
+        if(model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(
+                    ((currentPosX * 5) + currentPosY)
+                    )->isUnlocked())
+        {
+            DrawInformation attackDesc(0, 10, 1500, 140, "",
+                                    false, model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(
+                                           ((currentPosX * 5) + currentPosY)
+                                           )->getDescription());
+            items->push_back(attackDesc);
+        }
     }
 }
 

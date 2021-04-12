@@ -68,13 +68,13 @@ void PauseMenuStateParty::drawPauseMenu(std::vector<DrawInformation> *items)
         //items->push_back(port);
         DrawInformation info2(265, (50 + (i*200)), 200, 100, "", false, model->playerCharacters.at(i)->getName(), true);
         items->push_back(info2);
-        DrawInformation info3(450, (50 + (i*200)), 1000, 100, "", false,
+        DrawInformation info3(450, (50 + (i*200)), 1400, 100, "", false,
                               "Level: " + std::to_string(model->playerCharacters.at(i)->getLevel()) + " [XP: " + std::to_string(model->playerCharacters.at(i)->getXP())
                               + " / " + std::to_string(model->playerCharacters.at(i)->getNextLevelXP())
                               + "] [HP: " + std::to_string(model->playerCharacters.at(i)->getCurrentHealth()) + " / " + std::to_string(model->playerCharacters.at(i)->getMaxHealth())
                               + "] [MP: " + std::to_string(model->playerCharacters.at(i)->getCurrentMP()) + " / " + std::to_string(model->playerCharacters.at(i)->getMaxMP())
                               + "]",
-                              true, 42.f);
+                              true, 36.f);
         items->push_back(info3);
         DrawInformation info4(450, (150 + (i*200)), 1400, 100, "", false,
                               "[Att: " + std::to_string(model->playerCharacters.at(i)->getAttack())

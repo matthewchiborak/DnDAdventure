@@ -8,7 +8,12 @@
 PauseMenuStateSkills::PauseMenuStateSkills(ModelAbstract *model)
     : PauseMenuDrawState(model)
 {
+    for(int i = 0; i < model->playerCharacters.size(); i++)
+    {
+        numberOfCharacters++;
+    }
 
+    //model->playerCharacters.at(0)->changeXP(500000);
 }
 
 void PauseMenuStateSkills::moveMenuCursor(int x, int y)
@@ -33,6 +38,21 @@ void PauseMenuStateSkills::moveMenuCursor(int x, int y)
 
 PauseMenuDrawState *PauseMenuStateSkills::enterMenu()
 {
+    if(model->playerCharacters.at(pagePos)->getAttacks()->at(cursorPos)->isUnlocked())
+        return this;
+
+    if((cursorPos%5) == 0)
+        return this;
+
+    if(model->playerCharacters.at(pagePos)->getAttacks()->at(cursorPos-1)->isUnlocked())
+    {
+        if(model->playerCharacters.at(pagePos)->getAP() > (cursorPos%5))
+        {
+            model->playerCharacters.at(pagePos)->spendAP(cursorPos%5);
+            model->playerCharacters.at(pagePos)->getAttacks()->at(cursorPos)->unlock();
+        }
+    }
+
     return this;
 }
 
@@ -71,13 +91,15 @@ void PauseMenuStateSkills::drawPauseMenu(std::vector<DrawInformation> *items)
         }
         else
         {
-            DrawInformation attackIcon(-300 + (200*(i%5)), (200 - (100 * (i/5))), 50, 50, "SkillIconLocked", false);
+            DrawInformation attackIcon(-300 + (200*(i%5)), (200 - (100 * (i/5))), 50, 50, "Locked" + std::to_string(i%5), false);
             items->push_back(attackIcon);
         }
     }
 
     //Text
-    DrawInformation info2(265, (50 + (0*200)), 200, 100, "", false, model->playerCharacters.at(pagePos)->getName(), true);
+    DrawInformation info2(265, (50 + (0*200)), 400, 100, "", false, model->playerCharacters.at(pagePos)->getName()
+                          + " [AP: " + std::to_string(model->playerCharacters.at(pagePos)->getAP()) + "]"
+                          , true);
     items->push_back(info2);
 
     DrawInformation attackDesc(0, 760, 1500, 140, "",
@@ -87,6 +109,11 @@ void PauseMenuStateSkills::drawPauseMenu(std::vector<DrawInformation> *items)
     DrawInformation nameDesc(0, 700, 1500, 140, "",
                             false, model->playerCharacters.at(pagePos)->getAttacks()->at(cursorPos)->getName());
     items->push_back(nameDesc);
+
+    DrawInformation infoback(0, 650, 100, 100, "", false, "<Q");
+    items->push_back(infoback);
+    DrawInformation infoforw(1500, 650, 100, 100, "", false, "R>");
+    items->push_back(infoforw);
 
     DrawInformation info7(468 + (200*(cursorPos%5)), (215 + ((cursorPos/5)*100)), 100, 100, "", false, "V", true, 24.f);
     items->push_back(info7);
@@ -104,8 +131,8 @@ void PauseMenuStateSkills::speicalMessage(std::string message)
     if(message == "PageBack")
         pagePos--;
 
-    if(pagePos > (model->playerCharacters.size()-1))
+    if(pagePos > (numberOfCharacters-1))
         pagePos = 0;
     if(pagePos < 0)
-        pagePos = (model->playerCharacters.size()-1);
+        pagePos = (numberOfCharacters-1);
 }

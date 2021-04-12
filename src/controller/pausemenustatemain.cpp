@@ -6,6 +6,7 @@
 #include "pausemenustatebag.h"
 #include "pausemenustatemonstermanual.h"
 #include "pausemenustateskills.h"
+#include <QCoreApplication>
 
 PauseMenuStateMain::PauseMenuStateMain(ModelAbstract *model)
     : PauseMenuDrawState(model)
@@ -36,7 +37,10 @@ PauseMenuDrawState * PauseMenuStateMain::enterMenu()
     if(currentPos == 1)
         return new PauseMenuStateMonsterManual(model);
     if(currentPos == 0)
+    {
+        QCoreApplication::quit();
         return this;
+    }
 
     return this;
 }

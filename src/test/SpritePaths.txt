@@ -60,5 +60,9 @@ WeaponIcon,SlashIcon.png
 ArmorIcon,Guard.png
 SkillIcon,SkillIcon.png
 SkillIconGreen,SkillIconGreen.png
-SkillIconLocked,SkillIconLocked.png
+Locked0,SkillIconLocked.png
 VerticalLine,VerticalLine.png
+Locked1,Locked1.png
+Locked2,Locked2.png
+Locked3,Locked3.png
+Locked4,Locked4.png

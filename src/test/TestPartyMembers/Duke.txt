@@ -17,5 +17,18 @@ IVDef,0
 IVMAtt,31
 IVMDef,31
 IVSpeed,16
-Attack,DukeAttack1,200,0,10,100,Basic Attack5,0,0
-Attack,DukeAttack2,200,20,10,100,Basic Attack7,0,0
+Attack,Crossbow,1000,0,10,100,Single_target_piercing_attack._Quick_to_cast._[Phys][Pierce],0,9
+Attack,Poison_Bolt,4000,20,20,100,Single_target_piercing_attack._Chance_to_poison._[Phys][Pierce],0,0
+Attack,Arrow_Rain,1000,0,0,100,Multi_target_piercing_attack._Slow_speed._[Phys][Pierce],0,0,Poison
+Attack,Kneecap_Shot,2000,0,-10,100,Single_debuff._Inflicts_slow,2,0
+Attack,Focus_Shot,2000,0,100,100,Single_target_high_damage_attack._Slow_to_cast._[Phys][Pierce],0,0,None,100,1
+Attack,Coastal_Sands,2000,0,0,100,Throw_sand_in_single_enemies_eyes._Inflicts_blind,0,0,Poison,100,2
+Attack,Sharpen_Bolts,1000,0,10,100,Self_buff._Raises_attack,0,1
+Attack,Flank,1000,0,10,100,Single_target_buff._Raises_attack,0,1
+Attack,First_Aid,2000,0,0,100,Single_target_minor_healing,0,0,AttackUp,100,3
+Attack,Diguise,2000,0,0,100,Lowers_chance_enemies_attack_self,0,0,AttackUp,100,3
+Attack,Evil_Sword_Slash,2000,0,0,100,Single_target_slashing_attack._[Magic][Slash],0,0,AttackUp,100,3
+Attack,Heavy_Evil_Slash,2000,0,0,100,Single_target_slashing_attack._Slow_to_cast._[Magic][Slash],0,0,AttackUp,100,3
+Attack,Stormy_Seas,2000,0,0,100,Multi_target_water_magic._[Magic][Water],0,0,AttackUp,100,3
+Attack,Steal,2000,0,0,100,Steal_from_an_enemy,0,0,AttackUp,100,3
+Attack,Batten_Hatches,2000,0,0,100,Self_buff._Raises_speed,0,0,AttackUp,100,3
