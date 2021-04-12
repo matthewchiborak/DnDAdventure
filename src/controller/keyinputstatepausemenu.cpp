@@ -38,6 +38,8 @@ bool KeyInputStatePauseMenu::handleUserInput(std::string *nextState)
                 || keyToHandle == Qt::Key_E
                 || keyToHandle == Qt::Key_Escape
                 || keyToHandle == Qt::Key_X
+                || keyToHandle == Qt::Key_Q
+                || keyToHandle == Qt::Key_R
                 )
         {
             auto nowTime = std::chrono::system_clock::now().time_since_epoch();
@@ -56,6 +58,10 @@ bool KeyInputStatePauseMenu::handleUserInput(std::string *nextState)
                 this->model->moveMenuCursor(1, 0, "Pause");
             else if(keyToHandle == Qt::Key_E)
                 this->model->enterMenu("Pause");
+            else if(keyToHandle == Qt::Key_R)
+                this->model->specialMessage("PageForward", "Pause");
+            else if(keyToHandle == Qt::Key_Q)
+                this->model->specialMessage("PageBack", "Pause");
             else if(keyToHandle == Qt::Key_X)
                 this->model->specialMessage("RemoveEquipment", "Pause");
             else if(keyToHandle == Qt::Key_Escape)

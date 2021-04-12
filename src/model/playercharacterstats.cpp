@@ -77,6 +77,12 @@ PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
     equippedArmor = nullptr;
     equippedAccessory1 = nullptr;
     equippedAccessory2 = nullptr;
+
+    if(attacks.size() >= 15)
+    {
+        attacks.at(0)->unlock();
+        attacks.at(5)->unlock();
+    }
 }
 
 PlayerCharacterStats::~PlayerCharacterStats()

@@ -104,3 +104,13 @@ int AttackModel::getMultitarget()
 {
     return multitarget;
 }
+
+bool AttackModel::isUnlocked()
+{
+    return unlocked;
+}
+
+void AttackModel::unlock()
+{
+    unlocked = true;
+}

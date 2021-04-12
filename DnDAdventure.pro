@@ -32,6 +32,7 @@ SOURCES += \
     src/controller/pausemenustatemain.cpp \
     src/controller/pausemenustatemonstermanual.cpp \
     src/controller/pausemenustateparty.cpp \
+    src/controller/pausemenustateskills.cpp \
     src/display/aboveheadbattlemessage.cpp \
     src/display/abstractview.cpp \
     src/display/drawinformation.cpp \
@@ -100,6 +101,7 @@ HEADERS += \
     src/controller/pausemenustatemain.h \
     src/controller/pausemenustatemonstermanual.h \
     src/controller/pausemenustateparty.h \
+    src/controller/pausemenustateskills.h \
     src/display/aboveheadbattlemessage.h \
     src/display/abstractview.h \
     src/display/drawinformation.h \

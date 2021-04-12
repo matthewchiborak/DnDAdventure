@@ -5,6 +5,7 @@
 #include "pausemenustateequipment.h"
 #include "pausemenustatebag.h"
 #include "pausemenustatemonstermanual.h"
+#include "pausemenustateskills.h"
 
 PauseMenuStateMain::PauseMenuStateMain(ModelAbstract *model)
     : PauseMenuDrawState(model)
@@ -27,7 +28,7 @@ PauseMenuDrawState * PauseMenuStateMain::enterMenu()
     if(currentPos == 5)
         return new PauseMenuStateParty(model);
     if(currentPos == 4)
-        return this;
+        return new PauseMenuStateSkills(model);
     if(currentPos == 3)
         return new PauseMenuStateEquipment(model);
     if(currentPos == 2)

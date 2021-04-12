@@ -21,6 +21,9 @@ public:
     int getAccuracy();
     int getMultitarget();
 
+    bool isUnlocked();
+    void unlock();
+
 private:
     std::string name;
     int castTime; //
@@ -36,6 +39,8 @@ private:
     std::string additionalEffect;
     int chanceOfAdditionalEffect;
     //Poison, Sleep, Silence, Slow, Haste, AttackUp, etc.
+
+    bool unlocked = false;
 };
 
 #endif // ATTACKMODEL_H

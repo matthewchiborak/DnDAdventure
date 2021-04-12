@@ -58,3 +58,7 @@ InstantTurnR,InstantTurnR.png
 AccessoryIcon,AccessoryIcon.png
 WeaponIcon,SlashIcon.png
 ArmorIcon,Guard.png
+SkillIcon,SkillIcon.png
+SkillIconGreen,SkillIconGreen.png
+SkillIconLocked,SkillIconLocked.png
+VerticalLine,VerticalLine.png
