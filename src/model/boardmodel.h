@@ -14,8 +14,10 @@ public:
     BoardModel();
 
     //void draw(QPainter *p);
-    void load(std::string loadInfo);
+    void load(std::string loadInfo, std::vector<int> * boardObjectInteractedWith);
     void clear();
+
+    std::string interact(int * objId);
 
     std::vector<BoardObjectAbstract*> * getObjects();
 
@@ -44,6 +46,11 @@ private:
     int yPos;
     float xOffset;
     float yOffset;
+
+    int lastDirectionMovedX;
+    int lastDirectionMovedY;
+
+    std::vector<int> * boardObjectInteractedWith;
 
     bool playerCanMoveThisWay(int x, int y);
 };

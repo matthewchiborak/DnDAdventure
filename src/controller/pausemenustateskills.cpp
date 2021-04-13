@@ -11,14 +11,7 @@ PauseMenuStateSkills::PauseMenuStateSkills(ModelAbstract *model)
     for(int i = 0; i < model->playerCharacters.size(); i++)
     {
         numberOfCharacters++;
-
-//        for(int j = 0; j < model->playerCharacters.at(i)->getAttacks()->size(); j++)
-//        {
-//            model->playerCharacters.at(i)->getAttacks()->at(j)->unlock();
-//        }
     }
-
-    //model->playerCharacters.at(0)->changeXP(500000);
 }
 
 void PauseMenuStateSkills::moveMenuCursor(int x, int y)

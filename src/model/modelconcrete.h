@@ -29,6 +29,8 @@ public:
     void qrPressed(bool wasQ);
     void specialMessage(std::string message, std::string key);
 
+    std::string interact();
+
 private:
     BoardModel boardModel;
     BattleModel battleModel;

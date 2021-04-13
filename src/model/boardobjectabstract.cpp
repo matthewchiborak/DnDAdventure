@@ -1,7 +1,8 @@
 #include "boardobjectabstract.h"
 
-BoardObjectAbstract::BoardObjectAbstract(int xpos, int ypos, int width, int height, std::string spriteName, bool solid)
+BoardObjectAbstract::BoardObjectAbstract(int id, int xpos, int ypos, int width, int height, std::string spriteName, bool solid)
 {
+    this->id = id;
     this->xpos = xpos;
     this->ypos = ypos;
     this->width = width;
@@ -10,9 +11,9 @@ BoardObjectAbstract::BoardObjectAbstract(int xpos, int ypos, int width, int heig
     this->solid = solid;
 }
 
-void BoardObjectAbstract::interact()
+std::string BoardObjectAbstract::interact()
 {
-
+    return "None";
 }
 
 int BoardObjectAbstract::getXpos()
@@ -45,9 +46,14 @@ bool BoardObjectAbstract::getSolid()
     return solid;
 }
 
+int BoardObjectAbstract::getId()
+{
+    return id;
+}
+
 bool BoardObjectAbstract::isOccupyThisSpace(int x, int y)
 {
-    if(x >= ypos
+    if(x >= xpos
             && x < (xpos + width)
             && y >= ypos
             && y < (ypos + height)

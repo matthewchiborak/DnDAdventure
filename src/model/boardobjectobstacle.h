@@ -7,6 +7,7 @@ class BoardObjectObstacle : public BoardObjectAbstract
 {
 public:
     BoardObjectObstacle(
+            int id,
             int xpos,
             int ypos,
             int width,
@@ -14,7 +15,7 @@ public:
             std::string spriteName,
             bool solid);
 
-    void interact();
+    std::string interact();
 };
 
 #endif // BOARDOBJECTOBSTACLE_H

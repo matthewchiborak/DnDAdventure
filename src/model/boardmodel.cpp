@@ -10,11 +10,25 @@ BoardModel::BoardModel()
     srand (time(NULL));
 }
 
-void BoardModel::load(std::string loadInfo)
+void BoardModel::load(std::string loadInfo, std::vector<int> *boardObjectInteractedWith)
 {
+    this->boardObjectInteractedWith = boardObjectInteractedWith;
+
     factory.populate(&boardObjects, &doors, &encounterTable, &battleBackgroundKey, &xPos, &yPos, loadInfo);
     xOffset = xPos;// + 12.f;
     yOffset = yPos;// + 0.5f;// + 7.5f;
+
+    for(int i = 0; i < boardObjects.size(); i++)
+    {
+        for(int j = 0; j < boardObjectInteractedWith->size(); j++)
+        {
+            if(boardObjectInteractedWith->at(j) == boardObjects.at(i)->getId())
+            {
+                boardObjects.at(i)->interact();
+                j = boardObjectInteractedWith->size();
+            }
+        }
+    }
 }
 
 void BoardModel::clear()
@@ -31,6 +45,23 @@ void BoardModel::clear()
     doors.clear();
 }
 
+std::string BoardModel::interact(int *objId)
+{
+    for(int i = 0; i < boardObjects.size(); i++)
+    {
+        if(boardObjects.at(i)->getSolid())
+        {
+            if(boardObjects.at(i)->isOccupyThisSpace(xPos + lastDirectionMovedX, yPos + lastDirectionMovedY))
+            {
+                (*objId) = boardObjects.at(i)->getId();
+                return boardObjects.at(i)->interact();
+            }
+        }
+    }
+
+    return "None";
+}
+
 std::vector<BoardObjectAbstract *> *BoardModel::getObjects()
 {
     return &boardObjects;
@@ -38,6 +69,9 @@ std::vector<BoardObjectAbstract *> *BoardModel::getObjects()
 
 void BoardModel::movePlayer(int x, int y, float t)
 {
+    lastDirectionMovedX = x;
+    lastDirectionMovedY = y;
+
     //Check if even can move
     if(!playerCanMoveThisWay(x, y))
         return;
@@ -54,7 +88,6 @@ void BoardModel::movePlayer(int x, int y, float t)
         xOffset = (xPos) + (x*t);
         yOffset = (yPos) + (y*t);
     }
-
 }
 
 float BoardModel::getXOffset()
@@ -87,7 +120,7 @@ void BoardModel::checkAndActivateDoor()
             int tempy = doors.at(i)->getNewYPos();
             std::string tempPath = doors.at(i)->getBoardKey();
             clear();
-            load(tempPath);
+            load(tempPath, boardObjectInteractedWith);
             xPos = tempx;
             yPos = tempy;
             xOffset = (xPos);

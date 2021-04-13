@@ -29,11 +29,22 @@ void ModelConcrete::drawBoardModel(std::vector<DrawInformation> * items, float *
     //Active player character for moving
     DrawInformation charinfo(0, 0, 100, 100, playerCharacters.at(0)->getSpriteKey(), false);
     items->push_back(charinfo);
+
+    if(hasBoardDialogRemaining())
+    {
+        //Draw the dialog
+        DrawInformation topTextBox(-700, -375, 1500, 140, "BattleMenuBG", false);
+        items->push_back(topTextBox);
+
+        DrawInformation dialogDesc(0, 730, 1500, 140, "",
+                                false, boardModelDialog.front());
+        items->push_back(dialogDesc);
+    }
 }
 
 void ModelConcrete::loadBoardModel(std::string loadInfo)
 {
-    boardModel.load(loadInfo);
+    boardModel.load(loadInfo, &boardObjectsInteratctedWith);
 }
 
 std::string ModelConcrete::handleBoardCollisionTriggers()
@@ -146,5 +157,16 @@ void ModelConcrete::specialMessage(std::string message, std::string key)
     {
         currentMenuState->speicalMessage(message);
     }
+}
+
+std::string ModelConcrete::interact()
+{
+    int potId;
+    std::string toReturn = boardModel.interact(&potId);
+
+    if(toReturn != "None")
+        boardObjectsInteratctedWith.push_back(potId);
+
+    return toReturn;
 }
 

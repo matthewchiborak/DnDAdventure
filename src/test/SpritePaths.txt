@@ -69,3 +69,5 @@ Locked1,Locked1.png
 Locked2,Locked2.png
 Locked3,Locked3.png
 Locked4,Locked4.png
+Chest,chest.png
+ChestEmpty,chestempty.png

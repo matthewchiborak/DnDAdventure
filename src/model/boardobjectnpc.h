@@ -7,15 +7,20 @@ class BoardObjectNPC : public BoardObjectAbstract
 {
 public:
     BoardObjectNPC(
+            int id,
             int xpos,
             int ypos,
             int width,
             int height,
             std::string spriteName,
-            bool solid
+            bool solid,
+            std::string dialog
             );
 
-    void interact();
+    std::string interact();
+
+private:
+    std::string dialog;
 };
 
 #endif // BOARDOBJECTNPC_H

@@ -1,12 +1,13 @@
 #include "boardobjectnpc.h"
 
-BoardObjectNPC::BoardObjectNPC(int xpos, int ypos, int width, int height, std::string spriteName, bool solid)
-    : BoardObjectAbstract(xpos, ypos, width, height, spriteName, solid)
+BoardObjectNPC::BoardObjectNPC(int id, int xpos, int ypos, int width, int height, std::string spriteName, bool solid, std::string dialog)
+    : BoardObjectAbstract(id, xpos, ypos, width, height, spriteName, solid)
 {
-
+    this->dialog = dialog;
 }
 
-void BoardObjectNPC::interact()
+std::string BoardObjectNPC::interact()
 {
     //Unsure what im doing to do with this yet
+    return "NPC$" + dialog;
 }

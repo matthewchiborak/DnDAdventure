@@ -34,10 +34,27 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
 
         keyToHandle = keyboardEventQueue->front();
 
+        if(model->hasBoardDialogRemaining())
+        {
+            if(keyToHandle == Qt::Key_E)
+            {
+                auto nowTime = std::chrono::system_clock::now().time_since_epoch();
+                auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(nowTime).count();
+                theTimeNow = (millis);
+                timeOfLastButtonEvent = theTimeNow;
+                eventBeenSetUp = true;
+
+                model->getNextBoardDialog();
+            }
+
+            return false;
+        }
+
         if(keyToHandle == Qt::Key_W
                 || keyToHandle == Qt::Key_S
                 || keyToHandle == Qt::Key_A
                 || keyToHandle == Qt::Key_D
+                || keyToHandle == Qt::Key_E
                 || keyToHandle == Qt::Key_Escape
                 )
         {
@@ -46,6 +63,12 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
             theTimeNow = (millis);
             timeOfLastButtonEvent = theTimeNow;
             eventBeenSetUp = true;
+
+            if(keyToHandle == Qt::Key_E)
+            {
+                //Interact and update inventory based on resoponse
+                model->updateInventoryBasedOnString(this->model->interact());
+            }
         }
 
         return false;
@@ -77,14 +100,17 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
     if((elapsed_millies / movementLockTimeMil) >= 1)
     {
         eventBeenSetUp = false;
+        while(!keyboardEventQueue->empty())
+            keyboardEventQueue->pop();
 
-        //Hey guess what. try to trigger a random enounter
-        if(model->tryToStartABattle())
+        if(keyToHandle == Qt::Key_W || keyToHandle == Qt::Key_S || keyToHandle == Qt::Key_A || keyToHandle == Qt::Key_D)
         {
-            while(!keyboardEventQueue->empty())
-                keyboardEventQueue->pop();
-            (*nextState) = "RandomEncounter";
-            return true;
+            //Hey guess what. try to trigger a random enounter
+            if(model->tryToStartABattle())
+            {
+                (*nextState) = "RandomEncounter";
+                return true;
+            }
         }
     }
 

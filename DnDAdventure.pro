@@ -59,6 +59,7 @@ SOURCES += \
     src/model/battlemodel.cpp \
     src/model/boardmodel.cpp \
     src/model/boardobjectabstract.cpp \
+    src/model/boardobjectchest.cpp \
     src/model/boardobjectnpc.cpp \
     src/model/boardobjectobstacle.cpp \
     src/model/doorway.cpp \
@@ -128,6 +129,7 @@ HEADERS += \
     src/model/battlemodel.h \
     src/model/boardmodel.h \
     src/model/boardobjectabstract.h \
+    src/model/boardobjectchest.h \
     src/model/boardobjectnpc.h \
     src/model/boardobjectobstacle.h \
     src/model/doorway.h \

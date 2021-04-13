@@ -8,6 +8,7 @@ class BoardObjectAbstract
 {
 public:
     BoardObjectAbstract(
+            int id,
             int xpos,
             int ypos,
             int width,
@@ -15,7 +16,7 @@ public:
             std::string spriteName,
             bool solid);
 
-    virtual void interact();
+    virtual std::string interact();
 
     int getXpos();
     int getYpos();
@@ -23,6 +24,7 @@ public:
     int getHeight();
     std::string getSpriteName();
     bool getSolid();
+    int getId(); //Will be needed when saving is introduced
 
     bool isOccupyThisSpace(int x, int y);
 
@@ -33,6 +35,7 @@ protected:
     int height;
     std::string spriteName;
     bool solid;
+    int id;
 };
 
 //////////////////

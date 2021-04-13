@@ -5,6 +5,8 @@
 #include "../display/spriteflyweightfactoryabstract.h"
 #include "../model/playercharacterstats.h"
 
+#include <queue>
+
 class MonsterManualEntry;
 class DrawInformation;
 class EquipmentModel;
@@ -64,6 +66,13 @@ public:
     void loadMonsterManual(std::string filepath);
     std::vector<MonsterManualEntry> * getMonsterManual();
 
+    virtual std::string interact();
+
+    void updateInventoryBasedOnString(std::string message);
+
+    bool hasBoardDialogRemaining();
+    std::string getNextBoardDialog();
+
 
 protected:
     bool pauseIsDone = false;
@@ -76,6 +85,9 @@ protected:
     std::vector<EquipmentModel> equipment;
 
     std::vector<MonsterManualEntry> monsterManual;
+
+    std::vector<int> boardObjectsInteratctedWith;
+    std::queue<std::string> boardModelDialog;
 
 };
 
