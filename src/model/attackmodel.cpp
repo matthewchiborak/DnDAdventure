@@ -6,6 +6,7 @@ AttackModel::AttackModel(std::string info)
 {
     std::vector<std::string> split = FileReader::splitString(info, ',');
 
+    //name, castTime, mpcost, power, acc, desc, type, element, additonal, chance, multi
     name = FileReader::replaceCharacter(split.at(1), '_', ' ');
     castTime = std::stoi(split.at(2));
     mpcost = std::stoi(split.at(3));
