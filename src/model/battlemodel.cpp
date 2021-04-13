@@ -56,7 +56,7 @@ void BattleModel::clear()
     delete temp;
 }
 
-void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue, int *numberOfPotions, int *numberOfRemedies, int *numberOfEthers, int *numberOfJars, std::vector<MonsterManualEntry> *monsterManual)
+void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue, int *numberOfPotions, int *numberOfRemedies, int *numberOfEthers, int *numberOfJars, int *goldCount, std::vector<MonsterManualEntry> *monsterManual)
 {
     this->partyGaugeValue = partyGaugeValue;
     this->numberOfPotions = numberOfPotions;
@@ -64,6 +64,7 @@ void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *cha
     this->monsterManual = monsterManual;
     this->numberOfEthers = numberOfEthers;
     this->numberOfJars = numberOfJars;
+    this->goldCount = goldCount;
 
     for(int i = 0; i < charactersInput->size(); i++)
     {
@@ -396,9 +397,17 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
     if(damage < 0)
         addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Heal", std::to_string(-1*damage), 5000, attack->getElement());
     if(defender->applyStatusEffect(attack->getAdditionalEffectRoll()))
-        addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000, attack->getElement());
-    //else
-        //addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Immune", "", 2000);
+    {
+        if(attack->getAdditionalEffect() == "Steal")
+        {
+            stealSomething();
+        }
+        else
+        {
+            addAboveHeadBattleMessage(true, attacker->getAttackTarget(), attack->getAdditionalEffect(), "", 5000, attack->getElement());
+        }
+    }
+
 
     //Try interrupt
     if(damage > 0)
@@ -413,6 +422,72 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
 
 void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *defender, AttackModel *attack)
 {
+    //Check if disguise or taunt is happening
+    if(getCharacters()->at(0)->getStatusEffectModel()->disguise && getCharacters()->at(1)->getStatusEffectModel()->taunt)
+    {
+        //Guarenteed
+        defender = getCharacters()->at(1);
+        attacker->setTarget(1);
+    }
+    else if(getCharacters()->at(1)->getStatusEffectModel()->disguise && getCharacters()->at(0)->getStatusEffectModel()->taunt)
+    {
+        //Guarenteed
+        defender = getCharacters()->at(0);
+        attacker->setTarget(0);
+    }
+    else if(getCharacters()->at(0)->getStatusEffectModel()->disguise)
+    {
+        if(rand()%4 == 0)
+        {
+            attacker->setTarget(0);
+            defender = getCharacters()->at(0);
+        }
+        else
+        {
+            attacker->setTarget(1);
+            defender = getCharacters()->at(1);
+        }
+    }
+    else if(getCharacters()->at(1)->getStatusEffectModel()->disguise)
+    {
+        if(rand()%4 == 0)
+        {
+            attacker->setTarget(1);
+            defender = getCharacters()->at(1);
+        }
+        else
+        {
+            attacker->setTarget(0);
+            defender = getCharacters()->at(0);
+        }
+    }
+    else if(getCharacters()->at(0)->getStatusEffectModel()->taunt)
+    {
+        if(rand()%4 == 0)
+        {
+            attacker->setTarget(1);
+            defender = getCharacters()->at(1);
+        }
+        else
+        {
+            attacker->setTarget(0);
+            defender = getCharacters()->at(0);
+        }
+    }
+    else if(getCharacters()->at(1)->getStatusEffectModel()->taunt)
+    {
+        if(rand()%4 == 0)
+        {
+            attacker->setTarget(0);
+            defender = getCharacters()->at(0);
+        }
+        else
+        {
+            attacker->setTarget(1);
+            defender = getCharacters()->at(1);
+        }
+    }
+
     int damage = 0;
 
     if(rand()%100 > (attack->getAccuracy() * attacker->getAccuracyMultiplier()) || defender->getCurrentHealth() <= 0)
@@ -947,6 +1022,9 @@ void BattleModel::addAboveHeadBattleMessage(bool enemy, int index, std::string k
             || key == "MagicUp"
             || key == "MagicDefenceUp"
             || key == "Haste"
+            || key == "Taunt"
+            || key == "Disguise"
+            || key == "Stance"
             )
     {
         AboveHeadBattleMessage newMes(2000,
@@ -1242,4 +1320,37 @@ int BattleModel::getElementB(int ele)
         return 128;
 
     return 0;
+}
+
+void BattleModel::stealSomething()
+{
+    int result = rand()%100;
+
+    if(result < 40)
+    {
+        //Gold
+        int goldStole = 1 + (rand()%200);
+        (*goldCount) = (*goldCount) + goldStole;
+        displayMessage("Bullent stole " + std::to_string(goldStole) + " gold!");
+    }
+    else if(result >= 40 && result < 55)
+    {
+        (*numberOfPotions) = (*numberOfPotions) + 1;
+        displayMessage("Bullent stole a potion!");
+    }
+    else if(result >= 55 && result < 70)
+    {
+        (*numberOfRemedies) = (*numberOfRemedies) + 1;
+        displayMessage("Bullent stole a remedy!");
+    }
+    else if(result >= 70 && result < 85)
+    {
+        (*numberOfEthers) = (*numberOfEthers) + 1;
+        displayMessage("Bullent stole an ether!");
+    }
+    else if(result >= 85 && result < 100)
+    {
+        (*numberOfJars) = (*numberOfJars) + 1;
+        displayMessage("Bullent stole a jar of pickles!");
+    }
 }

@@ -38,9 +38,13 @@ private:
 
     std::string additionalEffect;
     int chanceOfAdditionalEffect;
+    std::string lastAddEffect;
     //Poison, Sleep, Silence, Slow, Haste, AttackUp, etc.
 
     bool unlocked = false;
+
+    void doACappuccino();
+    void doAWildMagic();
 };
 
 #endif // ATTACKMODEL_H

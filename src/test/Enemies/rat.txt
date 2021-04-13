@@ -8,18 +8,9 @@ MDef,15
 Speed,10
 XP,51
 Sprite,Rat
-Attack,Bite,2000,0,10,100,Basic Attack,0,1,Blind,100
-Attack,Scratch,6000,0,10,100,Basic Attack,0,1,Poison,50
+Attack,Bite,2000,0,10,100,Basic Attack,0,1
+Attack,Scratch,6000,0,10,100,Basic Attack,0,1
 Absorb,1
 Weak,2
 Res,3
 Half,4
-Immune,5
-StatusImmune,Poison
-StatusImmune,Sleep
-StatusImmune,AttackDown
-StatusImmune,DefenceDown
-StatusImmune,MagicDown
-StatusImmune,MagicDefenceDown
-StatusImmune,Slow
-StatusImmune,Silence

@@ -26,6 +26,10 @@ public:
     bool silenced = false;
     bool wet = false;
 
+    bool taunt = false;
+    bool disguise = false;
+    bool stance = false;
+
     int sleepCount = 0;
     const int sleepDuration = 15000;
     const float poisonDamagePercentagePerAction = 0.05f;
@@ -36,6 +40,8 @@ public:
     int magicCount = 0;
     int magicDefenceCount = 0;
     int speedCount = 0;
+    int tauntCount = 0;
+    int disguiseCount = 0;
 
     bool overdrive = false;
     const int overdriveDuration = 20000;

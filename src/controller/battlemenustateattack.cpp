@@ -174,7 +174,7 @@ void BattleMenuStateAttack::drawBattleMenu(std::vector<DrawInformation> *items)
             DrawInformation attack1(435 + ((i/5) * 400), (630 + ((i%5) * 50)), 400, 75, "",
                                     false, model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(i)->getName()
                                     + model->getCharacters()->at(model->getFocusPartyMember())->getAttacks()->at(i)->getMPCostString()
-                                    , true, 36);
+                                    , true, 30);
             items->push_back(attack1);
         }
     }
@@ -415,6 +415,21 @@ void BattleMenuStateAttack::drawEnemyStatusEffect(std::vector<DrawInformation> *
         if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->silenced)
         {
             DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SESilence", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->taunt)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SETaunt", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->disguise)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEDisguise", false);
+            items->push_back(SEAttUp);
+        }
+        if(model->getCharacters()->at(currentTarget)->getStatusEffectModel()->stance)
+        {
+            DrawInformation SEAttUp(-12 + (((enemyStatusCount%2) - (((enemyStatusCount+1)%2))) * 15*enemyStatusCount++), 360, 25, 25, "SEStance", false);
             items->push_back(SEAttUp);
         }
     }

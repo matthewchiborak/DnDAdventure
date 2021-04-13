@@ -41,6 +41,9 @@ std::string AttackModel::getName()
 
 int AttackModel::getCastTime()
 {
+    if(additionalEffect == "WildMagic")
+        return (500 + rand()%7000);
+
     return castTime;
 }
 
@@ -59,6 +62,9 @@ std::string AttackModel::getMPCostString()
 
 int AttackModel::getPower()
 {
+    if(additionalEffect == "WildMagic")
+        return (-150 + rand()%300);
+
     return power;
 }
 
@@ -74,16 +80,42 @@ int AttackModel::getAttackType()
 
 int AttackModel::getElement()
 {
+    if(additionalEffect == "WildMagic")
+        return (rand()%10);
+
+    if(element == 10)
+    {
+        //1-6
+        return ((rand()%6) + 1);
+    }
+
     return element;
 }
 
 std::string AttackModel::getAdditionalEffect()
 {
+    if(additionalEffect == "Cappuccino" || additionalEffect == "WildMagic")
+    {
+        return lastAddEffect;
+    }
+
     return additionalEffect;
 }
 
 std::string AttackModel::getAdditionalEffectRoll()
 {
+    if(additionalEffect == "Cappuccino")
+    {
+        doACappuccino();
+
+        return lastAddEffect;
+    }
+    if(additionalEffect == "WildMagic")
+    {
+        doAWildMagic();
+        return lastAddEffect;
+    }
+
     //if chance is less than 100 do a roll for it
     if(chanceOfAdditionalEffect >= 100)
         return additionalEffect;
@@ -103,6 +135,9 @@ int AttackModel::getAccuracy()
 
 int AttackModel::getMultitarget()
 {
+    if(additionalEffect == "WildMagic")
+        return (1 + rand()%2);
+
     return multitarget;
 }
 
@@ -114,4 +149,155 @@ bool AttackModel::isUnlocked()
 void AttackModel::unlock()
 {
     unlocked = true;
+}
+
+void AttackModel::doACappuccino()
+{
+    int value = rand()%200;
+
+    if(value < 20)
+    {
+        lastAddEffect = "AttackUp";
+    }
+    else if(value >= 20 && value < 40)
+    {
+        lastAddEffect = "DefenceUp";
+    }
+    else if(value >= 40 && value < 60)
+    {
+        lastAddEffect = "MagicUp";
+    }
+    else if(value >= 60 && value < 80)
+    {
+        lastAddEffect = "MagicDefenceUp";
+    }
+    else if(value >= 80 && value < 100)
+    {
+        lastAddEffect = "Haste";
+    }
+    else if(value >= 100 && value < 105)
+    {
+        lastAddEffect = "Slow";
+    }
+    else if(value >= 105 && value < 110)
+    {
+        lastAddEffect = "AttackDown";
+    }
+    else if(value >= 110 && value < 115)
+    {
+        lastAddEffect = "DefenceDown";
+    }
+    else if(value >= 115 && value < 120)
+    {
+        lastAddEffect = "MagicDown";
+    }
+    else if(value >= 120 && value < 125)
+    {
+        lastAddEffect = "MagicDefenceDown";
+    }
+    else if(value >= 125 && value < 130)
+    {
+        lastAddEffect = "Poison";
+    }
+    else if(value >= 130 && value < 135)
+    {
+        lastAddEffect = "Blind";
+    }
+    else if(value >= 135 && value < 140)
+    {
+        lastAddEffect = "Silence";
+    }
+    else if(value >= 140 && value < 145)
+    {
+        lastAddEffect = "Sleep";
+    }
+    else if(value >= 145 && value < 150)
+    {
+        lastAddEffect = "Stance";
+    }
+    else if(value >= 150 && value < 160)
+    {
+        lastAddEffect = "AttackUp";
+    }
+    else if(value >= 160 && value < 170)
+    {
+        lastAddEffect = "DefenceUp";
+    }
+    else if(value >= 170 && value < 180)
+    {
+        lastAddEffect = "MagicUp";
+    }
+    else if(value >= 180 && value < 190)
+    {
+        lastAddEffect = "MagicDefenceUp";
+    }
+    else if(value >= 190 && value < 200)
+    {
+        lastAddEffect = "Haste";
+    }
+
+}
+
+void AttackModel::doAWildMagic()
+{
+    int value = rand()%200;
+
+    if(value < 10)
+    {
+        lastAddEffect = "AttackUp";
+    }
+    else if(value < 20)
+    {
+        lastAddEffect = "DefenceUp";
+    }
+    else if(value < 30)
+    {
+        lastAddEffect = "MagicUp";
+    }
+    else if(value < 40)
+    {
+        lastAddEffect = "MagicDefenceUp";
+    }
+   else if(value < 50)
+    {
+        lastAddEffect = "Haste";
+    }
+    else if(value < 60)
+    {
+        lastAddEffect = "Slow";
+    }
+    else if(value < 70)
+    {
+        lastAddEffect = "AttackDown";
+    }
+    else if(value < 80)
+    {
+        lastAddEffect = "DefenceDown";
+    }
+    else if(value < 90)
+    {
+        lastAddEffect = "MagicDown";
+    }
+    else if(value < 100)
+    {
+        lastAddEffect = "MagicDefenceDown";
+    }
+    else if(value < 110)
+    {
+        lastAddEffect = "Poison";
+    }
+    else if(value < 120)
+    {
+        lastAddEffect = "Blind";
+    }
+    else if(value < 130)
+    {
+        lastAddEffect = "Silence";
+    }
+    else if(value < 140)
+    {
+        lastAddEffect = "Sleep";
+    }
+
+    lastAddEffect = "None";
 }

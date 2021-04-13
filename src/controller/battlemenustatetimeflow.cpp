@@ -410,6 +410,21 @@ void BattleMenuStateTimeFlow::drawStatusEffects(std::vector<DrawInformation> * i
         DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SESilence", false);
         items->push_back(SEAttUp);
     }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->taunt)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SETaunt", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->disguise)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SEDisguise", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(0)->getStatusEffectModel()->stance)
+    {
+        DrawInformation SEAttUp(-300 + 10 + (60*p1LowerStatusCount++), -275-100-15, 50, 50, "SEStance", false);
+        items->push_back(SEAttUp);
+    }
     ////////////////
     if(model->getCharacters()->at(1)->getStatusEffectModel()->SE_att > 0)
     {
@@ -480,6 +495,21 @@ void BattleMenuStateTimeFlow::drawStatusEffects(std::vector<DrawInformation> * i
     if(model->getCharacters()->at(1)->getStatusEffectModel()->silenced)
     {
         DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SESilence", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->taunt)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SETaunt", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->disguise)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SEDisguise", false);
+        items->push_back(SEAttUp);
+    }
+    if(model->getCharacters()->at(1)->getStatusEffectModel()->stance)
+    {
+        DrawInformation SEAttUp(250 + 10 + (60*p2LowerStatusCount++), -275-100-15, 50, 50, "SEStance", false);
         items->push_back(SEAttUp);
     }
 }

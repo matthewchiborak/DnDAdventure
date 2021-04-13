@@ -40,6 +40,9 @@ SEPoison,SEPoison.png
 SESleep,SESleep.png
 SESilence,SESilence.png
 SEBlind,SEBlind.png
+SETaunt,SETaunt.png
+SEDisguise,SEDisguise.png
+SEStance,SEStance.png
 Guard,Guard.png
 GaugeMarker,GaugeMarker.png
 Overdrive,Overdrive.png

@@ -102,6 +102,20 @@ void StatusEffectModel::applyStatusEffect(std::string se)
         overdriveCount = 0;
         overdrive = true;
     }
+    else if(se == "Taunt")
+    {
+        tauntCount = 0;
+        taunt = true;
+    }
+    else if(se == "Disguise")
+    {
+        disguiseCount = 0;
+        disguise = true;
+    }
+    else if(se == "Stance")
+    {
+        stance = !stance;
+    }
 }
 
 void StatusEffectModel::cureAllNegativeStatusEffects()
@@ -161,6 +175,18 @@ void StatusEffectModel::applyTime(float t)
         speedCount += t;
         if(speedCount > buffDuration)
             SE_speed = 0;
+    }
+    if(taunt)
+    {
+        tauntCount += t;
+        if(tauntCount > buffDuration)
+            taunt = false;
+    }
+    if(disguise)
+    {
+        disguiseCount += t;
+        if(disguiseCount > buffDuration)
+            disguise = false;
     }
     if(overdrive)
     {

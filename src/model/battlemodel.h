@@ -24,7 +24,8 @@ public:
 
     void clear();
     void load(std::string key, std::vector<PlayerCharacterStats*> * charactersInput, int *partyGaugeValue
-              , int * numberOfPotions, int * numberOfRemedies, int * numberOfEthers, int * numberOfJars, std::vector<MonsterManualEntry> * monsterManual);
+              , int * numberOfPotions, int * numberOfRemedies, int * numberOfEthers, int * numberOfJars,
+              int * goldCount, std::vector<MonsterManualEntry> * monsterManual);
     void draw(std::vector<DrawInformation> * items);
     void passTime(float value);
     void qrPressed(bool wasQ);
@@ -121,6 +122,7 @@ private:
     int * numberOfRemedies;
     int * numberOfEthers;
     int * numberOfJars;
+    int * goldCount;
 
     //vector of enemies
     std::vector<EnemyModel*> enemies;
@@ -156,6 +158,7 @@ private:
     int getElementB(int ele);
 
     int speedValueToGet200PointsPerSecond;
+    void stealSomething();
 };
 
 #endif // BATTLEMODEL_H

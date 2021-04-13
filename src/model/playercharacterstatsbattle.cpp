@@ -35,46 +35,62 @@ int PlayerCharacterStatsBattle::getMaxHealth()
 
 int PlayerCharacterStatsBattle::getAttack()
 {
+    int valueToUse = stats->getAttack();
+    if(statusEffectModel.stance)
+        valueToUse = stats->getMagicAttack();
+
     if(statusEffectModel.overdrive)
-        return stats->getAttack() * 2.f;
+        return valueToUse * 2.f;
 
     if(statusEffectModel.SE_att != 0)
-        return (1.f + (statusEffectModel.SE_att * 0.25f)) * stats->getAttack();
+        return (1.f + (statusEffectModel.SE_att * 0.25f)) * valueToUse;
 
-    return stats->getAttack();
+    return valueToUse;
 }
 
 int PlayerCharacterStatsBattle::getDefence()
 {
+    int valueToUse = stats->getDefence();
+    if(statusEffectModel.stance)
+        valueToUse = stats->getMagicDefence();
+
     if(statusEffectModel.guard)
-        return stats->getDefence() * 2.f;
+        return valueToUse * 2.f;
 
     if(statusEffectModel.SE_def != 0)
-        return (1.f + (statusEffectModel.SE_def * 0.25f)) * stats->getDefence();
+        return (1.f + (statusEffectModel.SE_def * 0.25f)) * valueToUse;
 
-    return stats->getDefence();
+    return valueToUse;
 }
 
 int PlayerCharacterStatsBattle::getMagicAttack()
 {
+    int valueToUse = stats->getMagicAttack();
+    if(statusEffectModel.stance)
+        valueToUse = stats->getAttack();
+
     if(statusEffectModel.overdrive)
-        return stats->getMagicAttack() * 2.f;
+        return valueToUse * 2.f;
 
     if(statusEffectModel.SE_magic != 0)
-        return (1.f + (statusEffectModel.SE_magic * 0.25f)) * stats->getMagicAttack();
+        return (1.f + (statusEffectModel.SE_magic * 0.25f)) * valueToUse;
 
-    return stats->getMagicAttack();
+    return valueToUse;
 }
 
 int PlayerCharacterStatsBattle::getMagicDefence()
 {
+    int valueToUse = stats->getMagicDefence();
+    if(statusEffectModel.stance)
+        valueToUse = stats->getDefence();
+
     if(statusEffectModel.guard)
-        return stats->getMagicDefence() * 2.f;
+        return valueToUse * 2.f;
 
     if(statusEffectModel.SE_magicDef != 0)
-        return (1.f + (statusEffectModel.SE_magicDef * 0.25f)) * stats->getMagicDefence();
+        return (1.f + (statusEffectModel.SE_magicDef * 0.25f)) * valueToUse;
 
-    return stats->getMagicDefence();
+    return valueToUse;
 }
 
 int PlayerCharacterStatsBattle::getSpeed()
