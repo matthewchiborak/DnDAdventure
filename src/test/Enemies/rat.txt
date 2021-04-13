@@ -5,7 +5,7 @@ Att,23
 Def,15
 MAtt,10
 MDef,15
-Speed,100
+Speed,10
 XP,51
 Sprite,Rat
 Attack,Bite,2000,0,10,100,Basic Attack,0,1,Blind,100

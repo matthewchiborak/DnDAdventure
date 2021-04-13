@@ -9,6 +9,7 @@
 #include "../model/attackmodel.h"
 
 #include <chrono>
+#include <QDebug>
 
 BattleMenuStateTimeFlow::BattleMenuStateTimeFlow(BattleModel *model)
     : BattleMenuState(model)
@@ -54,7 +55,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
     if(model->getCharacters()->at(0)->getCurrentHealth() > 0)
     {
         if(!model->getCharacters()->at(0)->getIsCasting())
-            model->setP1TimeLinePos(p1PosBefore + (model->getCharacters()->at(0)->getSpeed() * (elapsed_millies/100.f)));
+            model->setP1TimeLinePos(p1PosBefore + ((0.2f * elapsed_millies) * ((float)model->getCharacters()->at(0)->getSpeed() / (float)model->getSpeedValueToGet200PointsPerSecond())));
         else
             model->setP1TimeLinePos(p1PosBefore + ((elapsed_millies * 200) / model->getCharacters()->at(0)->getCastingAttack()->getCastTime()));
     }
@@ -62,7 +63,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
     if(model->getCharacters()->at(1)->getCurrentHealth() > 0)
     {
         if(!model->getCharacters()->at(1)->getIsCasting())
-            model->setP2TimeLinePos(p2PosBefore + (model->getCharacters()->at(1)->getSpeed() * (elapsed_millies/100.f)));
+            model->setP2TimeLinePos(p2PosBefore + ((0.2f * elapsed_millies) * ((float)model->getCharacters()->at(1)->getSpeed() / (float)model->getSpeedValueToGet200PointsPerSecond())));
         else
             model->setP2TimeLinePos(p2PosBefore + ((elapsed_millies * 200) / model->getCharacters()->at(1)->getCastingAttack()->getCastTime()));
     }
@@ -75,7 +76,7 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
 
             float enPosBefore =  model->getEnemies()->at(i)->getTimeLinePos();
             if(!model->getEnemies()->at(i)->getIsCasting())
-                model->getEnemies()->at(i)->setTimeLinePos(enPosBefore + (model->getEnemies()->at(i)->getSpeed() * (elapsed_millies/1000.f)));
+                model->getEnemies()->at(i)->setTimeLinePos(enPosBefore + ((0.2f * elapsed_millies) * ((float)model->getEnemies()->at(i)->getSpeed() / (float)model->getSpeedValueToGet200PointsPerSecond())));
             else
                 model->getEnemies()->at(i)->setTimeLinePos(enPosBefore + ((elapsed_millies * 200) / model->getEnemies()->at(i)->getCastingAttack()->getCastTime()));
 

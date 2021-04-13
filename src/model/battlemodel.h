@@ -100,6 +100,8 @@ public:
     void addAdvanceDialogLine(std::string line);
     std::queue<std::string> * getAdvanceDialogLines();
 
+    int getSpeedValueToGet200PointsPerSecond();
+
 private:
     //factory for building the enounter
     EncounterFactory * encounterFact;
@@ -152,6 +154,8 @@ private:
     int getElementR(int ele);
     int getElementG(int ele);
     int getElementB(int ele);
+
+    int speedValueToGet200PointsPerSecond;
 };
 
 #endif // BATTLEMODEL_H

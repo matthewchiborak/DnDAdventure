@@ -95,13 +95,20 @@ void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *cha
             maxSpeed = enemies.at(i)->getSpeed();
     }
 
-    setP1TimeLinePos((rand()%500) * (characters.at(0)->getSpeed() / maxSpeed));
-    setP2TimeLinePos((rand()%500) * (characters.at(1)->getSpeed() / maxSpeed));
+//    setP1TimeLinePos((rand()%500) * (characters.at(0)->getSpeed() / maxSpeed));
+//    setP2TimeLinePos((rand()%500) * (characters.at(1)->getSpeed() / maxSpeed));
+//    for(int i = 0; i < numberOfEnemies; i++)
+//    {
+//        enemies.at(i)->setTimeLinePos((rand()%500) * ((float)enemies.at(i)->getSpeed() / (float)maxSpeed));
+//    }
+    setP1TimeLinePos((rand()%500));
+    setP2TimeLinePos((rand()%500));
     for(int i = 0; i < numberOfEnemies; i++)
     {
-        enemies.at(i)->setTimeLinePos((rand()%500) * ((float)enemies.at(i)->getSpeed() / (float)maxSpeed));
+        enemies.at(i)->setTimeLinePos((rand()%500));
     }
 
+    speedValueToGet200PointsPerSecond = maxSpeed;
 }
 
 void BattleModel::draw(std::vector<DrawInformation> *items)
@@ -1107,6 +1114,11 @@ void BattleModel::addAdvanceDialogLine(std::string line)
 std::queue<std::string> *BattleModel::getAdvanceDialogLines()
 {
     return &advanceDialogLines;
+}
+
+int BattleModel::getSpeedValueToGet200PointsPerSecond()
+{
+    return speedValueToGet200PointsPerSecond;
 }
 
 void BattleModel::checkIfEnemiesAreDead()
