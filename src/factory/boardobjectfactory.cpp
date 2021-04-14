@@ -14,7 +14,7 @@ BoardObjectFactory::BoardObjectFactory()
 
 }
 
-void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjects, std::vector<Doorway*> * doors, std::vector<std::string> *encTable, std::string *battleBackgroundKey, int *xPos, int *yPos, std::string boardFileName)
+void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjects, std::vector<Doorway*> * doors, std::vector<std::string> *encTable, std::string *battleBackgroundKey, std::string *bgMusicKey, int *xPos, int *yPos, std::string boardFileName)
 {
     FileReader reader(boardFileName);
 
@@ -45,6 +45,8 @@ void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjec
                 boardObjects->push_back(createChest(vect));
             else if(vect.at(0) == "cutscene")
                 boardObjects->push_back(createCutsceneTrigger(vect));
+            else if(vect.at(0) == "musicBG")
+                (*bgMusicKey) = (vect.at(1));
         }
     }
 }

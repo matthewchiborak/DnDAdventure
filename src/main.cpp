@@ -16,6 +16,7 @@
 
 #include "factory/inputstatefactory.h"
 
+#include "controller/musiccontrollerconcrete.h"
 
 
 int main(int argc, char *argv[])
@@ -33,7 +34,11 @@ int main(int argc, char *argv[])
     SpriteFlyweightFactoryAbstract * spriteFactory =
             new SpriteFlyweightFactory("D:\\Qt Projects\\DnDAdventure\\src\\test\\SpritePaths.txt");
 
-    ModelAbstract * testModel = new ModelConcrete();
+    MusicControllerAbstract * musicController = new MusicControllerConcrete("D:\\Qt Projects\\DnDAdventure\\src\\test\\MusicPaths.txt");
+    musicController->manualLoad("Hit", "Hit");
+    musicController->manualLoad("Miss", "Miss");
+
+    ModelAbstract * testModel = new ModelConcrete(musicController);
     testModel->loadMonsterManual("D:\\Qt Projects\\DnDAdventure\\src\\test\\monstermanual.txt");
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Bullent.txt"));
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Chad.txt"));

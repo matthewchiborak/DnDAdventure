@@ -2,6 +2,7 @@ NextBoardPath,testobstaclefilesprites2.txt
 NextBoardX,10
 NextBoardY,10
 BG,TestBattleBG
+BGMusic,Ship
 LeftPortrait,DukeMenu
 RightPortrait,BullentMenu
 LeftName,Duke
@@ -12,6 +13,7 @@ Text,Hello!_This_is_a_cutscene
 Stop
 Text,Only_the_text_should_change
 Stop
+BGMusic,Pizza
 LeftTalk,0
 Text,Bullent_is_now_talking
 Stop

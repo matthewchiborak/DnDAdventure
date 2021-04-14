@@ -1,0 +1,6 @@
+Ship,Museum.mp3
+Battle,FF6BattleTheme.wav
+Hit,Hit.wav
+Miss,Miss.wav
+Pizza,Pizza.wav
+Victory,Victory.wav

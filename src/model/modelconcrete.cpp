@@ -8,10 +8,14 @@
 #include "../controller/pausemenustatemain.h"
 #include "battlemodel.h"
 
-ModelConcrete::ModelConcrete()
-    : ModelAbstract()
+ModelConcrete::ModelConcrete(MusicControllerAbstract *musicController)
+    : ModelAbstract(musicController)
 {
     currentMenuState = new PauseMenuStateMain(this);
+
+    battleModel.setMusicController(musicController);
+    boardModel.setMusicController(musicController);
+    cutsceneModel.setMusicController(musicController);
 }
 
 void ModelConcrete::drawBoardModel(std::vector<DrawInformation> * items, float *xOffset, float *yOffset)
@@ -160,6 +164,11 @@ void ModelConcrete::specialMessage(std::string message, std::string key)
     if(key == "Pause")
     {
         currentMenuState->speicalMessage(message);
+    }
+    if(key == "Board")
+    {
+        if(message == "PlayMusic")
+            boardModel.playBGMusic();
     }
 }
 

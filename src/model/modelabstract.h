@@ -10,11 +10,12 @@
 class MonsterManualEntry;
 class DrawInformation;
 class EquipmentModel;
+class MusicControllerAbstract;
 
 class ModelAbstract
 {
 public:
-    ModelAbstract();
+    ModelAbstract(MusicControllerAbstract * musicController);
     ~ModelAbstract();
     void addPlayerCharacter(PlayerCharacterStats* character);
 

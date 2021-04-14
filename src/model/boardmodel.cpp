@@ -16,7 +16,7 @@ void BoardModel::load(std::string loadInfo, std::vector<int> *boardObjectInterac
 
     this->boardObjectInteractedWith = boardObjectInteractedWith;
 
-    factory.populate(&boardObjects, &doors, &encounterTable, &battleBackgroundKey, &xPos, &yPos, loadInfo);
+    factory.populate(&boardObjects, &doors, &encounterTable, &battleBackgroundKey, &backgroundMusicKey, &xPos, &yPos, loadInfo);
     xOffset = xPos;// + 12.f;
     yOffset = yPos;// + 0.5f;// + 7.5f;
 
@@ -177,6 +177,16 @@ bool BoardModel::tryToGetAnEnounter(std::string *keyToReturn)
 std::string BoardModel::getBattleBackgroundKey()
 {
     return battleBackgroundKey;
+}
+
+void BoardModel::setMusicController(MusicControllerAbstract *musicController)
+{
+    this->musicController = musicController;
+}
+
+void BoardModel::playBGMusic()
+{
+    musicController->playMusic(backgroundMusicKey);
 }
 
 bool BoardModel::playerCanMoveThisWay(int x, int y)

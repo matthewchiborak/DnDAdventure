@@ -10,7 +10,7 @@ class PauseMenuDrawState;
 class ModelConcrete : public ModelAbstract
 {
 public:
-    ModelConcrete();
+    ModelConcrete(MusicControllerAbstract * musicController);
     void drawBoardModel(std::vector<DrawInformation> * items, float *xOffset, float *yOffset);
     void loadBoardModel(std::string loadInfo);
     std::string handleBoardCollisionTriggers();

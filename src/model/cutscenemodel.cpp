@@ -90,6 +90,9 @@ void CutsceneModel::advance()
             currentlyHasText = std::stoi(focus.at(1));
         if(focus.at(0) == "Text")
             currentText = FileReader::replaceCharacter(focus.at(1), '_', ' ');
+        if(focus.at(0) == "BGMusic")
+            musicController->playMusic(focus.at(1));
+
 
         instructions.pop();
     }while(!foundAStop);
@@ -113,4 +116,9 @@ int CutsceneModel::getXPosBoard()
 int CutsceneModel::getYPosBoard()
 {
     return yPosBoard;
+}
+
+void CutsceneModel::setMusicController(MusicControllerAbstract *musicController)
+{
+    this->musicController = musicController;
 }

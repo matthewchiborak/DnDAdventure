@@ -7,6 +7,7 @@
 #include "../controller/battlemenustate.h"
 #include "../display/aboveheadbattlemessage.h"
 #include <map>
+#include "../controller/musiccontrollerabstract.h"
 
 class PlayerCharacterStats;
 class DrawInformation;
@@ -103,9 +104,13 @@ public:
 
     int getSpeedValueToGet200PointsPerSecond();
 
+    void setMusicController(MusicControllerAbstract * musicController);
+
 private:
     //factory for building the enounter
     EncounterFactory * encounterFact;
+
+    MusicControllerAbstract * musicController;
 
     int focusPartyMember = 0;
     float timelineP1Pos = 0; // scale of 0-1200. 1000 being the attack time?

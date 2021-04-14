@@ -4,6 +4,8 @@
 #include <queue>
 #include <string>
 
+#include "../controller/musiccontrollerabstract.h"
+
 class DrawInformation;
 
 class CutsceneModel
@@ -21,8 +23,12 @@ public:
     int getXPosBoard();
     int getYPosBoard();
 
+    void setMusicController(MusicControllerAbstract * musicController);
+
 private:
     std::queue<std::string> instructions;
+
+    MusicControllerAbstract * musicController;
 
     std::string nextBoardFilePath;
     int xPosBoard;

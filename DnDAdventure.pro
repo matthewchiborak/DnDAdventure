@@ -1,4 +1,4 @@
-QT       += core gui opengl
+QT       += core gui opengl multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,6 +27,8 @@ SOURCES += \
     src/controller/keyinputstateboard.cpp \
     src/controller/keyinputstatecutscene.cpp \
     src/controller/keyinputstatepausemenu.cpp \
+    src/controller/musiccontrollerabstract.cpp \
+    src/controller/musiccontrollerconcrete.cpp \
     src/controller/pausemenustate.cpp \
     src/controller/pausemenustatebag.cpp \
     src/controller/pausemenustateequipment.cpp \
@@ -101,6 +103,8 @@ HEADERS += \
     src/controller/keyinputstateboard.h \
     src/controller/keyinputstatecutscene.h \
     src/controller/keyinputstatepausemenu.h \
+    src/controller/musiccontrollerabstract.h \
+    src/controller/musiccontrollerconcrete.h \
     src/controller/pausemenustate.h \
     src/controller/pausemenustatebag.h \
     src/controller/pausemenustateequipment.h \

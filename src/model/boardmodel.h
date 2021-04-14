@@ -5,6 +5,7 @@
 
 #include "gamemodelabstract.h"
 #include "../factory/boardobjectfactory.h"
+#include "../controller/musiccontrollerabstract.h"
 
 class BoardObjectAbstract;
 
@@ -36,6 +37,9 @@ public:
 
     std::string getBattleBackgroundKey();
 
+    void setMusicController(MusicControllerAbstract * musicController);
+    void playBGMusic();
+
 private:
     std::vector<BoardObjectAbstract*> boardObjects;
     std::vector<Doorway*> doors;
@@ -43,6 +47,7 @@ private:
 
     std::vector<std::string> encounterTable;
     std::string battleBackgroundKey;
+    std::string backgroundMusicKey;
 
     int xPos;
     int yPos;
@@ -53,6 +58,8 @@ private:
     int lastDirectionMovedY;
 
     std::vector<int> * boardObjectInteractedWith;
+
+    MusicControllerAbstract * musicController;
 
     bool playerCanMoveThisWay(int x, int y);
 };

@@ -10,6 +10,8 @@ KeyInputStateBoard::KeyInputStateBoard(ModelAbstract *model, std::queue<int> *ke
     : KeyInputState(model, keyboardEventQueue)
 {
     movementLockTimeMil = 300;
+
+    model->specialMessage("PlayMusic", "Board");
 }
 
 bool KeyInputStateBoard::handle(std::string *nextState)

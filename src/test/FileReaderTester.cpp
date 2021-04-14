@@ -82,10 +82,11 @@ bool FileReaderTester::boardObjectFactoryPopulateVectorBasedOnTextFileTest()
     std::vector<Doorway*> doors;
     std::vector<std::string> encounterTable;
     std::string battleBG;
+    std::string BGmusic;
     int xPos;
     int yPos;
 
-    factory.populate(&madeObjects, &doors, &encounterTable, &battleBG, &xPos, &yPos, "D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefile.txt");
+    factory.populate(&madeObjects, &doors, &encounterTable, &battleBG, &BGmusic, &xPos, &yPos, "D:\\Qt Projects\\DnDAdventure\\src\\test\\testobstaclefile.txt");
 
     if(madeObjects.size() != 2)
         return false;
@@ -148,7 +149,9 @@ bool FileReaderTester::splitStringsTest()
 
 bool FileReaderTester::factoryForMakingStatesTest()
 {
-    ModelConcrete model;
+    MusicControllerAbstract musicController("D:\\Qt Projects\\DnDAdventure\\src\\test\\MusicPaths.txt");
+
+    ModelConcrete model(&musicController);
     std::queue<int> que;
     InputStateFactory fact(&model, &que);
     KeyInputState * testPointer = fact.getState("Board");

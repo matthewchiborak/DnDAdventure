@@ -15,7 +15,7 @@ public:
     void populate(std::vector<BoardObjectAbstract*> * boardObjects,
                   std::vector<Doorway*> * doors,
                   std::vector<std::string> * encTable,
-                  std::string * battleBackgroundKey,
+                  std::string * battleBackgroundKey, std::string * bgMusicKey,
                   int * xPos, int * yPos, std::string boardFileName);
 
 private:

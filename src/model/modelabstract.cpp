@@ -6,7 +6,7 @@
 
 #include <vector>
 
-ModelAbstract::ModelAbstract()
+ModelAbstract::ModelAbstract(MusicControllerAbstract *musicController)
 {
     addEquipment("Weapon,1,Test_Weapon1,Bullent_Only,9,1000");
     addEquipment("Weapon,2,TestWeapon2,Chad_Only,AttackUp,50");

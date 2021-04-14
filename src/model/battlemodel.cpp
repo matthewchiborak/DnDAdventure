@@ -58,6 +58,8 @@ void BattleModel::clear()
 
 void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue, int *numberOfPotions, int *numberOfRemedies, int *numberOfEthers, int *numberOfJars, int *goldCount, std::vector<MonsterManualEntry> *monsterManual)
 {
+    musicController->playMusic("Battle");
+
     this->partyGaugeValue = partyGaugeValue;
     this->numberOfPotions = numberOfPotions;
     this->numberOfRemedies = numberOfRemedies;
@@ -233,6 +235,8 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
 
 void BattleModel::passTime(float value)
 {
+    musicController->loopMusic(3500, 56400);
+
     auto nowTime = std::chrono::system_clock::now().time_since_epoch();
     auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(nowTime).count();
     theTimeNow =(millis);
@@ -334,6 +338,7 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
 
     if(rand()%100 > (attack->getAccuracy() * attacker->getAccuracyMultiplier()) || defender->getCurrentHealth() <= 0)
     {
+        musicController->playSoundEffect("Miss");
 
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
@@ -412,6 +417,8 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, EnemyModel *
     //Try interrupt
     if(damage > 0)
     {
+        musicController->playSoundEffect("Hit");
+
         if(defender->tryInterrupt(500))
         {
             addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Interrupt", "", 5000, attack->getElement());
@@ -492,6 +499,8 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
 
     if(rand()%100 > (attack->getAccuracy() * attacker->getAccuracyMultiplier()) || defender->getCurrentHealth() <= 0)
     {
+        musicController->playSoundEffect("Miss");
+
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
             addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Miss", "", 5000, 0);
@@ -553,6 +562,8 @@ void BattleModel::applyAttack(EnemyModel *attacker, PlayerCharacterStatsBattle *
     //Try interrupt
     if(damage > 0)
     {
+        musicController->playSoundEffect("Hit");
+
         if(defender->getIsCasting())
         {
             if(attacker->getAttackTarget() == 0)
@@ -579,6 +590,8 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
 
     if(rand()%100 > (attack->getAccuracy() * attacker->getAccuracyMultiplier()) || defender->getCurrentHealth() <= 0)
     {
+        musicController->playSoundEffect("Miss");
+
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
             addAboveHeadBattleMessage(false, attacker->getAttackTarget(), "Miss", "", 5000, 0);
@@ -643,6 +656,8 @@ void BattleModel::applyAttack(PlayerCharacterStatsBattle *attacker, PlayerCharac
     //Try interrupt
     if(damage > 0)
     {
+        musicController->playSoundEffect("Hit");
+
         if(defender->getIsCasting())
         {
             if(attacker->getAttackTarget() == 0)
@@ -666,6 +681,8 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
 
     if(rand()%100 > (attack->getAccuracy() * attacker->getAccuracyMultiplier()) || defender->getCurrentHealth() <= 0)
     {
+        musicController->playSoundEffect("Miss");
+
         displayMessage(attacker->getName() + "'s attack misses...");
         if(defender->getCurrentHealth() > 0)
             addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Miss", "", 5000, 0);
@@ -730,6 +747,8 @@ void BattleModel::applyAttack(EnemyModel *attacker, EnemyModel *defender, Attack
     //Try interrupt
     if(damage > 0)
     {
+        musicController->playSoundEffect("Hit");
+
         if(defender->tryInterrupt(500))
         {
             addAboveHeadBattleMessage(true, attacker->getAttackTarget(), "Interrupt", "", 5000, attack->getElement());
@@ -1199,6 +1218,11 @@ int BattleModel::getSpeedValueToGet200PointsPerSecond()
     return speedValueToGet200PointsPerSecond;
 }
 
+void BattleModel::setMusicController(MusicControllerAbstract *musicController)
+{
+    this->musicController = musicController;
+}
+
 void BattleModel::checkIfEnemiesAreDead()
 {
     if(battleIsDone || enteredBattleOverState)
@@ -1238,6 +1262,7 @@ void BattleModel::checkIfEnemiesAreDead()
 
     if(deadEnemyCount >= numberOfEnemies)
     {
+        musicController->playMusic("Victory");
         enteredBattleOverState = true;
 
         int xpEarned = 0;

@@ -31,4 +31,4 @@ Attack,Rapier_Stab,3000,0,70,100,Single_target_piercing_attack._[Phys][Pierce],0
 Attack,Ritual,3000,10,0,200,Raises_magic_defence_of_target,2,0,MagicDefenceUp,100
 Attack,Air_of_Superiority,3000,15,80,100,Single_target_wind_magic._[Magic][Wind],1,5
 Attack,Fierce_Stab,5000,0,100,100,Single_target_strong_attack._[Phys][Pierce],0,9
-Attack,Execution,4000,0,1000000,5,Instantly_kill_enemy._Rare_to_hit,2,0
+Attack,Execution,4000,0,1000000,2,Instantly_kill_enemy._Rare_to_hit,2,0

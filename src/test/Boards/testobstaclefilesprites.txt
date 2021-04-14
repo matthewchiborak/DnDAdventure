@@ -10,3 +10,4 @@ door,-1,0,1,1,testobstaclefilesprites2.txt,3,-2
 cutscene,0,1,1,1,Chest,testcutscene1.txt
 ranenc,TestEncounter1
 battleBG,TestBattleBG
+musicBG,Ship
