@@ -11,6 +11,9 @@ PauseMenuStateBag::PauseMenuStateBag(ModelAbstract *model)
 {
     for(int i = 0; i < model->playerCharacters.size(); i++)
     {
+        if(!model->playerCharacters.at(i)->getIsActive())
+            continue;
+
         if(model->playerCharacters.at(i)->getWeapon() != nullptr)
             equippedItems.push_back(model->playerCharacters.at(i)->getWeapon()->getIndexInBag());
         if(model->playerCharacters.at(i)->getArmor() != nullptr)
@@ -41,6 +44,9 @@ PauseMenuDrawState *PauseMenuStateBag::enterMenu()
             model->changePotionAmount(-1);
             for(int i = 0; i < model->playerCharacters.size(); i++)
             {
+                if(!model->playerCharacters.at(i)->getIsActive())
+                    continue;
+
                 model->playerCharacters.at(i)->changeCurrentHealth(50);
             }
         }
@@ -52,6 +58,9 @@ PauseMenuDrawState *PauseMenuStateBag::enterMenu()
             model->changeEtherAmount(-1);
             for(int i = 0; i < model->playerCharacters.size(); i++)
             {
+                if(!model->playerCharacters.at(i)->getIsActive())
+                    continue;
+
                 model->playerCharacters.at(i)->changeCurrentMP(50);
             }
         }

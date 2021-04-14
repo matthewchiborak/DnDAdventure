@@ -302,11 +302,21 @@ void ModelConcrete::loadSaveGame()
         if(info.at(0) == "MoveUnlocked")
             playerCharacters.at(focusPartyMember)->getAttacks()->at(std::stoi(info.at(1)))->unlock();
     }
+
+    //Restore health and mp
+    for(int i = 0; i < playerCharacters.size(); i++)
+    {
+        playerCharacters.at(i)->refillHPandMP();
+    }
 }
 
 void ModelConcrete::saveGame()
 {
     //Restore health and mp
+    for(int i = 0; i < playerCharacters.size(); i++)
+    {
+        playerCharacters.at(i)->refillHPandMP();
+    }
 
     //Save
     std::vector<std::string> saveLines;

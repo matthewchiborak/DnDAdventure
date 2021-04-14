@@ -12,6 +12,9 @@ PauseMenuStateEquipment::PauseMenuStateEquipment(ModelAbstract *model)
     numberOfCharatersInput = 0;
     for(int i = 0; i < model->playerCharacters.size(); i++)
     {
+        if(!model->playerCharacters.at(i)->getIsActive())
+            continue;
+
         numberOfCharatersInput++;
         characters[model->playerCharacters.at(i)->getEquipmentID()] = model->playerCharacters.at(i);
     }
@@ -40,6 +43,14 @@ void PauseMenuStateEquipment::moveMenuCursor(int x, int y)
             currentPosX = 0;
         if(currentPosX < 0)
             currentPosX = 1;
+
+        if(numberOfCharatersInput < 3)
+        {
+            if(currentPosY < 0)
+                currentPosY = 3;
+            if(currentPosY > 3)
+                currentPosY = 0;
+        }
     }
 
     if(numberOfCharatersInput > 2 && numberOfCharatersInput < 4)

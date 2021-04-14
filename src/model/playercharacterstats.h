@@ -60,6 +60,7 @@ public:
     void setAP(int value);
     void spendAP(int amount);
 
+    void refillHPandMP();
 
 
 protected:

@@ -12,6 +12,10 @@ BattleMenuStateSpecial::BattleMenuStateSpecial(BattleModel *model)
     : BattleMenuState(model)
 {
     model->forceClearDisplayMessage();
+
+    numOfCh = 0;
+    for(int i = 0; i < model->getCharacters()->size(); i++)
+        numOfCh++;
 }
 
 void BattleMenuStateSpecial::moveMenuCursor(int x, int y)
@@ -34,10 +38,10 @@ void BattleMenuStateSpecial::moveMenuCursor(int x, int y)
 
     currentPos -= y;
 
-    if(currentPos > 3)
+    if(currentPos > (numOfCh-1))
         currentPos = 0;
     if(currentPos < 0)
-        currentPos = 3;
+        currentPos = (numOfCh-1);
 }
 
 BattleMenuState *BattleMenuStateSpecial::enterMenu()
@@ -230,14 +234,21 @@ void BattleMenuStateSpecial::drawBattleMenu(std::vector<DrawInformation> *items)
                             false, "Revive   (2 BAR)"
                             , true, 36);
     items->push_back(rezText);
-    DrawInformation superText(435, (630 + ((2) * 50)), 400, 75, "",
-                            false, "Super   (3 BAR)"
-                            , true, 36);
-    items->push_back(superText);
-    DrawInformation overdriveText(435, (630 + ((3) * 50)), 400, 75, "",
-                            false, "Overdrive   (4 BAR)"
-                            , true, 36);
-    items->push_back(overdriveText);
+
+    if(numOfCh > 2)
+    {
+        DrawInformation superText(435, (630 + ((2) * 50)), 400, 75, "",
+                                false, "Super   (3 BAR)"
+                                , true, 36);
+        items->push_back(superText);
+    }
+    if(numOfCh > 3)
+    {
+        DrawInformation overdriveText(435, (630 + ((3) * 50)), 400, 75, "",
+                                false, "Overdrive   (4 BAR)"
+                                , true, 36);
+        items->push_back(overdriveText);
+    }
 
     DrawInformation mainCursor(405, 630 + ((currentPos) * 50), 75, 75, "", false, ">", true, 36);
     items->push_back(mainCursor);

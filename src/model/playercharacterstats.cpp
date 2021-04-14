@@ -433,6 +433,12 @@ void PlayerCharacterStats::spendAP(int amount)
     AP -= amount;
 }
 
+void PlayerCharacterStats::refillHPandMP()
+{
+    this->currentHealth = getMaxHealth();
+    this->currentMP = getMaxMP();
+}
+
 
 bool PlayerCharacterStats::isAValidElement(std::string input)
 {

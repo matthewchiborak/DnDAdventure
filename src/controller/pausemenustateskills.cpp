@@ -10,7 +10,8 @@ PauseMenuStateSkills::PauseMenuStateSkills(ModelAbstract *model)
 {
     for(int i = 0; i < model->playerCharacters.size(); i++)
     {
-        numberOfCharacters++;
+        if(model->playerCharacters.at(i)->getIsActive())
+            numberOfCharacters++;
     }
 }
 

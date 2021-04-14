@@ -20,6 +20,7 @@ private:
     int accessPos = 0;
 
     bool isSelecting = false;
+    int numOfCh = 0;
 
     void drawEnemyStatusEffect(std::vector<DrawInformation> * items);
 };

@@ -197,14 +197,20 @@ void BattleMenuStateAccess::drawBattleMenu(std::vector<DrawInformation> *items)
                             false, "Revive   (2 BAR)"
                             , true, 36);
     items->push_back(rezText);
-    DrawInformation superText(435, (630 + ((2) * 50)), 400, 75, "",
-                            false, "Super   (3 BAR)"
-                            , true, 36);
-    items->push_back(superText);
-    DrawInformation overdriveText(435, (630 + ((3) * 50)), 400, 75, "",
-                            false, "Overdrive   (4 BAR)"
-                            , true, 36);
-    items->push_back(overdriveText);
+    if(model->getCharacters()->size() > 2)
+    {
+        DrawInformation superText(435, (630 + ((2) * 50)), 400, 75, "",
+                                false, "Super   (3 BAR)"
+                                , true, 36);
+        items->push_back(superText);
+    }
+    if(model->getCharacters()->size() > 3)
+    {
+        DrawInformation overdriveText(435, (630 + ((3) * 50)), 400, 75, "",
+                                false, "Overdrive   (4 BAR)"
+                                , true, 36);
+        items->push_back(overdriveText);
+    }
 
     DrawInformation mainCursor(405, 630 + ((0) * 50), 75, 75, "", false, ">", true, 36);
     items->push_back(mainCursor);

@@ -56,6 +56,9 @@ void PauseMenuStateParty::drawPauseMenu(std::vector<DrawInformation> *items)
     //images first
     for(int i = 0; i < model->playerCharacters.size(); i++)
     {
+        if(!model->playerCharacters.at(i)->getIsActive())
+            continue;
+
         DrawInformation port(-700, (300 - (i*200)), 200, 200, model->playerCharacters.at(i)->getMenuSpriteKey(), false);
         items->push_back(port);
     }
@@ -63,6 +66,9 @@ void PauseMenuStateParty::drawPauseMenu(std::vector<DrawInformation> *items)
     //Text second
     for(int i = 0; i < model->playerCharacters.size(); i++)
     {
+        if(!model->playerCharacters.at(i)->getIsActive())
+            continue;
+
         //150 - 850 , + 450
         //DrawInformation port(-700, (300 - (i*200)), 200, 200, model->playerCharacters.at(i)->getMenuSpriteKey(), false);
         //items->push_back(port);

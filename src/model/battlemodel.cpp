@@ -71,16 +71,19 @@ void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *cha
 
     for(int i = 0; i < charactersInput->size(); i++)
     {
-        PlayerCharacterStatsBattle * temp;
-        if(characters.size() > i)
+        if(charactersInput->at(i)->getIsActive())
         {
-            temp = characters.at(i);
-            this->characters.at(i) = new PlayerCharacterStatsBattle(charactersInput->at(i));
-            delete temp;
-        }
-        else
-        {
-            this->characters.push_back(new PlayerCharacterStatsBattle(charactersInput->at(i)));
+            PlayerCharacterStatsBattle * temp;
+            if(characters.size() > i)
+            {
+                temp = characters.at(i);
+                this->characters.at(i) = new PlayerCharacterStatsBattle(charactersInput->at(i));
+                delete temp;
+            }
+            else
+            {
+                this->characters.push_back(new PlayerCharacterStatsBattle(charactersInput->at(i)));
+            }
         }
     }
 
@@ -222,8 +225,12 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     items->push_back(guardText);
     DrawInformation specialText(100, 717, 200, 75, "", false, "Special", true, 36);
     items->push_back(specialText);
-    DrawInformation partyText(100, 757, 200, 75, "", false, "Party", true, 36);
-    items->push_back(partyText);
+
+    if(characters.size() > 2)
+    {
+        DrawInformation partyText(100, 757, 200, 75, "", false, "Party", true, 36);
+        items->push_back(partyText);
+    }
     DrawInformation itemText(100, 797, 200, 75, "", false, "Items", true, 36);
     items->push_back(itemText);
     if(isFleeable)
@@ -796,6 +803,35 @@ void BattleModel::applyAttackAllAllies(EnemyModel *attacker, AttackModel *attack
 
 void BattleModel::checkIfNeedToSwapDeadCharacters()
 {
+    if(characters.size() < 3)
+        return;
+
+    if(characters.size() < 4)
+    {
+        if(characters.at(0)->getCurrentHealth() <= 0)
+        {
+            if(characters.at(2)->getCurrentHealth() > 0)
+            {
+                PlayerCharacterStatsBattle * temp1 = characters.at(0);
+                PlayerCharacterStatsBattle * temp2 = characters.at(2);
+                characters.at(0) = temp2;
+                characters.at(2) = temp1;
+            }
+        }
+        if(characters.at(1)->getCurrentHealth() <= 0)
+        {
+            if(characters.at(2)->getCurrentHealth() > 0)
+            {
+                PlayerCharacterStatsBattle * temp1 = characters.at(1);
+                PlayerCharacterStatsBattle * temp2 = characters.at(2);
+                characters.at(0) = temp2;
+                characters.at(2) = temp1;
+            }
+        }
+
+        return;
+    }
+
     if(characters.at(0)->getCurrentHealth() <= 0)
     {
         if(characters.at(2)->getCurrentHealth() > 0)
