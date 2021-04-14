@@ -56,10 +56,11 @@ void BattleModel::clear()
     delete temp;
 }
 
-void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue, int *numberOfPotions, int *numberOfRemedies, int *numberOfEthers, int *numberOfJars, int *goldCount, std::vector<MonsterManualEntry> *monsterManual)
+void BattleModel::load(std::string key, std::vector<PlayerCharacterStats *> *charactersInput, int* partyGaugeValue, int *numberOfPotions, int *numberOfRemedies, int *numberOfEthers, int *numberOfJars, int *goldCount, std::vector<MonsterManualEntry> *monsterManual, bool isFleeable)
 {
     musicController->playMusic("Battle");
 
+    this->isFleeable = isFleeable;
     this->partyGaugeValue = partyGaugeValue;
     this->numberOfPotions = numberOfPotions;
     this->numberOfRemedies = numberOfRemedies;
@@ -225,8 +226,11 @@ void BattleModel::draw(std::vector<DrawInformation> *items)
     items->push_back(partyText);
     DrawInformation itemText(100, 797, 200, 75, "", false, "Items", true, 36);
     items->push_back(itemText);
-    DrawInformation fleeText(100, 837, 200, 75, "", false, "Flee", true, 36);
-    items->push_back(fleeText);
+    if(isFleeable)
+    {
+        DrawInformation fleeText(100, 837, 200, 75, "", false, "Flee", true, 36);
+        items->push_back(fleeText);
+    }
 
     for(int i = 0; i < aboveHeadBattleMessagesText.size(); i++)
         items->push_back(aboveHeadBattleMessagesText.at(i));
@@ -1221,6 +1225,11 @@ int BattleModel::getSpeedValueToGet200PointsPerSecond()
 void BattleModel::setMusicController(MusicControllerAbstract *musicController)
 {
     this->musicController = musicController;
+}
+
+bool BattleModel::getIsFleeable()
+{
+    return isFleeable;
 }
 
 void BattleModel::checkIfEnemiesAreDead()

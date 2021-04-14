@@ -1,4 +1,5 @@
 NextBoardPath,testobstaclefilesprites2.txt
+NextEncounter,TestEncounter2
 NextBoardX,10
 NextBoardY,10
 BG,TestBattleBG

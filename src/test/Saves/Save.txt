@@ -31,10 +31,10 @@ Character,Chad,2,160,1,1
 Accessory1,8
 MoveUnlocked,0
 MoveUnlocked,5
-Character,Allura,2,160,1,1
+Character,Allura,2,160,1,0
 MoveUnlocked,0
 MoveUnlocked,5
-Character,Duke,2,160,1,1
+Character,Duke,2,160,1,0
 Accessory2,9
 MoveUnlocked,0
 MoveUnlocked,5

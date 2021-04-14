@@ -36,8 +36,10 @@ bool KeyInputStateCutscene::handle(std::string *nextState)
 
                 if(model->cutsceneIsDone())
                 {
-                    model->loadBoardBasedOnLoadedCutscene();
-                    (*nextState) = "Board";
+                    if(model->loadBoardBasedOnLoadedCutscene())
+                        (*nextState) = "RandomEncounter";
+                    else
+                        (*nextState) = "Board";
                     return true;
                 }
             }

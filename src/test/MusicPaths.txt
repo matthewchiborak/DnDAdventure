@@ -4,3 +4,4 @@ Hit,Hit.wav
 Miss,Miss.wav
 Pizza,Pizza.wav
 Victory,Victory.wav
+Thud,Thud.wav

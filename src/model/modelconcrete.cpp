@@ -213,10 +213,22 @@ bool ModelConcrete::cutsceneIsDone()
     return cutsceneModel.isDone();
 }
 
-void ModelConcrete::loadBoardBasedOnLoadedCutscene()
+bool ModelConcrete::loadBoardBasedOnLoadedCutscene()
 {
-    boardModel.load(cutsceneModel.getNextBoardFilePath(), &boardObjectsInteratctedWith);
-    boardModel.setPlayerPos(cutsceneModel.getXPosBoard(), cutsceneModel.getYPosBoard());
+    if(cutsceneModel.getNextBoardFilePath() != "None")
+    {
+        boardModel.load(cutsceneModel.getNextBoardFilePath(), &boardObjectsInteratctedWith);
+        boardModel.setPlayerPos(cutsceneModel.getXPosBoard(), cutsceneModel.getYPosBoard());
+    }
+    if(cutsceneModel.getNextEncounter() != "None")
+    {
+        battleModel.load(cutsceneModel.getNextEncounter(), &playerCharacters, &partyGaugeValue,
+                         &numberOfPotions, &numberOfRemedies, &numberOfEthers, &numberOfPickleJars, &gold, &monsterManual, false);
+
+        return true;
+    }
+
+    return false;
 }
 
 void ModelConcrete::loadSaveGame()

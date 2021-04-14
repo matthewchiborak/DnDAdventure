@@ -350,9 +350,9 @@ bool ModelAbstract::cutsceneIsDone()
     return true;
 }
 
-void ModelAbstract::loadBoardBasedOnLoadedCutscene()
+bool ModelAbstract::loadBoardBasedOnLoadedCutscene()
 {
-
+    return false;
 }
 
 void ModelAbstract::loadSaveGame()

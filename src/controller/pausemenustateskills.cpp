@@ -44,7 +44,7 @@ PauseMenuDrawState *PauseMenuStateSkills::enterMenu()
 
     if(model->playerCharacters.at(pagePos)->getAttacks()->at(cursorPos-1)->isUnlocked())
     {
-        if(model->playerCharacters.at(pagePos)->getAP() > (cursorPos%5))
+        if(model->playerCharacters.at(pagePos)->getAP() >= (cursorPos%5))
         {
             model->playerCharacters.at(pagePos)->spendAP(cursorPos%5);
             model->playerCharacters.at(pagePos)->getAttacks()->at(cursorPos)->unlock();

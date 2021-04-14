@@ -26,7 +26,7 @@ public:
     void clear();
     void load(std::string key, std::vector<PlayerCharacterStats*> * charactersInput, int *partyGaugeValue
               , int * numberOfPotions, int * numberOfRemedies, int * numberOfEthers, int * numberOfJars,
-              int * goldCount, std::vector<MonsterManualEntry> * monsterManual);
+              int * goldCount, std::vector<MonsterManualEntry> * monsterManual, bool isFleeable = true);
     void draw(std::vector<DrawInformation> * items);
     void passTime(float value);
     void qrPressed(bool wasQ);
@@ -106,6 +106,8 @@ public:
 
     void setMusicController(MusicControllerAbstract * musicController);
 
+    bool getIsFleeable();
+
 private:
     //factory for building the enounter
     EncounterFactory * encounterFact;
@@ -155,6 +157,8 @@ private:
     std::queue<std::string> advanceDialogLines;
 
     std::vector<MonsterManualEntry> * monsterManual;
+
+    bool isFleeable;
 
     void checkIfEnemiesAreDead();
 

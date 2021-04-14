@@ -36,7 +36,7 @@ public:
     void loadCutscene(std::string filepath);
     void drawCutscene(std::vector<DrawInformation> * items);
     bool cutsceneIsDone();
-    void loadBoardBasedOnLoadedCutscene();
+    bool loadBoardBasedOnLoadedCutscene();
 
     void loadSaveGame();
 

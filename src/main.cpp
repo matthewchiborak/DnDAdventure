@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
     MusicControllerAbstract * musicController = new MusicControllerConcrete("D:\\Qt Projects\\DnDAdventure\\src\\test\\MusicPaths.txt");
     musicController->manualLoad("Hit", "Hit");
     musicController->manualLoad("Miss", "Miss");
+    musicController->manualLoad("Thud", "Thud");
 
     ModelAbstract * testModel = new ModelConcrete(musicController);
     testModel->loadMonsterManual("D:\\Qt Projects\\DnDAdventure\\src\\test\\monstermanual.txt");

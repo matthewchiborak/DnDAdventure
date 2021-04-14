@@ -22,8 +22,16 @@ void BattleMenuStateMain::moveMenuCursor(int x, int y)
 {
     currentPos += y;
 
+    if(currentPos == 0 && !model->getIsFleeable())
+        currentPos += y;
+
     if(currentPos > 5)
-        currentPos = 0;
+    {
+        if(model->getIsFleeable())
+            currentPos = 0;
+        else
+            currentPos = 1;
+    }
     if(currentPos < 0)
         currentPos = 5;
 }
@@ -43,7 +51,7 @@ BattleMenuState *BattleMenuStateMain::enterMenu()
         return new BattleMenuStateSwitch(model);
     if(currentPos == 1)
         return new BattleMenuStateItem(model);
-    if(currentPos == 0)
+    if(currentPos == 0 && model->getIsFleeable())
     {
         if((rand()%2) == 1)
         {

@@ -95,7 +95,13 @@ void BoardModel::movePlayer(int x, int y, float t)
 
     //Check if even can move
     if(!playerCanMoveThisWay(x, y))
+    {
+        lastMoveCallWasSuccess = false;
+        musicController->playSoundEffect("Thud");
         return;
+    }
+
+    lastMoveCallWasSuccess = true;
 
     if(t > 1)
     {
@@ -103,6 +109,7 @@ void BoardModel::movePlayer(int x, int y, float t)
         yPos += y;
         xOffset = (xPos);
         yOffset = (yPos);
+        stepsSinceLastEnouncter++;
     }
     else
     {
@@ -161,14 +168,19 @@ void BoardModel::checkAndActivateDoor()
 
 bool BoardModel::tryToGetAnEnounter(std::string *keyToReturn)
 {
+    if(!lastMoveCallWasSuccess)
+    {
+        return false;
+    }
     if(encounterTable.size() <= 0)
         return false;
 
 
-    int randVal = rand()%10;
+    int randVal = rand()%200;
 
-    if(randVal == 1)
+    if(randVal < (stepsSinceLastEnouncter*5))
     {
+        stepsSinceLastEnouncter = 0;
         (*keyToReturn) = encounterTable.at(rand()%encounterTable.size());
         return true;
     }

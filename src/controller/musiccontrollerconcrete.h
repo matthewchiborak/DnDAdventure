@@ -20,6 +20,7 @@ private:
     QMediaPlayer backgroundMusic;
     QMediaPlayer hitSE;
     QMediaPlayer missSE;
+    QMediaPlayer thudSE;
     //QMediaPlayer advanceTextSE;
     QMediaPlayer miscSE;
 };

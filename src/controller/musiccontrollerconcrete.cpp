@@ -5,13 +5,7 @@
 MusicControllerConcrete::MusicControllerConcrete(std::string musicFilepath)
     : MusicControllerAbstract(musicFilepath)
 {
-    //Auto load se that will be used alot like hit, miss, advancetext
-    /*
-    QMediaPlayer backgroundMusic;
-    QMediaPlayer hitSE;
-    QMediaPlayer missSE;
-    QMediaPlayer advanceTextSE;
-    QMediaPlayer miscSE;*/
+
 }
 
 void MusicControllerConcrete::playMusic(std::string key)
@@ -41,6 +35,8 @@ void MusicControllerConcrete::playSoundEffect(std::string key)
         hitSE.play();
     else if(key == "Miss")
         missSE.play();
+    else if(key == "Thud")
+        thudSE.play();
    // else if(key == "AdvanceText")
      //   advanceTextSE.play();
     else
@@ -69,6 +65,8 @@ void MusicControllerConcrete::manualLoad(std::string typeKey, std::string soundK
         hitSE.setMedia(QUrl(QString::fromStdString(theFilePath)));
     else if(typeKey == "Miss")
         missSE.setMedia(QUrl(QString::fromStdString(theFilePath)));
+    else if(typeKey == "Thud")
+        thudSE.setMedia(QUrl(QString::fromStdString(theFilePath)));
     //else if(typeKey == "AdvanceText")
     //  advanceTextSE.setMedia(QUrl(QString::fromStdString(theFilePath)));
 }

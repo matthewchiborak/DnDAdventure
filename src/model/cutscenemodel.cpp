@@ -12,6 +12,9 @@ void CutsceneModel::load(std::string loadInfo)
 {
     FileReader fr("D:\\Qt Projects\\DnDAdventure\\src\\test\\Cutscenes\\" + loadInfo);
 
+    nextBoardFilePath = "None";
+    nextEnouncter = "None";
+
     while(fr.hasNext())
     {
         instructions.push(fr.next());
@@ -72,6 +75,8 @@ void CutsceneModel::advance()
             xPosBoard = std::stoi(focus.at(1));
         if(focus.at(0) == "NextBoardY")
             yPosBoard = std::stoi(focus.at(1));
+        if(focus.at(0) == "NextEncounter")
+            nextEnouncter = focus.at(1);
         if(focus.at(0) == "Stop")
             foundAStop = true;
         if(focus.at(0) == "BG")
@@ -116,6 +121,11 @@ int CutsceneModel::getXPosBoard()
 int CutsceneModel::getYPosBoard()
 {
     return yPosBoard;
+}
+
+std::string CutsceneModel::getNextEncounter()
+{
+    return nextEnouncter;
 }
 
 void CutsceneModel::setMusicController(MusicControllerAbstract *musicController)

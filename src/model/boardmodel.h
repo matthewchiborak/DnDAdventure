@@ -64,6 +64,9 @@ private:
 
     MusicControllerAbstract * musicController;
 
+    bool lastMoveCallWasSuccess = true;
+    int stepsSinceLastEnouncter = 0;
+
     bool playerCanMoveThisWay(int x, int y);
 };
 

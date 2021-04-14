@@ -80,7 +80,7 @@ public:
     virtual void loadCutscene(std::string filepath);
     virtual void drawCutscene(std::vector<DrawInformation> * items);
     virtual bool cutsceneIsDone();
-    virtual void loadBoardBasedOnLoadedCutscene();
+    virtual bool loadBoardBasedOnLoadedCutscene();
 
     virtual void loadSaveGame();
 

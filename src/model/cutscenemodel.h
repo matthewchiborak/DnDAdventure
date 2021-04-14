@@ -22,6 +22,7 @@ public:
     std::string getNextBoardFilePath();
     int getXPosBoard();
     int getYPosBoard();
+    std::string getNextEncounter();
 
     void setMusicController(MusicControllerAbstract * musicController);
 
@@ -30,9 +31,11 @@ private:
 
     MusicControllerAbstract * musicController;
 
-    std::string nextBoardFilePath;
+    std::string nextBoardFilePath = "None";
     int xPosBoard;
     int yPosBoard;
+
+    std::string nextEnouncter = "None";
 
     std::string currentBackground = "";
     std::string currentLeft = "";
