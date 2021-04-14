@@ -40,7 +40,10 @@ public:
     void setMusicController(MusicControllerAbstract * musicController);
     void playBGMusic();
 
+    std::string getLastLoadedFilePath();
+
 private:
+    std::string lastLoadedFilePath;
     std::vector<BoardObjectAbstract*> boardObjects;
     std::vector<Doorway*> doors;
     BoardObjectFactory factory;

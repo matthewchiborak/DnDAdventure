@@ -60,9 +60,11 @@ public:
     void setAP(int value);
     void spendAP(int amount);
 
+
+
 protected:
     std::string name;
-    bool isActive;
+    bool isActive = true;
     int level;
     int xp;
     int currentHealth;

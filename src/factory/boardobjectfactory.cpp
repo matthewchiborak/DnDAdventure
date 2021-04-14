@@ -8,6 +8,8 @@
 #include "../model/boardobjectchest.h"
 #include "../model/boardobjectcutscenetrigger.h"
 #include "../model/doorway.h"
+#include "../model/boardobjectsavepoint.h"
+#include <QDir>
 
 BoardObjectFactory::BoardObjectFactory()
 {
@@ -16,6 +18,11 @@ BoardObjectFactory::BoardObjectFactory()
 
 void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjects, std::vector<Doorway*> * doors, std::vector<std::string> *encTable, std::string *battleBackgroundKey, std::string *bgMusicKey, int *xPos, int *yPos, std::string boardFileName)
 {
+    QDir dir(QDir::current());
+    dir.cdUp();
+
+    boardFileName = dir.path().toStdString()+ "/DnDAdventure/src/test/Boards/" + boardFileName;
+
     FileReader reader(boardFileName);
 
     while(reader.hasNext())
@@ -47,6 +54,8 @@ void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjec
                 boardObjects->push_back(createCutsceneTrigger(vect));
             else if(vect.at(0) == "musicBG")
                 (*bgMusicKey) = (vect.at(1));
+            else if(vect.at(0) == "savepoint")
+                boardObjects->push_back(createSavePoint(vect));
         }
     }
 }
@@ -117,6 +126,19 @@ BoardObjectAbstract *BoardObjectFactory::createCutsceneTrigger(std::vector<std::
                 info.at(5),
                 false,
                 info.at(6)
+                );
+}
+
+BoardObjectAbstract *BoardObjectFactory::createSavePoint(std::vector<std::string> info)
+{
+    return new BoardObjectSavePoint(
+                -1,
+                std::stoi(info.at(1)),
+                std::stoi(info.at(2)),
+                std::stoi(info.at(3)),
+                std::stoi(info.at(4)),
+                info.at(5),
+                true
                 );
 }
 

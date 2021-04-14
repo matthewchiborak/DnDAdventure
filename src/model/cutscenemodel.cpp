@@ -105,7 +105,7 @@ bool CutsceneModel::isDone()
 
 std::string CutsceneModel::getNextBoardFilePath()
 {
-    return "D:\\Qt Projects\\DnDAdventure\\src\\test\\Boards\\" + nextBoardFilePath;
+    return nextBoardFilePath;
 }
 
 int CutsceneModel::getXPosBoard()

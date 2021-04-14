@@ -82,6 +82,7 @@ public:
     virtual bool cutsceneIsDone();
     virtual void loadBoardBasedOnLoadedCutscene();
 
+    virtual void loadSaveGame();
 
 protected:
     bool pauseIsDone = false;
@@ -89,14 +90,16 @@ protected:
     int gold = 0;
     int numberOfPotions = 0;
     int numberOfRemedies = 0;
-    int numberOfEthers = 6;
-    int numberOfPickleJars = 7;
+    int numberOfEthers = 0;
+    int numberOfPickleJars = 0;
     std::vector<EquipmentModel> equipment;
 
     std::vector<MonsterManualEntry> monsterManual;
 
     std::vector<int> boardObjectsInteratctedWith;
     std::queue<std::string> boardModelDialog;
+
+    virtual void saveGame();
 
 };
 

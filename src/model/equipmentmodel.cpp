@@ -4,6 +4,8 @@
 
 EquipmentModel::EquipmentModel(std::string creationInfo, int index)
 {
+    creationString = creationInfo;
+
     std::vector<std::string> vec = FileReader::splitString(creationInfo, ',');
 
     type = vec.at(0);
@@ -48,4 +50,9 @@ std::string EquipmentModel::getDescription()
 int EquipmentModel::getIndexInBag()
 {
     return indexInBag;
+}
+
+std::string EquipmentModel::getCreationString()
+{
+    return creationString;
 }

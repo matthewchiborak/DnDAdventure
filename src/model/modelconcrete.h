@@ -38,6 +38,8 @@ public:
     bool cutsceneIsDone();
     void loadBoardBasedOnLoadedCutscene();
 
+    void loadSaveGame();
+
 private:
     BoardModel boardModel;
     BattleModel battleModel;
@@ -46,6 +48,8 @@ private:
     PauseMenuDrawState * currentMenuState;
 
     int partyGaugeValue = 0;
+
+    void saveGame();
 
 };
 

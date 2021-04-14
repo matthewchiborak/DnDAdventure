@@ -433,6 +433,7 @@ void PlayerCharacterStats::spendAP(int amount)
     AP -= amount;
 }
 
+
 bool PlayerCharacterStats::isAValidElement(std::string input)
 {
     if(input == "0")

@@ -23,13 +23,13 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    TestMain testmain;
-    if(!testmain.executeAllTests())
-    {
-        qDebug() << "Test Failed: " << testmain.getFailedTestId() << " Aborting\n";
-        return -1;
-    }
-    qDebug() << "All Tests Passed\n";
+//    TestMain testmain;
+//    if(!testmain.executeAllTests())
+//    {
+//        qDebug() << "Test Failed: " << testmain.getFailedTestId() << " Aborting\n";
+//        return -1;
+//    }
+//    qDebug() << "All Tests Passed\n";
 
     SpriteFlyweightFactoryAbstract * spriteFactory =
             new SpriteFlyweightFactory("D:\\Qt Projects\\DnDAdventure\\src\\test\\SpritePaths.txt");
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Chad.txt"));
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Allura.txt"));
     testModel->addPlayerCharacter(new PlayerCharacterStats("D:\\Qt Projects\\DnDAdventure\\src\\test\\TestPartyMembers\\Duke.txt"));
-    testModel->loadBoardModel("D:\\Qt Projects\\DnDAdventure\\src\\test\\Boards\\testobstaclefilesprites.txt");
+    testModel->loadBoardModel("testobstaclefilesprites.txt");
 
     RenderingStrategy * renderStrat = new RenderingStrategyBoard(testModel);
 
@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
     InputStateFactoryAbstract * inputStateFact = new InputStateFactory(testModel, &keyboardEventQueue);
 
     GameController gameController(testModel, window, &keyboardEventQueue, inputStateFact);
+    testModel->loadSaveGame();
     gameController.start();
 
     window->resize(1600, 900);

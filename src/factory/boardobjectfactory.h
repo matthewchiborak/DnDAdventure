@@ -24,6 +24,7 @@ private:
     BoardObjectAbstract * createMap(std::vector<std::string> info);
     BoardObjectAbstract * createNPC(std::vector<std::string> info);
     BoardObjectAbstract * createCutsceneTrigger(std::vector<std::string> info);
+    BoardObjectAbstract * createSavePoint(std::vector<std::string> info);
     Doorway * createDoorway(std::vector<std::string> info);
 };
 

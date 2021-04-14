@@ -16,7 +16,10 @@ public:
     std::string getDescription();
     int getIndexInBag();
 
+    std::string getCreationString();
+
 private:
+    std::string creationString = "";
     int indexInBag = 0;
     std::string name;
     int partyMemberLimit = 0; //0 - all, 1 - bullent

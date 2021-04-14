@@ -9,10 +9,8 @@ Doorway::Doorway(int xpos, int ypos, int width, int height, std::string boardKey
     this->width = width;
     this->height= height;
 
-    QDir dir(QDir::current());
-    dir.cdUp();
     //Get the image location from the other map, create and store the flyweight
-    this->boardKey = dir.path().toStdString()+ "/DnDAdventure/src/test/Boards/" + boardKey;
+    this->boardKey = boardKey;
     this->newXPos = newXPos;
     this->newYPos = newYPos;
 }

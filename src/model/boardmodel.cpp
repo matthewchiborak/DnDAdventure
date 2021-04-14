@@ -12,6 +12,8 @@ BoardModel::BoardModel()
 
 void BoardModel::load(std::string loadInfo, std::vector<int> *boardObjectInteractedWith)
 {
+    lastLoadedFilePath = loadInfo;
+
     clear();
 
     this->boardObjectInteractedWith = boardObjectInteractedWith;
@@ -187,6 +189,11 @@ void BoardModel::setMusicController(MusicControllerAbstract *musicController)
 void BoardModel::playBGMusic()
 {
     musicController->playMusic(backgroundMusicKey);
+}
+
+std::string BoardModel::getLastLoadedFilePath()
+{
+    return lastLoadedFilePath;
 }
 
 bool BoardModel::playerCanMoveThisWay(int x, int y)

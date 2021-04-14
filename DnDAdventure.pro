@@ -57,6 +57,7 @@ SOURCES += \
     src/factory/inputstatefactoryabstract.cpp \
     src/factory/worldobjectfactoryabstract.cpp \
     src/filemanagment/fileReader.cpp \
+    src/filemanagment/filewriter.cpp \
     src/main.cpp \
     src/model/EnemyModel.cpp \
     src/model/attackmodel.cpp \
@@ -67,6 +68,7 @@ SOURCES += \
     src/model/boardobjectcutscenetrigger.cpp \
     src/model/boardobjectnpc.cpp \
     src/model/boardobjectobstacle.cpp \
+    src/model/boardobjectsavepoint.cpp \
     src/model/cutscenemodel.cpp \
     src/model/doorway.cpp \
     src/model/equipmentmodel.cpp \
@@ -134,6 +136,7 @@ HEADERS += \
     src/factory/inputstatefactoryabstract.h \
     src/factory/worldobjectfactoryabstract.h \
     src/filemanagment/fileReader.h \
+    src/filemanagment/filewriter.h \
     src/model/EnemyModel.h \
     src/model/attackmodel.h \
     src/model/battlemodel.h \
@@ -143,6 +146,7 @@ HEADERS += \
     src/model/boardobjectcutscenetrigger.h \
     src/model/boardobjectnpc.h \
     src/model/boardobjectobstacle.h \
+    src/model/boardobjectsavepoint.h \
     src/model/cutscenemodel.h \
     src/model/doorway.h \
     src/model/equipmentmodel.h \

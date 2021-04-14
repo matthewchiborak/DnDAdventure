@@ -1,12 +1,13 @@
 playerpos,0,0
-map,-9,-6,36,24,TestShip,0
-npc,0,0,1,1,Duke,1,Hey_there!$I'm_NPC_number_1!$Pleasure_to_meet_you!
-obs,3,3,1,1,Blank,2
-npc,2,2,1,1,Duke,3,Hello_there_chap!$I'm_NPC_number_2!$Pleasure_to_meet_you_also!
+map,-9,-6,36,24,TestShip
+npc,0,0,1,1,Duke,Hey_there!$I'm_NPC_number_1!$Pleasure_to_meet_you!
+obs,3,3,1,1,Blank
+npc,2,2,1,1,Duke,Hello_there_chap!$I'm_NPC_number_2!$Pleasure_to_meet_you_also!
 chest,5,7,1,1,Chest,ChestEmpty,gold$1000,4
 chest,7,7,1,1,Chest,ChestEmpty,potion$3,5
 chest,9,7,1,1,Chest,ChestEmpty,equipment$Weapon$1$Test_Weapon1$Bullent_Only_From_Chest$9$1000,6
 door,-1,0,1,1,testobstaclefilesprites2.txt,3,-2
+savepoint,-3,-3,1,1,SavePoint
 cutscene,0,1,1,1,Chest,testcutscene1.txt
 ranenc,TestEncounter1
 battleBG,TestBattleBG
