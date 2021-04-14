@@ -18,6 +18,7 @@ public:
             );
 
     std::string interact();
+    std::string standOnInteract();
 
 private:
     std::string dialog;

@@ -3,6 +3,7 @@
 
 #include "modelabstract.h"
 #include "battlemodel.h"
+#include "cutscenemodel.h"
 
 class PauseMenuDrawState;
 
@@ -30,10 +31,17 @@ public:
     void specialMessage(std::string message, std::string key);
 
     std::string interact();
+    std::string standOnInteract();
+
+    void loadCutscene(std::string filepath);
+    void drawCutscene(std::vector<DrawInformation> * items);
+    bool cutsceneIsDone();
+    void loadBoardBasedOnLoadedCutscene();
 
 private:
     BoardModel boardModel;
     BattleModel battleModel;
+    CutsceneModel cutsceneModel;
 
     PauseMenuDrawState * currentMenuState;
 

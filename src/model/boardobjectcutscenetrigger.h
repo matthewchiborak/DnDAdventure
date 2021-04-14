@@ -1,12 +1,12 @@
-#ifndef BOARDOBJECTCHEST_H
-#define BOARDOBJECTCHEST_H
+#ifndef BOARDOBJECTCUTSCENETRIGGER_H
+#define BOARDOBJECTCUTSCENETRIGGER_H
 
 #include "boardobjectabstract.h"
 
-class BoardObjectChest : public BoardObjectAbstract
+class BoardObjectCutsceneTrigger : public BoardObjectAbstract
 {
 public:
-    BoardObjectChest(
+    BoardObjectCutsceneTrigger(
             int id,
             int xpos,
             int ypos,
@@ -14,16 +14,14 @@ public:
             int height,
             std::string spriteName,
             bool solid,
-            std::string emptySpriteName,
-            std::string contents
+            std::string cutsceneFilepath
             );
 
     std::string interact();
     std::string standOnInteract();
 
 private:
-    std::string contents;
-    std::string emptySpriteName;
+    std::string cutsceneFilepath;
 };
 
-#endif // BOARDOBJECTCHEST_H
+#endif // BOARDOBJECTCUTSCENETRIGGER_H

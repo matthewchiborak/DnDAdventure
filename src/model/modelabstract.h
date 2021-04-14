@@ -20,6 +20,7 @@ public:
 
     virtual void drawBoardModel(std::vector<DrawInformation> * items, float *xOffset, float *yOffset);
     virtual void loadBoardModel(std::string loadInfo);
+
     virtual std::string handleBoardCollisionTriggers();
 
     virtual void movePlayer(int x, int y, float t);
@@ -67,11 +68,18 @@ public:
     std::vector<MonsterManualEntry> * getMonsterManual();
 
     virtual std::string interact();
+    virtual std::string standOnInteract();
 
     void updateInventoryBasedOnString(std::string message);
 
     bool hasBoardDialogRemaining();
     std::string getNextBoardDialog();
+
+    //Cutscenes
+    virtual void loadCutscene(std::string filepath);
+    virtual void drawCutscene(std::vector<DrawInformation> * items);
+    virtual bool cutsceneIsDone();
+    virtual void loadBoardBasedOnLoadedCutscene();
 
 
 protected:

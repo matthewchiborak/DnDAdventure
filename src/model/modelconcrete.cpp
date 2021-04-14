@@ -90,6 +90,10 @@ void ModelConcrete::enterMenu(std::string key)
     {
         battleModel.enterMenu();
     }
+    else if(key == "Cutscene")
+    {
+        cutsceneModel.advance();
+    }
 }
 
 void ModelConcrete::closeMenu(std::string key)
@@ -164,9 +168,40 @@ std::string ModelConcrete::interact()
     int potId;
     std::string toReturn = boardModel.interact(&potId);
 
-    if(toReturn != "None")
+    if(toReturn.at(0) == 'C'
+            && toReturn.at(1) == 'h'
+            && toReturn.at(2) == 'e'
+            && toReturn.at(3) == 's'
+            && toReturn.at(4) == 't'
+            )
         boardObjectsInteratctedWith.push_back(potId);
 
     return toReturn;
+}
+
+std::string ModelConcrete::standOnInteract()
+{
+    return boardModel.standOnInteract();
+}
+
+void ModelConcrete::loadCutscene(std::string filepath)
+{
+    cutsceneModel.load(filepath);
+}
+
+void ModelConcrete::drawCutscene(std::vector<DrawInformation> *items)
+{
+    cutsceneModel.draw(items);
+}
+
+bool ModelConcrete::cutsceneIsDone()
+{
+    return cutsceneModel.isDone();
+}
+
+void ModelConcrete::loadBoardBasedOnLoadedCutscene()
+{
+    boardModel.load(cutsceneModel.getNextBoardFilePath(), &boardObjectsInteratctedWith);
+    boardModel.setPlayerPos(cutsceneModel.getXPosBoard(), cutsceneModel.getYPosBoard());
 }
 

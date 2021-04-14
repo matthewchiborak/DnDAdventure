@@ -18,10 +18,12 @@ public:
     void clear();
 
     std::string interact(int * objId);
+    std::string standOnInteract();
 
     std::vector<BoardObjectAbstract*> * getObjects();
 
     void movePlayer(int x, int y, float t);
+    void setPlayerPos(int x, int y);
 
     float getXOffset();
     float getYOffset();

@@ -17,6 +17,7 @@ public:
             bool solid);
 
     virtual std::string interact();
+    virtual std::string standOnInteract();
 
     int getXpos();
     int getYpos();

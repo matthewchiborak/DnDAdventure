@@ -20,3 +20,8 @@ std::string BoardObjectChest::interact()
 
     return "Chest$"+toReturn;
 }
+
+std::string BoardObjectChest::standOnInteract()
+{
+    return "None";
+}

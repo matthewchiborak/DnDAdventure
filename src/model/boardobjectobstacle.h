@@ -16,6 +16,7 @@ public:
             bool solid);
 
     std::string interact();
+    std::string standOnInteract();
 };
 
 #endif // BOARDOBJECTOBSTACLE_H

@@ -11,3 +11,8 @@ std::string BoardObjectNPC::interact()
     //Unsure what im doing to do with this yet
     return "NPC$" + dialog;
 }
+
+std::string BoardObjectNPC::standOnInteract()
+{
+    return "None";
+}

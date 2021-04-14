@@ -10,3 +10,8 @@ std::string BoardObjectObstacle::interact()
 {
     return "None";
 }
+
+std::string BoardObjectObstacle::standOnInteract()
+{
+    return "None";
+}

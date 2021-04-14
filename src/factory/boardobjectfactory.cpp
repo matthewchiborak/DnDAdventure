@@ -6,6 +6,7 @@
 #include "../model/boardobjectobstacle.h"
 #include "../model/boardobjectnpc.h"
 #include "../model/boardobjectchest.h"
+#include "../model/boardobjectcutscenetrigger.h"
 #include "../model/doorway.h"
 
 BoardObjectFactory::BoardObjectFactory()
@@ -42,6 +43,8 @@ void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjec
                 doors->push_back(createDoorway(vect));
             else if(vect.at(0) == "chest")
                 boardObjects->push_back(createChest(vect));
+            else if(vect.at(0) == "cutscene")
+                boardObjects->push_back(createCutsceneTrigger(vect));
         }
     }
 }
@@ -49,7 +52,7 @@ void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjec
 BoardObjectAbstract *BoardObjectFactory::createObstacle(std::vector<std::string> info)
 {
     return new BoardObjectObstacle(
-                                   std::stoi(info.at(6)),
+                                   -1,//std::stoi(info.at(6)),
                                    std::stoi(info.at(1)),
                                    std::stoi(info.at(2)),
                                    std::stoi(info.at(3)),
@@ -77,7 +80,7 @@ BoardObjectAbstract *BoardObjectFactory::createChest(std::vector<std::string> in
 BoardObjectAbstract *BoardObjectFactory::createMap(std::vector<std::string> info)
 {
     return new BoardObjectObstacle(
-                                   std::stoi(info.at(6)),
+                                   -1,//std::stoi(info.at(6)),
                                    std::stoi(info.at(1)),
                                    std::stoi(info.at(2)),
                                    std::stoi(info.at(3)),
@@ -90,14 +93,28 @@ BoardObjectAbstract *BoardObjectFactory::createMap(std::vector<std::string> info
 BoardObjectAbstract *BoardObjectFactory::createNPC(std::vector<std::string> info)
 {
     return new BoardObjectNPC(
-                                   std::stoi(info.at(6)),
+                                   -1,//std::stoi(info.at(6)),
                                    std::stoi(info.at(1)),
                                    std::stoi(info.at(2)),
                                    std::stoi(info.at(3)),
                                    std::stoi(info.at(4)),
                                    info.at(5),
                                    true,
-                                   info.at(7)
+                                   info.at(6)
+                );
+}
+
+BoardObjectAbstract *BoardObjectFactory::createCutsceneTrigger(std::vector<std::string> info)
+{
+    return new BoardObjectCutsceneTrigger(
+                -1,//std::stoi(info.at(7)),
+                std::stoi(info.at(1)),
+                std::stoi(info.at(2)),
+                std::stoi(info.at(3)),
+                std::stoi(info.at(4)),
+                info.at(5),
+                false,
+                info.at(6)
                 );
 }
 

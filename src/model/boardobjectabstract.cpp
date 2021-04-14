@@ -16,6 +16,11 @@ std::string BoardObjectAbstract::interact()
     return "None";
 }
 
+std::string BoardObjectAbstract::standOnInteract()
+{
+    return "None";
+}
+
 int BoardObjectAbstract::getXpos()
 {
     return xpos;

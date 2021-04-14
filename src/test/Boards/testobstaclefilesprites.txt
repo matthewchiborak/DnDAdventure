@@ -7,5 +7,6 @@ chest,5,7,1,1,Chest,ChestEmpty,gold$1000,4
 chest,7,7,1,1,Chest,ChestEmpty,potion$3,5
 chest,9,7,1,1,Chest,ChestEmpty,equipment$Weapon$1$Test_Weapon1$Bullent_Only_From_Chest$9$1000,6
 door,-1,0,1,1,testobstaclefilesprites2.txt,3,-2
+cutscene,0,1,1,1,Chest,testcutscene1.txt
 ranenc,TestEncounter1
 battleBG,TestBattleBG

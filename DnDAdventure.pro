@@ -25,6 +25,7 @@ SOURCES += \
     src/controller/keyinputstate.cpp \
     src/controller/keyinputstatebattle.cpp \
     src/controller/keyinputstateboard.cpp \
+    src/controller/keyinputstatecutscene.cpp \
     src/controller/keyinputstatepausemenu.cpp \
     src/controller/pausemenustate.cpp \
     src/controller/pausemenustatebag.cpp \
@@ -41,6 +42,7 @@ SOURCES += \
     src/display/renderingstrategy.cpp \
     src/display/renderingstrategybattle.cpp \
     src/display/renderingstrategyboard.cpp \
+    src/display/renderingstrategycutscene.cpp \
     src/display/renderingstrategypausemenu.cpp \
     src/display/spriteflyweight.cpp \
     src/display/spriteflyweightfactory.cpp \
@@ -60,8 +62,10 @@ SOURCES += \
     src/model/boardmodel.cpp \
     src/model/boardobjectabstract.cpp \
     src/model/boardobjectchest.cpp \
+    src/model/boardobjectcutscenetrigger.cpp \
     src/model/boardobjectnpc.cpp \
     src/model/boardobjectobstacle.cpp \
+    src/model/cutscenemodel.cpp \
     src/model/doorway.cpp \
     src/model/equipmentmodel.cpp \
     src/model/gamemodelabstract.cpp \
@@ -95,6 +99,7 @@ HEADERS += \
     src/controller/keyinputstate.h \
     src/controller/keyinputstatebattle.h \
     src/controller/keyinputstateboard.h \
+    src/controller/keyinputstatecutscene.h \
     src/controller/keyinputstatepausemenu.h \
     src/controller/pausemenustate.h \
     src/controller/pausemenustatebag.h \
@@ -112,6 +117,7 @@ HEADERS += \
     src/display/renderingstrategy.h \
     src/display/renderingstrategybattle.h \
     src/display/renderingstrategyboard.h \
+    src/display/renderingstrategycutscene.h \
     src/display/renderingstrategypausemenu.h \
     src/display/spriteflyweight.h \
     src/display/spriteflyweightfactory.h \
@@ -130,8 +136,10 @@ HEADERS += \
     src/model/boardmodel.h \
     src/model/boardobjectabstract.h \
     src/model/boardobjectchest.h \
+    src/model/boardobjectcutscenetrigger.h \
     src/model/boardobjectnpc.h \
     src/model/boardobjectobstacle.h \
+    src/model/cutscenemodel.h \
     src/model/doorway.h \
     src/model/equipmentmodel.h \
     src/model/gamemodelabstract.h \

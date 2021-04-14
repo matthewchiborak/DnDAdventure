@@ -12,6 +12,8 @@ BoardModel::BoardModel()
 
 void BoardModel::load(std::string loadInfo, std::vector<int> *boardObjectInteractedWith)
 {
+    clear();
+
     this->boardObjectInteractedWith = boardObjectInteractedWith;
 
     factory.populate(&boardObjects, &doors, &encounterTable, &battleBackgroundKey, &xPos, &yPos, loadInfo);
@@ -62,6 +64,23 @@ std::string BoardModel::interact(int *objId)
     return "None";
 }
 
+std::string BoardModel::standOnInteract()
+{
+    for(int i = 0; i < boardObjects.size(); i++)
+    {
+        if(!boardObjects.at(i)->getSolid())
+        {
+            if(boardObjects.at(i)->isOccupyThisSpace(xPos, yPos))
+            {
+                if(boardObjects.at(i)->standOnInteract() != "None")
+                    return boardObjects.at(i)->standOnInteract();
+            }
+        }
+    }
+
+    return "None";
+}
+
 std::vector<BoardObjectAbstract *> *BoardModel::getObjects()
 {
     return &boardObjects;
@@ -88,6 +107,14 @@ void BoardModel::movePlayer(int x, int y, float t)
         xOffset = (xPos) + (x*t);
         yOffset = (yPos) + (y*t);
     }
+}
+
+void BoardModel::setPlayerPos(int x, int y)
+{
+    xPos = x;
+    yPos = y;
+    xOffset = x;
+    yOffset = y;
 }
 
 float BoardModel::getXOffset()

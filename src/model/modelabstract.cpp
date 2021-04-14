@@ -244,6 +244,11 @@ std::string ModelAbstract::interact()
     return "None";
 }
 
+std::string ModelAbstract::standOnInteract()
+{
+    return "None";
+}
+
 void ModelAbstract::updateInventoryBasedOnString(std::string message)
 {
     if(message == "None")
@@ -334,6 +339,27 @@ std::string ModelAbstract::getNextBoardDialog()
     boardModelDialog.pop();
     return toRet;
 }
+
+void ModelAbstract::loadCutscene(std::string filepath)
+{
+
+}
+
+void ModelAbstract::drawCutscene(std::vector<DrawInformation> *items)
+{
+
+}
+
+bool ModelAbstract::cutsceneIsDone()
+{
+    return true;
+}
+
+void ModelAbstract::loadBoardBasedOnLoadedCutscene()
+{
+
+}
+
 
 
 

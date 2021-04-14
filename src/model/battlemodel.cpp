@@ -885,7 +885,7 @@ void BattleModel::addAboveHeadBattleMessage(bool enemy, int index, std::string k
 
     int textX;
     int textY;
-    int textW=200;
+    int textW=250;
     int textH=75;
 
     if(enemy)

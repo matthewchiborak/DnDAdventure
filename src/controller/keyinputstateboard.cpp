@@ -4,6 +4,7 @@
 #include <QDebug>
 
 #include "../model/modelabstract.h"
+#include "../filemanagment/fileReader.h"
 
 KeyInputStateBoard::KeyInputStateBoard(ModelAbstract *model, std::queue<int> *keyboardEventQueue)
     : KeyInputState(model, keyboardEventQueue)
@@ -119,9 +120,27 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
 
 bool KeyInputStateBoard::handleCollisionTriggers(std::string *nextState)
 {
+    //For doors
     std::string res = model->handleBoardCollisionTriggers();
-    if(res == "HUH")
+
+    //for cutscene triggers
+    std::string cutsceneoption = model->standOnInteract();
+
+    if(cutsceneoption == "None")
         return false;
+
+    std::vector<std::string> cutsceneInfo = FileReader::splitString(cutsceneoption, '$');
+
+    if(cutsceneInfo.at(0) == "Cutscene")
+    {
+        //Tell model to load cutscene
+        (*nextState) = "Cutscene";
+
+        //Load cutscene
+        model->loadCutscene(cutsceneInfo.at(1));
+
+        return true;
+    }
 
     return false;
 }
