@@ -27,6 +27,7 @@ SOURCES += \
     src/controller/keyinputstateboard.cpp \
     src/controller/keyinputstatecutscene.cpp \
     src/controller/keyinputstatepausemenu.cpp \
+    src/controller/keyinputstatetitle.cpp \
     src/controller/musiccontrollerabstract.cpp \
     src/controller/musiccontrollerconcrete.cpp \
     src/controller/pausemenustate.cpp \
@@ -46,6 +47,7 @@ SOURCES += \
     src/display/renderingstrategyboard.cpp \
     src/display/renderingstrategycutscene.cpp \
     src/display/renderingstrategypausemenu.cpp \
+    src/display/renderingstrategytitle.cpp \
     src/display/spriteflyweight.cpp \
     src/display/spriteflyweightfactory.cpp \
     src/display/spriteflyweightfactoryabstract.cpp \
@@ -105,6 +107,7 @@ HEADERS += \
     src/controller/keyinputstateboard.h \
     src/controller/keyinputstatecutscene.h \
     src/controller/keyinputstatepausemenu.h \
+    src/controller/keyinputstatetitle.h \
     src/controller/musiccontrollerabstract.h \
     src/controller/musiccontrollerconcrete.h \
     src/controller/pausemenustate.h \
@@ -125,6 +128,7 @@ HEADERS += \
     src/display/renderingstrategyboard.h \
     src/display/renderingstrategycutscene.h \
     src/display/renderingstrategypausemenu.h \
+    src/display/renderingstrategytitle.h \
     src/display/spriteflyweight.h \
     src/display/spriteflyweightfactory.h \
     src/display/spriteflyweightfactoryabstract.h \

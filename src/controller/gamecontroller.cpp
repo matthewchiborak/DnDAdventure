@@ -13,7 +13,7 @@ GameController::GameController(ModelAbstract *model, AbstractView *view, std::qu
     this->keyboardEventQueue = keyboardEventQueue;
     this->inputStateFactory = inputStateFactory;
 
-    this->keyInputState = inputStateFactory->getState("Board");
+    this->keyInputState = inputStateFactory->getState("Title");
 
     connect(&eventLoopTimer, SIGNAL(timeout()), this, SLOT(eventLoopTimerTimeout()));
 }

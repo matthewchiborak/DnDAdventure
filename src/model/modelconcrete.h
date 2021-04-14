@@ -38,7 +38,12 @@ public:
     bool cutsceneIsDone();
     bool loadBoardBasedOnLoadedCutscene();
 
+
     void loadSaveGame();
+
+    bool doIStartANewGame();
+
+    void drawTitleScreen(std::vector<DrawInformation> * items);
 
 private:
     BoardModel boardModel;
@@ -48,6 +53,8 @@ private:
     PauseMenuDrawState * currentMenuState;
 
     int partyGaugeValue = 0;
+
+    int titleMenuPos = 0;
 
     void saveGame();
 

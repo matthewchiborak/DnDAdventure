@@ -360,6 +360,16 @@ void ModelAbstract::loadSaveGame()
 
 }
 
+bool ModelAbstract::doIStartANewGame()
+{
+    return true;
+}
+
+void ModelAbstract::drawTitleScreen(std::vector<DrawInformation> *items)
+{
+
+}
+
 void ModelAbstract::saveGame()
 {
 

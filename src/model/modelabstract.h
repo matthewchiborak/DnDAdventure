@@ -84,6 +84,9 @@ public:
 
     virtual void loadSaveGame();
 
+    virtual bool doIStartANewGame();
+    virtual void drawTitleScreen(std::vector<DrawInformation> * items);
+
 protected:
     bool pauseIsDone = false;
     //Bag
@@ -100,6 +103,8 @@ protected:
     std::queue<std::string> boardModelDialog;
 
     virtual void saveGame();
+
+
 
 };
 

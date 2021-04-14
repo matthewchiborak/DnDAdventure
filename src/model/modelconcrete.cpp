@@ -12,6 +12,7 @@
 #include "../model/attackmodel.h"
 #include "../filemanagment/fileReader.h"
 #include <QDir>
+#include <QCoreApplication>
 
 ModelConcrete::ModelConcrete(MusicControllerAbstract *musicController)
     : ModelAbstract(musicController)
@@ -21,6 +22,8 @@ ModelConcrete::ModelConcrete(MusicControllerAbstract *musicController)
     battleModel.setMusicController(musicController);
     boardModel.setMusicController(musicController);
     cutsceneModel.setMusicController(musicController);
+
+    musicController->playMusic("Title");
 }
 
 void ModelConcrete::drawBoardModel(std::vector<DrawInformation> * items, float *xOffset, float *yOffset)
@@ -83,6 +86,15 @@ void ModelConcrete::moveMenuCursor(int x, int y, std::string key)
         currentMenuState->moveMenuCursor(x, y);
     else if(key == "Battle")
         battleModel.moveMenuCursor(x, y);
+    else if(key == "Title")
+    {
+        titleMenuPos -= y;
+
+        if(titleMenuPos < 0)
+            titleMenuPos = 2;
+        if(titleMenuPos > 2)
+            titleMenuPos = 0;
+    }
 }
 
 void ModelConcrete::enterMenu(std::string key)
@@ -102,6 +114,25 @@ void ModelConcrete::enterMenu(std::string key)
     else if(key == "Cutscene")
     {
         cutsceneModel.advance();
+    }
+    else if(key == "Title")
+    {
+        if(titleMenuPos == 0)
+        {
+            //New game boys
+            //Load opening cutscene
+            loadCutscene("Opening.txt");
+        }
+        else if(titleMenuPos == 1)
+        {
+            //Load the save
+            loadSaveGame();
+        }
+        if(titleMenuPos == 2)
+        {
+            //Quit
+            QCoreApplication::quit();
+        }
     }
 }
 
@@ -308,6 +339,35 @@ void ModelConcrete::loadSaveGame()
     {
         playerCharacters.at(i)->refillHPandMP();
     }
+}
+
+bool ModelConcrete::doIStartANewGame()
+{
+    if(titleMenuPos == 0)
+        return true;
+
+    return false;
+}
+
+void ModelConcrete::drawTitleScreen(std::vector<DrawInformation> *items)
+{
+    //Draw the title screen
+
+    //BG
+    DrawInformation info(-800, -400, 1700, 900, "TitleScreen", false);
+    items->push_back(info);
+
+    //3 menu opiotns, new game, coninue, quit
+    DrawInformation info4(700, 500, 250, 100, "", false, "New Game");
+    items->push_back(info4);
+    DrawInformation info5(700, 550, 250, 100, "", false, "Continue");
+    items->push_back(info5);
+    DrawInformation info6(700, 600, 250, 100, "", false, "Quit");
+    items->push_back(info6);
+
+    //curose
+    DrawInformation info7(600, 500 + (titleMenuPos*50), 100, 100, "", false, ">");
+    items->push_back(info7);
 }
 
 void ModelConcrete::saveGame()

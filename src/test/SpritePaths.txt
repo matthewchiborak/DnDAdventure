@@ -72,3 +72,4 @@ Locked4,Locked4.png
 Chest,chest.png
 ChestEmpty,chestempty.png
 SavePoint,SavePoint.png
+TitleScreen,TitleScreen.png

@@ -8,6 +8,8 @@
 #include "../display/renderingstrategypausemenu.h"
 #include "../display/renderingstrategybattle.h"
 #include "../display/renderingstrategycutscene.h"
+#include "../display/renderingstrategytitle.h"
+#include "../controller/keyinputstatetitle.h"
 
 InputStateFactory::InputStateFactory(ModelAbstract *model, std::queue<int> *keyboardEventQueue)
     : InputStateFactoryAbstract(model, keyboardEventQueue)
@@ -33,6 +35,10 @@ KeyInputState *InputStateFactory::getState(std::string key)
     {
         return new KeyInputStateCutscene(model, keyboardEventQueue);
     }
+    else if(key == "Title")
+    {
+        return new KeyInputStateTitle(model, keyboardEventQueue);
+    }
 
     return nullptr;
 }
@@ -54,6 +60,10 @@ RenderingStrategy *InputStateFactory::getRenderStrategy(std::string key)
     else if(key == "Cutscene")
     {
         return new RenderingStrategyCutscene(model);
+    }
+    else if(key == "Title")
+    {
+        return new RenderingStrategyTitle(model);
     }
 
     return nullptr;
