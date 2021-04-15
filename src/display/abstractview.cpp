@@ -1,12 +1,13 @@
 #include "abstractview.h"
 
-AbstractView::AbstractView(ModelAbstract * model, std::queue<int> * keyboardEventQueue, SpriteFlyweightFactoryAbstract *factory)
+AbstractView::AbstractView(ModelAbstract * model, std::queue<int> * keyboardEventQueue, std::vector<bool> *movementKeys, SpriteFlyweightFactoryAbstract *factory)
     : QOpenGLWindow(QOpenGLWindow::NoPartialUpdate)
 {
     this->model = model;
     this->spriteFactory = factory;
     this->keyboardEventQueue = keyboardEventQueue;
     this->renderStrat = nullptr;
+    this->movementKeys = movementKeys;
 }
 
 void AbstractView::setStrategy(RenderingStrategy *renderStrat)

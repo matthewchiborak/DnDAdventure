@@ -5,8 +5,8 @@
 
 
 
-OpenGLWindow::OpenGLWindow(ModelAbstract *model, std::queue<int> * keyboardEventQueue, SpriteFlyweightFactoryAbstract *factory)
-    : AbstractView(model, keyboardEventQueue, factory)
+OpenGLWindow::OpenGLWindow(ModelAbstract *model, std::queue<int> * keyboardEventQueue, std::vector<bool> * movementKeys, SpriteFlyweightFactoryAbstract *factory)
+    : AbstractView(model, keyboardEventQueue, movementKeys, factory)
 {
     m_view.lookAt(QVector3D(0,0,0),
                   QVector3D(0,0,0),
@@ -206,12 +206,32 @@ void OpenGLWindow::keyPressEvent(QKeyEvent *e)
 {
     if(keyboardEventQueue->empty())
         keyboardEventQueue->push(e->key());
+
+    //setAllMovementKeysToFalse();
+
+//    if(e->key() == Qt::Key_W)
+//        movementKeys->at(0) = true;
+//    if(e->key() == Qt::Key_A)
+//        movementKeys->at(1) = true;
+//    if(e->key() == Qt::Key_S)
+//        movementKeys->at(2) = true;
+//    if(e->key() == Qt::Key_D)
+//        movementKeys->at(3) = true;
 }
 
 void OpenGLWindow::keyReleaseEvent(QKeyEvent *e)
 {
     while(!keyboardEventQueue->empty())
         keyboardEventQueue->pop();
+
+//    if(e->key() == Qt::Key_W)
+//        movementKeys->at(0) = false;
+//    if(e->key() == Qt::Key_A)
+//        movementKeys->at(1) = false;
+//    if(e->key() == Qt::Key_S)
+//        movementKeys->at(2) = false;
+//    if(e->key() == Qt::Key_D)
+//        movementKeys->at(3) = false;
 }
 
 int OpenGLWindow::convertXLocationToPixels(int value)
@@ -222,6 +242,14 @@ int OpenGLWindow::convertXLocationToPixels(int value)
 int OpenGLWindow::convertYLocationToPixels(int value)
 {
     return windowHeight - (value * 100);
+}
+
+void OpenGLWindow::setAllMovementKeysToFalse()
+{
+    movementKeys->at(0) = false;
+    movementKeys->at(1) = false;
+    movementKeys->at(2) = false;
+    movementKeys->at(3) = false;
 }
 
 

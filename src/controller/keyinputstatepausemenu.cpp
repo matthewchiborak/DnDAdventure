@@ -2,8 +2,8 @@
 
 #include "../model/modelabstract.h"
 
-KeyInputStatePauseMenu::KeyInputStatePauseMenu(ModelAbstract *model, std::queue<int> *keyboardEventQueue)
-    : KeyInputState(model, keyboardEventQueue)
+KeyInputStatePauseMenu::KeyInputStatePauseMenu(ModelAbstract *model, std::queue<int> *keyboardEventQueue, std::vector<bool> *movementKeys)
+    : KeyInputState(model, keyboardEventQueue, movementKeys)
 {
     movementLockTimeMil = 150;
     model->setPauseIsDone(false);

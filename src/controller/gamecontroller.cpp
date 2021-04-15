@@ -6,12 +6,13 @@
 #include "../display/renderingstrategy.h"
 #include "../display/abstractview.h"
 
-GameController::GameController(ModelAbstract *model, AbstractView *view, std::queue<int> *keyboardEventQueue, InputStateFactoryAbstract *inputStateFactory)
+GameController::GameController(ModelAbstract *model, AbstractView *view, std::queue<int> *keyboardEventQueue, std::vector<bool> *movementKeys, InputStateFactoryAbstract *inputStateFactory)
 {
     this->model = model;
     this->view = view;
     this->keyboardEventQueue = keyboardEventQueue;
     this->inputStateFactory = inputStateFactory;
+    this->movementKeys = movementKeys;
 
     this->keyInputState = inputStateFactory->getState("Title");
 

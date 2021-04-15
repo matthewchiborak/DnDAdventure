@@ -1,15 +1,24 @@
 #include "keyinputstateboard.h"
 
+#pragma comment(lib, "User32.lib")
+
+#include <Windows.h>
+
 #include <queue>
 #include <QDebug>
 
 #include "../model/modelabstract.h"
 #include "../filemanagment/fileReader.h"
 
-KeyInputStateBoard::KeyInputStateBoard(ModelAbstract *model, std::queue<int> *keyboardEventQueue)
-    : KeyInputState(model, keyboardEventQueue)
+KeyInputStateBoard::KeyInputStateBoard(ModelAbstract *model, std::queue<int> *keyboardEventQueue, std::vector<bool> *movementKeys)
+    : KeyInputState(model, keyboardEventQueue, movementKeys)
 {
     movementLockTimeMil = 300;
+
+    lockMovement[0] = false;
+    lockMovement[1] = false;
+    lockMovement[2] = false;
+    lockMovement[3] = false;
 
     model->specialMessage("PlayMusic", "Board");
 }
@@ -17,6 +26,9 @@ KeyInputStateBoard::KeyInputStateBoard(ModelAbstract *model, std::queue<int> *ke
 bool KeyInputStateBoard::handle(std::string *nextState)
 {
     if(handleUserInput(nextState))
+        return true;
+
+    if(handleMovement(nextState))
         return true;
 
     //Else handle other possible events
@@ -30,6 +42,9 @@ bool KeyInputStateBoard::handle(std::string *nextState)
 
 bool KeyInputStateBoard::handleUserInput(std::string *nextState)
 {
+    if(movementEventSetUp)
+        return false;
+
     if(!eventBeenSetUp)
     {
         if(keyboardEventQueue->empty())
@@ -53,11 +68,7 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
             return false;
         }
 
-        if(keyToHandle == Qt::Key_W
-                || keyToHandle == Qt::Key_S
-                || keyToHandle == Qt::Key_A
-                || keyToHandle == Qt::Key_D
-                || keyToHandle == Qt::Key_E
+        if(keyToHandle == Qt::Key_E
                 || keyToHandle == Qt::Key_Escape
                 )
         {
@@ -83,15 +94,16 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
     theTimeNow =(millis);
     elapsed_millies = theTimeNow - timeOfLastButtonEvent;
 
-    if(keyToHandle == Qt::Key_W)
-        this->model->movePlayer(0, 1, ((elapsed_millies/movementLockTimeMil)));
-    else if(keyToHandle == Qt::Key_S)
-        this->model->movePlayer(0, -1, ((elapsed_millies/movementLockTimeMil)));
-    else if(keyToHandle == Qt::Key_A)
-        this->model->movePlayer(-1, 0, ((elapsed_millies/movementLockTimeMil)));
-    else if(keyToHandle == Qt::Key_D)
-        this->model->movePlayer(1, 0, ((elapsed_millies/movementLockTimeMil)));
-    else if(keyToHandle == Qt::Key_Escape)
+//    if(keyToHandle == Qt::Key_W)
+//        this->model->movePlayer(0, 1, ((elapsed_millies/movementLockTimeMil)));
+//    else if(keyToHandle == Qt::Key_S)
+//        this->model->movePlayer(0, -1, ((elapsed_millies/movementLockTimeMil)));
+//    else if(keyToHandle == Qt::Key_A)
+//        this->model->movePlayer(-1, 0, ((elapsed_millies/movementLockTimeMil)));
+//    else if(keyToHandle == Qt::Key_D)
+//        this->model->movePlayer(1, 0, ((elapsed_millies/movementLockTimeMil)));
+    //else
+    if(keyToHandle == Qt::Key_Escape)
     {
         eventBeenSetUp = false;
         while(!keyboardEventQueue->empty())
@@ -100,20 +112,80 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
         return true;
     }
 
-    if((elapsed_millies / movementLockTimeMil) >= 1)
+    if((elapsed_millies / movementLockTimeMil) >= 1 && eventBeenSetUp)
     {
         eventBeenSetUp = false;
         while(!keyboardEventQueue->empty())
             keyboardEventQueue->pop();
 
-        if(keyToHandle == Qt::Key_W || keyToHandle == Qt::Key_S || keyToHandle == Qt::Key_A || keyToHandle == Qt::Key_D)
+//        if(keyToHandle == Qt::Key_W || keyToHandle == Qt::Key_S || keyToHandle == Qt::Key_A || keyToHandle == Qt::Key_D)
+//        {
+//            //Hey guess what. try to trigger a random enounter
+//            if(model->tryToStartABattle())
+//            {
+//                (*nextState) = "RandomEncounter";
+//                return true;
+//            }
+//        }
+    }
+
+    return false;
+}
+
+bool KeyInputStateBoard::handleMovement(std::string *nextState)
+{
+    if(!movementEventSetUp)
+    {
+        if(GetAsyncKeyState('W') & 0x8000)
+            lockMovement[0] = true;
+        else if(GetAsyncKeyState('A') & 0x8000)
+            lockMovement[1] = true;
+        else if(GetAsyncKeyState('S') & 0x8000)
+            lockMovement[2] = true;
+        else if(GetAsyncKeyState('D') & 0x8000)
+            lockMovement[3] = true;
+
+        if(lockMovement[0] || lockMovement[1] || lockMovement[2] || lockMovement[3])
         {
-            //Hey guess what. try to trigger a random enounter
-            if(model->tryToStartABattle())
-            {
-                (*nextState) = "RandomEncounter";
-                return true;
-            }
+            auto nowTime = std::chrono::system_clock::now().time_since_epoch();
+            auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(nowTime).count();
+            theTimeNow = (millis);
+            timeOfLastButtonEvent = theTimeNow;
+            movementEventSetUp = true;
+        }
+
+        return false;
+    }
+
+    //Prcoess the event
+    auto nowTime = std::chrono::system_clock::now().time_since_epoch();
+    auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(nowTime).count();
+    theTimeNow =(millis);
+    elapsed_millies = theTimeNow - timeOfLastButtonEvent;
+
+    if(lockMovement[0])
+        this->model->movePlayer(0, 1, ((elapsed_millies/movementLockTimeMil)));
+    else if(lockMovement[2])
+        this->model->movePlayer(0, -1, ((elapsed_millies/movementLockTimeMil)));
+    else if(lockMovement[1])
+        this->model->movePlayer(-1, 0, ((elapsed_millies/movementLockTimeMil)));
+    else if(lockMovement[3])
+        this->model->movePlayer(1, 0, ((elapsed_millies/movementLockTimeMil)));
+
+    if((elapsed_millies / movementLockTimeMil) >= 1 && movementEventSetUp)
+    {
+        lockMovement[0] = false;
+        lockMovement[1] = false;
+        lockMovement[2] = false;
+        lockMovement[3] = false;
+
+        movementEventSetUp = false;
+
+        //Hey guess what. try to trigger a random enounter
+        if(model->tryToStartABattle())
+        {
+            (*nextState) = "RandomEncounter";
+            return true;
         }
     }
 

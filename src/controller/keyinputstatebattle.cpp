@@ -3,8 +3,8 @@
 #include "../model/modelabstract.h"
 #include <QDebug>
 
-KeyInputStateBattle::KeyInputStateBattle(ModelAbstract *model, std::queue<int> *keyboardEventQueue)
-    : KeyInputState(model, keyboardEventQueue)
+KeyInputStateBattle::KeyInputStateBattle(ModelAbstract *model, std::queue<int> *keyboardEventQueue, std::vector<bool> *movementKeys)
+    : KeyInputState(model, keyboardEventQueue, movementKeys)
 {
     movementLockTimeMil = 150;
 }

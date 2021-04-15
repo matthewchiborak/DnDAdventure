@@ -8,7 +8,7 @@ class OpenGLWindow : public AbstractView
     Q_OBJECT
 
 public:
-    OpenGLWindow(ModelAbstract * model, std::queue<int> * keyboardEventQueue, SpriteFlyweightFactoryAbstract * factory);
+    OpenGLWindow(ModelAbstract * model, std::queue<int> * keyboardEventQueue, std::vector<bool> * movementKeys, SpriteFlyweightFactoryAbstract * factory);
 
 protected:
     void paintGL() Q_DECL_OVERRIDE;
@@ -30,6 +30,8 @@ private:
 
     int convertXLocationToPixels(int value);
     int convertYLocationToPixels(int value);
+
+    void setAllMovementKeysToFalse();
 };
 
 #endif // OPENGLWINDOW_H

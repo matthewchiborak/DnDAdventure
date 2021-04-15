@@ -7,7 +7,7 @@
 class InputStateFactory : public InputStateFactoryAbstract
 {
 public:
-    InputStateFactory(ModelAbstract *model, std::queue<int> *keyboardEventQueue);
+    InputStateFactory(ModelAbstract *model, std::queue<int> *keyboardEventQueue, std::vector<bool> * movementKeys);
 
     KeyInputState * getState(std::string key);
     RenderingStrategy * getRenderStrategy(std::string key);

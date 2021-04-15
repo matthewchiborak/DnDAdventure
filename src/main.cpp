@@ -50,13 +50,18 @@ int main(int argc, char *argv[])
     RenderingStrategy * renderStrat = new RenderingStrategyTitle(testModel);
 
     std::queue<int> keyboardEventQueue;
+    std::vector<bool> movementKeys;
+    movementKeys.push_back(false);
+    movementKeys.push_back(false);
+    movementKeys.push_back(false);
+    movementKeys.push_back(false);
 
-    AbstractView * window = new OpenGLWindow(testModel, &keyboardEventQueue, spriteFactory);
+    AbstractView * window = new OpenGLWindow(testModel, &keyboardEventQueue, &movementKeys, spriteFactory);
     window->setStrategy(renderStrat);
 
-    InputStateFactoryAbstract * inputStateFact = new InputStateFactory(testModel, &keyboardEventQueue);
+    InputStateFactoryAbstract * inputStateFact = new InputStateFactory(testModel, &keyboardEventQueue, &movementKeys);
 
-    GameController gameController(testModel, window, &keyboardEventQueue, inputStateFact);
+    GameController gameController(testModel, window, &keyboardEventQueue, &movementKeys, inputStateFact);
     gameController.start();
 
     window->resize(1600, 900);

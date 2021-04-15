@@ -19,7 +19,7 @@
 class AbstractView : public QOpenGLWindow
 {
 public:
-    AbstractView(ModelAbstract * model, std::queue<int> * keyboardEventQueue, SpriteFlyweightFactoryAbstract * factory); //Should take model
+    AbstractView(ModelAbstract * model, std::queue<int> * keyboardEventQueue, std::vector<bool> * movementKeys, SpriteFlyweightFactoryAbstract * factory); //Should take model
 
     void setStrategy(RenderingStrategy * renderStrat);
 
@@ -33,6 +33,7 @@ protected:
     RenderingStrategy * renderStrat;
     SpriteFlyweightFactoryAbstract * spriteFactory;
     std::queue<int> * keyboardEventQueue;
+    std::vector<bool> * movementKeys;
 };
 
 #endif // ABSTRACTVIEW_H

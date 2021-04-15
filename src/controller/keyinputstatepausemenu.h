@@ -6,7 +6,7 @@
 class KeyInputStatePauseMenu : public KeyInputState
 {
 public:
-    KeyInputStatePauseMenu(ModelAbstract * model, std::queue<int> * keyboardEventQueue);
+    KeyInputStatePauseMenu(ModelAbstract * model, std::queue<int> * keyboardEventQueue, std::vector<bool> * movementKeys);
     ~KeyInputStatePauseMenu();
 
     bool handle(std::string * nextState);

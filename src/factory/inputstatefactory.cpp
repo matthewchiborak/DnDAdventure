@@ -11,8 +11,8 @@
 #include "../display/renderingstrategytitle.h"
 #include "../controller/keyinputstatetitle.h"
 
-InputStateFactory::InputStateFactory(ModelAbstract *model, std::queue<int> *keyboardEventQueue)
-    : InputStateFactoryAbstract(model, keyboardEventQueue)
+InputStateFactory::InputStateFactory(ModelAbstract *model, std::queue<int> *keyboardEventQueue, std::vector<bool> *movementKeys)
+    : InputStateFactoryAbstract(model, keyboardEventQueue, movementKeys)
 {
 
 }
@@ -21,23 +21,23 @@ KeyInputState *InputStateFactory::getState(std::string key)
 {
     if(key == "Board")
     {
-        return new KeyInputStateBoard(model, keyboardEventQueue);
+        return new KeyInputStateBoard(model, keyboardEventQueue, movementKeys);
     }
     else if(key == "PauseMenu")
     {
-        return new KeyInputStatePauseMenu(model, keyboardEventQueue);
+        return new KeyInputStatePauseMenu(model, keyboardEventQueue, movementKeys);
     }
     else if(key == "RandomEncounter")
     {
-        return new KeyInputStateBattle(model, keyboardEventQueue);
+        return new KeyInputStateBattle(model, keyboardEventQueue, movementKeys);
     }
     else if(key == "Cutscene")
     {
-        return new KeyInputStateCutscene(model, keyboardEventQueue);
+        return new KeyInputStateCutscene(model, keyboardEventQueue, movementKeys);
     }
     else if(key == "Title")
     {
-        return new KeyInputStateTitle(model, keyboardEventQueue);
+        return new KeyInputStateTitle(model, keyboardEventQueue, movementKeys);
     }
 
     return nullptr;

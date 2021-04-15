@@ -14,7 +14,7 @@ class ModelAbstract;
 class KeyInputState
 {
 public:
-    KeyInputState(ModelAbstract * model, std::queue<int> * keyboardEventQueue);
+    KeyInputState(ModelAbstract * model, std::queue<int> * keyboardEventQueue, std::vector<bool> * movementKeys);
     //~KeyInputState();
 
     //bool it returns is true if state change.
@@ -25,6 +25,7 @@ public:
 protected:
     ModelAbstract * model;
     std::queue<int> * keyboardEventQueue;
+    std::vector<bool> * movementKeys;
 
     int keyToHandle;
     bool eventBeenSetUp;

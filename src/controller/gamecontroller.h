@@ -20,6 +20,7 @@ public:
     GameController(ModelAbstract * model,
                    AbstractView * view,
                    std::queue<int> * keyboardEventQueue,
+                   std::vector<bool> * movementKeys,
                    InputStateFactoryAbstract * inputStateFactory);
 
     //Starts the timer for the timeout loop to handle events
@@ -32,6 +33,7 @@ private:
     ModelAbstract * model;
     AbstractView * view;
     std::queue<int> * keyboardEventQueue;
+    std::vector<bool> * movementKeys;
 
     QTimer eventLoopTimer;
 

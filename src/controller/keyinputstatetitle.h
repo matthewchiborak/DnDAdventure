@@ -6,7 +6,7 @@
 class KeyInputStateTitle : public KeyInputState
 {
 public:
-    KeyInputStateTitle(ModelAbstract * model, std::queue<int> * keyboardEventQueue);
+    KeyInputStateTitle(ModelAbstract * model, std::queue<int> * keyboardEventQueue, std::vector<bool> * movementKeys);
     ~KeyInputStateTitle();
 
     bool handle(std::string * nextState);

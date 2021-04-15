@@ -2,8 +2,8 @@
 
 #include "../model/modelabstract.h"
 
-KeyInputStateTitle::KeyInputStateTitle(ModelAbstract *model, std::queue<int> *keyboardEventQueue)
-    : KeyInputState(model, keyboardEventQueue)
+KeyInputStateTitle::KeyInputStateTitle(ModelAbstract *model, std::queue<int> *keyboardEventQueue, std::vector<bool> *movementKeys)
+    : KeyInputState(model, keyboardEventQueue, movementKeys)
 {
     movementLockTimeMil = 150;
 }

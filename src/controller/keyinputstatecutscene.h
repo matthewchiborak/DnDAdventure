@@ -6,7 +6,7 @@
 class KeyInputStateCutscene : public KeyInputState
 {
 public:
-    KeyInputStateCutscene(ModelAbstract * model, std::queue<int> * keyboardEventQueue);
+    KeyInputStateCutscene(ModelAbstract * model, std::queue<int> * keyboardEventQueue, std::vector<bool> * movementKeys);
     ~KeyInputStateCutscene();
 
     bool handle(std::string * nextState);

@@ -6,7 +6,7 @@
 class KeyInputStateBattle : public KeyInputState
 {
 public:
-    KeyInputStateBattle(ModelAbstract * model, std::queue<int> * keyboardEventQueue);
+    KeyInputStateBattle(ModelAbstract * model, std::queue<int> * keyboardEventQueue, std::vector<bool> * movementKeys);
     ~KeyInputStateBattle();
 
     bool handle(std::string * nextState);

@@ -153,7 +153,8 @@ bool FileReaderTester::factoryForMakingStatesTest()
 
     ModelConcrete model(&musicController);
     std::queue<int> que;
-    InputStateFactory fact(&model, &que);
+    std::vector<bool> quu;
+    InputStateFactory fact(&model, &que, &quu);
     KeyInputState * testPointer = fact.getState("Board");
 
     if(testPointer == nullptr)
