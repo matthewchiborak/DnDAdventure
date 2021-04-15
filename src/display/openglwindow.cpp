@@ -106,37 +106,61 @@ void OpenGLWindow::paintGL()
 
         if(itemsToDraw.at(i).isRelativeToWorld)
         {
-            glTexCoord2f(0, 1);
+            if(itemsToDraw.at(i).flip)
+                glTexCoord2f(1, 1);
+            else
+                glTexCoord2f(0, 1);
             glVertex3f(itemsToDraw.at(i).x - xOffset,
                        itemsToDraw.at(i).y - yOffset, 0.0f);
 
-            glTexCoord2f(1, 1);
+            if(itemsToDraw.at(i).flip)
+                glTexCoord2f(0, 1);
+            else
+                glTexCoord2f(1, 1);
             glVertex3f(itemsToDraw.at(i).x - xOffset + itemsToDraw.at(i).w,
                        itemsToDraw.at(i).y - yOffset, 0.0f);
 
-            glTexCoord2f(1, 0);
+            if(itemsToDraw.at(i).flip)
+                glTexCoord2f(0, 0);
+            else
+                glTexCoord2f(1, 0);
             glVertex3f(itemsToDraw.at(i).x - xOffset + itemsToDraw.at(i).w,
                        itemsToDraw.at(i).y + itemsToDraw.at(i).h - yOffset, 0.0f);
 
-            glTexCoord2f(0, 0);
+            if(itemsToDraw.at(i).flip)
+                glTexCoord2f(1, 0);
+            else
+                glTexCoord2f(0, 0);
             glVertex3f(itemsToDraw.at(i).x - xOffset,
                        itemsToDraw.at(i).y + itemsToDraw.at(i).h - yOffset, 0.0f);
         }
         else
         {
-            glTexCoord2f(0, 1);
+            if(itemsToDraw.at(i).flip)
+                glTexCoord2f(1, 1);
+            else
+                glTexCoord2f(0, 1);
             glVertex3f(itemsToDraw.at(i).x/100.f,
                        ((itemsToDraw.at(i).y)/100.f), 0.0f);
 
-            glTexCoord2f(1, 1);
+            if(itemsToDraw.at(i).flip)
+                glTexCoord2f(0, 1);
+            else
+                glTexCoord2f(1, 1);
             glVertex3f((itemsToDraw.at(i).x + itemsToDraw.at(i).w)/100.f,
                        ((itemsToDraw.at(i).y)/100.f), 0.0f);
 
-            glTexCoord2f(1, 0);
+            if(itemsToDraw.at(i).flip)
+                glTexCoord2f(0, 0);
+            else
+                glTexCoord2f(1, 0);
             glVertex3f((itemsToDraw.at(i).x + itemsToDraw.at(i).w)/100.f,
                        ((itemsToDraw.at(i).y + itemsToDraw.at(i).h)/100.f), 0.0f);
 
-            glTexCoord2f(0, 0);
+            if(itemsToDraw.at(i).flip)
+                glTexCoord2f(1, 0);
+            else
+                glTexCoord2f(0, 0);
             glVertex3f((itemsToDraw.at(i).x)/100.f,
                        ((itemsToDraw.at(i).y + itemsToDraw.at(i).h)/100.f), 0.0f);
         }

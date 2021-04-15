@@ -1,2 +1,5 @@
 TestEncounter1,rat,rat,rat,rat,rat
 TestEncounter2,rat
+Tutorial1,rat
+Tutorial2,rat,rat,rat
+Tutorial3,rat,rat,rat,rat,rat

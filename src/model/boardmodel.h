@@ -22,6 +22,7 @@ public:
     std::string standOnInteract();
 
     std::vector<BoardObjectAbstract*> * getObjects();
+    std::vector<Doorway*> * getDoors();
 
     void movePlayer(int x, int y, float t);
     void setPlayerPos(int x, int y);

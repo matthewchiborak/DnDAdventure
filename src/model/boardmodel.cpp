@@ -88,6 +88,11 @@ std::vector<BoardObjectAbstract *> *BoardModel::getObjects()
     return &boardObjects;
 }
 
+std::vector<Doorway *> *BoardModel::getDoors()
+{
+    return &doors;
+}
+
 void BoardModel::movePlayer(int x, int y, float t)
 {
     lastDirectionMovedX = x;

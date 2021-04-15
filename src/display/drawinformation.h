@@ -20,6 +20,7 @@ public:
     bool isLeftAlign;
     float fontSize;
     int r,g,b; //0-255
+    bool flip = false;
 };
 
 #endif // DRAWINFORMATION_H

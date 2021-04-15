@@ -13,7 +13,8 @@ public:
             int height,
             std::string boardKey,
             int newXPos,
-            int newYPos
+            int newYPos,
+            std::string spriteKey
             );
 
     std::string getBoardKey();
@@ -22,7 +23,14 @@ public:
 
     bool isOccupyThisSpace(int x, int y);
 
+    std::string getSpriteKey();
+    int getXPos();
+    int getYPos();
+    int getWidth();
+    int getHeight();
+
 private:
+    std::string spriteKey;
     int xpos;
     int ypos;
     int width;

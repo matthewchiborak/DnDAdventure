@@ -2,7 +2,7 @@
 #include <QDir>
 #include <QDebug>
 
-Doorway::Doorway(int xpos, int ypos, int width, int height, std::string boardKey, int newXPos, int newYPos)
+Doorway::Doorway(int xpos, int ypos, int width, int height, std::string boardKey, int newXPos, int newYPos, std::string spriteKey)
 {
     this->xpos = xpos;
     this->ypos = ypos;
@@ -13,6 +13,8 @@ Doorway::Doorway(int xpos, int ypos, int width, int height, std::string boardKey
     this->boardKey = boardKey;
     this->newXPos = newXPos;
     this->newYPos = newYPos;
+
+    this->spriteKey = spriteKey;
 }
 
 std::string Doorway::getBoardKey()
@@ -42,4 +44,29 @@ bool Doorway::isOccupyThisSpace(int x, int y)
     }
 
     return false;
+}
+
+std::string Doorway::getSpriteKey()
+{
+    return spriteKey;
+}
+
+int Doorway::getXPos()
+{
+    return xpos;
+}
+
+int Doorway::getYPos()
+{
+    return ypos;
+}
+
+int Doorway::getWidth()
+{
+    return width;
+}
+
+int Doorway::getHeight()
+{
+    return height;
 }

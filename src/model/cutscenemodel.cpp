@@ -8,8 +8,27 @@ CutsceneModel::CutsceneModel()
 
 }
 
+void CutsceneModel::clear()
+{
+    nextBoardFilePath = "None";
+    nextEnouncter = "None";
+    currentBackground = "";
+    currentLeft = "";
+    currentRight = "";
+    currentLeftName = "";
+    currentRightName = "";
+    currentlyLeftTalking = true;
+    currentlyHasText = true;
+    currentText = "";
+
+    while(!instructions.empty())
+        instructions.pop();
+}
+
 void CutsceneModel::load(std::string loadInfo)
 {
+    clear();
+
     FileReader fr("D:\\Qt Projects\\DnDAdventure\\src\\test\\Cutscenes\\" + loadInfo);
 
     nextBoardFilePath = "None";
@@ -36,6 +55,7 @@ void CutsceneModel::draw(std::vector<DrawInformation> *items)
 
     //Right port
     DrawInformation rp(200, -150, 500, 500, currentRight, false);
+    rp.flip = true;
     items->push_back(rp);
 
     if(!currentlyHasText)
@@ -58,7 +78,7 @@ void CutsceneModel::draw(std::vector<DrawInformation> *items)
     }
 
     //Text
-    DrawInformation dialog(50, 730, 1500, 140, "", false, currentText, true);
+    DrawInformation dialog(50, 730, 1500, 140, "", false, currentText, true, 24.f);
     items->push_back(dialog);
 }
 

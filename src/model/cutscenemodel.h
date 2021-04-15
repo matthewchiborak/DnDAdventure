@@ -13,6 +13,7 @@ class CutsceneModel
 public:
     CutsceneModel();
 
+    void clear();
     void load(std::string loadInfo);
     void draw(std::vector<DrawInformation> * items);
 

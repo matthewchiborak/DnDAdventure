@@ -151,6 +151,7 @@ Doorway *BoardObjectFactory::createDoorway(std::vector<std::string> info)
                 std::stoi(info.at(4)),
                 info.at(5),
                 std::stoi(info.at(6)),
-                std::stoi(info.at(7))
+                std::stoi(info.at(7)),
+                info.at(8)
                 );
 }

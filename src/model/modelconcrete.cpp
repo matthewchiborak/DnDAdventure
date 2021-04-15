@@ -13,6 +13,7 @@
 #include "../filemanagment/fileReader.h"
 #include <QDir>
 #include <QCoreApplication>
+#include "doorway.h"
 
 ModelConcrete::ModelConcrete(MusicControllerAbstract *musicController)
     : ModelAbstract(musicController)
@@ -37,6 +38,17 @@ void ModelConcrete::drawBoardModel(std::vector<DrawInformation> * items, float *
         DrawInformation info(bobjs->at(i)->getXpos(), bobjs->at(i)->getYpos(), bobjs->at(i)->getWidth(), bobjs->at(i)->getHeight(), bobjs->at(i)->getSpriteName(), true);
         items->push_back(info);
     }
+    for(int i = 0; i < boardModel.getDoors()->size(); i++)
+    {
+        DrawInformation info(
+                    boardModel.getDoors()->at(i)->getXPos(),
+                    boardModel.getDoors()->at(i)->getYPos(),
+                    boardModel.getDoors()->at(i)->getWidth(),
+                    boardModel.getDoors()->at(i)->getHeight(),
+                    boardModel.getDoors()->at(i)->getSpriteKey(),
+                    true);
+        items->push_back(info);
+    }
 
     //Active player character for moving
     DrawInformation charinfo(0, 0, 100, 100, playerCharacters.at(0)->getSpriteKey(), false);
@@ -49,7 +61,7 @@ void ModelConcrete::drawBoardModel(std::vector<DrawInformation> * items, float *
         items->push_back(topTextBox);
 
         DrawInformation dialogDesc(0, 730, 1500, 140, "",
-                                false, boardModelDialog.front());
+                                false, boardModelDialog.front(), false, 24.f);
         items->push_back(dialogDesc);
     }
 }
@@ -121,6 +133,9 @@ void ModelConcrete::enterMenu(std::string key)
         {
             //New game boys
             //Load opening cutscene
+            playerCharacters.at(2)->setIsActive(false);
+            playerCharacters.at(3)->setIsActive(false);
+            this->partyGaugeValue = (250-80);
             loadCutscene("Opening.txt");
         }
         else if(titleMenuPos == 1)
@@ -218,6 +233,7 @@ std::string ModelConcrete::interact()
             && toReturn.at(2) == 'e'
             && toReturn.at(3) == 's'
             && toReturn.at(4) == 't'
+            && potId >= 0
             )
         boardObjectsInteratctedWith.push_back(potId);
 
