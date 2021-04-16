@@ -3,3 +3,8 @@ TestEncounter2,rat
 Tutorial1,rat
 Tutorial2,rat,rat,rat
 Tutorial3,rat,rat,rat,rat,rat
+OpeningShip1,pirate,pirate,pirategun,pirategun
+OpeningShip2,rat,rat,drunk
+OpeningShip3,pirate,pirate,pirate
+OpeningShip4,pirategun,pirategun,pirategun,pirategun
+OpeningShip5,pirate,drunk,pirategun

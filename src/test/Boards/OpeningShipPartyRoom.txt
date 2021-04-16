@@ -19,6 +19,8 @@ npc,6,4,1,1,Man,My_old_captain_always_used_to_tell_us_if_you_need_to_change_our_
 npc,7,4,1,1,Woman,I_told_you_to_pack_plenty_of_items$Don't_come_running_to_me_you_get_food_poisoning
 npc,0,1,1,1,Man,Oh_hey_Bullent._Don't_worry_we_got_the_ship_covered._You_enjoy_the_party.
 npc,1,0,1,1,Man,Oh_hey_Bullent._Don't_worry_we_got_the_ship_covered._You_enjoy_the_party.
+npc,1,23,1,1,Gimli,What_you_looking_at?_This_ain't_a_show._Get_lost.
+npc,0,23,1,1,ShipTraitor,Shoulda_been_here_by_now._What's_the_hold_up...
 door,10,23,1,1,OpeningShipCargoHold.txt,3,9,StairsDown
 door,0,0,1,1,OpeningShipPartyRoom.txt,5,0,StairsUp
 battleBG,TestBattleBG

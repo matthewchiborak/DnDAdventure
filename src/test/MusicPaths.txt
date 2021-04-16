@@ -6,3 +6,4 @@ Pizza,Pizza.wav
 Victory,Victory.wav
 Thud,Thud.wav
 Title,Title.mp3
+Crisis,Crisis.mp3

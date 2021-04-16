@@ -19,7 +19,7 @@ PauseMenuStateMonsterManual::PauseMenuStateMonsterManual(ModelAbstract *model)
     {
         if(model->getMonsterManual()->at(i).getDefeated())
         {
-            names.push_back(model->getMonsterManual()->at(i).getName());
+            names.push_back(FileReader::replaceCharacter(model->getMonsterManual()->at(i).getName(), '_', ' '));
             defeats.push_back(true);
             keys.push_back(model->getMonsterManual()->at(i).getKey());
         }

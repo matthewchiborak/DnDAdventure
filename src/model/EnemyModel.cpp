@@ -2,10 +2,12 @@
 
 #include <cmath>
 
+#include "attackmodel.h"
+
 EnemyModel::EnemyModel(int maxHP, int att, int def, int mAtt, int mDef, int speed)
 {
     this->maxHealth = maxHP;
-    this->currentHealth = maxHP;
+
     this->attack = att;
     this->defence = def;
     this->magicAttack = mAtt;
@@ -13,6 +15,8 @@ EnemyModel::EnemyModel(int maxHP, int att, int def, int mAtt, int mDef, int spee
     this->speed = speed;
     this->timelinePos = 0;
     this->level = 1;
+
+    this->currentHealth = getMaxHealth();
 }
 
 EnemyModel::EnemyModel()
@@ -70,7 +74,7 @@ void EnemyModel::setLevel(int level)
 void EnemyModel::setMaxHealth(int value)
 {
     this->maxHealth = value;
-    this->currentHealth = value;
+    this->currentHealth = getMaxHealth();
 }
 
 void EnemyModel::setAttack(int value)
@@ -124,45 +128,56 @@ int EnemyModel::getCurrentHealth()
 }
 int EnemyModel::getMaxHealth()
 {
-    return maxHealth;
+    return floor(0.01f * (2.f * maxHealth + 0 + floor(0.25f * 0)) * (level + 15)) + level + 35;
+    //return maxHealth;
 }
 int EnemyModel::getAttack()
 {
-    if(statusEffectModel.SE_att != 0)
-        return (1.f + (statusEffectModel.SE_att * 0.25f)) * attack;
+    int temp = floor(0.01f * (2.f * attack + 0 + floor(0.25f * 0)) * (level + 15)) + 5;
 
-    return attack;
+    if(statusEffectModel.SE_att != 0)
+        return (1.f + (statusEffectModel.SE_att * 0.25f)) * temp;
+
+    return temp;
 }
 int EnemyModel::getDefence()
 {
-    if(statusEffectModel.SE_def != 0)
-        return (1.f + (statusEffectModel.SE_def * 0.25f)) * defence;
+    int temp = floor(0.01f * (2.f * defence + 0 + floor(0.25f * 0)) * (level + 15)) + 5;
 
-    return defence;
+    if(statusEffectModel.SE_def != 0)
+        return (1.f + (statusEffectModel.SE_def * 0.25f)) * temp;
+
+    return temp;
 }
 int EnemyModel::getMagicAttack()
 {
-    if(statusEffectModel.SE_magic != 0)
-        return (1.f + (statusEffectModel.SE_magic * 0.25f)) * magicAttack;
+    int temp = floor(0.01f * (2.f * magicAttack + 0 + floor(0.25f * 0)) * (level + 15)) + 5;
 
-    return magicAttack;
+    if(statusEffectModel.SE_magic != 0)
+        return (1.f + (statusEffectModel.SE_magic * 0.25f)) * temp;
+
+    return temp;
 }
 int EnemyModel::getMagicDefence()
 {
-    if(statusEffectModel.SE_magicDef != 0)
-        return (1.f + (statusEffectModel.SE_magicDef * 0.25f)) * magicDefence;
+    int temp = floor(0.01f * (2.f * magicDefence + 0 + floor(0.25f * 0)) * (level + 15)) + 5;
 
-    return magicDefence;
+    if(statusEffectModel.SE_magicDef != 0)
+        return (1.f + (statusEffectModel.SE_magicDef * 0.25f)) * temp;
+
+    return temp;
 }
 int EnemyModel::getSpeed()
 {
     if(statusEffectModel.sleep)
         return 0;
 
-    if(statusEffectModel.SE_speed != 0)
-        return (1.f + (statusEffectModel.SE_speed * 0.25f)) * speed;
+    int temp = floor(0.01f * (2.f * speed + 0 + floor(0.25f * 0)) * (level + 15)) + 5;
 
-    return speed;
+    if(statusEffectModel.SE_speed != 0)
+        return (1.f + (statusEffectModel.SE_speed * 0.25f)) * temp;
+
+    return temp;
 }
 
 int EnemyModel::getXP(int playerLevel)
@@ -203,8 +218,8 @@ void EnemyModel::changeHealth(int amount)
 
     if(currentHealth < 0)
         currentHealth = 0; //Die
-    if(currentHealth > maxHealth)
-        currentHealth = maxHealth;
+    if(currentHealth > getMaxHealth())
+        currentHealth = getMaxHealth();
 }
 
 float EnemyModel::getElementalMultiplier(int element)
@@ -324,16 +339,34 @@ void EnemyModel::stopCasting()
     isCasting = false;
 }
 
-void EnemyModel::castARandomAttack(bool p1Alive, bool p2Alive)
+void EnemyModel::castARandomAttack(bool p1Alive, bool p2Alive, int myIndex, std::vector<int> aliveAllies)
 {
     this->attackIndex = rand()%attacks.size();
 
-    if(!p1Alive)
-        attackTarget = 1;
-    else if(!p2Alive)
-        attackTarget = 0;
+    if(attacks.at(attackIndex)->getMultitarget() == 3)
+    {
+        this->attackTargetAlly=true;
+        attackTarget = myIndex;
+    }
+    else if(attacks.at(attackIndex)->getMultitarget() == 4)
+    {
+        int numAlies = 0;
+        for(int i = 0; i < aliveAllies.size(); i++)
+            numAlies++;
+
+        this->attackTargetAlly = true;
+        attackTarget = aliveAllies.at(rand()%numAlies);
+    }
     else
-        attackTarget = rand()%2;
+    {
+        this->attackTargetAlly=false;
+        if(!p1Alive)
+            attackTarget = 1;
+        else if(!p2Alive)
+            attackTarget = 0;
+        else
+            attackTarget = rand()%2;
+    }
 
     isCasting = true;
 }

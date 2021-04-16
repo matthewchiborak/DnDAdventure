@@ -82,9 +82,18 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
 
             if(enPosBefore < 1000 && model->getEnemies()->at(i)->getTimeLinePos() >= 1000)
             {
+                std::vector<int> aliveAlies;
+                for(int ass = 0; ass < model->getEnemies()->size(); ass++)
+                {
+                    if(model->getEnemies()->at(ass)->getCurrentHealth() > 0)
+                        aliveAlies.push_back(ass);
+                }
+
                 model->getEnemies()->at(i)->setTimeLinePos(1000);
                 model->getEnemies()->at(i)->castARandomAttack(model->getCharacters()->at(0)->getCurrentHealth() > 0,
-                                                              model->getCharacters()->at(1)->getCurrentHealth() > 0
+                                                              model->getCharacters()->at(1)->getCurrentHealth() > 0,
+                                                              i,
+                                                              aliveAlies
                                                               );
             }
 
@@ -122,7 +131,9 @@ BattleMenuState *BattleMenuStateTimeFlow::passTime(float value)
                 int poiDam = model->getEnemies()->at(i)->justGotToEndOfTimeLine();
                 if(poiDam != 0)
                     model->addAboveHeadBattleMessage(true, i, "Hurt", std::to_string(-1 * poiDam), 5000, -1);
+                model->getEnemies()->at(i)->stopCasting();
                 model->getEnemies()->at(i)->setTimeLinePos(0);
+
 
             }
         }

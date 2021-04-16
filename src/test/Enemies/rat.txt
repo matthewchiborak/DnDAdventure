@@ -1,13 +1,13 @@
 Name,Rat
 Level,1
-HP,10
-Att,23
-Def,15
-MAtt,10
-MDef,15
-Speed,10
+HP,30
+Att,56
+Def,35
+MAtt,25
+MDef,35
+Speed,72
 XP,51
 Sprite,Rat
-Attack,Bite,2000,0,10,100,Basic Attack,0,1
-Attack,Scratch,6000,0,10,100,Basic Attack,0,1
+Attack,Bite,2000,0,10,100,Basic Attack,0,9
+Attack,Scratch,6000,0,30,100,Basic Attack,0,8
 Weak,2

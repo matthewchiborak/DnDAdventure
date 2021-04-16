@@ -1,0 +1,13 @@
+Name,Pirate_Gunman
+Level,1
+HP,40
+Att,35
+Def,30
+MAtt,20
+MDef,20
+Speed,50
+XP,39
+Sprite,PirateGun
+Attack,Pistol_Shot,6000,0,50,100,Basic Attack,0,9
+Attack,Crossbow_Shot,3000,0,20,100,Basic Attack,0,9
+Weak,9

@@ -61,7 +61,7 @@ public:
     std::vector<AttackModel*> * getAttacks();
 
     void stopCasting();
-    void castARandomAttack(bool p1Alive, bool p2Alive);
+    void castARandomAttack(bool p1Alive, bool p2Alive, int myIndex, std::vector<int> aliveAllies);
     bool getIsCasting();
     AttackModel * getCastingAttack();
     int getAttackTarget();

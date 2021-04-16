@@ -134,6 +134,9 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
 
 bool KeyInputStateBoard::handleMovement(std::string *nextState)
 {
+    if(eventBeenSetUp)
+        return false;
+
     if(!movementEventSetUp)
     {
         if(GetAsyncKeyState('W') & 0x8000)

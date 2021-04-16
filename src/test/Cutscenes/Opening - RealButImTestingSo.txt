@@ -1,4 +1,4 @@
-NextBoardPath,OpeningShipPartyRoomInvade.txt
+NextBoardPath,OpeningShipPartyRoom.txt
 NextBoardX,5
 NextBoardY,0
 BG,StartShipFar

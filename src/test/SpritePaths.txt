@@ -99,3 +99,8 @@ Tutorial11,OpeningShip/TutorialBG11.png
 Tutorial12,OpeningShip/TutorialBG12.png
 Tutorial13,OpeningShip/TutorialBG13.png
 Tutorial14,OpeningShip/TutorialBG14.png
+Gimli,OpeningShip/Gimli.png
+ShipTraitor,OpeningShip/ShipTraitor.png
+Pirate,OpeningShip/Pirate.png
+PirateGun,OpeningShip/PirateGun.png
+Drunk,OpeningShip/Drunk.png

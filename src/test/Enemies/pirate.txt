@@ -1,0 +1,13 @@
+Name,Pirate
+Level,1
+HP,40
+Att,45
+Def,40
+MAtt,35
+MDef,35
+Speed,56
+XP,50
+Sprite,Pirate
+Attack,Punch,2000,0,10,100,Basic Attack,0,7
+Attack,Sword_Stab,6000,0,40,100,Basic Attack,0,8
+Weak,8

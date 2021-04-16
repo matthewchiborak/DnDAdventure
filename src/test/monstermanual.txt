@@ -1,6 +1,4 @@
 rat,Rat
-Chantelle,gres
-Jacinto,kgr
-Illa,lpp
-Arturo,koo
-Alysha,KOO
+pirate,Pirate
+pirategun,Pirate_Gunman
+drunk,Drunken_Guest

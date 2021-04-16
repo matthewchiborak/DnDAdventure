@@ -1317,9 +1317,9 @@ void BattleModel::checkIfEnemiesAreDead()
 
             for(int j = 0; j < monsterManual->size(); j++)
             {
-                if(monsterManual->at(i).getKey() == enemies.at(i)->getEnemyKey())
+                if(monsterManual->at(j).getKey() == enemies.at(i)->getEnemyKey())
                 {
-                    monsterManual->at(i).defeat();
+                    monsterManual->at(j).defeat();
                     j = monsterManual->size();
                 }
             }
