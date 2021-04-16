@@ -47,6 +47,8 @@ void BoardModel::clear()
         delete doors.at(i);
     }
     doors.clear();
+
+    encounterTable.clear();
 }
 
 std::string BoardModel::interact(int *objId)

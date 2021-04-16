@@ -50,15 +50,15 @@ PlayerCharacterStats::PlayerCharacterStats(std::string filepath)
         if(splits.at(0) == "IVHP")
             IVHP = std::stoi(splits.at(1));
         if(splits.at(0) == "IVAtt")
-            IVAtt = std::stoi(splits.at(1));
+            IVAtt = 0;//std::stoi(splits.at(1));
         if(splits.at(0) == "IVDef")
-            IVDef = std::stoi(splits.at(1));
+            IVDef = 0;//std::stoi(splits.at(1));
         if(splits.at(0) == "IVMAtt")
-            IVMAtt = std::stoi(splits.at(1));
+            IVMAtt = 0;//std::stoi(splits.at(1));
         if(splits.at(0) == "IVMDef")
-            IVMDef = std::stoi(splits.at(1));
+            IVMDef = 0;//std::stoi(splits.at(1));
         if(splits.at(0) == "IVSpeed")
-            IVSpeed = std::stoi(splits.at(1));
+            IVSpeed = 0;//std::stoi(splits.at(1));
         if(splits.at(0) == "IVMP")
             IVMP = std::stoi(splits.at(1));
         if(splits.at(0) == "Attack")

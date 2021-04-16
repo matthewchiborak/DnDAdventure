@@ -30,7 +30,7 @@ npc,4,1,1,1,ShipCaptainBoard,Captain:_Bullent!_We're_got_this._Go_after_the_trai
 npc,10,22,1,1,Fei,Fei:_This_doesn't_look_good...
 npc,9,23,1,1,Woman,They_kidnapped_the_diplomats!_You've_got_to_do_something!
 door,10,23,1,1,OpeningShipCargoHold.txt,3,9,StairsDown
-door,0,0,1,1,OpeningShipDeck.txt,5,0,StairsUp
+door,0,0,1,1,OpeningShipDeck.txt,6,0,StairsUp
 ranenc,OpeningShip1
 ranenc,OpeningShip2
 ranenc,OpeningShip3

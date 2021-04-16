@@ -12,6 +12,10 @@ DukeMenu,DukeMenu.png
 ChadMenu,ChadMenu.png
 AlluraMenu,AlluraMenu.png
 Rat,Rat.png
+Skadoodle,Skadoodle.png
+Steve,Steve.png
+Aramus,Aramus.png
+Roary,Roary.png
 TimeLine,TimeLine.png
 BullentTimeLine,BullentTimeLine.png
 ChadTimeLine,ChadTimeLine.png
@@ -77,6 +81,7 @@ ShipDinnerParty,OpeningShip/CutsceneShipDinnerParty.jpg
 StartShipFar,OpeningShip/CutsceneShipFar.png
 ShipCaptain,OpeningShip/ShipCaptain.png
 ShipFloor,OpeningShip/ShipFloor.png
+ShipDeck,OpeningShip/ShipDeck.png
 ShipTable,OpeningShip/Table.png
 Fei,Fei.png
 Man,Man.png
@@ -104,3 +109,4 @@ ShipTraitor,OpeningShip/ShipTraitor.png
 Pirate,OpeningShip/Pirate.png
 PirateGun,OpeningShip/PirateGun.png
 Drunk,OpeningShip/Drunk.png
+GimliSerilDiplomats,OpeningShip/GimliSerilDiplomats.png

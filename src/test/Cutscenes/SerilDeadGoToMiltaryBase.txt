@@ -7,7 +7,7 @@ RightName,
 RightPortrait,Blank
 LeftPortrait,Blank
 LeftTalk,0
-Text,Once_upon_a_time_a_special_ship_was_built_as_a_gift_to_the_new_king.
+Text,StartBossOnce_upon_a_time_a_special_ship_was_built_as_a_gift_to_the_new_king.
 Stop
 Text,For_the_ships_first_journey_a_party_was_held_and_many_inportant_people_were_invited
 Stop

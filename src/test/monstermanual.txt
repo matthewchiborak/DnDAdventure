@@ -2,3 +2,4 @@ rat,Rat
 pirate,Pirate
 pirategun,Pirate_Gunman
 drunk,Drunken_Guest
+seral,Seral

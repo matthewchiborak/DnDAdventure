@@ -8,3 +8,4 @@ OpeningShip2,rat,rat,drunk
 OpeningShip3,pirate,pirate,pirate
 OpeningShip4,pirategun,pirategun,pirategun,pirategun
 OpeningShip5,pirate,drunk,pirategun
+BossSeral,seral
