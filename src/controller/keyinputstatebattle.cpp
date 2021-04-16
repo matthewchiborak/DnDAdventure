@@ -29,6 +29,14 @@ bool KeyInputStateBattle::handle(std::string *nextState)
             return false;
         }
 
+        std::string nextCutPot = model->getCutsceneToPlayAfterBattle();
+        if(nextCutPot != "None")
+        {
+            model->loadCutscene(nextCutPot);
+            (*nextState) = "Cutscene";
+            return true;
+        }
+
         (*nextState) = "Board";
         return true;
     }

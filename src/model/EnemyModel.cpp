@@ -17,11 +17,13 @@ EnemyModel::EnemyModel(int maxHP, int att, int def, int mAtt, int mDef, int spee
     this->level = 1;
 
     this->currentHealth = getMaxHealth();
+    this->cutsceneToTriggerOnDefeat = "None";
 }
 
 EnemyModel::EnemyModel()
 {
     this->timelinePos = 0;
+    this->cutsceneToTriggerOnDefeat = "None";
 }
 
 void EnemyModel::applyTime(float t)
@@ -457,4 +459,14 @@ void EnemyModel::setEnemyKey(std::string eKey)
 std::string EnemyModel::getEnemyKey()
 {
     return enemyKey;
+}
+
+void EnemyModel::setCutsceneToPlayOnDefeat(std::string path)
+{
+    cutsceneToTriggerOnDefeat = path;
+}
+
+std::string EnemyModel::getCutsceneToPlayOnDefeat()
+{
+    return cutsceneToTriggerOnDefeat;
 }

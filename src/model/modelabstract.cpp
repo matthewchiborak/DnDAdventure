@@ -370,6 +370,11 @@ void ModelAbstract::drawTitleScreen(std::vector<DrawInformation> *items)
 
 }
 
+std::string ModelAbstract::getCutsceneToPlayAfterBattle()
+{
+    return "None";
+}
+
 void ModelAbstract::saveGame()
 {
 

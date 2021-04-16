@@ -386,6 +386,11 @@ void ModelConcrete::drawTitleScreen(std::vector<DrawInformation> *items)
     items->push_back(info7);
 }
 
+std::string ModelConcrete::getCutsceneToPlayAfterBattle()
+{
+    return battleModel.getCutsceneToPlayOnBattleExit();
+}
+
 void ModelConcrete::saveGame()
 {
     //Restore health and mp

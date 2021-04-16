@@ -110,3 +110,11 @@ Pirate,OpeningShip/Pirate.png
 PirateGun,OpeningShip/PirateGun.png
 Drunk,OpeningShip/Drunk.png
 GimliSerilDiplomats,OpeningShip/GimliSerilDiplomats.png
+AdmiralCaptain,MilitaryBase/AdmiralCaptain.png
+AdmiralCaptainCutscene,MilitaryBase/AdmiralCaptainCutscene.png
+Black,black.png
+Prison,MilitaryBase/Prison.png
+Janet,MilitaryBase/JanetCaptain.png
+JanetCutscene,MilitaryBase/JanetCutscene.png
+Jim,MilitaryBase/Jim.png
+JimCutscene,MilitaryBase/JimCutscene.png

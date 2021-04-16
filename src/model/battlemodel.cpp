@@ -29,6 +29,8 @@ BattleModel::BattleModel()
     this->encounterFact = new EncounterFactory(encounterFilepath);
 
     this->battleMenuState = new BattleMenuStateTimeFlow(this);
+
+    this->cutsceneToPlayOnBattleExit = "None";
 }
 
 void BattleModel::clear()
@@ -1268,6 +1270,13 @@ bool BattleModel::getIsFleeable()
     return isFleeable;
 }
 
+std::string BattleModel::getCutsceneToPlayOnBattleExit()
+{
+    std::string toRet = cutsceneToPlayOnBattleExit;
+    cutsceneToPlayOnBattleExit = "None";
+    return toRet;
+}
+
 void BattleModel::checkIfEnemiesAreDead()
 {
     if(battleIsDone || enteredBattleOverState)
@@ -1314,6 +1323,9 @@ void BattleModel::checkIfEnemiesAreDead()
         for(int i = 0; i < numberOfEnemies; i++)
         {
             xpEarned += enemies.at(i)->getXP(characters.at(0)->getLevel());
+
+            if(enemies.at(i)->getCutsceneToPlayOnDefeat() != "None")
+                cutsceneToPlayOnBattleExit = enemies.at(i)->getCutsceneToPlayOnDefeat();
 
             for(int j = 0; j < monsterManual->size(); j++)
             {

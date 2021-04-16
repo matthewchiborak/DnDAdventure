@@ -108,6 +108,8 @@ public:
 
     bool getIsFleeable();
 
+    std::string getCutsceneToPlayOnBattleExit();
+
 private:
     //factory for building the enounter
     EncounterFactory * encounterFact;
@@ -159,6 +161,8 @@ private:
     std::vector<MonsterManualEntry> * monsterManual;
 
     bool isFleeable;
+
+    std::string cutsceneToPlayOnBattleExit;
 
     void checkIfEnemiesAreDead();
 

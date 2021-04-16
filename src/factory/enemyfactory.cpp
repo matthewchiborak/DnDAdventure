@@ -13,6 +13,7 @@ EnemyFactory::EnemyFactory()
 EnemyModel *EnemyFactory::createEnemy(std::string key)
 {
     EnemyModel * newEnemy = new EnemyModel();
+    newEnemy->setCutsceneToPlayOnDefeat("None");
 
     QDir dir(QDir::current());
     dir.cdUp();
@@ -70,6 +71,8 @@ EnemyModel *EnemyFactory::createEnemy(std::string key)
             newEnemy->addAbsorbed(std::stoi(splits.at(1)));
         if(splits.at(0) == "StatusImmune")
             newEnemy->addStatusImmunity(splits.at(1));
+        if(splits.at(0) == "Cutscene")
+            newEnemy->setCutsceneToPlayOnDefeat(splits.at(1));
     }
 
     return newEnemy;

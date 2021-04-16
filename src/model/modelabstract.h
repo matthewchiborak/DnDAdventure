@@ -87,6 +87,8 @@ public:
     virtual bool doIStartANewGame();
     virtual void drawTitleScreen(std::vector<DrawInformation> * items);
 
+    virtual std::string getCutsceneToPlayAfterBattle();
+
 protected:
     bool pauseIsDone = false;
     //Bag

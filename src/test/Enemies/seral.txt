@@ -17,3 +17,4 @@ Attack,Cutlass_Cut,3000,0,30,100,Basic Attack,0,8
 Attack,Cutlass_Cut,3000,0,30,100,Basic Attack,0,8
 Attack,Power_Potion,4000,0,00,100,Basic Attack,0,9,AttackUp,100,3
 Attack,Poison_Dart,4000,0,10,100,Basic Attack,0,9,Poison,80
+Cutscene,SerilDeadGoToMiltaryBase.txt

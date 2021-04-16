@@ -1,4 +1,4 @@
-NextBoardPath,OpeningShipPartyRoom.txt
+NextBoardPath,BossSeralDead.txt
 NextEncounter,BossSeral
 NextBoardX,5
 NextBoardY,0

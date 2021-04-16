@@ -45,6 +45,8 @@ public:
 
     void drawTitleScreen(std::vector<DrawInformation> * items);
 
+    std::string getCutsceneToPlayAfterBattle();
+
 private:
     BoardModel boardModel;
     BattleModel battleModel;

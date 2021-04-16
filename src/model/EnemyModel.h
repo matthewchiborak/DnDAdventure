@@ -83,6 +83,9 @@ public:
     void setEnemyKey(std::string eKey);
     std::string getEnemyKey();
 
+    void setCutsceneToPlayOnDefeat(std::string path);
+    std::string getCutsceneToPlayOnDefeat();
+
 private:
     int level;
     int maxHealth;
@@ -107,6 +110,8 @@ private:
     bool attackTargetAlly = false;
 
     StatusEffectModel statusEffectModel;
+
+    std::string cutsceneToTriggerOnDefeat;
 
     std::vector<int> weaknesses;
     std::vector<int> resistances;

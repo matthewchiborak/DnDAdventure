@@ -50,11 +50,11 @@ void CutsceneModel::draw(std::vector<DrawInformation> *items)
     items->push_back(bg);
 
     //Left port
-    DrawInformation lp(-600, -150, 500, 500, currentLeft, false);
+    DrawInformation lp(-600, -175, 500, 500, currentLeft, false);
     items->push_back(lp);
 
     //Right port
-    DrawInformation rp(200, -150, 500, 500, currentRight, false);
+    DrawInformation rp(200, -175, 500, 500, currentRight, false);
     rp.flip = true;
     items->push_back(rp);
 
@@ -68,12 +68,12 @@ void CutsceneModel::draw(std::vector<DrawInformation> *items)
     //Name
     if(currentlyLeftTalking)
     {
-        DrawInformation name(50, 670, 200, 100, "", false, currentLeftName, true);
+        DrawInformation name(50, 670, 300, 100, "", false, currentLeftName, true, 36.f);
         items->push_back(name);
     }
     else
     {
-        DrawInformation name(1400, 670, 200, 100, "", false, currentRightName, true);
+        DrawInformation name(1400, 670, 300, 100, "", false, currentRightName, true, 36.f);
         items->push_back(name);
     }
 
@@ -106,9 +106,9 @@ void CutsceneModel::advance()
         if(focus.at(0) == "RightPortrait")
             currentRight = focus.at(1);
         if(focus.at(0) == "LeftName")
-            currentLeftName = focus.at(1);
+            currentLeftName = FileReader::replaceCharacter(focus.at(1), '_', ' ');
         if(focus.at(0) == "RightName")
-            currentRightName = focus.at(1);
+            currentRightName = FileReader::replaceCharacter(focus.at(1), '_', ' ');
         if(focus.at(0) == "LeftTalk")
             currentlyLeftTalking = std::stoi(focus.at(1));
         if(focus.at(0) == "HasText")
