@@ -88,20 +88,20 @@ PauseMenuDrawState *PauseMenuStateEquipment::enterMenu()
         //Equip the equipment
         if(focusType == "Weapon")
         {
-            characters[focusPartyMemberLimit]->setWeapon(&model->getEquipment()->at(indexesOfFocusType.at(equipmentPos)));
+            characters[focusPartyMemberLimit]->setWeapon(model->getEquipment()->at(indexesOfFocusType.at(equipmentPos)));
             listIsOpen = false;
         }
         else if(focusType == "Armor")
         {
-            characters[focusPartyMemberLimit]->setArmor(&model->getEquipment()->at(indexesOfFocusType.at(equipmentPos)));
+            characters[focusPartyMemberLimit]->setArmor(model->getEquipment()->at(indexesOfFocusType.at(equipmentPos)));
             listIsOpen = false;
         }
         else if(focusType == "Accessory")
         {
             if(selectedAccessory1)
-                characters[focusPartyMemberLimit]->setAccessory1(&model->getEquipment()->at(indexesOfFocusType.at(equipmentPos)));
+                characters[focusPartyMemberLimit]->setAccessory1(model->getEquipment()->at(indexesOfFocusType.at(equipmentPos)));
             else
-                characters[focusPartyMemberLimit]->setAccessory2(&model->getEquipment()->at(indexesOfFocusType.at(equipmentPos)));
+                characters[focusPartyMemberLimit]->setAccessory2(model->getEquipment()->at(indexesOfFocusType.at(equipmentPos)));
             listIsOpen = false;
         }
         return this;
@@ -130,31 +130,31 @@ PauseMenuDrawState *PauseMenuStateEquipment::enterMenu()
     indexesOfFocusType.clear();
     for(int i = 0; i < model->getEquipment()->size(); i++)
     {
-        if(model->getEquipment()->at(i).getType() == focusType)
+        if(model->getEquipment()->at(i)->getType() == focusType)
         {
             bool itsOkay = false;
             if((focusPartyMemberLimit == 0) &&
-                    (model->getEquipment()->at(i).getPartyMemberLimit()==0
-                     || model->getEquipment()->at(i).getPartyMemberLimit()==1
-                     || model->getEquipment()->at(i).getPartyMemberLimit()==5
+                    (model->getEquipment()->at(i)->getPartyMemberLimit()==0
+                     || model->getEquipment()->at(i)->getPartyMemberLimit()==1
+                     || model->getEquipment()->at(i)->getPartyMemberLimit()==5
                      ))
                 itsOkay = true;
             if((focusPartyMemberLimit == 1) &&
-                    (model->getEquipment()->at(i).getPartyMemberLimit()==0
-                     || model->getEquipment()->at(i).getPartyMemberLimit()==2
-                     || model->getEquipment()->at(i).getPartyMemberLimit()==6
+                    (model->getEquipment()->at(i)->getPartyMemberLimit()==0
+                     || model->getEquipment()->at(i)->getPartyMemberLimit()==2
+                     || model->getEquipment()->at(i)->getPartyMemberLimit()==6
                      ))
                 itsOkay = true;
             if((focusPartyMemberLimit == 2) &&
-                    (model->getEquipment()->at(i).getPartyMemberLimit()==0
-                     || model->getEquipment()->at(i).getPartyMemberLimit()==3
-                     || model->getEquipment()->at(i).getPartyMemberLimit()==6
+                    (model->getEquipment()->at(i)->getPartyMemberLimit()==0
+                     || model->getEquipment()->at(i)->getPartyMemberLimit()==3
+                     || model->getEquipment()->at(i)->getPartyMemberLimit()==6
                      ))
                 itsOkay = true;
             if((focusPartyMemberLimit == 3) &&
-                    (model->getEquipment()->at(i).getPartyMemberLimit()==0
-                     || model->getEquipment()->at(i).getPartyMemberLimit()==4
-                     || model->getEquipment()->at(i).getPartyMemberLimit()==5
+                    (model->getEquipment()->at(i)->getPartyMemberLimit()==0
+                     || model->getEquipment()->at(i)->getPartyMemberLimit()==4
+                     || model->getEquipment()->at(i)->getPartyMemberLimit()==5
                      ))
                 itsOkay = true;
 
@@ -243,7 +243,7 @@ void PauseMenuStateEquipment::drawPauseMenu(std::vector<DrawInformation> *items)
         drawEquipmentList(items);
 
         DrawInformation attackDesc(0, 730, 1500, 140, "",
-                                false, model->getEquipment()->at(indexesOfFocusType.at(equipmentPos)).getDescription());
+                                false, model->getEquipment()->at(indexesOfFocusType.at(equipmentPos))->getDescription());
         items->push_back(attackDesc);
 
         return;
@@ -386,7 +386,7 @@ void PauseMenuStateEquipment::drawEquipmentList(std::vector<DrawInformation> *it
     {
         //if(model->getEquipment()->at(i).getType() == focusType)
         {
-            DrawInformation info2(50, 25 + (numberOfItems * 25), 200, 100, "", false, model->getEquipment()->at(indexesOfFocusType.at(i)).getName(), true, 24.f);
+            DrawInformation info2(50, 25 + (numberOfItems * 25), 200, 100, "", false, model->getEquipment()->at(indexesOfFocusType.at(i))->getName(), true, 24.f);
             items->push_back(info2);
             numberOfItems++;
         }

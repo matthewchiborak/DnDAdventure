@@ -18,6 +18,10 @@ ModelAbstract::~ModelAbstract()
     {
         delete playerCharacters.at(i);
     }
+    for(int i = 0; i < equipment.size(); i++)
+    {
+        delete equipment.at(i);
+    }
 }
 
 void ModelAbstract::addPlayerCharacter(PlayerCharacterStats *character)
@@ -102,11 +106,11 @@ void ModelAbstract::specialMessage(std::string message, std::string key)
 
 void ModelAbstract::addEquipment(std::string info)
 {
-    EquipmentModel temp(info, equipment.size());
+    EquipmentModel * temp = new EquipmentModel(info, equipment.size());
     equipment.push_back(temp);
 }
 
-std::vector<EquipmentModel> *ModelAbstract::getEquipment()
+std::vector<EquipmentModel*> *ModelAbstract::getEquipment()
 {
     return &equipment;
 }

@@ -1,0 +1,13 @@
+NextBoardPath,MilitaryBase.txt
+NextBoardX,17
+NextBoardY,15
+BG,TestBattleBG
+BGMusic,Looks
+RightName,Bullent
+RightPortrait,BullentMenu
+LeftName,Chad
+LeftPortrait,ChadMenu
+LeftTalk,1
+Text,Going_to_horses_ass.
+Stop
+Stop

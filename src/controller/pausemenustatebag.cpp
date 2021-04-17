@@ -105,12 +105,12 @@ void PauseMenuStateBag::drawPauseMenu(std::vector<DrawInformation> *items)
 
         if(isEquiped)
         {
-            DrawInformation info2(50, 25 + (numberOfItems * 25), 200, 100, "", false, model->getEquipment()->at(i).getName() + "[E]", true, 24.f);
+            DrawInformation info2(50, 25 + (numberOfItems * 25), 200, 100, "", false, model->getEquipment()->at(i)->getName() + "[E]", true, 24.f);
             items->push_back(info2);
         }
         else
         {
-            DrawInformation info2(50, 25 + (numberOfItems * 25), 200, 100, "", false, model->getEquipment()->at(i).getName(), true, 24.f);
+            DrawInformation info2(50, 25 + (numberOfItems * 25), 200, 100, "", false, model->getEquipment()->at(i)->getName(), true, 24.f);
             items->push_back(info2);
         }
         numberOfItems++;
@@ -151,7 +151,7 @@ void PauseMenuStateBag::drawPauseMenu(std::vector<DrawInformation> *items)
     else
     {
         DrawInformation attackDesc(0, 730, 1500, 140, "",
-                                false, model->getEquipment()->at(cursorPos-4).getDescription());
+                                false, model->getEquipment()->at(cursorPos-4)->getDescription());
         items->push_back(attackDesc);
     }
 }

@@ -1,0 +1,12 @@
+Name,Soldier_Archer
+Level,3
+HP,50
+Att,50
+Def,95
+MAtt,40
+MDef,50
+Speed,35
+XP,64
+Sprite,SoldierArcher
+Attack,Arrow_Shot,2000,0,60,100,Basic Attack,0,9
+Attack,Weapon_Maintenance,4000,0,0,100,Basic Attack,2,0,AttackUp,4

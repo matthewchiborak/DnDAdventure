@@ -9,3 +9,8 @@ OpeningShip3,pirate,pirate,pirate
 OpeningShip4,pirategun,pirategun,pirategun,pirategun
 OpeningShip5,pirate,drunk,pirategun
 BossSeral,seral
+MilitaryBase1,PTSDHorse,chicken,chicken
+MilitaryBase2,soldiersword,soldierarcher,soldierarcher
+MilitaryBase3,soldierbarrel
+MilitaryBase4,soldiersword,soldiersword
+MilitaryBase5,soldierarcher,soldierarcher,soldierarcher,soldierarcher

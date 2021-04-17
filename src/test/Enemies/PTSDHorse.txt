@@ -1,0 +1,13 @@
+Name,PTSD_Horse
+Level,3
+HP,50
+Att,85
+Def,55
+MAtt,65
+MDef,65
+Speed,90
+XP,82
+Sprite,Horse
+Attack,Scream,3000,0,0,100,Basic Attack,2,0,AttackDown,80,1
+Attack,1000_Yard_Stare,3000,0,0,100,Basic Attack,2,0,DefenceDown,80,1
+Attack,Kick,2000,0,50,100,Basic Attack,0,7

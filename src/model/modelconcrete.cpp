@@ -339,13 +339,13 @@ void ModelConcrete::loadSaveGame()
             playerCharacters.at(focusPartyMember)->setIsActive(std::stoi(info.at(5)));
         }
         if(info.at(0) == "Weapon")
-            playerCharacters.at(focusPartyMember)->setWeapon(&equipment.at(std::stoi(info.at(1))));
+            playerCharacters.at(focusPartyMember)->setWeapon(equipment.at(std::stoi(info.at(1))));
         if(info.at(0) == "Armor")
-            playerCharacters.at(focusPartyMember)->setArmor(&equipment.at(std::stoi(info.at(1))));
+            playerCharacters.at(focusPartyMember)->setArmor(equipment.at(std::stoi(info.at(1))));
         if(info.at(0) == "Accessory1")
-            playerCharacters.at(focusPartyMember)->setAccessory1(&equipment.at(std::stoi(info.at(1))));
+            playerCharacters.at(focusPartyMember)->setAccessory1(equipment.at(std::stoi(info.at(1))));
         if(info.at(0) == "Accessory2")
-            playerCharacters.at(focusPartyMember)->setAccessory2(&equipment.at(std::stoi(info.at(1))));
+            playerCharacters.at(focusPartyMember)->setAccessory2(equipment.at(std::stoi(info.at(1))));
         if(info.at(0) == "MoveUnlocked")
             playerCharacters.at(focusPartyMember)->getAttacks()->at(std::stoi(info.at(1)))->unlock();
     }
@@ -423,7 +423,7 @@ void ModelConcrete::saveGame()
 
     for(int i = 0; i < equipment.size(); i++)
     {
-        saveLines.push_back("Equip," + equipment.at(i).getCreationString());
+        saveLines.push_back("Equip," + equipment.at(i)->getCreationString());
     }
 
     //Enemies defeated

@@ -43,7 +43,7 @@ public:
     std::vector<PlayerCharacterStats*> playerCharacters;
 
     void addEquipment(std::string info);
-    std::vector<EquipmentModel> * getEquipment();
+    std::vector<EquipmentModel*> * getEquipment();
 
     bool getPauseIsDone();
     void setPauseIsDone(bool value);
@@ -97,7 +97,7 @@ protected:
     int numberOfRemedies = 0;
     int numberOfEthers = 0;
     int numberOfPickleJars = 0;
-    std::vector<EquipmentModel> equipment;
+    std::vector<EquipmentModel*> equipment;
 
     std::vector<MonsterManualEntry> monsterManual;
 

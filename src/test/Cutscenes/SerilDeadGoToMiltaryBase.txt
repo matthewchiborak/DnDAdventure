@@ -1,6 +1,6 @@
-NextBoardPath,OpeningShipPartyRoom.txt
-NextBoardX,5
-NextBoardY,0
+NextBoardPath,MilitaryBase.txt
+NextBoardX,17
+NextBoardY,15
 BG,TestBattleBG
 BGMusic,Looks
 RightName,Bullent
@@ -75,7 +75,5 @@ LeftTalk,1
 Text,Alright._First_things_first._We_should_steal_our_equipment_back._It_should_be_in_storage_on_the_east_side.
 Stop
 Text,Then_the_crew_and_captain_should_be_in_the_prison_on_the_west_side.
-Stop
-Text,We'll_be_fugitives_so_except_heavy_resistance._Okay_let's_go.
 Stop
 Stop

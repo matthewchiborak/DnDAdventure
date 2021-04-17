@@ -1,0 +1,12 @@
+Name,Soldier_Swordman
+Level,3
+HP,50
+Att,105
+Def,79
+MAtt,35
+MDef,110
+Speed,76
+XP,159
+Sprite,SoldierSword
+Attack,Punch,2000,0,50,100,Basic Attack,0,7
+Attack,Sword_Swipe,4000,0,70,100,Basic Attack,0,8

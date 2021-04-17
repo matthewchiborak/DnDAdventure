@@ -1,0 +1,20 @@
+Name,Soldier_Barrel
+Level,5
+HP,55
+Att,95
+Def,115
+MAtt,45
+MDef,45
+Speed,35
+XP,137
+Sprite,SoldierBarrel
+Attack,Barrel_Bash,2000,0,40,100,Basic Attack,0,7
+Attack,Bowl_Over,4000,0,60,100,Basic Attack,0,7
+Attack,Lay_On_Side,5000,0,0,100,Basic Attack,2,0,Haste,3
+Attack,Barrel_Bash,2000,0,40,100,Basic Attack,0,7
+Attack,Bowl_Over,4000,0,60,100,Basic Attack,0,7
+Attack,Lay_On_Side,5000,0,0,100,Basic Attack,2,0,Haste,3
+Attack,Barrel_Bash,2000,0,40,100,Basic Attack,0,7
+Attack,Bowl_Over,4000,0,60,100,Basic Attack,0,7
+Attack,Lay_On_Side,5000,0,0,100,Basic Attack,2,0,Haste,3
+Attack,Revenge_On_Chad,7000,0,90,100,Basic Attack,0,7

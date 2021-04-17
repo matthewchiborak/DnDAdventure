@@ -1,0 +1,12 @@
+Name,Chicken
+Level,3
+HP,45
+Att,60
+Def,40
+MAtt,70
+MDef,50
+Speed,45
+XP,62
+Sprite,Chicken
+Attack,Peck,2000,0,50,100,Basic Attack,0,9
+Attack,Scratch,2000,0,50,100,Basic Attack,0,8

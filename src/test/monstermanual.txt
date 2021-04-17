@@ -3,3 +3,8 @@ pirate,Pirate
 pirategun,Pirate_Gunman
 drunk,Drunken_Guest
 seral,Seral
+chicken,Chicken
+PTSDHorse,PTSD_Horse
+soldierarcher,Soldier_Archer
+soldiersword,Soldier_Swordman
+soldierbarrel,Soldier_Barrel
