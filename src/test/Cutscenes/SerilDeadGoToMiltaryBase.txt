@@ -4,9 +4,9 @@ NextBoardY,15
 BG,TestBattleBG
 BGMusic,Looks
 RightName,Bullent
-RightPortrait,BullentMenu
+RightPortrait,BullentCutscene
 LeftName,Chad
-LeftPortrait,ChadMenu
+LeftPortrait,ChadCutscene
 Stop
 LeftTalk,1
 Text,That's_one_down_but_where's_the_other_one_and_the_diplomats?
@@ -38,7 +38,7 @@ HasText,1
 LeftPortrait,JanetCutscene
 LeftName,Janet_from_HR
 RightName,Bullent
-RightPortrait,BullentMenu
+RightPortrait,BullentCutscene
 Text,Okay_after_reviewing_what_each_of_you_told_us_everyone_who_isn't_part_of_the_crew_is_innocent.
 Stop
 Text,And_the_captain_and_the_crew_are_guilty
@@ -55,7 +55,7 @@ Text,The_government_needs_a_scapegoat_and_the_captain_and_crew_were_an_easy_choi
 Stop
 Text,However....
 Stop
-RightPortrait,ChadMenu
+RightPortrait,ChadCutscene
 RightName,Chad
 Text,Hypothetically_if_someone_broke_the_captain_and_crew_out_of_prison_and_stole_a_ship...
 Stop
@@ -64,7 +64,7 @@ Stop
 Text,What_do_you_say?
 Stop
 LeftTalk,1
-LeftPortrait,BullentMenu
+LeftPortrait,BullentCutscene
 LeftName,Bullent
 Text,Let's_do_it
 Stop

@@ -36,10 +36,10 @@ LeftPortrait,ShipTraitor
 LeftTalk,1
 Text,We'll_be_asking_the_questions_here._Now._If_you_want_no_one_getting_hurt_you'll_tell_us_what_we_want_to_know.
 Stop
-RightPortrait,BullentMenu
+RightPortrait,BullentCutscene
 RightName,Bullent
 LeftName,Chad
-LeftPortrait,ChadMenu
+LeftPortrait,ChadCutscene
 LeftTalk,1
 Text,What's_going_on_here?
 Stop

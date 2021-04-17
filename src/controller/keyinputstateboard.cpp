@@ -137,6 +137,9 @@ bool KeyInputStateBoard::handleMovement(std::string *nextState)
     if(eventBeenSetUp)
         return false;
 
+    if(model->hasBoardDialogRemaining())
+        return false;
+
     if(!movementEventSetUp)
     {
         if(GetAsyncKeyState('W') & 0x8000)

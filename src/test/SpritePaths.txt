@@ -6,6 +6,9 @@ Duke,Duke.png
 Bullent,Bullent.PNG,
 Chad,Chad.png
 Allura,Allura.png
+AlluraCutscene,AlluraCutscene.png
+ChadCutscene,ChadCutscene.png
+BullentCutscene,BullentCutscene.png
 PauseMenuBG,PauseMenuBG.jpg
 BullentMenu,BullentMenu.png
 DukeMenu,DukeMenu.png

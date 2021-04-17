@@ -22,16 +22,23 @@ void BattleMenuStateSpecial::moveMenuCursor(int x, int y)
 {
     if(isSelecting)
     {
-        do
-        {
-            accessPos += y;
+        accessPos += y;
 
-            if(accessPos >= model->getNumberOfEnemies())
-                accessPos = 0;
-            else if(accessPos < 0)
-                accessPos = (model->getNumberOfEnemies()) - 1;
+        if(accessPos >= model->getNumberOfEnemies())
+            accessPos = 0;
+        else if(accessPos < 0)
+            accessPos = (model->getNumberOfEnemies()) - 1;
 
-        }while(model->getEnemies()->at(accessPos)->getCurrentHealth() <= 0);
+//        do
+//        {
+//            accessPos += y;
+
+//            if(accessPos >= model->getNumberOfEnemies())
+//                accessPos = 0;
+//            else if(accessPos < 0)
+//                accessPos = (model->getNumberOfEnemies()) - 1;
+
+//        }while(model->getEnemies()->at(accessPos)->getCurrentHealth() <= 0);
 
         return;
     }

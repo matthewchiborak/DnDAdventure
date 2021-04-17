@@ -32,7 +32,7 @@ public:
 
     int sleepCount = 0;
     const int sleepDuration = 15000;
-    const float poisonDamagePercentagePerAction = 0.05f;
+    const float poisonDamagePercentagePerAction = 0.1f;
 
     const int buffDuration = 45000;
     int attackCount = 0;

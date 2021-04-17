@@ -22,7 +22,7 @@ Attack,Poison_Bolt,3000,0,20,90,Single_target_piercing_attack._Chance_to_poison.
 Attack,Arrow_Rain,5000,0,50,90,Multi_target_piercing_attack._Slow_speed._[Phys][Pierce],0,9,None,100,1
 Attack,Kneecap_Shot,3000,0,20,100,Single_debuff._Inflicts_defence_down,1,0,DefenceDown
 Attack,Focus_Shot,5000,0,100,100,Single_target_high_damage_attack._Slow_to_cast._[Phys][Pierce],0,9
-Attack,First_Aid,5000,0,-40,200,Single_target_minor_healing._Slow_to_cast,2,0
+Attack,First_Aid,5000,0,-25,200,Single_target_minor_healing._Slow_to_cast,2,0
 Attack,Steal,3000,0,0,50,Steal_from_an_enemy,2,0,Steal,100
 Attack,Disguise,3000,0,0,200,Lowers_chance_enemies_attack_self,2,0,Disguise,100,3
 Attack,Sharpen_Bolts,3000,0,0,200,Self_buff._Raises_attack,2,0,AttackUp,100,3

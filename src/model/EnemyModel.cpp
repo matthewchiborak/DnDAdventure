@@ -345,6 +345,21 @@ void EnemyModel::castARandomAttack(bool p1Alive, bool p2Alive, int myIndex, std:
 {
     this->attackIndex = rand()%attacks.size();
 
+    if(this->statusEffectModel.silenced)
+    {
+        for(int i = 0; i < attacks.size(); i++)
+        {
+            if(this->attacks.at(attackIndex)->getAdditionalEffect() == "None")
+            {
+                while(this->attacks.at(attackIndex)->getAdditionalEffect() != "None")
+                {
+                    this->attackIndex = rand()%attacks.size();
+                }
+                break;
+            }
+        }
+    }
+
     if(attacks.at(attackIndex)->getMultitarget() == 3)
     {
         this->attackTargetAlly=true;

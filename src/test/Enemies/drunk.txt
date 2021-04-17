@@ -8,6 +8,6 @@ MDef,54
 Speed,55
 XP,58
 Sprite,Drunk
-Attack,Drunken_Jig,4000,0,0,100,Basic Attack,2,0,DefenceDown,100
-Attack,Tale_A_Swog,4000,0,-20,100,Basic Attack,2,0,None,100,3
-Attack,Words_of_Encouragement,4000,0,0,100,Basic Attack,2,0,AttackUp,100,4
+Attack,Drunken_Jig,4000,0,0,200,Basic Attack,2,0,DefenceDown,200
+Attack,Tale_A_Swog,4000,0,-20,200,Basic Attack,2,0,None,200,3
+Attack,Words_of_Encouragement,4000,0,0,200,Basic Attack,2,0,AttackUp,200,4

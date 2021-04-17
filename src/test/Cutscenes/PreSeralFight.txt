@@ -7,7 +7,7 @@ BGMusic,Crisis
 RightName,Gimli
 RightPortrait,Gimli
 LeftName,Chad
-LeftPortrait,ChadMenu
+LeftPortrait,ChadCutscene
 LeftTalk,1
 Text,Stop_right_there!_What_do_you_think_you're_doing.
 Stop
@@ -15,7 +15,7 @@ LeftTalk,0
 Text,We'll_be_taking_these_diplomats_and_there's_nothing_you_can_do_to_stop_us.
 Stop
 LeftName,Bullent
-LeftPortrait,BullentMenu
+LeftPortrait,BullentCutscene
 LeftTalk,1
 Text,Oh_we'll_see_about_that.
 Stop

@@ -21,7 +21,7 @@ Stop
 LeftTalk,0
 LeftPortrait,ShipCaptain
 LeftName,Captain
-RightPortrait,BullentMenu
+RightPortrait,BullentCutscene
 RightName,Bullent
 Text,Excuse_me_captain._There_is_a_rat_outbreak_in_food_storage.
 Stop
@@ -33,7 +33,7 @@ Stop
 Text,Oh_and_take_that_big_guy_I_don't_know_with_you._He_looks_trustworthy_probably.
 Stop
 LeftTalk,0
-RightPortrait,ChadMenu
+RightPortrait,ChadCutscene
 RightName,Chad
 Text,What._Who_me?_Yes_I_am_very_trustworthy.
 Stop

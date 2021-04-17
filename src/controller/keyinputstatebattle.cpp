@@ -32,6 +32,8 @@ bool KeyInputStateBattle::handle(std::string *nextState)
         std::string nextCutPot = model->getCutsceneToPlayAfterBattle();
         if(nextCutPot != "None")
         {
+            while(!keyboardEventQueue->empty())
+                keyboardEventQueue->pop();
             model->loadCutscene(nextCutPot);
             (*nextState) = "Cutscene";
             return true;
