@@ -89,6 +89,9 @@ public:
 
     virtual std::string getCutsceneToPlayAfterBattle();
 
+    virtual void loadShop(std::string info);
+    virtual void drawShop(std::vector<DrawInformation> * items);
+
 protected:
     bool pauseIsDone = false;
     //Bag

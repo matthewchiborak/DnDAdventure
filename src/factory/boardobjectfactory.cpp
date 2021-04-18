@@ -6,6 +6,7 @@
 #include "../model/boardobjectobstacle.h"
 #include "../model/boardobjectnpc.h"
 #include "../model/boardobjectchest.h"
+#include "../model/boardobjectshop.h"
 #include "../model/boardobjectcutscenetrigger.h"
 #include "../model/doorway.h"
 #include "../model/boardobjectsavepoint.h"
@@ -56,6 +57,8 @@ void BoardObjectFactory::populate(std::vector<BoardObjectAbstract *> *boardObjec
                 (*bgMusicKey) = (vect.at(1));
             else if(vect.at(0) == "savepoint")
                 boardObjects->push_back(createSavePoint(vect));
+            else if(vect.at(0) == "shop")
+                boardObjects->push_back(createShop(vect));
         }
     }
 }
@@ -85,6 +88,20 @@ BoardObjectAbstract *BoardObjectFactory::createChest(std::vector<std::string> in
                 true,
                 info.at(6),
                 info.at(7)
+                );
+}
+
+BoardObjectAbstract *BoardObjectFactory::createShop(std::vector<std::string> info)
+{
+    return new BoardObjectShop(
+                -1,
+                std::stoi(info.at(1)),
+                std::stoi(info.at(2)),
+                std::stoi(info.at(3)),
+                std::stoi(info.at(4)),
+                info.at(5),
+                true,
+                info.at(6)
                 );
 }
 

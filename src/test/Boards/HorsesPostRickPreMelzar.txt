@@ -34,6 +34,6 @@ obs,18,16,3,3,House
 obs,21,16,3,3,House
 obs,24,16,3,3,House
 savepoint,15,3,1,1,SavePoint
-cutscene,7,14,1,1,Blank,PubPreRick.txt
+cutscene,22,7,1,1,Blank,MelzarHouse.txt
 battleBG,PubInside
 musicBG,Harbor

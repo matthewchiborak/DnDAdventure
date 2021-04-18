@@ -27,6 +27,7 @@ SOURCES += \
     src/controller/keyinputstateboard.cpp \
     src/controller/keyinputstatecutscene.cpp \
     src/controller/keyinputstatepausemenu.cpp \
+    src/controller/keyinputstateshop.cpp \
     src/controller/keyinputstatetitle.cpp \
     src/controller/musiccontrollerabstract.cpp \
     src/controller/musiccontrollerconcrete.cpp \
@@ -47,6 +48,7 @@ SOURCES += \
     src/display/renderingstrategyboard.cpp \
     src/display/renderingstrategycutscene.cpp \
     src/display/renderingstrategypausemenu.cpp \
+    src/display/renderingstrategyshop.cpp \
     src/display/renderingstrategytitle.cpp \
     src/display/spriteflyweight.cpp \
     src/display/spriteflyweightfactory.cpp \
@@ -71,6 +73,7 @@ SOURCES += \
     src/model/boardobjectnpc.cpp \
     src/model/boardobjectobstacle.cpp \
     src/model/boardobjectsavepoint.cpp \
+    src/model/boardobjectshop.cpp \
     src/model/cutscenemodel.cpp \
     src/model/doorway.cpp \
     src/model/equipmentmodel.cpp \
@@ -80,6 +83,7 @@ SOURCES += \
     src/model/monstermanualentry.cpp \
     src/model/playercharacterstats.cpp \
     src/model/playercharacterstatsbattle.cpp \
+    src/model/shopmodel.cpp \
     src/model/statuseffectmodel.cpp \
     src/test/FileReaderTester.cpp \
     src/test/tester.cpp \
@@ -107,6 +111,7 @@ HEADERS += \
     src/controller/keyinputstateboard.h \
     src/controller/keyinputstatecutscene.h \
     src/controller/keyinputstatepausemenu.h \
+    src/controller/keyinputstateshop.h \
     src/controller/keyinputstatetitle.h \
     src/controller/musiccontrollerabstract.h \
     src/controller/musiccontrollerconcrete.h \
@@ -128,6 +133,7 @@ HEADERS += \
     src/display/renderingstrategyboard.h \
     src/display/renderingstrategycutscene.h \
     src/display/renderingstrategypausemenu.h \
+    src/display/renderingstrategyshop.h \
     src/display/renderingstrategytitle.h \
     src/display/spriteflyweight.h \
     src/display/spriteflyweightfactory.h \
@@ -151,6 +157,7 @@ HEADERS += \
     src/model/boardobjectnpc.h \
     src/model/boardobjectobstacle.h \
     src/model/boardobjectsavepoint.h \
+    src/model/boardobjectshop.h \
     src/model/cutscenemodel.h \
     src/model/doorway.h \
     src/model/equipmentmodel.h \
@@ -160,6 +167,7 @@ HEADERS += \
     src/model/monstermanualentry.h \
     src/model/playercharacterstats.h \
     src/model/playercharacterstatsbattle.h \
+    src/model/shopmodel.h \
     src/model/statuseffectmodel.h \
     src/test/FileReaderTester.h \
     src/test/tester.h \

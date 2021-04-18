@@ -98,6 +98,8 @@ void ModelConcrete::moveMenuCursor(int x, int y, std::string key)
         currentMenuState->moveMenuCursor(x, y);
     else if(key == "Battle")
         battleModel.moveMenuCursor(x, y);
+    else if(key == "Shop")
+        shopModel.moveMenuCursor(x,y);
     else if(key == "Title")
     {
         titleMenuPos -= y;
@@ -126,6 +128,10 @@ void ModelConcrete::enterMenu(std::string key)
     else if(key == "Cutscene")
     {
         cutsceneModel.advance();
+    }
+    else if(key == "Shop")
+    {
+        shopModel.confirm();
     }
     else if(key == "Title")
     {
@@ -250,7 +256,8 @@ void ModelConcrete::loadCutscene(std::string filepath)
     if(filepath == "TravelToHorsesAss.txt")
     {
         playerCharacters.at(2)->setIsActive(true);
-        playerCharacters.at(2)->setLevel(4);
+        playerCharacters.at(2)->setLevel((playerCharacters.at(0)->getLevel() + playerCharacters.at(1)->getLevel()) / 2);
+        playerCharacters.at(2)->setXP((playerCharacters.at(0)->getXP() + playerCharacters.at(1)->getXP()) / 2);
         playerCharacters.at(2)->setAP(3);
         playerCharacters.at(2)->refillHPandMP();
     }
@@ -397,6 +404,16 @@ void ModelConcrete::drawTitleScreen(std::vector<DrawInformation> *items)
 std::string ModelConcrete::getCutsceneToPlayAfterBattle()
 {
     return battleModel.getCutsceneToPlayOnBattleExit();
+}
+
+void ModelConcrete::loadShop(std::string info)
+{
+    shopModel.load(info, &gold, &numberOfPotions, &numberOfRemedies, &numberOfEthers, &numberOfPickleJars, &equipment);
+}
+
+void ModelConcrete::drawShop(std::vector<DrawInformation> *items)
+{
+    shopModel.draw(items);
 }
 
 void ModelConcrete::saveGame()

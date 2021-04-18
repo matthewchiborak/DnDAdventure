@@ -81,7 +81,24 @@ bool KeyInputStateBoard::handleUserInput(std::string *nextState)
             if(keyToHandle == Qt::Key_E)
             {
                 //Interact and update inventory based on resoponse
-                model->updateInventoryBasedOnString(this->model->interact());
+                std::string holdRes = this->model->interact();
+                model->updateInventoryBasedOnString(holdRes);
+                if(holdRes.length() > 3)
+                {
+                    if(holdRes.at(0) == 'S'
+                            && holdRes.at(1) == 'h'
+                            && holdRes.at(2) == 'o'
+                            && holdRes.at(3) == 'p'
+                            )
+                    {
+                        eventBeenSetUp = false;
+                        while(!keyboardEventQueue->empty())
+                            keyboardEventQueue->pop();
+                        model->loadShop(holdRes);
+                        (*nextState) = "Shop";
+                        return true;
+                    }
+                }
             }
         }
 

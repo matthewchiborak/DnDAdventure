@@ -1,20 +1,17 @@
 Name,Big_Dick_Rick
 Level,8
-HP,70
-Att,110
-Def,70
-MAtt,115
-MDef,70
-Speed,90
-XP,184
-Sprite,ShipTraitor
-Attack,Dagger_Cut,2000,0,15,100,Basic Attack,0,8
-Attack,Dagger_Cut,2000,0,15,100,Basic Attack,0,8
-Attack,Blunderbuss,6000,0,60,100,Basic Attack,0,9
-Attack,Cutlass_Cut,3000,0,30,100,Basic Attack,0,8
-Attack,Blunderbuss,6000,0,60,100,Basic Attack,0,9
-Attack,Cutlass_Cut,3000,0,30,100,Basic Attack,0,8
-Attack,Cutlass_Cut,3000,0,30,100,Basic Attack,0,8
-Attack,Power_Potion,4000,0,00,100,Basic Attack,0,9,AttackUp,100,3
-Attack,Poison_Dart,4000,0,10,100,Basic Attack,0,9,Poison,80
-Cutscene,SerilDeadGoToMiltaryBase.txt
+HP,90
+Att,130
+Def,80
+MAtt,65
+MDef,85
+Speed,55
+XP,227
+Sprite,Rick
+Attack,Punch,2000,0,50,100,Basic Attack,0,8
+Attack,Suplex,4000,0,70,100,Basic Attack,0,8
+Attack,Punch,2000,0,50,100,Basic Attack,0,8
+Attack,Suplex,4000,0,70,100,Basic Attack,0,8
+Attack,Flex,4000,0,0,200,Basic Attack,2,0,AttackUp,200,3
+Attack,Oil_Up,4000,0,0,200,Basic Attack,2,0,Haste,200
+Cutscene,RickDefeated.txt

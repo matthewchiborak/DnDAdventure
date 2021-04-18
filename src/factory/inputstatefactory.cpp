@@ -10,6 +10,8 @@
 #include "../display/renderingstrategycutscene.h"
 #include "../display/renderingstrategytitle.h"
 #include "../controller/keyinputstatetitle.h"
+#include "../display/renderingstrategyshop.h"
+#include "../controller/keyinputstateshop.h"
 
 InputStateFactory::InputStateFactory(ModelAbstract *model, std::queue<int> *keyboardEventQueue, std::vector<bool> *movementKeys)
     : InputStateFactoryAbstract(model, keyboardEventQueue, movementKeys)
@@ -39,6 +41,10 @@ KeyInputState *InputStateFactory::getState(std::string key)
     {
         return new KeyInputStateTitle(model, keyboardEventQueue, movementKeys);
     }
+    else if(key == "Shop")
+    {
+        return new KeyInputStateShop(model, keyboardEventQueue, movementKeys);
+    }
 
     return nullptr;
 }
@@ -64,6 +70,10 @@ RenderingStrategy *InputStateFactory::getRenderStrategy(std::string key)
     else if(key == "Title")
     {
         return new RenderingStrategyTitle(model);
+    }
+    else if(key == "Shop")
+    {
+        return new RenderingStrategyShop(model);
     }
 
     return nullptr;

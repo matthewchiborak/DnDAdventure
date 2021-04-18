@@ -5,6 +5,7 @@
 
 #include "../model/monstermanualentry.h"
 
+
 #include <vector>
 
 ModelAbstract::ModelAbstract(MusicControllerAbstract *musicController)
@@ -377,6 +378,16 @@ void ModelAbstract::drawTitleScreen(std::vector<DrawInformation> *items)
 std::string ModelAbstract::getCutsceneToPlayAfterBattle()
 {
     return "None";
+}
+
+void ModelAbstract::loadShop(std::string info)
+{
+
+}
+
+void ModelAbstract::drawShop(std::vector<DrawInformation> *items)
+{
+
 }
 
 void ModelAbstract::saveGame()

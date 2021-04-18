@@ -4,6 +4,7 @@
 #include "../display/drawinformation.h"
 #include "../model/modelabstract.h"
 
+#include <QDebug>
 #include <string>
 
 PauseMenuStateBag::PauseMenuStateBag(ModelAbstract *model)
@@ -88,7 +89,7 @@ void PauseMenuStateBag::drawPauseMenu(std::vector<DrawInformation> *items)
     items->push_back(info2);
     DrawInformation info3(50, 25 + (1 * 25), 200, 100, "", false, "Remedy x" + std::to_string(model->getNumberOfRemedies()), true, 24.f);
     items->push_back(info3);
-    DrawInformation info4(50, 25 + (2 * 25), 200, 100, "", false, "Potion x" + std::to_string(model->getNumberOfEthers()), true, 24.f);
+    DrawInformation info4(50, 25 + (2 * 25), 200, 100, "", false, "Ether x" + std::to_string(model->getNumberOfEthers()), true, 24.f);
     items->push_back(info4);
     DrawInformation info5(50, 25 + (3 * 25), 200, 100, "", false, "Remedy x" + std::to_string(model->getNumberOfJars()), true, 24.f);
     items->push_back(info5);
