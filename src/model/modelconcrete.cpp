@@ -250,7 +250,8 @@ void ModelConcrete::loadCutscene(std::string filepath)
     if(filepath == "TravelToHorsesAss.txt")
     {
         playerCharacters.at(2)->setIsActive(true);
-        playerCharacters.at(2)->setLevel(playerCharacters.at(0)->getLevel());
+        playerCharacters.at(2)->setLevel(4);
+        playerCharacters.at(2)->setAP(3);
         playerCharacters.at(2)->refillHPandMP();
     }
 

@@ -14,3 +14,4 @@ MilitaryBase2,soldiersword,soldierarcher,soldierarcher
 MilitaryBase3,soldierbarrel
 MilitaryBase4,soldiersword,soldiersword
 MilitaryBase5,soldierarcher,soldierarcher,soldierarcher,soldierarcher
+BossRick,rick

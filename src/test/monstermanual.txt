@@ -7,4 +7,5 @@ chicken,Chicken
 PTSDHorse,PTSD_Horse
 soldierarcher,Soldier_Archer
 soldiersword,Soldier_Swordman
-soldierbarrel,Soldier_Barrel
+soldierbarrel,Barrel_Man
+rick,Big_Dick_Rick

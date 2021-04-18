@@ -1,4 +1,4 @@
-Name,Soldier_Barrel
+Name,Barrel_Man
 Level,5
 HP,55
 Att,95

@@ -1,6 +1,6 @@
-NextBoardPath,MilitaryBase.txt
+NextBoardPath,HorsesPreRick.txt
 NextBoardX,17
-NextBoardY,15
+NextBoardY,0
 BG,HarborBattleBG
 BGMusic,Crisis
 RightName,Bullent
@@ -9,6 +9,7 @@ LeftName,Allura
 LeftPortrait,AlluraCutscene
 LeftTalk,0
 Text,You._Out_of_our_way._You_can't_stop_us_from_leaving.
+Stop
 Stop
 LeftTalk,1
 Text,No_I'm_not_here_to_stop_you._I_am_one_of_the_diplomats_who_managed_to_fight_off_the_pirates.
@@ -20,5 +21,19 @@ Text,Well_alright_then._Let's_head_out_quick.
 Stop
 RightName, 
 Text,Allura_has_joined_the_party.
+Stop
+RightName,Bullent
+LeftName,Chad
+LeftPortrait,ChadCutscene
+LeftTalk,1
+Text,Do_we_know_where_the_pirates_went?
+Stop
+LeftTalk,0
+Text,No_but_someone_in_Horse's_Behind_would_probably_know._Let's_head_out.
+Stop
+LeftTalk,0
+BG,HarborTown
+BGMusic,Harbor
+Text,Okay_we've_arrived_without_being_followed._We_should_head_over_to_the_pub._Someone_should_know_something.
 Stop
 Stop
